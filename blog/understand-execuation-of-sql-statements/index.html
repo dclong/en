@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Understand Execuation of SQL Statements</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Understand Execuation of SQL Statements</h1>
+      <p class="meta"><time datetime="2016-06-10T11:25:18-07:00" pubdate>Jun 10, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p>A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after <code>select</code> 
+and rows you want to select after <code>from</code>.
+A SQL statement is executed as follows.
+First, 
+the (inner|left|right|full) <code>join (on)</code> is executed if any (see more explanation later).
+Second, 
+the <code>where</code> condition is executed. Conditions before grouping (aggregation) must go into the <code>where</code> clause.
+Third, 
+<code>group by (having)</code> is executed. 
+Conditions after grouping (aggregation) must go into the <code>having</code> clause.
+Fourth, 
+the <code>sort by</code> statement is executed if any.
+Last, columns (specified in the <code>from</code> clause) are selected.</p>
+<p>An <code>inner join</code> first creates a cross join of tables in the <code>join</code> clause 
+(i.e., a Cartesian product of rows from tables in the <code>join</code> clause), 
+then it selects rows satisfying the <code>on</code> condition from the cross join result. 
+A <code>left/right/full join</code> consists of 2 sub steps. 
+First, an <code>inner join (on)</code> is performed. 
+Second, unmatched rows in the left/right/both table(s) are appended into the resulting table of <code>inner join (on)</code>. 
+This means that all rows in the left/right/both table(s) will be in the resulting table
+if there is no <code>where</code> or <code>having</code> condition in the query.
+Notice that unmatched rows in the left/right/both table(s) uses <code>NULL</code> values for columns in the other table,
+which is different from the Cartesian product (which uses values of the matched row). 
+After joining, 
+the <code>where</code> clause is executed. 
+This means that the <code>where</code> condition is executed after the <code>on</code> condition in <code>join</code>. 
+For an <code>inner join</code>, 
+the <code>where</code> condition can be put in the <code>on</code> condition 
+using <code>and</code> because no extras (unmatched rows) are appended after the <code>on</code> condition is executed. 
+However, for a <code>left/right/full join</code> (extra unmatched rows are appended after <code>on</code> condition is executed) 
+the <code>where</code> condition cannot be combined with the <code>on</code> condition (using <code>and</code>), generally speaking. 
+For example,</p>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> 
+    <span class="n">A</span>
+<span class="k">inner</span> <span class="k">join</span> 
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">where</span> 
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="o">&gt;</span> <span class="mi">10</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<p>returns the same result as </p>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> 
+    <span class="n">A</span>
+<span class="k">inner</span> <span class="k">join</span> 
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="k">and</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="o">&gt;</span> <span class="mi">10</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<p>However, </p>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> 
+    <span class="n">A</span>
+<span class="k">left</span> <span class="k">join</span> 
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">where</span> 
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="k">is</span> <span class="k">null</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<p>returns different result from</p>
+<div class="highlight"><pre><span></span><span class="k">select</span> <span class="o">*</span>
+<span class="k">from</span> 
+    <span class="n">A</span>
+<span class="k">left</span> <span class="k">join</span> 
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">where</span> 
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="k">is</span> <span class="k">null</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<p>generally speaking. 
+For good practice, you'd better separate the <code>where</code> and <code>on</code> conditions.</p>
+<p>Let's see some real examples to better understand the execution of SQL code.
+Suppose we have 2 tables A and B (see below) both of which contain only 1 integer column named <code>id</code>.</p>
+<table>
+<thead>
+<tr>
+<th align="right">id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="right">5</td>
+</tr>
+<tr>
+<td align="right">6</td>
+</tr>
+<tr>
+<td align="right">7</td>
+</tr>
+<tr>
+<td align="right">8</td>
+</tr>
+<tr>
+<td align="right">9</td>
+</tr>
+<tr>
+<td align="right">10</td>
+</tr>
+<tr>
+<td align="right">11</td>
+</tr>
+<tr>
+<td align="right">12</td>
+</tr>
+<tr>
+<td align="right">13</td>
+</tr>
+<tr>
+<td align="right">14</td>
+</tr>
+<tr>
+<td align="right">15</td>
+</tr>
+</tbody>
+</table>
+<table>
+<thead>
+<tr>
+<th align="right">id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">1</td>
+</tr>
+<tr>
+<td align="right">2</td>
+</tr>
+<tr>
+<td align="right">3</td>
+</tr>
+<tr>
+<td align="right">4</td>
+</tr>
+<tr>
+<td align="right">5</td>
+</tr>
+<tr>
+<td align="right">6</td>
+</tr>
+<tr>
+<td align="right">7</td>
+</tr>
+<tr>
+<td align="right">8</td>
+</tr>
+<tr>
+<td align="right">9</td>
+</tr>
+<tr>
+<td align="right">10</td>
+</tr>
+<tr>
+<td align="right">12</td>
+</tr>
+<tr>
+<td align="right">15</td>
+</tr>
+</tbody>
+</table>
+<p>The following presents some join queries and corresponding results.
+Note that question marks (<code>?</code>) stand for null values in the following results.</p>
+<div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">A inner join B</span>
+<span class="cm">Only matched rows are kept, which is easy to understand.</span>
+<span class="cm">*/</span>
+<span class="k">select</span> 
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">from</span>
+    <span class="n">A</span>
+<span class="k">inner</span> <span class="k">join</span>
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">A.id</th>
+<th align="center">B.id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">6</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">3</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">10</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">12</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">9</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">4</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">5</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">15</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">8</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">7</td>
+<td align="center">7</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">A left join B</span>
+<span class="cm">Unmatched rows in A are kept but B.id is null for these unmatched rows.</span>
+<span class="cm">*/</span>
+<span class="k">select</span> 
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">from</span>
+    <span class="n">A</span>
+<span class="k">left</span> <span class="k">join</span>
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="p">;</span>
+</pre></div>
+
+
+<p>Notice <code>B.id</code> is set to null for rows in table A that do not have matching rows in table B.</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">A.id</th>
+<th align="center">B.id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">11</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">6</td>
+<td align="center">6</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">13</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">3</td>
+<td align="center">3</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">10</td>
+<td align="center">10</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">12</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">9</td>
+<td align="center">9</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">4</td>
+<td align="center">4</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">5</td>
+<td align="center">5</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">1</td>
+<td align="center">1</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">15</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">14</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">8</td>
+<td align="center">8</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">2</td>
+<td align="center">2</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">7</td>
+<td align="center">7</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><span class="k">select</span> 
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">from</span>
+    <span class="n">A</span>
+<span class="k">left</span> <span class="k">join</span>
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">and</span> 
+   <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="o">&gt;</span> <span class="mi">10</span> 
+<span class="p">;</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">A.id</th>
+<th align="center">B.id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">11</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">6</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">13</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">3</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">10</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">6</td>
+<td align="center">12</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">7</td>
+<td align="center">9</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">8</td>
+<td align="center">4</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">9</td>
+<td align="center">5</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">10</td>
+<td align="center">1</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">11</td>
+<td align="center">15</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="center">12</td>
+<td align="center">14</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">13</td>
+<td align="center">8</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">14</td>
+<td align="center">2</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">15</td>
+<td align="center">7</td>
+<td align="center">?</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">Use where to further select records after inner join.</span>
+<span class="cm">Together with the query above, </span>
+<span class="cm">it shows the different between `on condition1 and condition2` and `on condition1 where condition2`.</span>
+<span class="cm">*/</span>
+<span class="k">select</span> 
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">from</span>
+    <span class="n">A</span>
+<span class="k">left</span> <span class="k">join</span>
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">where</span> 
+   <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">&gt;</span> <span class="mi">10</span> 
+<span class="p">;</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">id</th>
+<th align="center">id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">11</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">13</td>
+<td align="center">?</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">12</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">4</td>
+<td align="center">15</td>
+<td align="center">15</td>
+</tr>
+<tr>
+<td align="center">5</td>
+<td align="center">14</td>
+<td align="center">?</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre><span></span><span class="cm">/*</span>
+<span class="cm">Use where to further select records. </span>
+<span class="cm">Notice that rows with B.id being `null` are dropped </span>
+<span class="cm">because they are not eligible for condition `B.id &gt;10`.</span>
+<span class="cm">*/</span>
+<span class="k">select</span> 
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span><span class="p">,</span>
+    <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">from</span>
+    <span class="n">A</span>
+<span class="k">left</span> <span class="k">join</span>
+    <span class="n">B</span>
+<span class="k">on</span>
+    <span class="n">A</span><span class="p">.</span><span class="n">id</span> <span class="o">=</span> <span class="n">B</span><span class="p">.</span><span class="n">id</span>
+<span class="k">where</span> 
+   <span class="n">B</span><span class="p">.</span><span class="n">id</span> <span class="o">&gt;</span> <span class="mi">10</span> 
+<span class="p">;</span>
+</pre></div>
+
+
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center">A.id</th>
+<th align="center">B.id</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">12</td>
+<td align="center">12</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">15</td>
+<td align="center">15</td>
+</tr>
+</tbody>
+</table>
+<h2 id="references">References</h2>
+<p>https://social.msdn.microsoft.com/Forums/getfile/208801</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2016-06-10T11:25:18-07:00" pubdate>Jun 10, 2016</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/en/tag/sql.html">SQL</a>
+    <a class="category" href="http://www.legendu.net/en/tag/join-on.html">join on</a>
+    <a class="category" href="http://www.legendu.net/en/tag/having.html">having</a>
+    <a class="category" href="http://www.legendu.net/en/tag/where.html">where</a>
+    <a class="category" href="http://www.legendu.net/en/tag/group-by.html">group by</a>
+    <a class="category" href="http://www.legendu.net/en/tag/null-value.html">null value</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/understand-execuation-of-sql-statements/';
+          var disqus_url = 'http://www.legendu.net/en/blog/understand-execuation-of-sql-statements/';
+          var disqus_title = 'Understand Execuation of SQL Statements';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

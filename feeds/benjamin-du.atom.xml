@@ -1,0 +1,647 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Benjamin Du</title><link href="http://www.legendu.net/en/" rel="alternate"></link><link href="http://www.legendu.net/en/feeds/benjamin-du.atom.xml" rel="self"></link><id>http://www.legendu.net/en/</id><updated>2019-10-16T09:56:13-07:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Runtime Paths in Python</title><link href="http://www.legendu.net/en/blog/runtime-paths-in-python/" rel="alternate"></link><published>2019-10-16T09:56:13-07:00</published><updated>2019-10-16T09:56:13-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-10-16:/en/blog/runtime-paths-in-python/</id><summary type="html">&lt;p&gt;&lt;code&gt;__file__&lt;/code&gt; is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then &lt;code&gt;__file__&lt;/code&gt; is the path of the symbolic link.
+Of course, you can use &lt;code&gt;os.path.realpath&lt;/code&gt; to get real path of files.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;os.getcwd …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;__file__&lt;/code&gt; is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then &lt;code&gt;__file__&lt;/code&gt; is the path of the symbolic link.
+Of course, you can use &lt;code&gt;os.path.realpath&lt;/code&gt; to get real path of files.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;os.getcwd()&lt;/code&gt; and &lt;code&gt;'.'&lt;/code&gt; returns/represents the path where the Python script was invoked,
+which is often different from &lt;code&gt;__file__&lt;/code&gt;.&lt;/p&gt;</content><category term="programming"></category><category term="Python"></category><category term="runtime paths"></category></entry><entry><title>Configuration Scripts for the Blog Project on Notebooks.Ai</title><link href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/" rel="alternate"></link><published>2019-10-16T09:52:11-07:00</published><updated>2019-10-16T09:52:11-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-10-16:/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/</id><summary type="html">&lt;p&gt;Run the following command to configure the &lt;code&gt;blog&lt;/code&gt; project on &lt;notebooks.ai&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -sSL www.legendu.net/media/notebooks.ai.sh &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Run the following command to configure the &lt;code&gt;blog&lt;/code&gt; project on &lt;notebooks.ai&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -sSL www.legendu.net/media/notebooks.ai.sh &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;/pre&gt;&lt;/div&gt;</content><category term="programming"></category><category term="notebooks.ai"></category><category term="blog"></category><category term="configuration script"></category></entry><entry><title>Install Python in Mac</title><link href="http://www.legendu.net/en/blog/install-python-in-mac/" rel="alternate"></link><published>2019-05-24T01:46:40-07:00</published><updated>2019-05-24T01:46:40-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-05-24:/en/blog/install-python-in-mac/</id><summary type="html">&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Anaconda and Homebrew installs Python locally rather than system-wide.
+  You have to install …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Anaconda and Homebrew installs Python locally rather than system-wide.
+  You have to install Python using an official installation package manually 
+  (downloading the installation package and double click to install)
+  if you need a system-wide installation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The recommended way to instlal Python on Mac is to use Homebrew.
+  However, 
+  there are limited choices of Python versions in Homebrew.
+  Go with Anaconda Python if you cannot find the version you need in Homebrew.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/51125013/how-can-i-install-a-previous-version-of-python-3-in-macos-using-homebrew&lt;/p&gt;
+&lt;p&gt;https://osxuninstaller.com/uninstall-guides/properly-uninstall-python-mac/&lt;/p&gt;</content><category term="software"></category><category term="install"></category><category term="Python"></category><category term="macOS"></category></entry><entry><title>Understand Execuation of SQL Statements</title><link href="http://www.legendu.net/en/blog/understand-execuation-of-sql-statements/" rel="alternate"></link><published>2016-06-10T11:25:18-07:00</published><updated>2016-06-10T11:25:18-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2016-06-10:/en/blog/understand-execuation-of-sql-statements/</id><summary type="html">&lt;p&gt;A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after &lt;code&gt;select&lt;/code&gt; 
+and rows you want to select after &lt;code&gt;from&lt;/code&gt;.
+A SQL statement is executed as follows.
+First, 
+the (inner|left|right|full) &lt;code&gt;join (on)&lt;/code&gt; is executed if any (see …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after &lt;code&gt;select&lt;/code&gt; 
+and rows you want to select after &lt;code&gt;from&lt;/code&gt;.
+A SQL statement is executed as follows.
+First, 
+the (inner|left|right|full) &lt;code&gt;join (on)&lt;/code&gt; is executed if any (see more explanation later).
+Second, 
+the &lt;code&gt;where&lt;/code&gt; condition is executed. Conditions before grouping (aggregation) must go into the &lt;code&gt;where&lt;/code&gt; clause.
+Third, 
+&lt;code&gt;group by (having)&lt;/code&gt; is executed. 
+Conditions after grouping (aggregation) must go into the &lt;code&gt;having&lt;/code&gt; clause.
+Fourth, 
+the &lt;code&gt;sort by&lt;/code&gt; statement is executed if any.
+Last, columns (specified in the &lt;code&gt;from&lt;/code&gt; clause) are selected.&lt;/p&gt;
+&lt;p&gt;An &lt;code&gt;inner join&lt;/code&gt; first creates a cross join of tables in the &lt;code&gt;join&lt;/code&gt; clause 
+(i.e., a Cartesian product of rows from tables in the &lt;code&gt;join&lt;/code&gt; clause), 
+then it selects rows satisfying the &lt;code&gt;on&lt;/code&gt; condition from the cross join result. 
+A &lt;code&gt;left/right/full join&lt;/code&gt; consists of 2 sub steps. 
+First, an &lt;code&gt;inner join (on)&lt;/code&gt; is performed. 
+Second, unmatched rows in the left/right/both table(s) are appended into the resulting table of &lt;code&gt;inner join (on)&lt;/code&gt;. 
+This means that all rows in the left/right/both table(s) will be in the resulting table
+if there is no &lt;code&gt;where&lt;/code&gt; or &lt;code&gt;having&lt;/code&gt; condition in the query.
+Notice that unmatched rows in the left/right/both table(s) uses &lt;code&gt;NULL&lt;/code&gt; values for columns in the other table,
+which is different from the Cartesian product (which uses values of the matched row). 
+After joining, 
+the &lt;code&gt;where&lt;/code&gt; clause is executed. 
+This means that the &lt;code&gt;where&lt;/code&gt; condition is executed after the &lt;code&gt;on&lt;/code&gt; condition in &lt;code&gt;join&lt;/code&gt;. 
+For an &lt;code&gt;inner join&lt;/code&gt;, 
+the &lt;code&gt;where&lt;/code&gt; condition can be put in the &lt;code&gt;on&lt;/code&gt; condition 
+using &lt;code&gt;and&lt;/code&gt; because no extras (unmatched rows) are appended after the &lt;code&gt;on&lt;/code&gt; condition is executed. 
+However, for a &lt;code&gt;left/right/full join&lt;/code&gt; (extra unmatched rows are appended after &lt;code&gt;on&lt;/code&gt; condition is executed) 
+the &lt;code&gt;where&lt;/code&gt; condition cannot be combined with the &lt;code&gt;on&lt;/code&gt; condition (using &lt;code&gt;and&lt;/code&gt;), generally speaking. 
+For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;inner&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;returns the same result as &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;inner&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;returns different result from&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;generally speaking. 
+For good practice, you'd better separate the &lt;code&gt;where&lt;/code&gt; and &lt;code&gt;on&lt;/code&gt; conditions.&lt;/p&gt;
+&lt;p&gt;Let's see some real examples to better understand the execution of SQL code.
+Suppose we have 2 tables A and B (see below) both of which contain only 1 integer column named &lt;code&gt;id&lt;/code&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="right"&gt;id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;13&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="right"&gt;id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The following presents some join queries and corresponding results.
+Note that question marks (&lt;code&gt;?&lt;/code&gt;) stand for null values in the following results.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;A inner join B&lt;/span&gt;
+&lt;span class="cm"&gt;Only matched rows are kept, which is easy to understand.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;inner&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;A left join B&lt;/span&gt;
+&lt;span class="cm"&gt;Unmatched rows in A are kept but B.id is null for these unmatched rows.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice &lt;code&gt;B.id&lt;/code&gt; is set to null for rows in table A that do not have matching rows in table B.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;and&lt;/span&gt; 
+   &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; 
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;Use where to further select records after inner join.&lt;/span&gt;
+&lt;span class="cm"&gt;Together with the query above, &lt;/span&gt;
+&lt;span class="cm"&gt;it shows the different between `on condition1 and condition2` and `on condition1 where condition2`.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+   &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; 
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;id&lt;/th&gt;
+&lt;th align="center"&gt;id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;Use where to further select records. &lt;/span&gt;
+&lt;span class="cm"&gt;Notice that rows with B.id being `null` are dropped &lt;/span&gt;
+&lt;span class="cm"&gt;because they are not eligible for condition `B.id &amp;gt;10`.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+   &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; 
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://social.msdn.microsoft.com/Forums/getfile/208801&lt;/p&gt;</content><category term="programming"></category><category term="SQL"></category><category term="join on"></category><category term="having"></category><category term="where"></category><category term="group by"></category><category term="null value"></category></entry></feed>

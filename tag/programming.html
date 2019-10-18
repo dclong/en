@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - programming</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2019-10-16T09:56:13-07:00" pubdate>Oct 16, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><code>__file__</code> is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then <code>__file__</code> is the path of the symbolic link.
+Of course, you can use <code>os.path.realpath</code> to get real path of files.</p>
+<p><code>os.getcwd …</code></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </h1>
+      <p class="meta"><time datetime="2019-10-16T09:52:11-07:00" pubdate>Oct 16, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>Run the following command to configure the <code>blog</code> project on <notebooks.ai>.</p>
+<div class="highlight"><pre><span></span>curl -sSL www.legendu.net/media/notebooks.ai.sh <span class="p">|</span> bash
+</pre></div></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2019-08-30T22:30:27-07:00" pubdate>Aug 30, 2019</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p><code>\</code> needs to be escaped (i.e., use <code>\\</code>) in triple quotes.</p>
+</li>
+<li>
+<p>There are a few ways to write a long string in Python.
+    The first way is of course to have the long string on the the same line,
+    which can be ugly.</p>
+<div class="highlight"><pre><span></span><span class="n">long_string</span> <span class="o">=</span> <span class="s1">&#39;This is a very looooooooooooooooooooooooooooooooooooooooooooooooooooooong string.&#39;</span>
+</pre></div>
+
+
+<p>The …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/string-in-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/summary-parallel-computing/">Parallel Computing in Different Programming Languages</a>
+      </h1>
+      <p class="meta"><time datetime="2019-04-28T11:50:22-07:00" pubdate>Apr 28, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>There many different ways for parallel computing. 
+This article focus on multithreading computing.
+Generally speaking, commercial softwares have very good support for parallel computing. 
+For example, Mathematica, MATLAB and Revolution R all have solid support for parallel computing. 
+Mathematica and MATLAB also have good support for GPU computing. </p>
+<h2 id="python">Python</h2>
+<p>Multithreading …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/summary-parallel-computing/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/ruby-read-pdf/">Read PDF in Ruby</a>
+      </h1>
+      <p class="meta"><time datetime="2019-04-18T17:57:21-07:00" pubdate>Apr 18, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/ruby/ruby.png" height="200" width="240" align="right"/></p>
+<p>"pdf-reader" is a good Ruby libary for reading pdf document. 
+You can install it via RubyGems using the following command.</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">pdf</span><span class="o">-</span><span class="n">reader</span>
+</pre></div>
+
+
+<p>You have to load the library before you use it. 
+To load it, use the command below. </p>
+<div class="highlight"><pre><span></span><span class="n">require</span> <span class="s1">&#39;pdf-reader&#39;</span>
+</pre></div>
+
+
+<p>For more information, see the <a href="https://github.com/yob/pdf-reader">project …</a></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/ruby-read-pdf/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/use-eclipse-as-your-ide/">Use Eclipse as Your IDE</a>
+      </h1>
+      <p class="meta"><time datetime="2019-03-29T09:30:34-07:00" pubdate>Mar 29, 2019</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>There are at least 3 ways to jump to errors quickly in Eclipse</p>
+<ul>
+<li>Click these red icons on the right margin.</li>
+<li>Click the <code>Previous Annotation</code> button 
+or <code>Next Annotation</code> buttons on the tool bar or under the <code>Navigation</code> menu.</li>
+<li>Use hot keys (<code>Ctrl+.</code> for <code>Next Annotation</code> and <code>Ctrl+,</code> for <code>Previous …</code></li></ul></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/use-eclipse-as-your-ide/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/en/tag/programming2.html">&larr; Older</a>
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/summary-parallel-computing/">Parallel Computing in Different Programming Languages</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/ruby-read-pdf/">Read PDF in Ruby</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

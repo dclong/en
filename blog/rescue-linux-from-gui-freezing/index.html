@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Rescue Linux from GUI Freezing</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Rescue Linux from GUI Freezing</h1>
+      <p class="meta"><time datetime="2015-02-20T10:30:22-08:00" pubdate>Feb 20, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/computer/computer.gif" height="200" width="240" align="right"/></p>
+<p>The kernel of Linux is usually very stable, 
+but the existing free desktop environments are craps. 
+Amongs these desktop environments I tried 
+(Gnome, Xfce, LXDE and so on), none is even close to the desktop environments in Windows and Mac.
+I do not require desktop environments in Linux to be as fancy as desktop environments in Windows and Mac,
+but they have to be usable and stable. 
+These two basic requirements, unfortunately, seems unreachable from these desktop environment developers.
+Tought their desktop environments are full of all kinds of flaws, 
+they never fell shame to brag about their products. 
+My experience with Linux desktops is that they crash very often. 
+The most annoying case is that the X windows freezes and does not react to the keyboard and touchpad. 
+It is not recommended to shutdown the machine by pressing the power button. 
+To solve this problem, you can ssh into the machine from another one and kill the Xorg process. 
+There arises several problems:</p>
+<ol>
+<li>
+<p>How do you ssh into your machine in any network? </p>
+</li>
+<li>
+<p>What if you do not have another machine on hand?</p>
+</li>
+</ol>
+<p>The first problem often comes to how do you find the IP of the freezing machine?
+If the machine is connected to your home network, 
+you can just scan the network for connected machines. 
+If the machine is connected to your work network, 
+you often have a host name for your machine on the network. 
+Scanning the network for ips is not a good idea in this case, 
+because there are often many machines connected to your work network.
+If the machine is connected to some network (e.g., public network),
+it can be even harder to find the ip of your freezing machine.
+My way to solve this problem is let the machine write its ip address 
+into a file in Dropbox. 
+So I can always know the ip of my machine no matter which network it is connected to. 
+The second problem is not a problem if you have a (smart) phone with you. 
+With a smartphone, you can install an application (e.g., connectBot) to login into 
+Linux machine. 
+If you only have a phone which cannot connect to internet, 
+you can call someone who know Linux and you can trust and let him/her
+login into your machine and kill the X window. 
+If you hesitate to do that, well, just press the power button on your machine, 
+hold it unitl your machine shut down. </p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-02-20T10:30:22-08:00" pubdate>Feb 20, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/gui.html">GUI</a>
+    <a class="category" href="http://www.legendu.net/en/tag/de.html">DE</a>
+    <a class="category" href="http://www.legendu.net/en/tag/dropbox.html">Dropbox</a>
+    <a class="category" href="http://www.legendu.net/en/tag/x.html">X</a>
+    <a class="category" href="http://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="http://www.legendu.net/en/tag/ssh.html">SSH</a>
+    <a class="category" href="http://www.legendu.net/en/tag/desktop-environment.html">desktop environment</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/rescue-linux-from-gui-freezing/';
+          var disqus_url = 'http://www.legendu.net/en/blog/rescue-linux-from-gui-freezing/';
+          var disqus_title = 'Rescue Linux from GUI Freezing';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

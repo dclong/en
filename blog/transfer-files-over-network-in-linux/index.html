@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Transfer Files over Network in Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Transfer Files over Network in Linux</h1>
+      <p class="meta"><time datetime="2016-07-13T22:42:20-07:00" pubdate>Jul 13, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p><strong>
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+It is not meant to readers but rather for convenient reference of the author and future improvement.
+</strong></p>
+<h2 id="comparison-of-network-drives-remote-file-system">Comparison of Network Drives (Remote File System)</h2>
+<ol>
+<li>
+<p>NFS is very fast but not secure and it is for Unix/Linux only. 
+    It is a good choice for local network sharing.</p>
+</li>
+<li>
+<p>Samba is fast, secure and cross-platform. 
+    it is good for general purpose sharing and popular in companies.</p>
+</li>
+<li>
+<p>SSHFS is slow but very secure and it is for Unix/Linux only. 
+    It is good for situations where security is critical but performance is not.</p>
+</li>
+</ol>
+<p>To sum up,
+<strong>Samba is the one you want to use generally speaking</strong>.
+However,
+if you are on a local network and performance is crtical, 
+go with NFS.</p>
+<h2 id="comparison-of-file-copying-tools">Comparison of File-copying Tools</h2>
+<ol>
+<li>
+<p>Generally speaking, 
+    <code>rsync</code> is the tool you want to use in most situations. 
+    It is definitely preferred over <code>scp</code> 
+    unless in situations when <code>rsync</code> is not available (e.g., on Andrioid).</p>
+</li>
+<li>
+<p>There are some other file-copying tools such as mbuffer, nc, etc. 
+    if you want to squeeze the most out of network speed.</p>
+<div class="highlight"><pre><span></span><span class="n">tar</span> <span class="n">zcf</span> <span class="o">-</span> <span class="n">bigfile</span><span class="p">.</span><span class="n">m4p</span> <span class="o">|</span> <span class="n">mbuffer</span> <span class="o">-</span><span class="n">s</span> <span class="mi">1</span><span class="n">K</span> <span class="o">-</span><span class="n">m</span> <span class="mi">512</span> <span class="o">|</span> <span class="n">ssh</span> <span class="n">otherhost</span> <span class="ss">&quot;tar zxf -&quot;</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="references">References</h2>
+<p>https://linuxaria.com/article/tar-rsync-netcat-scp</p>
+<p>http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html</p>
+<p>https://unix.stackexchange.com/questions/48399/fast-way-to-copy-a-large-file-on-a-lan</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-07-13T22:42:20-07:00" pubdate>Jul 13, 2016</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/internet.html">internet</a>
+    <a class="category" href="http://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="http://www.legendu.net/en/tag/network.html">network</a>
+    <a class="category" href="http://www.legendu.net/en/tag/web.html">web</a>
+    <a class="category" href="http://www.legendu.net/en/tag/transfer.html">transfer</a>
+    <a class="category" href="http://www.legendu.net/en/tag/file-system.html">file system</a>
+    <a class="category" href="http://www.legendu.net/en/tag/nfs.html">nfs</a>
+    <a class="category" href="http://www.legendu.net/en/tag/ssh.html">SSH</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/transfer-files-over-network-in-linux/';
+          var disqus_url = 'http://www.legendu.net/en/blog/transfer-files-over-network-in-linux/';
+          var disqus_title = 'Transfer Files over Network in Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

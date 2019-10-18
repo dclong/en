@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Benjamin Du</title><link>http://www.legendu.net/en/</link><description>And let it direct your passion with reason.</description><lastBuildDate>Wed, 16 Oct 2019 09:56:13 -0700</lastBuildDate><item><title>Runtime Paths in Python</title><link>http://www.legendu.net/en/blog/runtime-paths-in-python/</link><description>&lt;p&gt;&lt;code&gt;__file__&lt;/code&gt; is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then &lt;code&gt;__file__&lt;/code&gt; is the path of the symbolic link.
+Of course, you can use &lt;code&gt;os.path.realpath&lt;/code&gt; to get real path of files.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;os.getcwd …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 16 Oct 2019 09:56:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-16:/en/blog/runtime-paths-in-python/</guid><category>programming</category><category>Python</category><category>runtime paths</category></item><item><title>Configuration Scripts for the Blog Project on Notebooks.Ai</title><link>http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/</link><description>&lt;p&gt;Run the following command to configure the &lt;code&gt;blog&lt;/code&gt; project on &lt;notebooks.ai&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;curl -sSL www.legendu.net/media/notebooks.ai.sh &lt;span class="p"&gt;|&lt;/span&gt; bash
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 16 Oct 2019 09:52:11 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-16:/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/</guid><category>programming</category><category>notebooks.ai</category><category>blog</category><category>configuration script</category></item><item><title>Install Python in Mac</title><link>http://www.legendu.net/en/blog/install-python-in-mac/</link><description>&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Anaconda and Homebrew installs Python locally rather than system-wide.
+  You have to install …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 24 May 2019 01:46:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-24:/en/blog/install-python-in-mac/</guid><category>software</category><category>install</category><category>Python</category><category>macOS</category></item><item><title>Understand Execuation of SQL Statements</title><link>http://www.legendu.net/en/blog/understand-execuation-of-sql-statements/</link><description>&lt;p&gt;A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after &lt;code&gt;select&lt;/code&gt; 
+and rows you want to select after &lt;code&gt;from&lt;/code&gt;.
+A SQL statement is executed as follows.
+First, 
+the (inner|left|right|full) &lt;code&gt;join (on)&lt;/code&gt; is executed if any (see …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 10 Jun 2016 11:25:18 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-10:/en/blog/understand-execuation-of-sql-statements/</guid><category>programming</category><category>SQL</category><category>join on</category><category>having</category><category>where</category><category>group by</category><category>null value</category></item></channel></rss>

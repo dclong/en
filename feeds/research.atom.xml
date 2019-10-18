@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Research</title><link href="http://www.legendu.net/en/" rel="alternate"></link><link href="http://www.legendu.net/en/feeds/research.atom.xml" rel="self"></link><id>http://www.legendu.net/en/</id><updated>2019-05-15T19:07:49-07:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Good Ways to Do Scientific Computing</title><link href="http://www.legendu.net/en/blog/good-ways-scientific-computing/" rel="alternate"></link><published>2019-05-15T19:07:49-07:00</published><updated>2019-05-15T19:07:49-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-05-15:/en/blog/good-ways-scientific-computing/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Break down the work into smaller modules and develop pipelines (consists of module) for the work.
+  Be sure to save (important) intermediate results so that you can resume failed modules withouting reruning succeeded ones.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Manage your project in GitHub and use issues to manage tasks to do and their priorities …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Break down the work into smaller modules and develop pipelines (consists of module) for the work.
+  Be sure to save (important) intermediate results so that you can resume failed modules withouting reruning succeeded ones.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Manage your project in GitHub and use issues to manage tasks to do and their priorities.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Keep your code clean. 
+  Make sure to follow good coding (especially naming) styles no matter which programming language you use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Write help documents for your code (classes, methods, etc.)
+  and keep a up-to-date readme file (explaining design, TODO or refer to other docs) for your project. 
+  Bullets 2 and 3 are critical to make sure sustainable progress on projects that last for a long time.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use seeds when you generate random numbers. 
+  This makes sure that your work can be reproduced later.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Test running your code using a small dataset or complexity degree 
+  to estimate the time needed to run at full scale. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Update the progress of running regularlly if a program is time-consuming.
+  It is good practice to log both the time ellapsed and the amount of work that has been done
+  so that you can estimate the ETA.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Research"></category><category term="scientific computing"></category></entry><entry><title>Estimation of False Discovery Rate using Sequential Permutation Pvalues</title><link href="http://www.legendu.net/en/blog/sequential-permutation-test/" rel="alternate"></link><published>2015-03-03T10:17:03-08:00</published><updated>2015-03-03T10:17:03-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-03:/en/blog/sequential-permutation-test/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/r/r.png" height="200" width="240" align="right"/&gt;
+I wrote a paper on sequential permutation test with Tim Bancroft and Dan Nettleton. 
+The paper "T. Bancroft, C. Du and D. Nettleton (2012). 
+Estimation of False Discovery Rate Using Sequential Permutation P­Values." 
+has been accepted by Biometrics. To illustrate ideas in the paper and make sequential 
+permutation test …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/r/r.png" height="200" width="240" align="right"/&gt;
+I wrote a paper on sequential permutation test with Tim Bancroft and Dan Nettleton. 
+The paper "T. Bancroft, C. Du and D. Nettleton (2012). 
+Estimation of False Discovery Rate Using Sequential Permutation P­Values." 
+has been accepted by Biometrics. To illustrate ideas in the paper and make sequential 
+permutation test easier to use, I wrote an R package &lt;strong&gt;dclong.spt&lt;/strong&gt; which is availabe 
+on &lt;a href="https://github.com/dclong/dclong.spt"&gt;GitHub&lt;/a&gt;. In order to make the package smaller, 
+I moved these big datasets (used for illustrations in the paper) from the package to this website. &lt;/p&gt;
+&lt;p&gt;The data &lt;a href="http://dclong.github.io/media/spt/marker.rda"&gt;barley&lt;/a&gt; was produced by experiment 
+"Genetic regulation of gene expression of barley in response
+to stem rust (Pgt isolate TTKS)" and can be access from PLEXdb (BB64). 
+There is a file called "BB64_RMA_tmt_medians.txt" on the download page contains RMA expressions. 
+The rma expression for the 75 chips involve fungas infection is the dataset barley in this package. &lt;/p&gt;
+&lt;p&gt;The Band T-cell Acute Lymphocyctic Leukemia (ALL) data set can be 
+access via the Bioconductor ALL package at &lt;www.bioconductor.org&gt;. 
+Measures of messenger ribonucleic acid (mRNA) commonly referred to as expression levels
+are available for 12,625 probesets in 128 ALL patients.
+Of these 128 patients, we focus on the 21 males who have been classified as having a translocation
+between chromosomes 9 and 22 (BCR/ABL) and the 5 males who have a translocation between
+chromosomes 4 and 11 (ALL1/AF4). 
+This subset of data is the &lt;a href="http://dclong.github.io/media/spt/leukemia.rda"&gt;leukemia&lt;/a&gt; used in the paper.&lt;/p&gt;
+&lt;p&gt;Biologists genetically mutated/changed the genotypes of barley. 
+They could not change everywhere, so they changed 378 positions on the chromosome of barley. 
+In the map, "A" and "B" are two types (sort of open and close). 
+Because they know where the mutations are, they called them "markers"
+(so that if a barley with a certain genotype has a higher expression level, then you may infer and
+say, oh that may be caused by the 145th marker, etc.). 
+The map has 7 chromosomes of barley, 1H, 2H, ..., 7H. 
+These numbers are locations of markers on the chromosomes, like coordinates. 
+There are some missing values in the original map, a naive method was used to interpolate the missing
+values and produced this dataset &lt;a href="http://dclong.github.io/media/spt/marker.rda"&gt;marker&lt;/a&gt;. &lt;/p&gt;</content><category term="research"></category><category term="sequential permutation test"></category><category term="biostatistics"></category><category term="Acute Lymphocyctic Leukemia"></category><category term="package"></category><category term="marker"></category><category term="dclong.spt"></category><category term="R"></category><category term="barley"></category><category term="false discovery rate"></category><category term="FDR"></category></entry><entry><title>Some Useful Properties of Modified Bessel Functions of the First Kind</title><link href="http://www.legendu.net/en/blog/bessel-first-property/" rel="alternate"></link><published>2014-07-28T21:55:16-07:00</published><updated>2014-07-28T21:55:16-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-07-28:/en/blog/bessel-first-property/</id><summary type="html">&lt;p&gt;I have to deal with Modified Bessel functions of the first kind frequently in my research. 
+Here I list some useful properties of them for future reference. 
+    &lt;/p&gt;
+&lt;div class="math"&gt;$$I_0'(x) = I_1(x)$$&lt;/div&gt;
+&lt;div class="math"&gt;$$I_1'(x) = \frac{I_0(x)+I_2(x)}{2} $$&lt;/div&gt;
+&lt;div class="math"&gt;$$\frac{I_1(x)}{I_0(x)}\uparrow \Leftrightarrow I_0(x)(I_0(x …&lt;/div&gt;</summary><content type="html">&lt;p&gt;I have to deal with Modified Bessel functions of the first kind frequently in my research. 
+Here I list some useful properties of them for future reference. 
+    &lt;/p&gt;
+&lt;div class="math"&gt;$$I_0'(x) = I_1(x)$$&lt;/div&gt;
+&lt;div class="math"&gt;$$I_1'(x) = \frac{I_0(x)+I_2(x)}{2} $$&lt;/div&gt;
+&lt;div class="math"&gt;$$\frac{I_1(x)}{I_0(x)}\uparrow \Leftrightarrow I_0(x)(I_0(x)+I_2(x))-2I_1^2(x)&amp;gt;0,\forall x&amp;gt;0$$&lt;/div&gt;
+&lt;div class="math"&gt;$$\frac{I_1(x)-I_2(x)}{I_0(x)-I_1(x)}\uparrow$$&lt;/div&gt;
+&lt;p&gt;
+where &lt;span class="math"&gt;\(I_n(x)\)&lt;/span&gt; is the modified Bessel function of order &lt;span class="math"&gt;\(n\)&lt;/span&gt;.&lt;/p&gt;
+&lt;p&gt;For more properties about modified Bessel functions of the first kind, 
+please refer to &lt;a href="http://mathworld.wolfram.com/ModifiedBesselFunctionoftheFirstKind.html"&gt;Wolfram MathWorld&lt;/a&gt;.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' &amp;&amp; location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="derivative"></category><category term="monotone"></category><category term="Research"></category><category term="Mathematica"></category><category term="positive"></category><category term="Bessel functions"></category></entry></feed>

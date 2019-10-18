@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Import/Export Data to/from SAS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Import/Export Data to/from SAS</h1>
+      <p class="meta"><time datetime="2015-05-30T14:20:50-07:00" pubdate>May 30, 2015</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="import-data-to-sas">Import Data to SAS</h2>
+<ol>
+<li>
+<p>The <code>IMPORT</code> procedure is based on the <code>DATA</code> step.
+When you run an <code>IMPORT</code> procedure, 
+the unlying data step code is printed into the log.
+Sometimes the <code>IMPORT</code> procedure does a little bit extra work 
+to automatically decide the most possible format you want (especially when you have date related data).
+If it is not what you want, 
+you can copy and paste the <code>DATA</code> step code 
+generated in the log and modify it where necessary.</p>
+</li>
+<li>
+<p>You'd better use SAS valid names for sheet names and column names in each sheet. 
+This saves you trouble when importing data.</p>
+</li>
+<li>
+<p>You can also use the data step to read a text/CSV file,
+however, 
+the <code>IMPORT</code> procedure is preferred over the data step for reading files
+as you can read in variable names from the file instead of specifying them manually 
+(as you would do in a data step).</p>
+</li>
+<li>
+<p>It is suggested that you use CSV files whenever possible
+as it is easier to modify a text file than a binary file (especially on a Linux server).
+Also, you have better control over a CSV file compared to, e.g., an Excel file 
+when using <code>proc import</code>.
+You should avoid using other general format text file 
+as it might take you or others extra effort to figure out the exact format of the file.</p>
+</li>
+<li>
+<p>A common problem with the <code>IMPORT</code> procedure is that 
+if you work on SAS server and import an Excel or CSV file created on Windows, 
+the last column will always be character.
+This is due to different termination of line used on Linux and Windows. 
+I always upload data files using rsync/scp via command line, 
+and never encounter the problem when importing an Excel file.
+I do observe the problem on CSV (and other text files). 
+A solution is to simply convert the CSV (or text) files<br>
+from Windows format to Linux format using the command <code>dos2unix</code>.
+Or you can manually import the CSV/Excel file into SAS using "File -&gt; Import Data".
+Another "dirty" solution is to append a "junk" column as the last column in the CSV (or text) file. </p>
+</li>
+<li>
+<p>A trick problem that might happen when you import data using <code>proc import</code> 
+is that text might get truncated if it is too long.
+A way to resolve the issue is to add the option <code>guessingRows=n;</code>,
+where <code>n</code> is a large enough number (e.g., the number of rows in the data set).</p>
+</li>
+</ol>
+<p>The following SAS code reads in the sheet named "Hist_Macro" 
+from the Excel file "data.xlsx"
+using the <code>IMPORT</code> procedure.
+The option replace overwrites the data set macro if it already exists.
+Notice that you have to end the <code>IMPORT</code> statement (semicolon after replace) 
+before you use other statement (sheet, getNames, etc.).
+The getNames statement controls whether the first row in the range is read in as column names.
+If Yes, the first row in the range is read in as column name, vice versa.
+The default is to read in the first row (of a sheet/range) as column names.
+The dataRow statement controls from which row the data is read in.
+The default is to read in data from the first row of a sheet.
+This option is overwritten if the range statement is used.
+The statement <code>guessingRows=100</code> asks the <code>IMPORT</code> procedure 
+to scans the first 100 rows in the input file 
+to determine the appropriate data type and length of columns.</p>
+<div class="highlight"><pre><span></span><span class="kr">proc import </span><span class="k">out</span>=macro
+    datafile=<span class="s">&quot;~/projects/data.xlsx&quot;</span> 
+    dbms=xlsx 
+    <span class="k">replace</span>
+    ; 
+    sheet=<span class="s">&quot;Hist_Macro&quot;</span>;
+    getNames=Y;
+    dataRow=<span class="m">5</span>;
+    guessingRows=<span class="m">100</span><span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<p>The following SAS code reads in data from the range A35:B40 
+of the sheet "Hist_Macro" of the Excel file "data.xlsx". </p>
+<div class="highlight"><pre><span></span><span class="kr">proc import </span><span class="k">out</span>=s1
+    dataFile=<span class="s">&quot;~/projects/data.xlsx&quot;</span> 
+    dbms=xlsx
+    <span class="k">replace</span>
+    ;
+    range=<span class="s">&quot;Hist_Macro$A35:B40&quot;</span>;
+    getNames=N<span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<p>You can also use the IMPORT procedure to read a CSV file 
+(A CSV file is a text file with data fields seprated by commas).
+or a general text file. </p>
+<div class="highlight"><pre><span></span><span class="kr">proc import </span><span class="k">out</span>=shoes
+    dataFile=<span class="s">&quot;~/test.csv&quot;</span>
+    dbms=csv
+    <span class="k">replace</span>
+    ;
+    getNames=no;
+    dataRow=<span class="m">5</span><span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<div class="highlight"><pre><span></span><span class="kr">proc import </span><span class="k">out</span>=class
+    dataFile=<span class="s">&#39;~/tab.txt&#39;</span>
+    dbms=dlm
+    <span class="k">replace</span>
+    ;
+    <span class="k">delimiter</span>=<span class="s">&#39;09&#39;</span><span class="k">x</span>;
+    getNames=Y;
+    dataRow=<span class="m">5</span><span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<h2 id="export-data-from-sas">Export Data from SAS</h2>
+<ol>
+<li>When SAS export data to csv, missing values are left as blank.
+SAS automatically decide whether quoting is needed.
+When there is ambiguition (e.g., a string contains comma), 
+then SAS automatically quote data when exporting to CSV. </li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kr">proc export </span>data=dataset (<span class="k">where</span>=(conditions))
+    outfile=<span class="s">&quot;file_path&quot;</span>
+    dbms= csv
+    <span class="k">replace</span><span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-05-30T14:20:50-07:00" pubdate>May 30, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/en/tag/sas.html">SAS</a>
+    <a class="category" href="http://www.legendu.net/en/tag/import.html">import</a>
+    <a class="category" href="http://www.legendu.net/en/tag/procedure.html">procedure</a>
+    <a class="category" href="http://www.legendu.net/en/tag/excel.html">Excel</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/import-export-data-sas/';
+          var disqus_url = 'http://www.legendu.net/en/blog/import-export-data-sas/';
+          var disqus_title = 'Import/Export Data to/from SAS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

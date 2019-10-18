@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My Docker Images</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">My Docker Images</h1>
+      <p class="meta"><time datetime="2019-08-18T00:23:13-07:00" pubdate>Aug 18, 2019</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="tips">Tips</h2>
+<ol>
+<li>
+<p>The <code>dclong/jupyterlab</code> Docker image is well maintained (which is the base image of <code>dclong/jupyterhub</code>), 
+    however, 
+    many of the <code>dclong/jupyterlab-*</code> Docker images are not maintained any more.
+    Please use the corresponding <code>dclong/jupyterhub-*</code>  Docker images instead.</p>
+</li>
+<li>
+<p>There is an issue with the <code>dclong/xubuntu*</code> Docker images due to Xfce on Ubuntu 18.04.
+    It is suggested that you use the corresponding <code>dclong/lubuntu*</code> Docker images instead,
+    which are based on LXQt.</p>
+</li>
+</ol>
+<h2 id="usage">Usage</h2>
+<h3 id="install-docker">Install Docker</h3>
+<p>You must have Docker installed.
+If you are on Ubuntu,
+the just use the command below to install the community edition of Docker.</p>
+<div class="highlight"><pre><span></span>sudo apt-get install docker.io
+</pre></div>
+
+
+<p>If you'd rather install the enterprise edition
+or if you are on other platforms,
+please refer to the offical Docker doc <a href="https://docs.docker.com/install/">Install Docker</a>.</p>
+<h3 id="pull-the-docker-image">Pull the Docker Image</h3>
+<p>Taking <code>dclong/jupyterhub-ds</code> as an example,
+you can pull it using the command below.</p>
+<div class="highlight"><pre><span></span>docker pull dclong/jupyterhub-ds
+</pre></div>
+
+
+<p>For people in mainland of China,
+please refer to the post
+<a href="http://www.legendu.net/en/blog/speedup-docker-pulling-and-pushing/">Speedup Docker Pulling and Pushing</a>
+on ways to speed up pushing/pulling of Docker images.
+If you don't bother,
+then just use the command below.</p>
+<div class="highlight"><pre><span></span>docker pull registry.docker-cn.com/dclong/jupyterhub-ds
+</pre></div>
+
+
+<h3 id="start-a-container">Start a Container</h3>
+<p>Below are some Docker command arguments explained.
+These are for properly handling file permissions in the Docker container and on the host.
+Keep the default if you don't know what are the best to use.
+<code>DOCKER_PASSWORD</code> is probably the only argument you want to and should change.</p>
+<ul>
+<li><code>DOCKER_USER</code>: The user to be created (dynamically) in the container.
+    By default, the name of the current user on the host is used.</li>
+<li><code>DOCKER_USER_ID</code>: The ID of the user to be created in the container.
+    By default, the ID of the current user on the host is used.</li>
+<li><code>DOCKER_PASSWORD</code>: The password of the user to be created.
+    By default, it's the same as the user name.
+    You'd better change it for security reasons.
+    Of course, users can always change it later using the command <code>passwd</code>.</li>
+<li><code>DOCKER_GROUP_ID</code>: The group of the user to be created.
+    By default, it's the group ID of the current user on the host.</li>
+<li><code>DOCKER_ADMIN_USER</code> (<code>dclong/jupyterhub-*</code> only): The admin of the JupyterLab server.
+    By default, it's the user to be created in the container.</li>
+<li><code>USER_MEM_LIMIT</code> (<code>dclong/jupyterhub-*</code> only): The memory limit that each user can use.
+    Note that this optional is not in effect now.</li>
+</ul>
+<p>The root directory of JupyterLab/Jupyter notebooks is <code>/workdir</code> in the container.
+You can mount directory on the host to it as you wish.
+Below are illustration using the Docker image <code>dclong/jupyterhub-ds</code>.</p>
+<p>The following command starts a container 
+and mounts the current working directory and <code>/home</code> on the host machine 
+to <code>/workdir</code> and <code>/home_host</code> in the container respectively.</p>
+<div class="highlight"><pre><span></span><span class="nv">docker</span> <span class="nv">run</span> <span class="o">-</span><span class="nv">d</span> \
+    <span class="o">--</span><span class="nv">name</span> <span class="nv">jupyterhub</span><span class="o">-</span><span class="nv">ds</span> \
+    <span class="o">--</span><span class="nv">log</span><span class="o">-</span><span class="nv">opt</span> <span class="nv">max</span><span class="o">-</span><span class="nv">size</span><span class="o">=</span><span class="mi">50</span><span class="nv">m</span> \
+    <span class="o">-</span><span class="nv">p</span> <span class="mi">8000</span>:<span class="mi">8000</span> \
+    <span class="o">-</span><span class="nv">p</span> <span class="mi">5006</span>:<span class="mi">5006</span> \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_USER</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">un</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_USER_ID</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">u</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_PASSWORD</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">un</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_GROUP_ID</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">g</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_ADMIN_USER</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">un</span>` \
+    <span class="o">-</span><span class="nv">v</span> `<span class="nv">pwd</span>`:<span class="o">/</span><span class="nv">workdir</span> \
+    <span class="o">-</span><span class="nv">v</span> `<span class="k">dirname</span> $<span class="nv">HOME</span>`:<span class="o">/</span><span class="nv">home_host</span> \
+    <span class="nv">dclong</span><span class="o">/</span><span class="nv">jupyterhub</span><span class="o">-</span><span class="nv">ds</span>
+</pre></div>
+
+
+<p>The following command (only works on Linux) does the same as the above one 
+except that it limits the use of CPU and memory.</p>
+<div class="highlight"><pre><span></span><span class="nv">docker</span> <span class="nv">run</span> <span class="o">-</span><span class="nv">d</span> \
+    <span class="o">--</span><span class="nv">name</span> <span class="nv">jupyterhub</span><span class="o">-</span><span class="nv">ds</span> \
+    <span class="o">--</span><span class="nv">log</span><span class="o">-</span><span class="nv">opt</span> <span class="nv">max</span><span class="o">-</span><span class="nv">size</span><span class="o">=</span><span class="mi">50</span><span class="nv">m</span> \
+    <span class="o">--</span><span class="nv">memory</span><span class="o">=</span>$<span class="ss">((</span>$<span class="ss">(</span><span class="nv">head</span> <span class="o">-</span><span class="nv">n</span> <span class="mi">1</span> <span class="o">/</span><span class="nv">proc</span><span class="o">/</span><span class="nv">meminfo</span> <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{print $2}</span><span class="s1">&#39;</span><span class="ss">)</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">/</span> <span class="mi">5</span><span class="ss">))</span><span class="nv">k</span> \
+    <span class="o">--</span><span class="nv">cpus</span><span class="o">=</span>$<span class="ss">((</span>`<span class="nv">nproc</span>` <span class="o">-</span> <span class="mi">1</span><span class="ss">))</span> \
+    <span class="o">-</span><span class="nv">p</span> <span class="mi">8000</span>:<span class="mi">8000</span> \
+    <span class="o">-</span><span class="nv">p</span> <span class="mi">5006</span>:<span class="mi">5006</span> \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_USER</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">un</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_USER_ID</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">u</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_PASSWORD</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">un</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_GROUP_ID</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">g</span>` \
+    <span class="o">-</span><span class="nv">e</span> <span class="nv">DOCKER_ADMIN_USER</span><span class="o">=</span>`<span class="nv">id</span> <span class="o">-</span><span class="nv">un</span>` \
+    <span class="o">-</span><span class="nv">v</span> `<span class="nv">pwd</span>`:<span class="o">/</span><span class="nv">workdir</span> \
+    <span class="o">-</span><span class="nv">v</span> `<span class="k">dirname</span> $<span class="nv">HOME</span>`:<span class="o">/</span><span class="nv">home_host</span> \
+    <span class="nv">dclong</span><span class="o">/</span><span class="nv">jupyterhub</span><span class="o">-</span><span class="nv">ds</span>
+</pre></div>
+
+
+<h2 id="use-the-jupyterhub-server">Use the JupyterHub Server</h2>
+<ol>
+<li>
+<p>Open your browser and and visit <code>your_host_ip:8000</code>
+  where <code>your_host_ip</code> is the URL/ip address of your server.</p>
+</li>
+<li>
+<p>Login to the JupyterHub server 
+  using your user name (by default your user name on the host machine)
+  and password (by default your user name on the host machine). </p>
+</li>
+<li>
+<p>It is strongly suggested (for security reasons) that you change your password (using the command <code>passwd</code>)
+  in the container.</p>
+</li>
+<li>
+<p>Enjoy JupyterLab notebook!</p>
+</li>
+</ol>
+<h2 id="add-a-new-user-to-the-jupyterhub-server">Add a New User to the JupyterHub Server</h2>
+<p>By default,
+any user in the Docker container can visit the JupyterHub server.
+So if you want to grant access to a new user,
+just create an account for him in the Docker container.
+You can of course use the well know commands <code>useradd</code>, <code>adduser</code>, etc. to achive it.
+To make things easier for you,
+there are some shell scripts in the directory <code>/scripts/</code> to create usres for you.</p>
+<ul>
+<li><code>/scripts/sys/create_user.sh</code>: Create a new user. It's the base script for creating users.</li>
+<li><code>/scripts/sys/create_user_group.sh</code>: Create a new user with the given (existing) group.</li>
+<li><code>/scripts/sys/create_user_nogroup.sh</code>: Create a new user with group name <code>nogroup</code>.</li>
+<li><code>/scripts/sys/create_user_docker.sh</code>: Create a new user with group name <code>docker</code>.</li>
+</ul>
+<p>You can use the option <code>-h</code> to print help doc for these commands.
+For example, <code>/scripts/sys/create_user_nogroup.sh -h</code> prints the below help doc.</p>
+<div class="highlight"><pre><span></span>Create a new user with the group name <span class="s2">&quot;nogroup&quot;</span>.
+Syntax: create_user_nogroup user user_id <span class="o">[</span>password<span class="o">]</span>
+Arguments:
+user: user name
+user_id: user id
+password: Optional password of the user. If not provided, <span class="k">then</span> the user name is used as the password.
+</pre></div>
+
+
+<p>Now suppose you want to create a new user <code>dclong</code> with user ID <code>2000</code> and group name <code>nogroup</code>,
+you can use the following command.</p>
+<div class="highlight"><pre><span></span>sudo /scripts/sys/create_user_nogroup.sh dclong <span class="m">2000</span>
+</pre></div>
+
+
+<p>Since we didn't specify a password for the user,
+the default password (same as the user name) is used.</p>
+<h2 id="remote-connection-to-desktop-in-the-container">Remote Connection to Desktop in the Container</h2>
+<p>If you are running a Docker container with a desktop environment (<code>dclong/lubuntu*</code> or <code>dclong/xubuntu*</code>),
+you can connect to the desktop environment in the Docker container using NoMachine.</p>
+<ol>
+<li>Download the NoMachine client from <a href="https://www.nomachine.com/download">https://www.nomachine.com/download</a>.</li>
+<li>Install the NoMachine client on your computer.</li>
+<li>Create a new connection from your computer 
+    to the desktop environment in the Docker image using the NX protocol and port 4000.
+    You will be asked for a user name and password.
+    By default,
+    the user name used to start the Docker container on the host machine 
+    is used as both the user name and password in the Docker container.</li>
+</ol>
+<h2 id="use-spark-in-jupyterlab-notebook">Use Spark in JupyterLab Notebook</h2>
+<h3 id="spark-the-beakerx-scala-kernel">Spark - The BeakerX Scala Kernel</h3>
+<p>Currently <a href="https://hub.docker.com/r/dclong/jupyterhub-ds/">dclong/jupyterhub-ds</a> uses the BeakerX Scala kernel.</p>
+<ol>
+<li>
+<p>Open a JupyterLab notebook with the BeakerX Scala kernel from the launcher.</p>
+</li>
+<li>
+<p>Download Spark (say, 2.3.1) dependencies. </p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="c">%%classpath add mvn</span>
+<span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">spark</span> <span class="n">spark</span><span class="o">-</span><span class="n">core_2</span><span class="p">.</span><span class="mi">11</span> <span class="mf">2.3</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">org</span><span class="p">.</span><span class="n">apache</span><span class="p">.</span><span class="n">spark</span> <span class="n">spark</span><span class="o">-</span><span class="n">sql_2</span><span class="p">.</span><span class="mi">11</span> <span class="mf">2.3</span><span class="p">.</span><span class="mi">1</span>
+</pre></div>
+
+
+<ol>
+<li>Create a SparkSession object.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">org.apache.spark.sql.SparkSession</span>
+<span class="kn">import</span> <span class="nn">org.apache.spark.sql.functions._</span>
+
+<span class="n">val</span> <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local[2]&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Spark Example&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.some.config.option&quot;</span><span class="p">,</span> <span class="s2">&quot;some-value&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">spark.implicits._</span>
+</pre></div>
+
+
+<ol>
+<li>Use Spark as usual. </li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nv">val</span> <span class="nv">df</span> <span class="o">=</span> <span class="nv">Range</span><span class="ss">(</span><span class="mi">0</span>, <span class="mi">10</span><span class="ss">)</span>.<span class="nv">toDF</span>
+<span class="nv">df</span>.<span class="k">show</span>
+</pre></div>
+
+
+<h3 id="spark-the-almond-scala-kernel">Spark - The Almond Scala Kernel</h3>
+<p>Currently <a href="https://hub.docker.com/r/dclong/jupyterhub-almond/">dclong/jupyterhub-almond</a> uses the Almond Scala kernel.</p>
+<ol>
+<li>
+<p>Open a JupyterLab notebook with the Almond Scala kernel from the launcher.</p>
+</li>
+<li>
+<p>Download Spark (say, 2.3.1) dependencies. </p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">interp</span><span class="p">.</span><span class="k">load</span><span class="p">.</span><span class="n">ivy</span><span class="p">(</span><span class="ss">&quot;org.apache.spark&quot;</span> <span class="o">%</span> <span class="ss">&quot;spark-core_2.11&quot;</span> <span class="o">%</span> <span class="ss">&quot;2.3.1&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<ol>
+<li>Create a SparkSession object.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">org.apache.spark.sql.SparkSession</span>
+<span class="kn">import</span> <span class="nn">org.apache.spark.sql.functions._</span>
+
+<span class="n">val</span> <span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="p">()</span>
+    <span class="o">.</span><span class="n">master</span><span class="p">(</span><span class="s2">&quot;local[2]&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s2">&quot;Spark Example&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s2">&quot;spark.some.config.option&quot;</span><span class="p">,</span> <span class="s2">&quot;some-value&quot;</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+
+<span class="kn">import</span> <span class="nn">spark.implicits._</span>
+</pre></div>
+
+
+<ol>
+<li>Use Spark as usual. </li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nv">val</span> <span class="nv">df</span> <span class="o">=</span> <span class="nv">Range</span><span class="ss">(</span><span class="mi">0</span>, <span class="mi">10</span><span class="ss">)</span>.<span class="nv">toDF</span>
+<span class="nv">df</span>.<span class="k">show</span>
+</pre></div>
+
+
+<p>Please refer to 
+<a href="https://github.com/almond-sh/examples/blob/master/notebooks/spark.ipynb">almond-sh/examples</a>
+for more details.</p>
+<h3 id="spark-apache-toree">Spark - Apache Toree</h3>
+<p>Currently <a href="https://hub.docker.com/r/dclong/jupyterhub-toree/">dclong/jupyterhub-toree</a> uses the Apache Toree Scala kernel.</p>
+<p>The Docker image 
+<a href="https://github.com/dclong/docker-jupyterhub-toree">dclong/jupyterhub-toree</a>
+has Spark and Apache Toree installed and configured.
+Since Spark is already installed in it, 
+you don't need to download and install Spark by yourself.
+By default, 
+a Spark Session object named <code>spark</code> is created automatically just like spark-shell.
+So, you can use Spark/Scala out-of-box in a JupyterLab notebook with the <code>Scala - Apache Toree</code> kernel.</p>
+<ol>
+<li>
+<p>Open a JupyterLab notebook with the <code>Scala - Apache Toree</code> kernel from the launcher.</p>
+</li>
+<li>
+<p>Use Spark as usual.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="nv">val</span> <span class="nv">df</span> <span class="o">=</span> <span class="nv">Range</span><span class="ss">(</span><span class="mi">0</span>, <span class="mi">10</span><span class="ss">)</span>.<span class="nv">toDF</span>
+<span class="nv">df</span>.<span class="k">show</span>
+</pre></div>
+
+
+<h3 id="pyspark-pyspark-and-findspark">PySpark - pyspark and findspark</h3>
+<p>The Docker image
+<a href="https://github.com/dclong/docker-jupyterhub-toree">dclong/jupyterhub-toree</a>
+has Spark (2.4.3) and the Python packages <code>pyspark</code> and <code>findspark</code> installed and configured.
+For convenience, 
+a symbolic link of the Spark home directory (<code>/opt/spark-2.4.3-bin-hadoop2.7</code>) is made to <code>/opt/spark</code>.</p>
+<ol>
+<li>
+<p>Open a JupyterLab notebook with the <code>Scala - Apache Toree</code> kernel from the launcher.</p>
+</li>
+<li>
+<p>Find and initialize PySpark.</p>
+</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">findspark</span>
+<span class="c1"># A symbolic link of the Spark Home is made to /opt/spark for convenience</span>
+<span class="n">findspark</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s1">&#39;/opt/spark&#39;</span><span class="p">)</span>
+
+<span class="kn">import</span> <span class="nn">pyspark</span>
+<span class="n">sc</span> <span class="o">=</span> <span class="n">pyspark</span><span class="o">.</span><span class="n">SparkContext</span><span class="p">(</span><span class="n">appName</span><span class="o">=</span><span class="s2">&quot;myAppName&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<ol>
+<li>Use Spark as usual.</li>
+</ol>
+<div class="highlight"><pre><span></span><span class="n">sc</span><span class="p">.</span><span class="n">textFile</span>
+</pre></div>
+
+
+<h2 id="list-of-images-and-detailed-information">List of Images and Detailed Information</h2>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/gitpod-svim/">dclong/gitpod-svim</a></p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/gitpod-py3/">dclong/gitpod-py3</a></li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/deepin_b/">dclong/deepin_b</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/deepin_cn/">dclong/deepin_cn</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/deepin/">dclong/deepin</a>  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/ubuntu_b/">dclong/ubuntu_b</a>  </p>
+<blockquote>
+<p>OS: Ubuntu 18.04<br>
+Time Zone: US Pacific Time<br>
+Desktop Environment: None<br>
+Remote Desktop: None  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/proxychains/">dclong/proxychains</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/linuxbrew/">dclong/linuxbrew</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/samba/">dclong/samba</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/nfs/">dclong/nfs</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/nodejs/">dclong/nodejs</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/typescript/">dclong/typescript</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jdk/">dclong/jdk</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/scala/">dclong/scala</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/hadoop/">dclong/hadoop</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/hive/">dclong/hive</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/spark/">dclong/spark</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/zeppelin/">dclong/zeppelin</a>  </p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/h2o/">dclong/h2o</a>  </p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/r-base/">dclong/r-base</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/r-pop/">dclong/r-pop</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/rstudio/">dclong/rstudio</a>  </li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/qt5/">dclong/qt5</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/conda/">dclong/conda</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/conda-build/">dclong/conda-build</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/conda-yarn/">dclong/conda-yarn</a>  </p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/tdodbc/">dclong/tdodbc</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/tdodbc-py/">dclong/tdodbc-py</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/python/">dclong/python</a>  </p>
+<blockquote>
+<p>Python 3.6  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/theia/">dclong/theia</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/wdb/">dclong/wdb</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/python-jdk/">dclong/python-jdk</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/python-nodejs/">dclong/python-nodejs</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/mlflow/">dclong/mlflow</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/flask/">dclong/flask</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/dryscrape/">dclong/dryscrape</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyter/">dclong/jupyter</a>  </p>
+<blockquote>
+<p>Jupyter Notebook: 5.7.0  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyter-nodejs/">dclong/jupyter-nodejs</a>  </p>
+<blockquote>
+<p>NodeJS: 10.15.0  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterlab">dclong/jupyterlab</a>  </p>
+<blockquote>
+<p>JupyterLab: 0.35.4  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub/">dclong/jupyterhub</a>  </p>
+<blockquote>
+<p>JupyterHub: 0.9.3  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-ts/">dclong/jupyterhub-ts</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-julia/">dclong/jupyterhub-julia</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-jdk/">dclong/jupyterhub-jdk</a>  </p>
+<blockquote>
+<p>OpenJDK 8<br>
+Maven: 3.3.9  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-py/">dclong/jupyterhub-py</a>  </p>
+<blockquote>
+<p>numpy scipy pandas dask<br>
+torch torchvision tensorflow keras h2o<br>
+gensim nltk<br>
+scikit-learn xgboost<br>
+matplotlib seaborn bokeh plotly<br>
+tabulate<br>
+JayDeBeApi pymysql pymongo sqlalchemy<br>
+pysocks requests[socks] Scrapy beautifulsoup4 wget  ansible  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/holoviews/">dclong/holoviews</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-ai/">dclong/jupyterhub-ai</a>  </p>
+<blockquote>
+<p>torch torchvision tensorflow keras h2o<br>
+gensim pytext    </p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-beakerx/">dclong/jupyterhub-beakerx</a>  </p>
+<blockquote>
+<p>SQL (based on JDBC) via BeakerX 1.1.0<br>
+Scala 2.11.12 via BeakerX 1.1.0<br>
+Java 8, Clojure, Groovy, Kotlin via BeakerX 1.1.0  </p>
+</blockquote>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/jupyterhub-ds/">dclong/jupyterhub-ds</a>  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/ubuntu_cn/">dclong/ubuntu_cn</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu/">dclong/lubuntu</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu-qt5/">dclong/lubuntu-qt5</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/lubuntu-pyside2/">dclong/lubuntu-pyside2</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu-nodejs/">dclong/lubuntu-nodejs</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/lubuntu-vscode/">dclong/lubuntu-vscode</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu-py/">dclong/lubuntu-py</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/lubuntu-pycharm/">dclong/lubuntu-pycharm</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu-jdk/">dclong/lubuntu-jdk</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/lubuntu-scala/">dclong/lubuntu-scala</a>  <ul>
+<li><a href="https://hub.docker.com/r/dclong/lubuntu-intellij/">dclong/lubuntu-intellij</a>  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/xubuntu/">dclong/xubuntu</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/xubuntu-nodejs/">dclong/xubuntu-nodejs</a>  <ul>
+<li><a href="https://hub.docker.com/r/dclong/xubuntu-vscode/">dclong/xubuntu-vscode</a>  </li>
+</ul>
+</li>
+<li><a href="https://hub.docker.com/r/dclong/xubuntu-py/">dclong/xubuntu-py</a>  <ul>
+<li><a href="https://hub.docker.com/r/dclong/xubuntu-pycharm/">dclong/xubuntu-pycharm</a>  </li>
+</ul>
+</li>
+<li><a href="https://hub.docker.com/r/dclong/xubuntu-jdk/">dclong/xubuntu-jdk</a>  <ul>
+<li><a href="https://hub.docker.com/r/dclong/xubuntu-scala/">dclong/xubuntu-scala</a>  <ul>
+<li><a href="https://hub.docker.com/r/dclong/xubuntu-intellij/">dclong/xubuntu-intellij</a>  </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="known-issues">Known Issues</h2>
+<ol>
+<li>The subprocess managment issue.
+    This is not an issue at all in most use cases.
+    This Docker image launch service using a shell script
+    so there won't be orphan subprocesses
+    when the process of the Docker container is killed.
+    However, launching by shell script is not the best way for managing processes.
+    Please refer to <a href="https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/#asimpleinitsystem">A Simple Init System</a>
+    for more details.
+    I might switch to the <a href="https://github.com/Supervisor/supervisor">Supervisor</a> for process management
+    or use the base image of <a href="https://hub.docker.com/r/phusion/baseimage/">pushion/baseimage</a> in future.</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-08-18T00:23:13-07:00" pubdate>Aug 18, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/software.html">software</a>
+    <a class="category" href="http://www.legendu.net/en/tag/docker.html">Docker</a>
+    <a class="category" href="http://www.legendu.net/en/tag/docker-image.html">Docker image</a>
+    <a class="category" href="http://www.legendu.net/en/tag/ubuntu.html">Ubuntu</a>
+    <a class="category" href="http://www.legendu.net/en/tag/jupyterlab.html">JupyterLab</a>
+    <a class="category" href="http://www.legendu.net/en/tag/lubuntu.html">Lubuntu</a>
+    <a class="category" href="http://www.legendu.net/en/tag/dclong.html">dclong</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/my-docker-images/';
+          var disqus_url = 'http://www.legendu.net/en/blog/my-docker-images/';
+          var disqus_title = 'My Docker Images';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

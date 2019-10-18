@@ -1,0 +1,1712 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Linux</title><link href="http://www.legendu.net/en/" rel="alternate"></link><link href="http://www.legendu.net/en/feeds/linux.atom.xml" rel="self"></link><id>http://www.legendu.net/en/</id><updated>2019-05-11T01:05:59-07:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Tips on Installing Debian Series Linux Distributions</title><link href="http://www.legendu.net/en/blog/tips-for-installing-debian/" rel="alternate"></link><published>2019-05-11T01:05:59-07:00</published><updated>2019-05-11T01:05:59-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-05-11:/en/blog/tips-for-installing-debian/</id><summary type="html">&lt;h2 id="before-installation"&gt;Before Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can either create a boot CD/DVD or flash drive to install debian.
+    The way I prefer is to instal debian using a bootable flash drive 
+    because many laptops do not have CD/DVD trays. 
+    To write a debian image to flash drive, you can use the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="before-installation"&gt;Before Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can either create a boot CD/DVD or flash drive to install debian.
+    The way I prefer is to instal debian using a bootable flash drive 
+    because many laptops do not have CD/DVD trays. 
+    To write a debian image to flash drive, you can use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;dd&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_to_debian_image&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_of_device&lt;/span&gt; &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="nv"&gt;M&lt;/span&gt;&lt;span class="c1"&gt;; sync&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or can you also use&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;path_to_debian_image&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;path_of_device&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;where path of device is the path of the flash drive. 
+Note that you must use the whole device (e.g., /dev/sdb) not just a partition (e.g., /dev/sdb1),
+otherwise the flash drive is not bootable.
+You have to aware that both the 2 commands above are dangerous 
+as they can destory data on the device,
+so you'd better be sure about what you are doing. 
+For more information, see &lt;a href="http://www.debian.org/CD/faq/#write-usb"&gt;http://www.debian.org/CD/faq/#write-usb&lt;/a&gt;.
+(The two simple ways for creating bootable falsh drives also applies to many other Linux distributions.)
+It requires that the ISO image is hybrid. 
+If not, 
+you can use the following command to make it hybird if it uses isolinux/syslinux technology.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;isohybrid&lt;/span&gt; &lt;span class="n"&gt;path_to_linux_image&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;And then you can use either &lt;code&gt;dd&lt;/code&gt; or &lt;code&gt;cat&lt;/code&gt; to the write the image into a device.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better have ethernet connection. 
+    The wireless support for Linux is still not perfect.
+    Depending on the brand of your laptop, 
+    you might need to connect to internet through ethernet network during installation.
+    What's more, 
+    the ethernet network is faster than a wireless network. 
+    So it is suggested that you alway use a ethernet network connection while installing debian.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure the power of your laptop is plugged in. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="during-installation"&gt;During Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is recommended that you use the text installation. 
+    The text installation of Debian actually is pretty intuitive and easy to follow.
+    The graphical installation of Debian did not work on any of my laptops.
+    I am not sure whether the problem has been fixed or not, 
+    but it does not hurt to use the text installation. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Since Debian can keep data in the home directory during installation,
+    it is suggested that you do not use a separate home directory. 
+    Following this suggestion, 
+    you have to set the mount point of the disk to install debian as &lt;code&gt;/&lt;/code&gt; (root directory). 
+    You also have to use a swap partition. 
+    The size of the swap parition is controversial, 
+    generally speaking it should be 1 to 2 times the memory of the computer.
+    I often set the size of the swap partition to be 1.5 times the memory of the computer. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If your network is not very fast, 
+    you can choose not to use network mirrors especially 
+    when your installation image is update to date. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you do not like the default desktop enviroment of Debian (currently Gnome),
+    you can deselect the desktop environment during installation. 
+    This also makes the installation faster.
+    You can install a desktop enviroment you like manually after installtion of Debian. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="after-installation"&gt;After Installation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The first thing to do after installtion is 
+    to edit the APT (advance package tool) configuration file &lt;code&gt;/etc/apt/sources.list&lt;/code&gt;. 
+    By default, debian uses the installing media as a repository after installation.
+    However, the media is usually removed and thus unavailable after installation.
+    So, you probably want to delete or comment out the repository using the installing media.
+    Also, if you did not use a network mirror duing installation, 
+    you have to add a debian repository into the APT configuration file manually.
+    For example, you can add the following lines into the APT configuration file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://ftp.us.debian.org/debian/&lt;/span&gt; &lt;span class="kp"&gt;wheezy&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt;
+&lt;span class="k"&gt;deb&lt;/span&gt; &lt;span class="s"&gt;http://ftp.us.debian.org/debian/&lt;/span&gt; &lt;span class="kp"&gt;wheezy&lt;/span&gt; &lt;span class="kp"&gt;main&lt;/span&gt; &lt;span class="kp"&gt;contrib&lt;/span&gt; &lt;span class="kp"&gt;non-free&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It is suggested that you include &lt;code&gt;contrib&lt;/code&gt; and &lt;code&gt;non-free&lt;/code&gt; in the repository.
+This ensures that you can also use many non-open source but cost-free softwares.  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The second thing to do after installation of Debian is 
+    to install the &lt;code&gt;sudo&lt;/code&gt; package and configure it.
+    You have to switch to root to install packages.
+    To switch to root, type in &lt;code&gt;su&lt;/code&gt; (super user) in the terminal. 
+    You will be asked for the password of root.
+    After authentication, you are in root user. 
+    Notice that the prompt character is &lt;code&gt;#&lt;/code&gt; (instead of &lt;code&gt;$&lt;/code&gt;) for the root user. 
+    You can type &lt;code&gt;apt-get install sudo&lt;/code&gt; in the terminal (as root) to install the package &lt;code&gt;sudo&lt;/code&gt;.
+    After installation of &lt;code&gt;sudo&lt;/code&gt;,
+    you have to add your user name to the &lt;code&gt;sudo&lt;/code&gt; group. 
+    To do this, 
+    run the following command as root.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;adduser&lt;/span&gt; &lt;span class="n"&gt;your_user_name&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, 
+this will not take effect immediately. 
+To notify the change (of group permission) to the system, 
+you can run the following command as root.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;newgrp&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If this does not work, 
+you can manually log out and then log in
+and the change of group permissions will take effect.
+Now you are in the &lt;code&gt;sudo&lt;/code&gt; group, 
+you can use &lt;code&gt;sudo&lt;/code&gt; (instead of the root user) to run commands
+that need root permission.
+You can now exit the root terminal (by running &lt;code&gt;exit&lt;/code&gt;) 
+if you are still in the root terminal.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The third thing to do after installation of Debian is to install the &lt;code&gt;wajig&lt;/code&gt; package.
+    To do this, 
+    type &lt;code&gt;sudo apt-get install wajig&lt;/code&gt; in the terminal (as your own user).
+    You will be prompt for your user password to install the package. 
+    Surely, 
+    you can install the &lt;code&gt;wajig&lt;/code&gt; package together with the &lt;code&gt;sudo&lt;/code&gt; package in the second step. 
+    To do this, 
+    you can run command &lt;code&gt;apt-get install sudo wajig&lt;/code&gt; as root. 
+    However, it is suggested that you avoid use th root user as much as possible. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The last step is to install and configure other necessary packages.
+    Now you have &lt;code&gt;sudo&lt;/code&gt; and &lt;code&gt;wajig&lt;/code&gt; installed, 
+    you can use &lt;code&gt;wajig&lt;/code&gt; to manage packages,
+    and you should use &lt;code&gt;sudo&lt;/code&gt; instead of the root user to operations need root permissions.
+    For example, 
+    to install other packages such as &lt;code&gt;vim&lt;/code&gt; and &lt;code&gt;eclipse&lt;/code&gt;, 
+    you can type &lt;code&gt;wajig install vim eclipse&lt;/code&gt; in the terminal (as your own user).
+    You will be prompt for your user password to continue. 
+    Notice that &lt;code&gt;wajig&lt;/code&gt; is a little special command, 
+    it automatically uses &lt;code&gt;sudo&lt;/code&gt; to install packages when necessary. 
+    For other operations that need root permission, 
+    you have to use &lt;code&gt;sudo&lt;/code&gt; before the command. 
+    For example, if you use &lt;code&gt;apt-get&lt;/code&gt; to install packages &lt;code&gt;vim&lt;/code&gt; and &lt;code&gt;eclipse&lt;/code&gt;,
+    you must use &lt;code&gt;sudo apt-get install vim eclipse&lt;/code&gt; manually.
+    However, in practice I avoid using &lt;code&gt;sudo&lt;/code&gt; as much as possible. 
+    I often use a command first without prefixing it with &lt;code&gt;sudo&lt;/code&gt;, 
+    if it fails because of permission, 
+    I then use command &lt;code&gt;sudo !!&lt;/code&gt; to run it using &lt;code&gt;sudo&lt;/code&gt; quickly.
+    Generally speaking, this is safer than abusing &lt;code&gt;sudo&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="wireless"&gt;Wireless&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You might have to install wireless dirvers manually 
+    depending on the type of wireless card in your computer. 
+    You can use the following command to check the type of the wireless card in your computer.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;lspci&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="n"&gt;wireless&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Then you can search for the driver/package that support your wireless card. 
+For example, the result of the above command on my laptop is:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;06&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="mf"&gt;00.0&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Network&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;controller&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Intel&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Corporation&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;PRO&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Wireless&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;5100&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;AGN&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;Shiloh&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Network&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;Connection&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This wireless card is supported by iwlwifi. 
+If you have included non-free softwares in your debian repository 
+(see the first step after installation),
+you can type &lt;code&gt;wajig install firmware-iwlwifi&lt;/code&gt; in terminal to install it. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you have installed a desktop environment, 
+    you usually have a network manager to manager the wireless interface. 
+    In this case, 
+    it is strongly suggested that 
+    you comment everything out in the (or use an empty) configuration file &lt;code&gt;/etc/network/interface&lt;/code&gt;.
+    Otherwise, 
+    you might not be able to use the wireless network 
+    though the network manager shows that you have connected to it. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="sshfs-and-fuse"&gt;sshfs and fuse&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you want to be able to mount remove Linux filesystem on you computer, 
+    you can install sshfs and fuse using the following command. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;sshfs&lt;/span&gt; &lt;span class="n"&gt;fuse&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It is suggested that you add you user name into the fuse group using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;usermod&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;aG&lt;/span&gt; &lt;span class="n"&gt;fuse&lt;/span&gt; &lt;span class="n"&gt;user_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You have to restart your computer to make the action take effect. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="suggestions-for-other-debian-series-linux-distributions"&gt;Suggestions for Other Debian Series Linux Distributions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you create a boot flash drive for Ubuntu in Windows using UNetbootin or other softwares, 
+    then you'd better format the flash drive as &lt;code&gt;FAT&lt;/code&gt; instead of &lt;code&gt;FAT32&lt;/code&gt;. 
+    Otherwise, 
+    you might get the error information: "BOOTMGR is missing".&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By default, LMDE installs 486 on 32 bit computers.
+    If your computer has more than 1 cores/processors, 
+    you can upgrade to 686-pae manually by running the following command in terminal
+    and then reboot your computer.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;linux&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;686&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;pae&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="install"></category><category term="Linux"></category><category term="software"></category><category term="Debian"></category></entry><entry><title>Compare Two Directories on Linux</title><link href="http://www.legendu.net/en/blog/compare-two-directories-on-linux/" rel="alternate"></link><published>2019-05-10T19:13:40-07:00</published><updated>2019-05-10T19:13:40-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-05-10:/en/blog/compare-two-directories-on-linux/</id><summary type="html">&lt;h2 id="on-the-same-machine"&gt;On the Same Machine&lt;/h2&gt;
+&lt;p&gt;If the two directories are on the same machine, 
+you can use either &lt;code&gt;colordiff&lt;/code&gt; (preferred over &lt;code&gt;diff&lt;/code&gt;) or &lt;code&gt;git diff&lt;/code&gt;
+to find the differences between them. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;colordiff -qr dir_1 dir_2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git diff --no-index dir_1 dir_2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="on-different-machines"&gt;On Different Machines&lt;/h2&gt;
+&lt;p&gt;It is a little bit tricky when the …&lt;/p&gt;</summary><content type="html">&lt;h2 id="on-the-same-machine"&gt;On the Same Machine&lt;/h2&gt;
+&lt;p&gt;If the two directories are on the same machine, 
+you can use either &lt;code&gt;colordiff&lt;/code&gt; (preferred over &lt;code&gt;diff&lt;/code&gt;) or &lt;code&gt;git diff&lt;/code&gt;
+to find the differences between them. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;colordiff -qr dir_1 dir_2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;git diff --no-index dir_1 dir_2
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="on-different-machines"&gt;On Different Machines&lt;/h2&gt;
+&lt;p&gt;It is a little bit tricky when the two directories are on different machines. 
+You have to first calculate md5sums of files in the two directories recursively,
+and then compare the md5sums.
+To calculate the md5sums of files in a directory recursively 
+and output the results into a file &lt;code&gt;md5.txt&lt;/code&gt;, 
+you can use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;md5deep -r path_to_directory &amp;gt; md5.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Once you have the md5sums for the 2 directories calculated 
+and outputed into files (e.g., &lt;code&gt;j.txt&lt;/code&gt;) on the 2 machines,
+you can then compare the contents of the 2 files on the 2 machines.
+One way to achieve this is to run the following command on one of the machines.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh -p port user_name@the_other_server cat md5.txt &lt;span class="p"&gt;|&lt;/span&gt; git diff --no-index md5.txt -
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can also copy (using &lt;code&gt;rsync&lt;/code&gt; or &lt;code&gt;scp&lt;/code&gt;) the output file on one machine to the other machine 
+and then compare them locally using &lt;code&gt;git diff&lt;/code&gt;.&lt;/p&gt;</content><category term="difference"></category><category term="directory"></category><category term="folder"></category><category term="Linux"></category><category term="md5sum"></category><category term="md5deep"></category><category term="diff"></category><category term="ssh"></category></entry><entry><title>Advanced Use of "head" and "tail"</title><link href="http://www.legendu.net/en/blog/advanced-use-head-tail/" rel="alternate"></link><published>2019-03-29T09:29:01-07:00</published><updated>2019-03-29T09:29:01-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-29:/en/blog/advanced-use-head-tail/</id><summary type="html">&lt;p&gt;Besides passing an unsigned integer as parameter to the option &lt;code&gt;-n&lt;/code&gt;, 
+you can also pass a signed integer to it.
+When a signed integer is passed to &lt;code&gt;-n&lt;/code&gt;, 
+it means from/to (inclusive/exclusive similar to most programming languages) the row with this index (1-based). 
+More specifically, 
+&lt;code&gt;head -n +/-k …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;Besides passing an unsigned integer as parameter to the option &lt;code&gt;-n&lt;/code&gt;, 
+you can also pass a signed integer to it.
+When a signed integer is passed to &lt;code&gt;-n&lt;/code&gt;, 
+it means from/to (inclusive/exclusive similar to most programming languages) the row with this index (1-based). 
+More specifically, 
+&lt;code&gt;head -n +/-k&lt;/code&gt; means take rows 1 (inclusive) to &lt;code&gt;+/-k&lt;/code&gt; (exclusive).
+&lt;code&gt;tail -n +/-k&lt;/code&gt; means take rows &lt;code&gt;+/-k&lt;/code&gt; (inclusive) to the last row. 
+Below are some examples to help you fruther understand how it works.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Print all but the last &lt;code&gt;5&lt;/code&gt; lines.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;means&lt;/span&gt; &lt;span class="k"&gt;without&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;last&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;lines&lt;/span&gt;  
+&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Print lines 6 and after (i.e., all but the first &lt;code&gt;5&lt;/code&gt; lines).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;means&lt;/span&gt; &lt;span class="n"&gt;starting&lt;/span&gt; &lt;span class="k"&gt;from&lt;/span&gt; &lt;span class="n"&gt;line&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt;  
+&lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Print lines 10 to 20.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;  
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;tail&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;11&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Please refer to 
+&lt;a href="http://www.legendu.net/en/blog/print-rows-from-a-text-file/"&gt;Print Rows from a Text File&lt;/a&gt;
+for better ways using &lt;code&gt;sed&lt;/code&gt; and &lt;code&gt;awk&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="shell"></category><category term="command line"></category><category term="head"></category><category term="tail"></category><category term="sed"></category><category term="awk"></category><category term="rows"></category><category term="lines"></category><category term="text manipulation"></category></entry><entry><title>Advanced Use of "ls" in Linux</title><link href="http://www.legendu.net/en/blog/list-files-without-tilde-linux/" rel="alternate"></link><published>2019-03-29T09:29:01-07:00</published><updated>2019-03-29T09:29:01-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-29:/en/blog/list-files-without-tilde-linux/</id><summary type="html">&lt;h2 id="list-files-sorted-by-time"&gt;List Files Sorted by Time&lt;/h2&gt;
+&lt;p&gt;You can list files sorted by time (newest first) using the &lt;code&gt;-t&lt;/code&gt; option.
+Notice that the &lt;code&gt;-t&lt;/code&gt; option is also support by &lt;code&gt;hdfs dfs -ls&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lht&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="ignore-files"&gt;Ignore Files&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You have to either enclose the pattern in quotes or escape the wildcard in patterns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Equivalent …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="list-files-sorted-by-time"&gt;List Files Sorted by Time&lt;/h2&gt;
+&lt;p&gt;You can list files sorted by time (newest first) using the &lt;code&gt;-t&lt;/code&gt; option.
+Notice that the &lt;code&gt;-t&lt;/code&gt; option is also support by &lt;code&gt;hdfs dfs -ls&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lht&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="ignore-files"&gt;Ignore Files&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You have to either enclose the pattern in quotes or escape the wildcard in patterns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Equivalent commands to ignore JSON files.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="c1"&gt;--ignore=*.json&lt;/span&gt;
+&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;json&lt;/span&gt;
+&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*.json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;quote&lt;/span&gt; &lt;span class="n"&gt;needed&lt;/span&gt; &lt;span class="n"&gt;due&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="k"&gt;space&lt;/span&gt;&lt;span class="o"&gt;!&lt;/span&gt;
+&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iname&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*.json&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ignore multiple patterns.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*.txt&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;I&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*.pdf&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iname&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*.json&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;iname&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;*.pdf&amp;#39;&lt;/span&gt;
+&lt;span class="n"&gt;find&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;type&lt;/span&gt; &lt;span class="n"&gt;f&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;*.txt&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;./Movies/*&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;./Downloads/*&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;!&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;./Music/*&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Ignore backup files (whose names end with &lt;code&gt;~&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or you can use&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="c1"&gt;--ignore=*~&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="list-contents-of-a-directory-with-the-directory-name-prefixed"&gt;List Contents of a Directory with the Directory Name Prefixed&lt;/h2&gt;
+&lt;p&gt;When you list the contents of a directory (e.g., &lt;code&gt;raw&lt;/code&gt;) using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls raw
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;the directory name &lt;code&gt;raw&lt;/code&gt; is not prefixed to the returned/printed contents.
+You can of course concatenate the directory name &lt;code&gt;raw&lt;/code&gt; to each of its subdirectory/subfile manually,
+however,
+a more convenient way is to use the the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls raw/*
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="list-only-subdirectories"&gt;List Only Subdirectories&lt;/h2&gt;
+&lt;p&gt;You can use the following command to list directories only in the current directory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ls -d ./*
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="list-hidden-files-and-directories"&gt;List Hidden Files and Directories&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ls&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="ls"></category><category term="shell"></category></entry><entry><title>Configure SSH to Use a Proxy Server</title><link href="http://www.legendu.net/en/blog/configure-ssh-to-use-a-proxy-server/" rel="alternate"></link><published>2019-03-07T23:42:48-08:00</published><updated>2019-03-07T23:42:48-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-07:/en/blog/configure-ssh-to-use-a-proxy-server/</id><summary type="html">&lt;p&gt;Suppose you have a production server that you want to visit via SSH,
+however,
+it is not accessible directly.
+Instead,
+you have to visit it from a bastion/proxy server.
+You can configure SSH to use the bastion/proxy server when visiting the production server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Host&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;production_server&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;ProxyCommand&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;proxy_server …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;Suppose you have a production server that you want to visit via SSH,
+however,
+it is not accessible directly.
+Instead,
+you have to visit it from a bastion/proxy server.
+You can configure SSH to use the bastion/proxy server when visiting the production server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;Host&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;production_server&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;ProxyCommand&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;proxy_server&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;W&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+
+&lt;span class="k"&gt;Host&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+
+&lt;span class="n"&gt;SendEnv&lt;/span&gt; &lt;span class="n"&gt;LANG&lt;/span&gt; &lt;span class="n"&gt;LC_&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="n"&gt;HashKnownHosts&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
+&lt;span class="n"&gt;GSSAPIAuthentication&lt;/span&gt; &lt;span class="n"&gt;yes&lt;/span&gt;
+&lt;span class="n"&gt;GSSAPIDelegateCredentials&lt;/span&gt; &lt;span class="k"&gt;no&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;make&lt;/span&gt; &lt;span class="k"&gt;connection&lt;/span&gt; &lt;span class="n"&gt;alive&lt;/span&gt;
+&lt;span class="n"&gt;ServerAliveInterval&lt;/span&gt; &lt;span class="mi"&gt;90&lt;/span&gt;
+&lt;span class="n"&gt;ServerAliveCountMax&lt;/span&gt; &lt;span class="mi"&gt;3&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Wildcards and NOT operators are supported.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="k"&gt;Host&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;xxx&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt; &lt;span class="o"&gt;!*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;exclude&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+    &lt;span class="n"&gt;ProxyCommand&lt;/span&gt; &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="n"&gt;proxy_server_address&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;W&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;h&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;%&lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;
+    &lt;span class="k"&gt;Host&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice that you can also specify the proxy to use directly
+via the option &lt;code&gt;-o ProxyCommand="ssh proxy_server -W %h:%p"&lt;/code&gt;.
+For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;ssh&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt; &lt;span class="n"&gt;ProxyCommand&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;ssh proxy_server -W %h:%p&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;target_server&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="SSH"></category><category term="proxy server"></category></entry><entry><title>Configure Debian Apt Source List</title><link href="http://www.legendu.net/en/blog/configure-debian-sources/" rel="alternate"></link><published>2019-03-07T09:27:00-08:00</published><updated>2019-03-07T09:27:00-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-07:/en/blog/configure-debian-sources/</id><summary type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://debgen.simplylinux.ch/"&gt;Debian Apt Sources List Generator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Personally, I prefer stable with backports.
+Testing is also good but still update might introduce …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;strong&gt;
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+It is not meant to readers
+but rather for convenient reference of the author and future improvement.
+&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://debgen.simplylinux.ch/"&gt;Debian Apt Sources List Generator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Personally, I prefer stable with backports.
+Testing is also good but still update might introduce critial bugs sometimes.
+It is not easy to maitainly a stable and update to date balance.
+You can certainly use multi-sources,
+i.e., use stable, testing, sid and experimental at the same time.
+multi-source is much harder to maintain especially when you want to support multi-archi
+It is not recommended.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;deb http://ftp.us.debian.org/debian stable main contrib non-free
+deb-src http://ftp.us.debian.org/debian stable main contrib non-free
+
+deb http://ftp.debian.org/debian/ wheezy-updates main contrib non-free
+deb-src http://ftp.debian.org/debian/ wheezy-updates main contrib non-free
+
+deb http://security.debian.org/ wheezy/updates main contrib non-free
+deb-src http://security.debian.org/ wheezy/updates main contrib non-free
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# stable&lt;/span&gt;
+deb http://ftp.us.debian.org/debian/ stable main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ stable main contrib non-free
+
+&lt;span class="c1"&gt;# stable Security&lt;/span&gt;
+deb http://security.debian.org/ stable/updates main contrib non-free
+deb-src http://security.debian.org/ stable/updates main contrib non-free
+
+&lt;span class="c1"&gt;# stable-updates, previously known as &amp;#39;volatile&amp;#39;&lt;/span&gt;
+deb http://ftp.us.debian.org/debian/ stable-updates main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ stable-updates main contrib non-free
+
+&lt;span class="c1"&gt;# stable-backports&lt;/span&gt;
+deb http://ftp.us.debian.org/debian/ stable-backports main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ stable-backports main contrib non-free
+
+&lt;span class="c1"&gt;# testing&lt;/span&gt;
+deb http://ftp.us.debian.org/debian/ testing main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ testing main contrib non-free
+
+&lt;span class="c1"&gt;# testing Security&lt;/span&gt;
+deb http://security.debian.org/ testing/updates main contrib non-free
+deb-src http://security.debian.org/ testing/updates main contrib non-free
+
+&lt;span class="c1"&gt;# sid&lt;/span&gt;
+deb http://ftp.us.debian.org/debian/ sid main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ sid main contrib non-free
+
+&lt;span class="c1"&gt;# experimental&lt;/span&gt;
+deb http://ftp.us.debian.org/debian/ experimental main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ experimental main contrib non-free
+&lt;/pre&gt;&lt;/div&gt;</content><category term="operating system"></category><category term="OS"></category><category term="Linux"></category><category term="Debian"></category><category term="apt-get"></category><category term="apt"></category><category term="source list"></category></entry><entry><title>Schedule Task Using Crontab in Linux</title><link href="http://www.legendu.net/en/blog/schedule-task-using-crontab-in-linux/" rel="alternate"></link><published>2017-11-12T11:31:51-08:00</published><updated>2017-11-12T11:31:51-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-11-12:/en/blog/schedule-task-using-crontab-in-linux/</id><summary type="html">&lt;p&gt;The information of scheuled tasks are saved in the file &lt;code&gt;/etc/crontab&lt;/code&gt;. 
+It contains scheduled tasks of all users.
+Though you can schedule tasks by editing the file directly,
+you'd better not.
+It is suggested that you use the command &lt;code&gt;crontab -e&lt;/code&gt; to schedule tasks.
+There are 6 fields that …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The information of scheuled tasks are saved in the file &lt;code&gt;/etc/crontab&lt;/code&gt;. 
+It contains scheduled tasks of all users.
+Though you can schedule tasks by editing the file directly,
+you'd better not.
+It is suggested that you use the command &lt;code&gt;crontab -e&lt;/code&gt; to schedule tasks.
+There are 6 fields that you need to fill for a task to be schedule: 
+&lt;code&gt;m&lt;/code&gt;, &lt;code&gt;h&lt;/code&gt;, &lt;code&gt;dom&lt;/code&gt;, &lt;code&gt;mon&lt;/code&gt;, &lt;code&gt;dow&lt;/code&gt; and &lt;code&gt;command&lt;/code&gt;,
+which stand for &lt;code&gt;minute&lt;/code&gt;, &lt;code&gt;hour&lt;/code&gt;, &lt;code&gt;day of month&lt;/code&gt;, &lt;code&gt;month&lt;/code&gt;, &lt;code&gt;day of week&lt;/code&gt;.
+The graph below shows possible values for each field.
+shortened name 
+Notice that abbreviations of days (MON, TUE, etc.) can be used for the field &lt;code&gt;dow&lt;/code&gt;.
+For example &lt;code&gt;SUN,MON,THU&lt;/code&gt; for (day of week) 
+will exectute the command on Sundays, Mondays on Thursdays.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt; &lt;span class="err"&gt;┌──────────&lt;/span&gt; &lt;span class="n"&gt;minute&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;59&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;┌────────&lt;/span&gt; &lt;span class="n"&gt;hour&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;23&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;┌──────&lt;/span&gt; &lt;span class="n"&gt;day&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;month&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;31&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;┌────&lt;/span&gt; &lt;span class="n"&gt;month&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;┌──&lt;/span&gt; &lt;span class="n"&gt;day&lt;/span&gt; &lt;span class="n"&gt;of&lt;/span&gt; &lt;span class="n"&gt;week&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;6&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Sunday&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Saturday&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt;
+ &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt; &lt;span class="err"&gt;│&lt;/span&gt;                &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;7&lt;/span&gt; &lt;span class="o"&gt;=&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Monday&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="n"&gt;Sunday&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="err"&gt;↓&lt;/span&gt; &lt;span class="err"&gt;↓&lt;/span&gt; &lt;span class="err"&gt;↓&lt;/span&gt; &lt;span class="err"&gt;↓&lt;/span&gt; &lt;span class="err"&gt;↓&lt;/span&gt;
+ &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="n"&gt;command&lt;/span&gt; &lt;span class="n"&gt;to&lt;/span&gt; &lt;span class="n"&gt;be&lt;/span&gt; &lt;span class="n"&gt;executed&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and &lt;code&gt;command&lt;/code&gt; respectively. 
+An alternative way is to save the information of a scheduled task in a file (e.g. 'task.txt'),
+and then run the command &lt;code&gt;crontab task.txt&lt;/code&gt; to import it.
+To list all scheduled tasks, 
+run the command &lt;code&gt;crontab -l&lt;/code&gt;.
+To remove a sheduled task,
+use the command &lt;code&gt;crontab -r&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;As long as you use the &lt;code&gt;crontab&lt;/code&gt; commands to edit the file &lt;code&gt;/etc/crontab&lt;/code&gt;,
+you do NOT have to restart &lt;code&gt;cron&lt;/code&gt;.
+&lt;code&gt;cron&lt;/code&gt; will automatically reload tasks that were changed.
+The log of cron jobs can be found at 
+&lt;code&gt;/var/log/syslog&lt;/code&gt; (Ubuntu) or &lt;code&gt;/var/log/cron&lt;/code&gt; (CentOS).
+If you do not have read permission to the log files, 
+you can redict the standard output and error messages of a cron job when you schedule it. 
+Please find an example below.&lt;/p&gt;
+&lt;h2 id="start-a-crontab-service-on-ubuntu"&gt;Start a Crontab Service on Ubuntu&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt; &lt;span class="n"&gt;cron&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;cron&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;check&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt; &lt;span class="k"&gt;of&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;cron&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt; 
+&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;cron&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;cron&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt;
+&lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;cron&lt;/span&gt; &lt;span class="n"&gt;stop&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="cron-job-examples"&gt;Cron Job Examples&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Run the command &lt;code&gt;duplicity.lbp&lt;/code&gt; at 03:00 every Thursday. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;   &lt;span class="mi"&gt;3&lt;/span&gt;   &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="mi"&gt;5&lt;/span&gt;     &lt;span class="n"&gt;duplicity&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;lbp&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the command &lt;code&gt;rsnapshot daily&lt;/code&gt; daily at 22:00. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;   &lt;span class="mi"&gt;22&lt;/span&gt;  &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="n"&gt;rsnapshot&lt;/span&gt; &lt;span class="n"&gt;daily&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the command &lt;code&gt;rsnapshot daily&lt;/code&gt; hourly at the 5th minutes,
+    and redict standard output and error messages to &lt;code&gt;/home/dclong/cron.log&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="mi"&gt;5&lt;/span&gt;   &lt;span class="o"&gt;*&lt;/span&gt;   &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="o"&gt;*&lt;/span&gt;     &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;schedule&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cron&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;amp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="scheduling-tips"&gt;Scheduling Tips&lt;/h2&gt;
+&lt;p&gt;You can schedule more frequently in crontab 
+and then reduce the running frequency of the application in your scripts.
+Below is an example in Bash shell.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt; [[ $&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;date&lt;/span&gt; &lt;span class="o"&gt;+%&lt;/span&gt;&lt;span class="nv"&gt;H&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; &lt;span class="o"&gt;=~&lt;/span&gt; &lt;span class="o"&gt;^&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;12&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;14&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="o"&gt;|&lt;/span&gt;&lt;span class="mi"&gt;18&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;$ ]]&lt;span class="c1"&gt;; then&lt;/span&gt;
+    ...
+&lt;span class="nv"&gt;fi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="check-crontab-logs"&gt;Check Crontab Logs&lt;/h2&gt;
+&lt;p&gt;You can use the following command to check crontab logs on Ubuntu.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;var&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;log&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;syslog&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="n"&gt;cron&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="crontab-vs-airflow"&gt;Crontab vs AirFlow&lt;/h2&gt;
+&lt;p&gt;Crontab is great for simple scheduling requests. 
+For complicated scheduling with many dependencies you probably want to go with AirFlow.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;https://stackoverflow.com/questions/18919151/crontab-day-of-the-week-syntax&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="task"></category><category term="crontab"></category><category term="schedule"></category><category term="linux"></category><category term="scheduling"></category><category term="AirFlow"></category></entry><entry><title>Print Rows from a Text File</title><link href="http://www.legendu.net/en/blog/print-rows-from-a-text-file/" rel="alternate"></link><published>2017-11-01T23:51:11-07:00</published><updated>2017-11-01T23:51:11-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-11-01:/en/blog/print-rows-from-a-text-file/</id><summary type="html">&lt;p&gt;Please refer to 
+&lt;a href="http://www.legendu.net/en/blog/advanced-use-head-tail/"&gt;Advanced Use of "head" and "tail"&lt;/a&gt;
+on how to use &lt;code&gt;head&lt;/code&gt; and &lt;code&gt;tail&lt;/code&gt; for printing rows from a text file.
+These 2 commands are convenient when you want to take head/tail rows. 
+If you want to take middle rows of a file,
+better ways exists using …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Please refer to 
+&lt;a href="http://www.legendu.net/en/blog/advanced-use-head-tail/"&gt;Advanced Use of "head" and "tail"&lt;/a&gt;
+on how to use &lt;code&gt;head&lt;/code&gt; and &lt;code&gt;tail&lt;/code&gt; for printing rows from a text file.
+These 2 commands are convenient when you want to take head/tail rows. 
+If you want to take middle rows of a file,
+better ways exists using &lt;code&gt;sed&lt;/code&gt; and &lt;code&gt;awk&lt;/code&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# print lines 10 to 20 using sed&lt;/span&gt;
+sed -n &lt;span class="s1"&gt;&amp;#39;10,20p&amp;#39;&lt;/span&gt; filename
+&lt;span class="c1"&gt;# print lines 10 to 20 using awk&lt;/span&gt;
+awk &lt;span class="s1"&gt;&amp;#39;NR &amp;gt;= 10 &amp;amp;&amp;amp; NR &amp;lt;= 20&amp;#39;&lt;/span&gt; file_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you work with a very large file, 
+you make the &lt;code&gt;sed&lt;/code&gt; command a little bit more efficient by quitting ealier. 
+For example, 
+the following command efficiently prints lines 10000000 to 10000020 of the file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sed -n &lt;span class="s1"&gt;&amp;#39;10000000,10000020p; 10000021q&amp;#39;&lt;/span&gt; file_name 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Thi way is faster than &lt;code&gt;awk&lt;/code&gt; (but slower without the quitting early trick) on large files.&lt;/p&gt;</content><category term="Linux"></category><category term="shell"></category><category term="command line"></category><category term="head"></category><category term="tail"></category><category term="sed"></category><category term="awk"></category><category term="rows"></category><category term="lines"></category><category term="text manipulation"></category></entry><entry><title>Sample Lines from a File Using Command Line</title><link href="http://www.legendu.net/en/blog/sample-lines-from-a-file-using-command-line/" rel="alternate"></link><published>2017-10-28T10:52:36-07:00</published><updated>2017-10-28T10:52:36-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-28:/en/blog/sample-lines-from-a-file-using-command-line/</id><summary type="html">&lt;p&gt;NOTE: the article talks about sampling "lines" rather than "records". 
+If a records can occupy multiple lines, 
+e.g., if any field contains a new line (&lt;code&gt;\n&lt;/code&gt;),
+the following tutorial does not work 
+and you have to fall back to more powerful tools such as Python or R.&lt;/p&gt;
+&lt;p&gt;Let's say …&lt;/p&gt;</summary><content type="html">&lt;p&gt;NOTE: the article talks about sampling "lines" rather than "records". 
+If a records can occupy multiple lines, 
+e.g., if any field contains a new line (&lt;code&gt;\n&lt;/code&gt;),
+the following tutorial does not work 
+and you have to fall back to more powerful tools such as Python or R.&lt;/p&gt;
+&lt;p&gt;Let's say that you want sample 500 lines (without replacement) from a file.
+This can be done easily using a scraping language such as R or Python. 
+However, if samling lines is all you have to do,
+it is much faster to do it in shell. 
+While there are many command lines tools you can use, 
+the one I found to be elegantest is 'shuf'.
+&lt;code&gt;shuf&lt;/code&gt; permuates lines of a file. 
+If you want to sample 500 lines, 
+then you you just have to keep the first 500 shuffled lines.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;shuf -n &lt;span class="m"&gt;500&lt;/span&gt; file
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It is a little more work if the file contains a header line
+and you want to keep the header line and sample from the rest lines.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# keep the header&lt;/span&gt;
+head -n &lt;span class="m"&gt;1&lt;/span&gt; file &amp;gt; sample_500
+&lt;span class="c1"&gt;# sample from the rest line and append to sample_500&lt;/span&gt;
+tail -n +2 file &lt;span class="p"&gt;|&lt;/span&gt; shuf -n &lt;span class="m"&gt;500&lt;/span&gt; &amp;gt;&amp;gt; sample_500
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;There is another tool named &lt;a href="http://harelba.github.io/q/"&gt;q&lt;/a&gt;
+for performing SQL operations on structured text files. 
+If the text file is structured,
+then task can be done even easier with &lt;code&gt;q&lt;/code&gt;.
+Assume the text file is tab delimited and has a header, 
+then you can use the following command to sample 500 lines from it.
+The option &lt;code&gt;-O&lt;/code&gt; outputs the header also.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;q -t -H -O &lt;span class="s1"&gt;&amp;#39;select * from file order by random() limit 500&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;q&lt;/code&gt; can be installed with the command below. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nb"&gt;text&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;as&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;data&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Even thougt I'm Linux fan, 
+I'm a practical Linux fan 
+not liking some enthusiasium of Linux 
+who broadcasting about solving every probelm using command line.
+If there is a simple and elegant command line tool to get your work done,
+then use it. 
+Otherwise, instead of cooking up a weird, unreadable, anti-human shell command, 
+R or Python is a much better choice.&lt;/p&gt;</content><category term="Linux"></category><category term="shell"></category><category term="command line"></category><category term="sample"></category><category term="shuffle"></category><category term="shuf"></category><category term="q"></category><category term="text"></category><category term="SQL"></category></entry><entry><title>Get Group Names on Linux/Unix</title><link href="http://www.legendu.net/en/blog/get-group-names-on-linux-unix/" rel="alternate"></link><published>2017-10-22T12:37:19-07:00</published><updated>2017-10-22T12:37:19-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-22:/en/blog/get-group-names-on-linux-unix/</id><summary type="html">&lt;h2 id="linux"&gt;Linux&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get information of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ getent group staff
+staff:x:20:
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Get group ID of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ getent group staff &lt;span class="p"&gt;|&lt;/span&gt; cut -d: -f3
+&lt;span class="m"&gt;20&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="mac"&gt;Mac&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get information of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dscl . -read /Groups/staff
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Get group ID of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dscl . -read /Groups/staff &lt;span class="p"&gt;|&lt;/span&gt; awk …&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="linux"&gt;Linux&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get information of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ getent group staff
+staff:x:20:
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Get group ID of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ getent group staff &lt;span class="p"&gt;|&lt;/span&gt; cut -d: -f3
+&lt;span class="m"&gt;20&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="mac"&gt;Mac&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get information of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dscl . -read /Groups/staff
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Get group ID of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;$ dscl . -read /Groups/staff &lt;span class="p"&gt;|&lt;/span&gt; awk &lt;span class="s1"&gt;&amp;#39;($1 == &amp;quot;PrimaryGroupID:&amp;quot;) { print $2 }&amp;#39;&lt;/span&gt;
+&lt;span class="m"&gt;20&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;As a matter of fact, 
+&lt;code&gt;dscl&lt;/code&gt; in Mac is the equivalence of &lt;code&gt;getent&lt;/code&gt; in Linux.
+Both of them can be used to query user information as well. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Querying user information using &lt;code&gt;getent&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;getent&lt;/span&gt; &lt;span class="n"&gt;passwd&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Querying user information using &lt;code&gt;dscl&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dscl&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;search&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt; &lt;span class="n"&gt;UniqueID&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="n"&gt;uid&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;In both cases, 
+you then need to parse the output to get the username. 
+The output of &lt;code&gt;getent&lt;/code&gt; is standard /etc/passwd format, something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;zamboni&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1005&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1005&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="n"&gt;Diego&lt;/span&gt; &lt;span class="n"&gt;Zamboni&lt;/span&gt;&lt;span class="o"&gt;,,,:/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="sr"&gt;/zamboni:/bin/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This is very easy to parse (using awk, for example) and gives you the full record at once.
+&lt;code&gt;dscl&lt;/code&gt; only provides the field you searched for, something like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;zamboni&lt;/span&gt;              &lt;span class="n"&gt;UniqueID&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="mi"&gt;501&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;So if you want to get the full record, you would need to get the username and then query for it, like this:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;dscl&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;read&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;Users&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;zamboni&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The output is harder to parse, 
+in "keyword: value" form, 
+but with many multiline values. 
+You can also use the -plist option to get it in Apple's plist format, which could be easier to parse.&lt;/p&gt;
+&lt;h2 id="cross-platform-ways"&gt;Cross-platform Ways&lt;/h2&gt;
+&lt;p&gt;You can also get group information using the &lt;code&gt;grp&lt;/code&gt; module in Python.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;grp&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;grp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getgrnam&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;staff&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gr_gid&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="Mac OSX"></category><category term="group"></category><category term="python"></category><category term="getent"></category><category term="dscl"></category></entry><entry><title>Install Java 8 on Ubuntu 14.04</title><link href="http://www.legendu.net/en/blog/install-java-8-on-ubuntu-14.04/" rel="alternate"></link><published>2017-08-26T09:24:18-07:00</published><updated>2017-08-26T09:24:18-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-08-26:/en/blog/install-java-8-on-ubuntu-14.04/</id><summary type="html">&lt;p&gt;You can install open JDK 8 on Ubuntu 14.04 using the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="n"&gt;ppa&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;openjdk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ppa&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;openjdk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;jdk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more please refer to 
+&lt;a href="https://askubuntu.com/questions/464755/how-to-install-openjdk-8-on-14-04-lts"&gt;https://askubuntu.com/questions/464755/how-to-install-openjdk-8-on-14-04-lts&lt;/a&gt;.&lt;/p&gt;</summary><content type="html">&lt;p&gt;You can install open JDK 8 on Ubuntu 14.04 using the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="n"&gt;ppa&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;openjdk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;ppa&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;openjdk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;jdk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more please refer to 
+&lt;a href="https://askubuntu.com/questions/464755/how-to-install-openjdk-8-on-14-04-lts"&gt;https://askubuntu.com/questions/464755/how-to-install-openjdk-8-on-14-04-lts&lt;/a&gt;.&lt;/p&gt;</content><category term="Linux"></category><category term="Java"></category><category term="open JDK 8"></category><category term="Java 8"></category><category term="Ubuntu 14.04"></category></entry><entry><title>Add Users to a Group in Linux</title><link href="http://www.legendu.net/en/blog/add-a-user-to-the-sudo-group-on-linux/" rel="alternate"></link><published>2017-04-10T19:05:41-07:00</published><updated>2017-04-10T19:05:41-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-04-10:/en/blog/add-a-user-to-the-sudo-group-on-linux/</id><summary type="html">&lt;p&gt;There are several ways to add users to a group in Linux. 
+The following uses the &lt;code&gt;sudo&lt;/code&gt; group as illustration.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gpasswd&lt;/code&gt;, &lt;code&gt;usermod&lt;/code&gt; and &lt;code&gt;adduser&lt;/code&gt; can all be used to add a user to a given group.
+    However, it is suggested that you use &lt;code&gt;gpasswd&lt;/code&gt; as it is more portable and …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;There are several ways to add users to a group in Linux. 
+The following uses the &lt;code&gt;sudo&lt;/code&gt; group as illustration.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gpasswd&lt;/code&gt;, &lt;code&gt;usermod&lt;/code&gt; and &lt;code&gt;adduser&lt;/code&gt; can all be used to add a user to a given group.
+    However, it is suggested that you use &lt;code&gt;gpasswd&lt;/code&gt; as it is more portable and intuitive. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;gpasswd&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="n"&gt;user_name&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;
+&lt;span class="n"&gt;newgrp&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;
+
+&lt;span class="n"&gt;usermod&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;aG&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;user_name&lt;/span&gt;
+&lt;span class="n"&gt;newgrp&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;
+
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;works&lt;/span&gt; &lt;span class="k"&gt;on&lt;/span&gt; &lt;span class="n"&gt;Ubuntu&lt;/span&gt; &lt;span class="n"&gt;but&lt;/span&gt; &lt;span class="k"&gt;not&lt;/span&gt; &lt;span class="n"&gt;CentOS&lt;/span&gt;
+&lt;span class="n"&gt;adduser&lt;/span&gt; &lt;span class="n"&gt;user_name&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;
+&lt;span class="n"&gt;newgrp&lt;/span&gt; &lt;span class="n"&gt;sudo&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Just adding an user to a group might not make it work right away.
+The command &lt;code&gt;newgrp sudo&lt;/code&gt; make the group &lt;code&gt;sudo&lt;/code&gt; in effect right away.
+Of course, you can log out and then log in to make it work.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some desktop environment (e.g., GNome, Cinnamon, KDE, etc.) can also do this for you. 
+    Taking Cinnamon as an example, 
+    you can follow the steps below to add/remove groups for a user. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;System Settings&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click &lt;code&gt;Users and Groups&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select the user you want modify.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click on &lt;code&gt;Groups&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Check/uncheck groups from the prompt list.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click the OK to save the changes.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="sudo"></category><category term="user"></category><category term="groups"></category><category term="gpasswd"></category><category term="usermod"></category></entry><entry><title>Ways to Make a Bootable Flash Drive in Linux</title><link href="http://www.legendu.net/en/blog/ways-to-make-a-bootable-flash-drive/" rel="alternate"></link><published>2017-03-19T10:33:38-07:00</published><updated>2017-03-19T10:33:38-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-19:/en/blog/ways-to-make-a-bootable-flash-drive/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use command&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;dd&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_to_linux_image&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_to_device&lt;/span&gt; &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="nv"&gt;M&lt;/span&gt;&lt;span class="c1"&gt;; sync&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;path_to_linux_image&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;path_to_device&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;to write a hybird Linux image into a flash drive.
+Note that you must use the whole device (e.g., &lt;code&gt;/dev/sdb&lt;/code&gt;) 
+not just a partition (e.g., &lt;code&gt;/dev/sdb1&lt;/code&gt;)
+on the device.
+For …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use command&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;dd&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_to_linux_image&lt;/span&gt; &lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_to_device&lt;/span&gt; &lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="nv"&gt;M&lt;/span&gt;&lt;span class="c1"&gt;; sync&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;path_to_linux_image&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;path_to_device&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;to write a hybird Linux image into a flash drive.
+Note that you must use the whole device (e.g., &lt;code&gt;/dev/sdb&lt;/code&gt;) 
+not just a partition (e.g., &lt;code&gt;/dev/sdb1&lt;/code&gt;)
+on the device.
+For a non-hybrid Linux image, 
+you can make it hybid using the following command 
+if it uses isolinux/syslinux technology.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;isohybird&lt;/span&gt; &lt;span class="n"&gt;path_to_linux_image&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Manually copying files to the USB stick.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;`zcat boot.img.gz &amp;gt; /dev/sdX&lt;/li&gt;
+&lt;li&gt;Mount the USB stick and copy a iso image to it.&lt;/li&gt;
+&lt;li&gt;Umount the USB stick.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the GUI tool &lt;a href="http://unetbootin.sourceforge.net/"&gt;UNetbootin&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the universal online booting tool &lt;a href="http://www.netboot.me/"&gt;netboot.me&lt;/a&gt;.
+Note that you must have ethernet connection in order to use netboot.me. 
+netboot.me is a fantastic tool for general purposes, 
+but it has problems on some old computers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="bootable"></category><category term="flash drive"></category><category term="hybird"></category><category term="USB"></category><category term="Hardware"></category><category term="Linux"></category></entry><entry><title>Map Keys in Linux</title><link href="http://www.legendu.net/en/blog/map-keys-in-linux/" rel="alternate"></link><published>2017-03-19T10:30:15-07:00</published><updated>2017-03-19T10:30:15-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-19:/en/blog/map-keys-in-linux/</id><summary type="html">&lt;p&gt;Note: For Vim users, it is appealing to make the &lt;code&gt;Caps Lock&lt;/code&gt; function like &lt;code&gt;Escape&lt;/code&gt;.
+It is suggested that you make &lt;code&gt;Caps Lock&lt;/code&gt; an additonal &lt;code&gt;Escape&lt;/code&gt;
+rather than swap them.
+This avoid inconsistent key mapping issues when you work remotely via VNC, NoMachine, etc.&lt;/p&gt;
+&lt;h2 id="desktop-environment"&gt;Desktop Environment&lt;/h2&gt;
+&lt;p&gt;Some desktop environment (e …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Note: For Vim users, it is appealing to make the &lt;code&gt;Caps Lock&lt;/code&gt; function like &lt;code&gt;Escape&lt;/code&gt;.
+It is suggested that you make &lt;code&gt;Caps Lock&lt;/code&gt; an additonal &lt;code&gt;Escape&lt;/code&gt;
+rather than swap them.
+This avoid inconsistent key mapping issues when you work remotely via VNC, NoMachine, etc.&lt;/p&gt;
+&lt;h2 id="desktop-environment"&gt;Desktop Environment&lt;/h2&gt;
+&lt;p&gt;Some desktop environment (e.g., Cinnamon, GNOME, etc.) let you define behavior of keys.
+For example,
+you can follow the steps below to define the behavior of the &lt;code&gt;Caps Lock&lt;/code&gt; key in Cinnamon.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open System Settings.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select Keybord.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Keybord layouts&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Options (on the right-bottom corner)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Caps Lock key behavior&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Choose the behavior you want.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For the Unity desktop environment,
+you need to install &lt;code&gt;unity-tweak-tool&lt;/code&gt;.
+And if you are on the GNOME desktop,
+you need &lt;code&gt;gnome-tweak-tool&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="setxkbmap"&gt;setxkbmap&lt;/h2&gt;
+&lt;p&gt;Swap the Caps and the Escape keys.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;setxkbmap -option -option caps:swapescape
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Unfortunately,
+the key mapping partially pass to virtual machines or remote desktops,
+which is the worst scenario.
+It is suggested that you turn off the mapping on the Linux host
+when you work in a VM or a remote desktop.&lt;/p&gt;
+&lt;h3 id="keyboard-configuration"&gt;Keyboard Configuration&lt;/h3&gt;
+&lt;p&gt;Keyboard in configured in by the file &lt;code&gt;/etc/default/keyboard&lt;/code&gt; on Linux.
+For example,
+you can find the line that starts with &lt;code&gt;XKBOPTIONS&lt;/code&gt;,
+and add &lt;code&gt;ctrl:nocaps&lt;/code&gt; to make Caps Lock an additional Control key
+or &lt;code&gt;ctrl:swapcaps&lt;/code&gt; to swap Caps Lock and Control.
+Run the following command after updating the file &lt;code&gt;/etc/default/keyboard&lt;/code&gt; to make it in effect.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;dpkg&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;reconfigure&lt;/span&gt; &lt;span class="n"&gt;keyboard&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;configuration&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;This way is better as it will take effect on the virtual consoles as well as in the GUI DE.&lt;/p&gt;
+&lt;h2 id="more-references"&gt;More References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://askubuntu.com/questions/444714/how-do-i-swap-escape-and-caps-lock-in-14-04/446725#446725"&gt;http://askubuntu.com/questions/444714/how-do-i-swap-escape-and-caps-lock-in-14-04/446725#446725&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.fascinatingcaptain.com/howto/remap-keyboard-keys-for-ubuntu/"&gt;http://www.fascinatingcaptain.com/howto/remap-keyboard-keys-for-ubuntu/&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://askubuntu.com/questions/885045/how-to-swap-ctrl-and-alt-keys-in-ubuntu-16-04/885047"&gt;http://askubuntu.com/questions/885045/how-to-swap-ctrl-and-alt-keys-in-ubuntu-16-04/885047&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://askubuntu.com/questions/453793/remapping-caps-lock-in-14-04-trusty-tahr"&gt;http://askubuntu.com/questions/453793/remapping-caps-lock-in-14-04-trusty-tahr&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://askubuntu.com/questions/444714/how-do-i-swap-escape-and-caps-lock-in-14-04/446725#446725"&gt;http://askubuntu.com/questions/444714/how-do-i-swap-escape-and-caps-lock-in-14-04/446725#446725&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Linux"></category><category term="keyboard"></category><category term="mapping"></category><category term="swap"></category><category term="setxkbmap"></category><category term="Cinnamon"></category><category term="GNOME"></category><category term="keys"></category></entry><entry><title>Working Remotely in Linux</title><link href="http://www.legendu.net/en/blog/work-remotely-linux/" rel="alternate"></link><published>2017-03-01T23:20:51-08:00</published><updated>2017-03-01T23:20:51-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-01:/en/blog/work-remotely-linux/</id><summary type="html">&lt;h2 id="from-linux-to-linux"&gt;From Linux to Linux:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Command Line Mode: &lt;code&gt;ssh&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Using X forwarding, you can also run GUI applications on the server.
+This is not recommended unless it's short quick work.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remote File System: &lt;code&gt;sshfs&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better use a mount point which you have full access to,
+otherwise, you have use the …&lt;/p&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ul&gt;</summary><content type="html">&lt;h2 id="from-linux-to-linux"&gt;From Linux to Linux:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Command Line Mode: &lt;code&gt;ssh&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Using X forwarding, you can also run GUI applications on the server.
+This is not recommended unless it's short quick work.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remote File System: &lt;code&gt;sshfs&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better use a mount point which you have full access to,
+otherwise, you have use the root user to access the mount point. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better add yourself to the &lt;code&gt;fuse&lt;/code&gt; (which is required by sshfs) group.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remote Desktop&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;NX (NoMachine)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;VNC (e.g., vino or tight vnc, remmina)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Teamviewer&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="from-linux-to-windows"&gt;From Linux to Windows:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Remote Desktop:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Remmina&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;rdesktop&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NoMachine&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Teamviewer&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remote File System: &lt;code&gt;smb&lt;/code&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open nautilus file manager and press &lt;code&gt;CTRL + L&lt;/code&gt; to show the address field.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Type in &lt;code&gt;smb://host_name/folder&lt;/code&gt; in the address field and press enter.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Type in your user name and password in the prompt to login. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="from-windows-to-linux"&gt;From Windows to Linux:&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Comand Line Mode: &lt;code&gt;ssh&lt;/code&gt; (e.g., Security Shell)&lt;/li&gt;
+&lt;/ul&gt;</content><category term="software"></category><category term="remote"></category><category term="Linux"></category></entry><entry><title>Copy SSH Public Key Using "ssh-copy-id"</title><link href="http://www.legendu.net/en/blog/ssh-copy-id/" rel="alternate"></link><published>2016-06-20T22:21:15-07:00</published><updated>2016-06-20T22:21:15-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-06-20:/en/blog/ssh-copy-id/</id><summary type="html">&lt;p&gt;You can use the following command to copy your SSH public key to a Linux server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-copy-id -i ~/.ssh/id_rsa.pub host_machine
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, 
+if a Linux server runs the SSH deamon on a non default port (default is 22), 
+you have to specify the port with option &lt;code&gt;-p port&lt;/code&gt;. 
+In …&lt;/p&gt;</summary><content type="html">&lt;p&gt;You can use the following command to copy your SSH public key to a Linux server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-copy-id -i ~/.ssh/id_rsa.pub host_machine
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, 
+if a Linux server runs the SSH deamon on a non default port (default is 22), 
+you have to specify the port with option &lt;code&gt;-p port&lt;/code&gt;. 
+In addition, 
+the host machine and the port options must be in quotes 
+(either single or double quotes), 
+otherwise, 
+you will get an error message.
+Suppose sshd runs on port 323 on &lt;code&gt;host_machine&lt;/code&gt;, 
+the following command copies the ssh public key to it. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;ssh-copy-id -i ~/.ssh/id_rsa.pub &lt;span class="s2"&gt;&amp;quot;host_machine -p 323&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You can of course SSH into the server 
+and add your SSH public key(s) into the &lt;code&gt;~/.ssh/authorized_keys&lt;/code&gt; file manually.&lt;/p&gt;</content><category term="Linux"></category><category term="SSH"></category><category term="server"></category><category term="remote"></category><category term="port"></category><category term="ssh-copy-id"></category></entry><entry><title>Compress and Decompressing Archives in Linux</title><link href="http://www.legendu.net/en/blog/compress-and-decompress-in-linux/" rel="alternate"></link><published>2016-06-19T12:17:21-07:00</published><updated>2016-06-19T12:17:21-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-06-19:/en/blog/compress-and-decompress-in-linux/</id><summary type="html">&lt;p&gt;&lt;a href="https://www.tecmint.com/18-tar-command-examples-in-linux/"&gt;18 Tar Command Examples in Linux&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Important tips:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Always test integrity of the compressed file
+before you throw away the original archives.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For a large zip file generated in Windows,
+it is possible that it cannot be unzipped correctly in Linux.
+(unzip bug?)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="universal-way"&gt;Universal Way&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# decompress&lt;/span&gt;
+dtrx file_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="targz-or-tgz"&gt;tar.gz …&lt;/h2&gt;</summary><content type="html">&lt;p&gt;&lt;a href="https://www.tecmint.com/18-tar-command-examples-in-linux/"&gt;18 Tar Command Examples in Linux&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Important tips:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Always test integrity of the compressed file
+before you throw away the original archives.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;For a large zip file generated in Windows,
+it is possible that it cannot be unzipped correctly in Linux.
+(unzip bug?)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="universal-way"&gt;Universal Way&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# decompress&lt;/span&gt;
+dtrx file_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="targz-or-tgz"&gt;tar.gz or tgz&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# list the archive contents&lt;/span&gt;
+tar -ztvf archive_name.tag.gz
+&lt;span class="c1"&gt;# extract the archive contents to the current directory&lt;/span&gt;
+tar -zxvf archive_name.tag.gz
+&lt;span class="c1"&gt;# extract the archive contents to a directory named &amp;quot;exdir&amp;quot;&lt;/span&gt;
+tar -zxvf archive_name.tag.gz -C exdir
+&lt;span class="c1"&gt;# create an archive&lt;/span&gt;
+tar -zcvf archive_name.tar.gz file_or_directory
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="gz"&gt;.gz&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# decompress&lt;/span&gt;
+gunzip -c archive_name.gz &amp;gt; decompressed_file_name
+&lt;span class="c1"&gt;# or&lt;/span&gt;
+gzip -cd archive_name.gz &amp;gt; decompressed_file_name
+&lt;span class="c1"&gt;# or&lt;/span&gt;
+zcat archive_name.gz &amp;gt; decompressed_file_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice that you have to use the &lt;code&gt;-c&lt;/code&gt; option,
+otherwise,
+the original compressed file is removed.&lt;/p&gt;
+&lt;h2 id="tarbz2"&gt;tar.bz2&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# list the archive contents&lt;/span&gt;
+tar -jtvf archive_name.tar.bz2
+&lt;span class="c1"&gt;# extract the archive contents to the current directory&lt;/span&gt;
+tar -jxvf archive_name.tar.bz2
+&lt;span class="c1"&gt;# extract the archive contents to a directory named &amp;quot;exdir&amp;quot;&lt;/span&gt;
+tar -jxvf archive_name.tar.bz2 -C exdir
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="zip"&gt;zip&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# list the archive contents&lt;/span&gt;
+unzip -l archive_name.zip
+&lt;span class="c1"&gt;# test integrity of the archive&lt;/span&gt;
+unzip -t archive_name.zip
+&lt;span class="c1"&gt;# extract the archive contents into the current directory&lt;/span&gt;
+unzip archive_name.zip
+&lt;span class="c1"&gt;# extract the archive contents into the directory &amp;quot;exdir&amp;quot;&lt;/span&gt;
+unzip archive_name.zip -d exdir
+&lt;span class="c1"&gt;# zip all files and subdirectories in current directory&lt;/span&gt;
+zip -r archive_name.zip .
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="rar"&gt;rar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# list the archive contents&lt;/span&gt;
+unrar l file_name
+&lt;span class="c1"&gt;# test integrity of the archive&lt;/span&gt;
+unrar t file_name
+&lt;span class="c1"&gt;# extract the archive with full names&lt;/span&gt;
+unrar x file_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="jar"&gt;Jar&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;extract&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;archive&lt;/span&gt;
+&lt;span class="n"&gt;jar&lt;/span&gt; &lt;span class="n"&gt;xf&lt;/span&gt; &lt;span class="n"&gt;jar&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;archived&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="7zip"&gt;7zip&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# list the archive contents&lt;/span&gt;
+7za l file_name
+&lt;span class="c1"&gt;# test the archive contents&lt;/span&gt;
+7za t file_name
+&lt;span class="c1"&gt;# extract the archive contents with full names&lt;/span&gt;
+7za x file_name
+&lt;span class="c1"&gt;# extract a file/folder from the archive&lt;/span&gt;
+7za x archive_name path_to_file_to_be_extracted
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If the compressed archive is splitted into several smaller files,
+just replace &lt;code&gt;file_name&lt;/code&gt; in the above commands
+with the name of the first file of the compressed archive.&lt;/p&gt;
+&lt;p&gt;For &lt;code&gt;rar&lt;/code&gt; and &lt;code&gt;7za&lt;/code&gt;,
+I'm not sure whether there are options for creating a new directory
+to uncompress the archive into.
+However, you can always first create an empty directory,
+move the archive into it and then uncompress it.&lt;/p&gt;
+&lt;h2 id="multiple-archives"&gt;Multiple Archives&lt;/h2&gt;
+&lt;p&gt;The archive related commands (e.g., &lt;code&gt;tar&lt;/code&gt;, &lt;code&gt;zip&lt;/code&gt;, &lt;code&gt;unzip&lt;/code&gt;, etc.) in Linux
+does not support decompressing from multiple archives
+or compressing files into multiple archives directly.
+To extract content from multiple archives,
+you need to first concatenate them into a single one.
+For example,
+you can use the following command to unzip archives
+&lt;code&gt;BigDataLite-3.0.zip.001&lt;/code&gt;, &lt;code&gt;BigDataLite-3.0.zip.002&lt;/code&gt;, &lt;code&gt;BigDataLite-3.0.zip.003&lt;/code&gt;,
+&lt;code&gt;BigDataLite-3.0.zip.004&lt;/code&gt;, &lt;code&gt;BigDataLite-3.0.zip.005&lt;/code&gt; and &lt;code&gt;BigDataLite-3.0.zip.006&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c1"&gt;# concatenate zipped archives into a single one&lt;/span&gt;
+cat BigDataLite-3.0.zip.00? &amp;gt; BigDataLite-3.0.zip
+&lt;span class="c1"&gt;# unzip the combined archive&lt;/span&gt;
+unzip BigDataLite-3.0.zip
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To compress files into multiple archives,
+you have to first compress them into a single archive
+using one of the commands introduced before
+and then split the single archive into multiple ones
+using the command &lt;code&gt;split&lt;/code&gt;.
+For example,
+the following command split the archive &lt;code&gt;WinTPC_1.tar.gz&lt;/code&gt;
+into smaller ones named &lt;code&gt;WinTPC_1.tar.gz_part??&lt;/code&gt; with size around 2.7G.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;split -b 2700M -d WinTPC_1.tar.gz WinTPC_1.tar.gz_part
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;An alternative way (and better in my opinion)
+is to specify the number of archives (with about equal size) to split into.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;split -n &lt;span class="m"&gt;5&lt;/span&gt; -d xp_2.tar.gz xp_2.tar.gz_part
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="decompress"></category><category term="compress"></category><category term="archive"></category><category term="split"></category><category term="multiple"></category><category term="zip"></category><category term="tar"></category><category term="gz"></category><category term="bz2"></category><category term="dtrx"></category><category term="rar"></category><category term="7zip"></category></entry><entry><title>Power Settings in Linux with GNOME Desktop</title><link href="http://www.legendu.net/en/blog/linux-gnome-power-settings/" rel="alternate"></link><published>2015-03-03T10:17:32-08:00</published><updated>2015-03-03T10:17:32-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-03:/en/blog/linux-gnome-power-settings/</id><summary type="html">&lt;p&gt;Full control of the power settings in Linux with Gnome Desktop can be done through 
+&lt;strong&gt;dconf-editor&lt;/strong&gt; at org-&amp;gt;gnome-&amp;gt;settings-daemon-&amp;gt;plugins-&amp;gt;power.
+The default way to determine low battery, critical low battery and to carray out 
+critical low action is by counting left battery time. 
+You can change the way …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Full control of the power settings in Linux with Gnome Desktop can be done through 
+&lt;strong&gt;dconf-editor&lt;/strong&gt; at org-&amp;gt;gnome-&amp;gt;settings-daemon-&amp;gt;plugins-&amp;gt;power.
+The default way to determine low battery, critical low battery and to carray out 
+critical low action is by counting left battery time. 
+You can change the way to measuring percentage of battery. 
+To get help on what an entry means, single click on the entry. &lt;/p&gt;</content><category term="configuration"></category><category term="battery"></category><category term="power"></category><category term="Linux"></category><category term="GNOME"></category></entry><entry><title>Dual Monitor for Linux Desktop</title><link href="http://www.legendu.net/en/blog/dual-monitor-for-linux-desktop/" rel="alternate"></link><published>2015-02-20T10:59:38-08:00</published><updated>2015-02-20T10:59:38-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-20:/en/blog/dual-monitor-for-linux-desktop/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;Type &lt;code&gt;xrandr&lt;/code&gt; or &lt;code&gt;xrandr -q&lt;/code&gt; in terminal to dispaly information of all available output device.
+Then you can use the following commands to set dual display.&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --auto &lt;/span&gt;
+&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --same-as LVDS1 --auto&lt;/span&gt;
+&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --mode 1024x800&lt;/span&gt;
+&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --off&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;where &lt;code&gt;VGA1&lt;/code&gt; and &lt;code&gt;LVDS1&lt;/code&gt; should …&lt;/p&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;Type &lt;code&gt;xrandr&lt;/code&gt; or &lt;code&gt;xrandr -q&lt;/code&gt; in terminal to dispaly information of all available output device.
+Then you can use the following commands to set dual display.&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --auto &lt;/span&gt;
+&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --same-as LVDS1 --auto&lt;/span&gt;
+&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --mode 1024x800&lt;/span&gt;
+&lt;span class="n"&gt;xrandr&lt;/span&gt; &lt;span class="c1"&gt;--output VGA1 --off&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;where &lt;code&gt;VGA1&lt;/code&gt; and &lt;code&gt;LVDS1&lt;/code&gt; should be replaced by with appropriate device names. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;When use multi-monitors in Linux, 
+you need to have close resolutions in order for same (mirorr) display to work well.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="DE"></category><category term="Linux"></category><category term="monitor"></category><category term="dual"></category></entry><entry><title>Rescue Linux from GUI Freezing</title><link href="http://www.legendu.net/en/blog/rescue-linux-from-gui-freezing/" rel="alternate"></link><published>2015-02-20T10:30:22-08:00</published><updated>2015-02-20T10:30:22-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-20:/en/blog/rescue-linux-from-gui-freezing/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/computer.gif" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;The kernel of Linux is usually very stable, 
+but the existing free desktop environments are craps. 
+Amongs these desktop environments I tried 
+(Gnome, Xfce, LXDE and so on), none is even close to the desktop environments in Windows and Mac.
+I do not require desktop environments in Linux to be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/computer.gif" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;The kernel of Linux is usually very stable, 
+but the existing free desktop environments are craps. 
+Amongs these desktop environments I tried 
+(Gnome, Xfce, LXDE and so on), none is even close to the desktop environments in Windows and Mac.
+I do not require desktop environments in Linux to be as fancy as desktop environments in Windows and Mac,
+but they have to be usable and stable. 
+These two basic requirements, unfortunately, seems unreachable from these desktop environment developers.
+Tought their desktop environments are full of all kinds of flaws, 
+they never fell shame to brag about their products. 
+My experience with Linux desktops is that they crash very often. 
+The most annoying case is that the X windows freezes and does not react to the keyboard and touchpad. 
+It is not recommended to shutdown the machine by pressing the power button. 
+To solve this problem, you can ssh into the machine from another one and kill the Xorg process. 
+There arises several problems:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;How do you ssh into your machine in any network? &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;What if you do not have another machine on hand?&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The first problem often comes to how do you find the IP of the freezing machine?
+If the machine is connected to your home network, 
+you can just scan the network for connected machines. 
+If the machine is connected to your work network, 
+you often have a host name for your machine on the network. 
+Scanning the network for ips is not a good idea in this case, 
+because there are often many machines connected to your work network.
+If the machine is connected to some network (e.g., public network),
+it can be even harder to find the ip of your freezing machine.
+My way to solve this problem is let the machine write its ip address 
+into a file in Dropbox. 
+So I can always know the ip of my machine no matter which network it is connected to. 
+The second problem is not a problem if you have a (smart) phone with you. 
+With a smartphone, you can install an application (e.g., connectBot) to login into 
+Linux machine. 
+If you only have a phone which cannot connect to internet, 
+you can call someone who know Linux and you can trust and let him/her
+login into your machine and kill the X window. 
+If you hesitate to do that, well, just press the power button on your machine, 
+hold it unitl your machine shut down. &lt;/p&gt;</content><category term="GUI"></category><category term="DE"></category><category term="Dropbox"></category><category term="X"></category><category term="Linux"></category><category term="SSH"></category><category term="desktop environment"></category></entry><entry><title>Download Debian Using Jigdo</title><link href="http://www.legendu.net/en/blog/download-debian-using-jigdo/" rel="alternate"></link><published>2015-02-03T19:59:19-08:00</published><updated>2015-02-03T19:59:19-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-03:/en/blog/download-debian-using-jigdo/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/linux/debian.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;You can save a lot of time using Jigdo to download Debian image 
+especially when you have an old version of the image. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Mount the the old version of the image to a folder that you 
+have access to, e.g.,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="n"&gt;debian&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;testing&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iso&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Go to &lt;a href="http://cdimage.debian.org/cdimage/weekly-builds/amd64/jigdo-dvd/"&gt;Weekly …&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/linux/debian.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;You can save a lot of time using Jigdo to download Debian image 
+especially when you have an old version of the image. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Mount the the old version of the image to a folder that you 
+have access to, e.g.,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;mount&lt;/span&gt; &lt;span class="n"&gt;debian&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;testing&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;iso&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;mnt&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Go to &lt;a href="http://cdimage.debian.org/cdimage/weekly-builds/amd64/jigdo-dvd/"&gt;Weekly Builds of Debian Testing Image&lt;/a&gt; to copy the link
+address of the jigdo file that you want to use. 
+The first one is usually what you need. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following command in terminal. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jigdo&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;lite&lt;/span&gt; &lt;span class="n"&gt;link_to_jigdo_file&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You will be asked about old vesions of images that you want to use
+to accelerate downloading.
+You can type in the path where you mounted the image. 
+This process will be repeated until you don't have any more old version 
+of CD/DVD images to use. Just press enter to continue and files not 
+found in the old versions of images will be fetched throught internet. &lt;/p&gt;</content><category term="jigdo-lite"></category><category term="wget"></category><category term="debian image"></category><category term="jigdo"></category><category term="Linux"></category></entry><entry><title>Adjust Screen Brightness for Linux Desktops</title><link href="http://www.legendu.net/en/blog/adjust-screen-brightness-for-linux-desktops/" rel="alternate"></link><published>2015-02-03T19:57:46-08:00</published><updated>2015-02-03T19:57:46-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-03:/en/blog/adjust-screen-brightness-for-linux-desktops/</id><summary type="html">&lt;p&gt;For many computers and laptops installed with Linux desktops, 
+you can use shortcuts (usually Fn + Brightness_keys) to adjust screen brightness.
+This does not work for some laptops. 
+Another way to adjust screen brightness is to use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;setpci&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;02&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;F4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;brightness_value&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The value …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For many computers and laptops installed with Linux desktops, 
+you can use shortcuts (usually Fn + Brightness_keys) to adjust screen brightness.
+This does not work for some laptops. 
+Another way to adjust screen brightness is to use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;setpci&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt; &lt;span class="mi"&gt;00&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;02&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="n"&gt;F4&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;brightness_value&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The value is between 00 to ff. 
+However, this is not a universal way either, 
+i.e., it does not work on all laptops. 
+As you see, 
+you have to have root permission in order to run the command. 
+Generally speaking,
+you are not recommnend to use the latter way if the shortcuts works. &lt;/p&gt;</content><category term="screen"></category><category term="Linux"></category><category term="brightness"></category></entry><entry><title>Make Your Linux Server Securer</title><link href="http://www.legendu.net/en/blog/make-your-linux-server-securer/" rel="alternate"></link><published>2015-02-03T19:57:25-08:00</published><updated>2015-02-03T19:57:25-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-03:/en/blog/make-your-linux-server-securer/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Define host access rules in &lt;code&gt;/etc/hosts.allow&lt;/code&gt; and &lt;code&gt;/etc/hosts.deny&lt;/code&gt;. 
+Usually I only allow login to my private server from my home and work ip. 
+If I have to login into my private server from some other network, 
+I login to a computer at my workplace, 
+login into …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Define host access rules in &lt;code&gt;/etc/hosts.allow&lt;/code&gt; and &lt;code&gt;/etc/hosts.deny&lt;/code&gt;. 
+Usually I only allow login to my private server from my home and work ip. 
+If I have to login into my private server from some other network, 
+I login to a computer at my workplace, 
+login into my private server from the computer at my workplace,
+editing the access rules on my private server,
+and then login into my private server from the new network directly. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Disable root SSH login (edit the file &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;).
+With root SSH login disabled, 
+a hacker has to guess both your login name and password,
+which is much harder than guessing the password alone.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use a non-default port for the SSH server (edit the file &lt;code&gt;/etc/ssh/sshd_config&lt;/code&gt;).
+With a non-default port set up,
+a hacker has to also guess the port number,
+which makes the brute-forth break-in even harder.
+You can use the command `sudo nmap -sS -O 127.0.0.1' to scan open ports.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the package &lt;code&gt;fail2ban&lt;/code&gt; to automatically ban ips which attemps to break into your server by brute-forth. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="security"></category><category term="Linux"></category><category term="server"></category></entry><entry><title>File Name of Bash Script</title><link href="http://www.legendu.net/en/blog/file-name-of-bash-script/" rel="alternate"></link><published>2015-02-03T19:54:45-08:00</published><updated>2015-02-03T19:54:45-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-03:/en/blog/file-name-of-bash-script/</id><summary type="html">&lt;p&gt;This post discusses the behavior of &lt;code&gt;$0&lt;/code&gt; and &lt;code&gt;BASH_SOURCE&lt;/code&gt; in bash using examples.
+I created 3 executable bash files &lt;code&gt;a.sh&lt;/code&gt;, &lt;code&gt;b.sh&lt;/code&gt; and &lt;code&gt;c.sh&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Content of &lt;code&gt;a.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo $0
+echo $(readlink -f $0)
+echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_SOURCE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+echo $(readlink -f &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_SOURCE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;b.sh&lt;/code&gt; is a symbolic of …&lt;/p&gt;</summary><content type="html">&lt;p&gt;This post discusses the behavior of &lt;code&gt;$0&lt;/code&gt; and &lt;code&gt;BASH_SOURCE&lt;/code&gt; in bash using examples.
+I created 3 executable bash files &lt;code&gt;a.sh&lt;/code&gt;, &lt;code&gt;b.sh&lt;/code&gt; and &lt;code&gt;c.sh&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;Content of &lt;code&gt;a.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;echo $0
+echo $(readlink -f $0)
+echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_SOURCE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+echo $(readlink -f &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_SOURCE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;)
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;&lt;code&gt;b.sh&lt;/code&gt; is a symbolic of &lt;code&gt;a.sh&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;Content of &lt;code&gt;c.sh&lt;/code&gt;:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;source a.sh
+./a.sh
+echo &lt;span class="cp"&gt;${&lt;/span&gt;&lt;span class="n"&gt;BASH_SOURCE&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;span class="cp"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./a.sh &lt;span class="c1"&gt;# run a.sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; a.sh &lt;span class="c1"&gt;# source in a.sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./b.sh &lt;span class="c1"&gt;# run b.sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; b.sh &lt;span class="c1"&gt;# source in b.sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="n"&gt;b&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;./c.sh &lt;span class="c1"&gt;# run c.sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;source&lt;/span&gt; c.sh &lt;span class="c1"&gt;# source in c.sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;bash&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;home&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;btsync&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;blog&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;en&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;knitr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;09&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;13&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;span class="o"&gt;##&lt;/span&gt; &lt;span class="k"&gt;c&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sh&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="$0"></category><category term="BASH_SOURCE"></category><category term="bash"></category><category term="Linux"></category></entry><entry><title>A Secure Way to Use Vino in Debian</title><link href="http://www.legendu.net/en/blog/a-secure-way-to-use-vino-in-debian/" rel="alternate"></link><published>2015-02-03T19:41:59-08:00</published><updated>2015-02-03T19:41:59-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-03:/en/blog/a-secure-way-to-use-vino-in-debian/</id><summary type="html">&lt;p&gt;VNC on Linux is not secure. 
+Most implementations of VNC servers for Linux allows password only up to 8 characters. 
+Such a VNC server is very vulnerable to brute-force attack. 
+This article discuss a secure way to use VNC.
+The VNC (vino) server is started only when needed,
+thus reduce …&lt;/p&gt;</summary><content type="html">&lt;p&gt;VNC on Linux is not secure. 
+Most implementations of VNC servers for Linux allows password only up to 8 characters. 
+Such a VNC server is very vulnerable to brute-force attack. 
+This article discuss a secure way to use VNC.
+The VNC (vino) server is started only when needed,
+thus reduce the chance of your server to be hacked.&lt;/p&gt;
+&lt;p&gt;First install the vino server in debian using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;vino&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Whenever you want to use VNC on the server, 
+follow the steps below.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ssh into the server with X11 forwarding enabled. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ssh&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;X&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;username&lt;/span&gt;&lt;span class="nv"&gt;@servername&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Edit vino server settings by typing the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;vino&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;preference&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;It will prompt a window for you to edit vino settings. 
+Close the window after you are done. 
+This step only has to done once and can be skipped 
+if you don't want to change the settings.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Start the vino server using the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;export&lt;/span&gt; &lt;span class="n"&gt;DISPLAY&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;amp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;amp&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;usr&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;lib&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vino&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;vino&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Connect to your server using Remmina.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Lock the screen of you Debian/Linux server 
+when you have finished using VNC on your server. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Stop/kill the vino server by hot keys &lt;code&gt;CTRL + C&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="vino"></category><category term="Linux"></category><category term="vnc"></category><category term="network"></category></entry><entry><title>Add an Entry into the Right-click Menu in Windows</title><link href="http://www.legendu.net/en/blog/add-an-entry-into-the-right-click-menu-in-windows/" rel="alternate"></link><published>2015-02-03T19:30:50-08:00</published><updated>2015-02-03T19:30:50-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-03:/en/blog/add-an-entry-into-the-right-click-menu-in-windows/</id><summary type="html">&lt;p&gt;To add an entry into the right-click menu in Windows, 
+edit the registry following the steps below.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the registry.
+You can search for &lt;code&gt;regedit&lt;/code&gt; in Windows Start menu and run it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to the key
+&lt;code&gt;HKEY_CLASSES_ROOT\Directory\Background\shell&lt;/code&gt;
+in the registry.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create another key with any name (e …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;To add an entry into the right-click menu in Windows, 
+edit the registry following the steps below.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the registry.
+You can search for &lt;code&gt;regedit&lt;/code&gt; in Windows Start menu and run it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to the key
+&lt;code&gt;HKEY_CLASSES_ROOT\Directory\Background\shell&lt;/code&gt;
+in the registry.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create another key with any name (e.g., rstudio) under 
+&lt;code&gt;HKEY_CLASSES_ROOT\Directory\Background\shell&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set a value (e.g., Rstudio) for the newly created key (rstudio)
+in the right-side pane of the registry.
+This value (Rstudio) shows up in the right-click menu whenever you right click.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create another key named &lt;code&gt;command&lt;/code&gt; under the newly created key (rstudio).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set the value of the newly created key &lt;code&gt;command&lt;/code&gt; 
+to be the full path of the application
+(e.g., &lt;code&gt;C:\Program Files\RStudio\bin\rstudio.exe&lt;/code&gt;)
+that you want to launch.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Windows"></category><category term="right-click menu"></category><category term="registry"></category><category term="regedit"></category></entry><entry><title>Missing Grub Menu of Windows Operating System</title><link href="http://www.legendu.net/en/blog/missing-grub-windows/" rel="alternate"></link><published>2015-02-03T19:10:47-08:00</published><updated>2015-02-03T19:10:47-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-03:/en/blog/missing-grub-windows/</id><summary type="html">&lt;p&gt;I came across this problem after I installed both Debian and Windows 7 system on my laptop.
+After searching online, I found a solution to this problem. 
+1. Open /etc/default/grub as root user and make sure the following line is somewhere in the file and uncommented:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;GRUB_DISABLE_OS_PROBER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;false …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;I came across this problem after I installed both Debian and Windows 7 system on my laptop.
+After searching online, I found a solution to this problem. 
+1. Open /etc/default/grub as root user and make sure the following line is somewhere in the file and uncommented:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;GRUB_DISABLE_OS_PROBER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Run command &lt;code&gt;update-grub2&lt;/code&gt; and then reboot your computer.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;This solution is not just for Windows and Linux dual boot. 
+It is also for dual/multiple Linux operating systems boot. &lt;/p&gt;</content><category term="Windows"></category><category term="Linux"></category><category term="OS"></category><category term="Debian"></category></entry><entry><title>Read CPU Temperature in Linux</title><link href="http://www.legendu.net/en/blog/linux-read-cpu-temperature/" rel="alternate"></link><published>2012-05-19T00:00:00-07:00</published><updated>2012-05-19T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2012-05-19:/en/blog/linux-read-cpu-temperature/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/hot.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;First you have to install package "lm-sensors". &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;lm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sensors&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To detect the cpu temperature, type the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="n"&gt;coretemp&lt;/span&gt;
+&lt;span class="n"&gt;sensors&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more instructions on this top, 
+see &lt;a href="http://www.cyberciti.biz/faq/howto-linux-get-sensors-information/"&gt;nixCraft&lt;/a&gt;.&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/hot.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;First you have to install package "lm-sensors". &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;lm&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sensors&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;To detect the cpu temperature, type the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;modprobe&lt;/span&gt; &lt;span class="n"&gt;coretemp&lt;/span&gt;
+&lt;span class="n"&gt;sensors&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more instructions on this top, 
+see &lt;a href="http://www.cyberciti.biz/faq/howto-linux-get-sensors-information/"&gt;nixCraft&lt;/a&gt;.&lt;/p&gt;</content><category term="modprobe"></category><category term="sensors"></category><category term="CPU"></category><category term="Linux"></category><category term="temperature"></category></entry><entry><title>Install Softwares in Linux</title><link href="http://www.legendu.net/en/blog/install-software-linux/" rel="alternate"></link><published>2012-04-30T00:00:00-07:00</published><updated>2012-04-30T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2012-04-30:/en/blog/install-software-linux/</id><summary type="html">&lt;p&gt;Sometime when you install softwares in Linux, 
+you get an error message saying that you do not have permission while you used sudo or the root account. 
+This probably means that you do not have full access to some installation files.
+An easy way to solve this problem is to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Sometime when you install softwares in Linux, 
+you get an error message saying that you do not have permission while you used sudo or the root account. 
+This probably means that you do not have full access to some installation files.
+An easy way to solve this problem is to change file permissions of these installation files.
+For example, 
+suppose "inst" is the directory containing installation files, 
+you can 
+change file access use the following command and try installation again.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;chmod&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="mi"&gt;755&lt;/span&gt; &lt;span class="n"&gt;inst&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="Linux"></category><category term="softwares"></category><category term="permission"></category></entry></feed>

@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>How Long Does It Take to Observe a Sequence?</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">How Long Does It Take to Observe a Sequence?</h1>
+      <p class="meta"><time datetime="2018-01-04T02:30:19-08:00" pubdate>Jan 04, 2018</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/pattern/coin.jpg" height="200" width="240" align="right"/></p>
+<p>There are many interesting while at the same time very tricky problems in
+statistics. One famous question is that how many steps (expected) does
+it take to observe a given sequence (e.g. THTH, TTHH), if we flip a
+balanced coin?</p>
+<p>This problem can be solved using (delay) renewal theory or martingales.
+These two methods are well explained in stochastic processes text books
+(e.g. Stochastic Processes, S. M. Ross), so I will not explain them here. 
+I implemented an algorithm base on martingales in Mathematica. 
+It can deal with all this kind of problems, no matter how
+long the pattern to be observed is and no matter which discrete distribution
+is specified for the sample space. The following are some running results in
+Mathematica.</p>
+<div class="highlight"><pre><span></span><span class="n">sp</span> <span class="o">=</span> <span class="err">{</span><span class="ss">&quot;H&quot;</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="err">}</span><span class="p">;</span>
+<span class="n">pat1</span> <span class="o">=</span> <span class="err">{</span><span class="ss">&quot;H&quot;</span><span class="p">,</span><span class="ss">&quot;H&quot;</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="err">}</span><span class="p">;</span>
+<span class="n">pat2</span> <span class="o">=</span> <span class="err">{</span><span class="ss">&quot;H&quot;</span><span class="p">,</span> <span class="ss">&quot;T&quot;</span><span class="p">,</span> <span class="ss">&quot;H&quot;</span><span class="p">,</span><span class="ss">&quot;T&quot;</span><span class="err">}</span><span class="p">;</span>
+<span class="n">PatternExpectedTime</span><span class="p">[</span><span class="n">pat1</span><span class="p">,</span> <span class="n">sp</span><span class="p">]</span>
+<span class="mi">16</span>
+<span class="n">PatternExpectedTime</span><span class="p">[</span><span class="n">pat2</span><span class="p">,</span> <span class="n">sp</span><span class="p">]</span>
+<span class="mi">20</span>
+</pre></div>
+
+
+<p>Some people might be shock by the above results, because they either think
+that the result should be the same, or they think that the expected time for
+patter "HTHT" to occur should be smaller. Notice that pattern "HTHT" has a
+duplicated structure which is the reason make it harder to occur. To be clearer,
+we know that a random sequence generated by flipping a coin n times won't have
+a big chance to have either too many or too few runs. Duplicated structures
+usually result in too many runs in sequence, e.g. "HTHT" has four runs which
+is the biggest run we can have in a sequence of length 4, so it would take more
+time on average for "HTHT" to come out.</p>
+<p>Here are <a href="http://dclong.github.io/media/pattern/pattern-time-examples.pdf">more examples and results</a> of the <a href="http://dclong.github.io/media/pattern/pattern.cdf">code</a>.
+You need either Mathematica or CDF player to open the code.
+For you convenience, the code is also presented below. 
+Notice that the code also contains a function for calculating the probability for a 
+pattern to come out before other patterns. 
+For a more detail description about this interesting problem see my post 
+<a href="http://dclong.github.io/en/blog/best-strategy/">Which One Is the Best Strategy?</a> and
+<a href="http://dclong.github.io/en/blog/best-strategy-2/">Which One Is the Best Strategy? (continued)</a>.</p>
+<div class="highlight"><pre><span></span><span class="nv">PatternExpectedTime</span>::<span class="nv">nprob</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">All element of `1` are negative.</span><span class="s2">&quot;</span><span class="c1">;</span>
+<span class="nv">PatternExpectedTime</span>::<span class="nv">ndist</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">The sum of `1` is greater than 1.</span><span class="s2">&quot;</span><span class="c1">;</span>
+<span class="nv">PatternExpectedTime</span>::<span class="nv">sp</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">The sample space `1` has duplicated element(s).</span><span class="s2">&quot;</span><span class="c1">;</span>
+<span class="nv">PatternExpectedTime</span>::<span class="nv">nmatch</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">The length of `1` does not match the length of `2`.</span><span class="s2">&quot;</span><span class="c1">;</span>
+<span class="nv">PatternExpectedTime</span>[<span class="nv">pattern_</span>, <span class="nv">samspace_</span>, <span class="nv">prob_</span>: <span class="nv">Null</span>, <span class="nv">padj_</span>: <span class="nv">True</span>] :<span class="o">=</span>
+    <span class="ss">(</span><span class="o">*</span><span class="nv">the</span> <span class="nv">algorithm</span> <span class="nv">is</span> <span class="nv">based</span> <span class="nv">on</span> <span class="nv">martingales</span><span class="o">*</span><span class="ss">)</span>
+    <span class="ss">(</span><span class="o">*</span><span class="nv">pattern</span>: <span class="nv">a</span> <span class="nv">list</span> <span class="nv">defining</span> <span class="nv">the</span> <span class="nv">pattern</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">observed</span><span class="o">*</span><span class="ss">)</span>
+    <span class="ss">(</span><span class="o">*</span><span class="nv">samspace</span>: <span class="nv">a</span> <span class="nv">list</span> <span class="nv">defining</span> <span class="nv">the</span> <span class="nv">sample</span> <span class="nv">space</span><span class="o">*</span><span class="ss">)</span>
+    <span class="ss">(</span><span class="o">*</span><span class="nv">prob</span>: <span class="nv">a</span> <span class="nv">list</span> <span class="nv">defining</span> <span class="nv">probabilites</span><span class="o">*</span><span class="ss">)</span>
+    <span class="ss">(</span><span class="o">*</span><span class="nv">padj</span>: <span class="nv">logical</span>, <span class="nv">whether</span> <span class="nv">to</span> <span class="nv">auto</span> <span class="nv">adjust</span> <span class="nv">argument</span> <span class="nv">prob</span> <span class="nv">to</span> <span class="nv">make</span> <span class="nv">it</span> <span class="nv">sum</span> <span class="nv">to</span> <span class="mi">1</span><span class="o">*</span><span class="ss">)</span>
+
+<span class="nv">Module</span>[{<span class="nv">nsample</span>, <span class="nv">npattern</span>, <span class="nv">i</span>, <span class="nv">j</span>, <span class="nv">ResultProb</span> <span class="o">=</span> {}, <span class="nv">temp</span>, <span class="nv">expect</span>, <span class="nv">probs</span>},
+    <span class="nv">nsample</span> <span class="o">=</span> <span class="nv">Length</span>[<span class="nv">samspace</span>]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">Length</span>[<span class="nv">DeleteDuplicates</span>[<span class="nv">samspace</span>]] <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; nsample,</span>
+        <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">sp</span>, <span class="nv">samspace</span>]<span class="c1">;</span>
+        <span class="k">Return</span>[]
+    ]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">prob</span> <span class="o">===</span> <span class="nv">Null</span>,
+    <span class="nv">probs</span> <span class="o">=</span> <span class="nv">Table</span>[<span class="mi">1</span><span class="o">/</span><span class="nv">nsample</span>, {<span class="nv">nsample</span>}],
+    <span class="k">If</span>[<span class="nv">Length</span>[<span class="nv">prob</span>] <span class="o">!=</span> <span class="nv">nsample</span>,
+        <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">nmatch</span>, <span class="nv">prob</span>, <span class="nv">samspace</span>]<span class="c1">;</span>
+        <span class="k">Return</span>[]
+    ]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">Min</span>[<span class="nv">prob</span>] <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; 0,</span>
+    <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">nprob</span>, <span class="nv">prob</span>]<span class="c1">;</span>
+    <span class="k">Return</span>[]
+    ]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">padj</span>,
+        <span class="nv">probs</span> <span class="o">=</span> <span class="nv">prob</span><span class="o">/</span><span class="nv">Total</span>[<span class="nv">prob</span>],
+        <span class="k">If</span>[<span class="nv">Total</span>[<span class="nv">prob</span>] <span class="o">&amp;</span><span class="nv">gt</span><span class="c1">; 1,</span>
+          <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">ndist</span>, <span class="nv">prob</span>]<span class="c1">;</span>
+          <span class="k">Return</span>[],
+          <span class="nv">probs</span> <span class="o">=</span> <span class="nv">prob</span>
+          ]<span class="c1">;</span>
+        ]<span class="c1">;</span>
+    ]<span class="c1">;</span>
+    <span class="ss">(</span><span class="o">*</span><span class="nv">the</span> <span class="nv">following</span> <span class="nv">is</span> <span class="nv">the</span> <span class="nv">core</span> <span class="nv">algorithm</span><span class="o">*</span><span class="ss">)</span>
+    <span class="nv">npattern</span> <span class="o">=</span> <span class="nv">Length</span>[<span class="nv">pattern</span>]<span class="c1">;</span>
+    <span class="k">For</span>[<span class="nv">i</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">i</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npattern, i++,</span>
+        <span class="nv">AppendTo</span>[<span class="nv">ResultProb</span>, 
+        <span class="nv">probs</span>[[<span class="nv">Flatten</span>[<span class="nv">Position</span>[<span class="nv">samspace</span>, <span class="nv">pattern</span>[[<span class="nv">i</span>]]]][[<span class="mi">1</span>]]]]]<span class="c1">;</span>
+    ]<span class="c1">;</span>
+    <span class="nv">expect</span> <span class="o">=</span> <span class="nv">npattern</span><span class="c1">;</span>
+    <span class="k">For</span>[<span class="nv">i</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">i</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npattern, i++,</span>
+        <span class="nv">temp</span> <span class="o">=</span> <span class="mi">1</span><span class="c1">;</span>
+        <span class="k">For</span>[<span class="nv">j</span> <span class="o">=</span> <span class="nv">i</span>, <span class="nv">j</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npattern, j++,</span>
+            <span class="k">If</span>[<span class="nv">pattern</span>[[<span class="nv">j</span>]] <span class="o">==</span> <span class="nv">pattern</span>[[<span class="nv">j</span> <span class="o">-</span> <span class="nv">i</span> <span class="o">+</span> <span class="mi">1</span>]],
+                <span class="nv">temp</span> <span class="o">=</span> <span class="nv">temp</span><span class="o">/</span><span class="nv">ResultProb</span>[[<span class="nv">j</span>]],
+                <span class="nv">temp</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">;</span>
+                <span class="k">Break</span>[]
+            ]
+        ]<span class="c1">;</span>
+        <span class="nv">expect</span> <span class="o">=</span> <span class="nv">expect</span> <span class="o">+</span> <span class="nv">temp</span> <span class="o">-</span> <span class="mi">1</span>
+    ]<span class="c1">;</span>
+    <span class="k">Return</span>[<span class="nv">expect</span>]
+]
+
+<span class="nv">PatternAdditionalExpectedTime</span>[<span class="nv">pat_</span>, <span class="nv">gpat_</span>, <span class="nv">samspace_</span>, <span class="nv">prob_</span>: <span class="nv">Null</span>, <span class="nv">padj_</span>: <span class="nv">True</span>] :<span class="o">=</span>
+<span class="ss">(</span><span class="o">*</span><span class="nv">calculate</span> <span class="nv">the</span> <span class="nv">expected</span> <span class="nv">time</span> <span class="k">for</span> <span class="nv">a</span> <span class="nv">pat</span> <span class="nv">to</span> <span class="nv">occur</span> \
+<span class="nv">given</span> <span class="nv">that</span> <span class="nv">gpat</span> <span class="nv">already</span> <span class="nv">occurs</span>,
+<span class="nv">it</span><span class="s1">&#39;</span><span class="s">s essentially based on the function PatternExpectedTime[]*)</span>
+<span class="nv">Module</span>[{<span class="nv">npat</span>, <span class="nv">ngpat</span>, <span class="nv">i</span>, <span class="nv">j</span>, <span class="nv">count</span>, <span class="nv">win</span> <span class="o">=</span> {}, <span class="nv">temp</span>, <span class="nv">nsample</span>, <span class="nv">probs</span>},
+    <span class="nv">nsample</span> <span class="o">=</span> <span class="nv">Length</span>[<span class="nv">samspace</span>]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">Length</span>[<span class="nv">DeleteDuplicates</span>[<span class="nv">samspace</span>]] <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; nsample,</span>
+        <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">sp</span>, <span class="nv">samspace</span>]<span class="c1">;</span>
+        <span class="k">Return</span>[]
+    ]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">prob</span> <span class="o">===</span> <span class="nv">Null</span>,
+        <span class="nv">probs</span> <span class="o">=</span> <span class="nv">Table</span>[<span class="mi">1</span><span class="o">/</span><span class="nv">nsample</span>, {<span class="nv">nsample</span>}],
+        <span class="k">If</span>[<span class="nv">Length</span>[<span class="nv">prob</span>] <span class="o">!=</span> <span class="nv">nsample</span>,
+            <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">nmatch</span>, <span class="nv">prob</span>, <span class="nv">samspace</span>]<span class="c1">;</span>
+            <span class="k">Return</span>[]
+        ]<span class="c1">;</span>
+        <span class="k">If</span>[<span class="nv">Min</span>[<span class="nv">prob</span>] <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; 0,</span>
+            <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">nprob</span>, <span class="nv">prob</span>]<span class="c1">;</span>
+            <span class="k">Return</span>[]
+        ]<span class="c1">;</span>
+        <span class="k">If</span>[<span class="nv">padj</span>,
+            <span class="nv">probs</span> <span class="o">=</span> <span class="nv">prob</span><span class="o">/</span><span class="nv">Total</span>[<span class="nv">prob</span>],
+            <span class="k">If</span>[<span class="nv">Total</span>[<span class="nv">prob</span>] <span class="o">&amp;</span><span class="nv">gt</span><span class="c1">; 1,</span>
+                <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">ndist</span>, <span class="nv">prob</span>]<span class="c1">;</span>
+                <span class="k">Return</span>[],
+                <span class="nv">probs</span> <span class="o">=</span> <span class="nv">prob</span>
+            ]<span class="c1">;</span>
+        ]<span class="c1">;</span>
+    ]<span class="c1">;</span>
+    <span class="nv">npat</span> <span class="o">=</span> <span class="nv">Length</span>[<span class="nv">pat</span>]<span class="c1">;</span>
+    <span class="nv">ngpat</span> <span class="o">=</span> <span class="nv">Length</span>[<span class="nv">gpat</span>]<span class="c1">;</span>
+    <span class="nv">count</span> <span class="o">=</span> <span class="nv">ngpat</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">-</span> <span class="nv">npat</span><span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">count</span> <span class="o">&amp;</span><span class="nv">gt</span><span class="c1">;= 1,</span>
+        <span class="nv">temp</span> <span class="o">=</span> <span class="mi">1</span><span class="c1">;</span>
+        <span class="k">For</span>[<span class="nv">i</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">i</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npat, i++,</span>
+            <span class="nv">temp</span> <span class="o">/=</span> <span class="nv">probs</span>[[<span class="nv">Flatten</span>[<span class="nv">Position</span>[<span class="nv">samspace</span>, <span class="nv">pat</span>[[<span class="nv">i</span>]]]][[<span class="mi">1</span>]]]]
+        ]<span class="c1">;</span>
+        <span class="nv">temp</span> <span class="o">-=</span> <span class="mi">1</span><span class="c1">;</span>
+        <span class="k">For</span>[<span class="nv">i</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">i</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= count, i++,</span>
+            <span class="k">For</span>[<span class="nv">j</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">j</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npat, j++,</span>
+                <span class="k">If</span>[<span class="nv">gpat</span>[[<span class="nv">i</span> <span class="o">+</span> <span class="nv">j</span> <span class="o">-</span> <span class="mi">1</span>]] <span class="o">!=</span> <span class="nv">pat</span>[[<span class="nv">j</span>]],
+                    <span class="nv">AppendTo</span>[<span class="nv">win</span>, <span class="o">-</span><span class="mi">1</span>]<span class="c1">;</span>
+                    <span class="nv">Goto</span>[<span class="k">next</span>]<span class="c1">;</span>
+                ]<span class="c1">;</span>
+            ]<span class="c1">;</span>
+            <span class="nv">AppendTo</span>[<span class="nv">win</span>, <span class="nv">temp</span>]<span class="c1">;</span>
+            <span class="nv">Label</span>[<span class="k">next</span>]<span class="c1">;</span>
+        ]<span class="c1">;</span>
+    ]<span class="c1">;</span>
+    <span class="nv">count</span> <span class="o">=</span> <span class="nv">Max</span>[<span class="mi">1</span>, <span class="nv">count</span> <span class="o">+</span> <span class="mi">1</span>]<span class="c1">;</span>
+    <span class="k">For</span>[<span class="nv">i</span> <span class="o">=</span> <span class="nv">count</span>, <span class="nv">i</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= ngpat, i++,</span>
+        <span class="nv">temp</span> <span class="o">=</span> <span class="mi">1</span><span class="c1">;</span>
+        <span class="k">For</span>[<span class="nv">j</span> <span class="o">=</span> <span class="nv">i</span>, <span class="nv">j</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= ngpat, j++,</span>
+            <span class="k">If</span>[<span class="nv">gpat</span>[[<span class="nv">j</span>]] <span class="o">==</span> <span class="nv">pat</span>[[<span class="nv">j</span> <span class="o">-</span> <span class="nv">i</span> <span class="o">+</span> <span class="mi">1</span>]],
+                <span class="nv">temp</span> <span class="o">/=</span> 
+                <span class="nv">probs</span>[[<span class="nv">Flatten</span>[<span class="nv">Position</span>[<span class="nv">samspace</span>, <span class="nv">pat</span>[[<span class="nv">j</span> <span class="o">-</span> <span class="nv">i</span> <span class="o">+</span> <span class="mi">1</span>]]]][[<span class="mi">1</span>]]]],
+                <span class="nv">temp</span> <span class="o">=</span> <span class="mi">0</span><span class="c1">;</span>
+                <span class="k">Break</span>[]<span class="c1">;</span>
+            ]<span class="c1">;</span>
+        ]<span class="c1">;</span>
+        <span class="nv">AppendTo</span>[<span class="nv">win</span>, <span class="nv">temp</span> <span class="o">-</span> <span class="mi">1</span>]<span class="c1">;</span>
+    ]<span class="c1">;</span>
+    <span class="nv">win</span> <span class="o">=</span> <span class="nv">Total</span>[<span class="nv">win</span>]<span class="c1">;</span>
+    <span class="nv">PatternExpectedTime</span>[<span class="nv">pat</span>, <span class="nv">samspace</span>, <span class="nv">probs</span>, <span class="nv">padj</span>] <span class="o">-</span> <span class="nv">win</span> <span class="o">-</span> <span class="nv">ngpat</span>
+]
+
+<span class="nv">PatternFirstComeOutProbability</span>::<span class="nv">patnum</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">Argument `1` requires 2 or more elements.</span><span class="s2">&quot;</span><span class="c1">;</span>
+<span class="nv">PatternFirstComeOutProbability</span>[<span class="nv">patterns_</span>, <span class="nv">samspace_</span>, <span class="nv">prob_</span>: <span class="nv">Null</span>, <span class="nv">padj_</span>: <span class="nv">True</span>] :<span class="o">=</span> 
+<span class="nv">Module</span>[{<span class="nv">npat</span>, <span class="nv">A</span> <span class="o">=</span> {}, <span class="nv">row</span> <span class="o">=</span> {}, <span class="nv">b</span> <span class="o">=</span> {}, <span class="nv">i</span>, <span class="nv">j</span>, <span class="nv">nsample</span>, <span class="nv">probs</span>},
+    <span class="ss">(</span><span class="o">*</span><span class="nv">patterns</span> <span class="nv">is</span> <span class="nv">a</span> <span class="nv">list</span> <span class="nv">which</span> <span class="nv">contains</span> <span class="nv">patterns</span> <span class="nv">to</span> <span class="nv">be</span> <span class="nv">compared</span><span class="o">*</span><span class="ss">)</span>
+    <span class="ss">(</span><span class="o">*</span><span class="nv">dist</span> <span class="nv">is</span> <span class="nv">list</span> <span class="nv">which</span> <span class="nv">specifies</span> <span class="nv">a</span> <span class="nv">discrete</span> <span class="nv">distribution</span><span class="o">*</span><span class="ss">)</span>
+    <span class="nv">npat</span> <span class="o">=</span> <span class="nv">Length</span>[<span class="nv">patterns</span>]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">npat</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; 2,</span>
+        <span class="nv">Message</span>[<span class="nv">PatternFirstComeOutProbability</span>::<span class="nv">patnum</span>, <span class="nv">patterns</span>]<span class="c1">;</span>
+        <span class="k">Return</span>[]
+    ]<span class="c1">;</span>
+    <span class="nv">nsample</span> <span class="o">=</span> <span class="nv">Length</span>[<span class="nv">samspace</span>]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">Length</span>[<span class="nv">DeleteDuplicates</span>[<span class="nv">samspace</span>]] <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; nsample,</span>
+        <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">sp</span>, <span class="nv">samspace</span>]<span class="c1">;</span>
+        <span class="k">Return</span>[]
+    ]<span class="c1">;</span>
+    <span class="k">If</span>[<span class="nv">prob</span> <span class="o">===</span> <span class="nv">Null</span>,
+        <span class="nv">probs</span> <span class="o">=</span> <span class="nv">Table</span>[<span class="mi">1</span><span class="o">/</span><span class="nv">nsample</span>, {<span class="nv">nsample</span>}],
+        <span class="k">If</span>[<span class="nv">Length</span>[<span class="nv">prob</span>] <span class="o">!=</span> <span class="nv">nsample</span>,
+            <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">nmatch</span>, <span class="nv">prob</span>, <span class="nv">samspace</span>]<span class="c1">;</span>
+            <span class="k">Return</span>[]
+        ]<span class="c1">;</span>
+        <span class="k">If</span>[<span class="nv">Min</span>[<span class="nv">prob</span>] <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">; 0,</span>
+            <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">nprob</span>, <span class="nv">prob</span>]<span class="c1">;</span>
+            <span class="k">Return</span>[]
+        ]<span class="c1">;</span>
+        <span class="k">If</span>[<span class="nv">padj</span>,
+            <span class="nv">probs</span> <span class="o">=</span> <span class="nv">prob</span><span class="o">/</span><span class="nv">Total</span>[<span class="nv">prob</span>],
+            <span class="k">If</span>[<span class="nv">Total</span>[<span class="nv">prob</span>] <span class="o">&amp;</span><span class="nv">gt</span><span class="c1">; 1,</span>
+                <span class="nv">Message</span>[<span class="nv">PatternExpectedTime</span>::<span class="nv">ndist</span>, <span class="nv">prob</span>]<span class="c1">;</span>
+                <span class="k">Return</span>[],
+                <span class="nv">probs</span> <span class="o">=</span> <span class="nv">prob</span>
+            ]<span class="c1">;</span>
+        ]<span class="c1">;</span>
+    ]<span class="c1">;</span>
+    <span class="nv">A</span> <span class="o">=</span> <span class="nv">Table</span>[<span class="mi">0</span>, {<span class="nv">i</span>, <span class="mi">1</span>, <span class="nv">npat</span>}, {<span class="nv">j</span>, <span class="mi">1</span>, <span class="nv">npat</span>}]<span class="c1">;</span>
+    <span class="k">For</span>[<span class="nv">i</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">i</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npat, i++,</span>
+        <span class="k">For</span>[<span class="nv">j</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">j</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npat, j++,</span>
+            <span class="k">If</span>[<span class="nv">j</span> <span class="o">==</span> <span class="nv">i</span>, <span class="k">Continue</span>[]]<span class="c1">;</span>
+                <span class="nv">A</span>[[<span class="nv">i</span>, <span class="nv">j</span>]] <span class="o">=</span> <span class="nv">PatternAdditionalExpectedTime</span>[<span class="nv">patterns</span>[[<span class="nv">i</span>]], <span class="nv">patterns</span>[[<span class="nv">j</span>]], <span class="nv">samspace</span>, <span class="nv">probs</span>, <span class="nv">padj</span>]<span class="c1">;</span>
+            ]<span class="c1">;</span>
+        ]<span class="c1">;</span>
+        <span class="nv">A</span> <span class="o">=</span> <span class="nv">Join</span>[<span class="nv">Table</span>[<span class="mi">1</span>, {<span class="nv">i</span>, <span class="nv">npat</span>}, {<span class="nv">j</span>, <span class="mi">1</span>}], <span class="nv">A</span>, <span class="mi">2</span>]<span class="c1">;</span>
+        <span class="nv">row</span> <span class="o">=</span> <span class="nv">Table</span>[<span class="mi">1</span>, {<span class="nv">i</span>, <span class="nv">npat</span>}]<span class="c1">;</span>
+        <span class="nv">PrependTo</span>[<span class="nv">row</span>, <span class="mi">0</span>]<span class="c1">;</span>
+        <span class="nv">AppendTo</span>[<span class="nv">A</span>, <span class="nv">row</span>]<span class="c1">;</span>
+        <span class="k">For</span>[<span class="nv">i</span> <span class="o">=</span> <span class="mi">1</span>, <span class="nv">i</span> <span class="o">&amp;</span><span class="nv">lt</span><span class="c1">;= npat, i++,</span>
+            <span class="nv">AppendTo</span>[<span class="nv">b</span>, 
+            <span class="nv">PatternExpectedTime</span>[<span class="nv">patterns</span>[[<span class="nv">i</span>]], <span class="nv">samspace</span>, <span class="nv">probs</span>, <span class="nv">padj</span>]
+        ]
+    ]<span class="c1">;</span>
+    <span class="nv">AppendTo</span>[<span class="nv">b</span>, <span class="mi">1</span>]<span class="c1">;</span>
+    <span class="k">Return</span>[<span class="nv">LinearSolve</span>[<span class="nv">A</span>, <span class="nv">b</span>]]<span class="c1">;</span>
+]
+</pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2018-01-04T02:30:19-08:00" pubdate>Jan 04, 2018</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/mathematica.html">Mathematica</a>
+    <a class="category" href="http://www.legendu.net/en/tag/pattern.html">pattern</a>
+    <a class="category" href="http://www.legendu.net/en/tag/markov-chain.html">Markov chain</a>
+    <a class="category" href="http://www.legendu.net/en/tag/statistics.html">statistics</a>
+    <a class="category" href="http://www.legendu.net/en/tag/sequence.html">sequence</a>
+    <a class="category" href="http://www.legendu.net/en/tag/coin.html">coin</a>
+    <a class="category" href="http://www.legendu.net/en/tag/stochastic.html">stochastic</a>
+    <a class="category" href="http://www.legendu.net/en/tag/martingale.html">martingale</a>
+    <a class="category" href="http://www.legendu.net/en/tag/fun-problems.html">fun problems</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/how-long-observe-pattern/';
+          var disqus_url = 'http://www.legendu.net/en/blog/how-long-observe-pattern/';
+          var disqus_title = 'How Long Does It Take to Observe a Sequence?';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

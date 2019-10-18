@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - R</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/io-in-r/">Input and Output in R</a>
+      </h1>
+      <p class="meta"><time datetime="2016-07-09T18:20:45-07:00" pubdate>Jul 09, 2016</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="readtable-readcsv-readdelim-etc">read.table, read.csv, read.delim, etc.</h2>
+<ol>
+<li>
+<p>It is suggested that you use <code>read.csv</code>/<code>read.delim</code> and avoid using <code>read.table</code>.
+This is because that the <code>comment.char</code> is off for <code>read.csv</code>/<code>read.delim</code> and on for <code>read.table</code> by default. 
+My experience is that data seldom has …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/io-in-r/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/arrayQualityMetrics/">Install the R Package "arrayQualityMetrics"</a>
+      </h1>
+      <p class="meta"><time datetime="2016-06-11T19:11:28-07:00" pubdate>Jun 11, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p>I had to use the R package "arrayQualityMetrics" to check the quality of some gene chips. 
+Installing this package in Linux takes a few steps. 
+The following is the brief instruction on how to install R package "arayQualityMetrics" in Debian.    </p>
+<div class="highlight"><pre><span></span><span class="c1"># install the graphics library cairo</span>
+<span class="n">sudo</span> <span class="n">apt</span><span class="o">-</span><span class="n">get</span> <span class="n">install</span> <span class="n">libcairo2 …</span></pre></div></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/arrayQualityMetrics/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/fast-computing-r/">Write R Code that Runs Faster</a>
+      </h1>
+      <p class="meta"><time datetime="2015-08-26T22:08:17-07:00" pubdate>Aug 26, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/r/run-fast.jpg" height="200" width="240" align="right"/></p>
+<p>R is a popular statistical software which is famous for enormous amout of
+packages. The syntax of R is very flexible with make it convenient at the cost
+of performance. R is indeed slow compared to many other scripting languages, but
+there are a few tricks which can make your …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/fast-computing-r/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/keep-matrix-structure-r/">Keep Matrix Structure when Extract a Row/Column from a Matrix</a>
+      </h1>
+      <p class="meta"><time datetime="2015-05-14T22:04:52-07:00" pubdate>May 14, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p>I talked in the post <a href="">Abuse of Vector in R</a> that 
+it is often the case that we want keep the matrix sturcture when 
+extracting a row/column from a matrix,
+i.e., we often want to return a matrix with 1 row/column when extracting 
+a row/column from …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/keep-matrix-structure-r/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/mistakes-r/">Easy Made Mistakes when Writing R code</a>
+      </h1>
+      <p class="meta"><time datetime="2015-05-14T22:04:09-07:00" pubdate>May 14, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/r/mistake.jpg" height="200" width="240" align="right"/></p>
+<p>Being flexible is a two-side sword to R. 
+While it make it convenient and productive to use R,
+it is also very easy to make mistakes when writing R code. 
+The following is list of mistakes that happens all the time.</p>
+<ol>
+<li>
+<p>Miss passed arguments<br>
+This is often due the to …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/mistakes-r/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/skills-for-r/">Skills for R</a>
+      </h1>
+      <p class="meta"><time datetime="2015-05-14T21:59:32-07:00" pubdate>May 14, 2015</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>Unlike C/C++, Java and SAS, 
+you do not have semicolon to indicate the end of a command, 
+but you can do this if you like. 
+It is helpful if you have to write multiple commands on a line.</p>
+</li>
+<li>
+<p>R support command/terminal mode, 
+and if you open R in …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/skills-for-r/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/en/tag/r4.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/en/tag/r2.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/summary-parallel-computing/">Parallel Computing in Different Programming Languages</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/develop-r-packages-using-roxygen2/">Develop R Packages Using "roxygen2"</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/zero-length-vector-issue-in-R/">Zero-length Vector Issue in R</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/traps-in-r/">Traps in R</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/install-r-packages-on-windows-behind-proxy/">Install R Packages Behind Proxy on Windows</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

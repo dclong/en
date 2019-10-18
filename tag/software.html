@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - software</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </h1>
+      <p class="meta"><time datetime="2019-08-18T00:23:13-07:00" pubdate>Aug 18, 2019</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="tips">Tips</h2>
+<ol>
+<li>
+<p>The <code>dclong/jupyterlab</code> Docker image is well maintained (which is the base image of <code>dclong/jupyterhub</code>), 
+    however, 
+    many of the <code>dclong/jupyterlab-*</code> Docker images are not maintained any more.
+    Please use the corresponding <code>dclong/jupyterhub-*</code>  Docker images instead.</p>
+</li>
+<li>
+<p>There is an issue with the <code>dclong/xubuntu*</code> Docker images due …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/my-docker-images/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </h1>
+      <p class="meta"><time datetime="2019-06-23T02:38:23-07:00" pubdate>Jun 23, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>It is suggested that you use <a href="https://osquery.io/">osquery</a>
+to query Docker images, containers, etc.</p>
+<h2 id="remove-containers">Remove Containers</h2>
+<p>Note that running containers will NOT be removed by default.
+This is what users want generally speaking. 
+You can use the option <code>-f</code> to force removing running containers,
+but use it with caution and at …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/install-python-in-mac/">Install Python in Mac</a>
+      </h1>
+      <p class="meta"><time datetime="2019-05-24T01:46:40-07:00" pubdate>May 24, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>There are a few ways to install Python in Mac. </p>
+<ol>
+<li>
+<p>Install system-wide via the official Python installation package.</p>
+</li>
+<li>
+<p>Install a Anaconda Python distribution locally.</p>
+</li>
+<li>
+<p>Install locally using Homebrew (recommended).</p>
+</li>
+</ol>
+<p>A few comments about different ways of installation.</p>
+<ol>
+<li>
+<p>Anaconda and Homebrew installs Python locally rather than system-wide.
+  You have to install …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/install-python-in-mac/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/pdftk-examples/">Examples of Using pdftk to Manipulating PDF Files</a>
+      </h1>
+      <p class="meta"><time datetime="2019-05-12T15:25:00-07:00" pubdate>May 12, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>Even though <code>pdftk</code> is a great command-line tool,
+it is suggested that you use Python libraries to manipulating PDFs.
+Please refer to 
+<a href="http://www.legendu.net/misc/blog/editing-PDF-files/">Editing PDF Files</a>
+and
+<a href="http://www.legendu.net/misc/blog/pypdf2-examples/">PyPDF2 Examples</a>
+for more details.</p>
+<ol>
+<li>
+<p>Fill in forms in an I-9 doc. </p>
+<div class="highlight"><pre><span></span># <span class="nv">dump</span> <span class="nv">fields</span> <span class="nv">in</span> <span class="nv">the</span> <span class="nv">form</span> <span class="ss">(</span><span class="nv">optional</span>, <span class="k">for</span> <span class="nv">human</span> <span class="nv">examination</span> <span class="nv">only</span><span class="ss">)</span>
+<span class="nv">pdftk</span> <span class="nv">i9 …</span></pre></div></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/pdftk-examples/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/tips-for-installing-debian/">Tips on Installing Debian Series Linux Distributions</a>
+      </h1>
+      <p class="meta"><time datetime="2019-05-11T01:05:59-07:00" pubdate>May 11, 2019</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="before-installation">Before Installation</h2>
+<ol>
+<li>
+<p>You can either create a boot CD/DVD or flash drive to install debian.
+    The way I prefer is to instal debian using a bootable flash drive 
+    because many laptops do not have CD/DVD trays. 
+    To write a debian image to flash drive, you can use the …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/tips-for-installing-debian/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/use-eclipse-as-your-ide/">Use Eclipse as Your IDE</a>
+      </h1>
+      <p class="meta"><time datetime="2019-03-29T09:30:34-07:00" pubdate>Mar 29, 2019</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>There are at least 3 ways to jump to errors quickly in Eclipse</p>
+<ul>
+<li>Click these red icons on the right margin.</li>
+<li>Click the <code>Previous Annotation</code> button 
+or <code>Next Annotation</code> buttons on the tool bar or under the <code>Navigation</code> menu.</li>
+<li>Use hot keys (<code>Ctrl+.</code> for <code>Next Annotation</code> and <code>Ctrl+,</code> for <code>Previous …</code></li></ul></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/use-eclipse-as-your-ide/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/en/tag/software2.html">&larr; Older</a>
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/install-python-in-mac/">Install Python in Mac</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/pdftk-examples/">Examples of Using pdftk to Manipulating PDF Files</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/tips-for-installing-debian/">Tips on Installing Debian Series Linux Distributions</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

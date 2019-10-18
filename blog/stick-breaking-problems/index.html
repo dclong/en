@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Stick Breaking Problems</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Stick Breaking Problems</h1>
+      <p class="meta"><time datetime="2014-12-16T19:47:59-08:00" pubdate>Dec 16, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>The following is a popular brain teaser problem about probability.</p>
+<blockquote>
+<p>Randomly select two points on a unit stick to break it into 3 pieces,
+what is the probability that the 3 pieces can form a triangle?</p>
+</blockquote>
+<p>The critical thing here is how are the two points selected. 
+The most popular (and probably default) way is that 
+<span class="math">\(X_1, X_2 \overset{iid}{\sim} U(0, 1)\)</span>,
+where <span class="math">\(X_1\)</span> and <span class="math">\(X_2\)</span> are the distances from the two points to the left end of the stick.
+There some other interesting ways of selecting the points,
+and I will study the 3 cases in this post.</p>
+<h2 id="independent-uniformly-distributed">Independent Uniformly Distributed</h2>
+<p>Let <span class="math">\(X_1\)</span> and <span class="math">\(X_2\)</span> be the distances from the two points to the left end of the stick.
+In this situation we assume that 
+<span class="math">\(X_1, X_2 \overset{iid}{\sim} U(0, 1).\)</span></p>
+<h3 id="method-i-exclusive-method">Method I: Exclusive Method</h3>
+<p>Let 
+<span class="math">\(l_1\)</span>, <span class="math">\(l_2\)</span> and <span class="math">\(l_3\)</span> 
+be the lengths of the 3 pieces from the left end of the stick.
+To form a triangle, 
+<span class="math">\(l_1\)</span>, <span class="math">\(l_2\)</span> and <span class="math">\(l_3\)</span> have to satisfy the following conditions.</p>
+<div class="math">$$l_1 + l_2 &gt; l_3,$$</div>
+<div class="math">$$l_2 + l_3 &gt; l_1,$$</div>
+<div class="math">$$l_3 + l_1 &gt; l_2.$$</div>
+<p>Or equivalently,
+</p>
+<div class="math">$$0 &lt; l_1, l_2, l_3 &lt; \frac{1}{2}.$$</div>
+<div class="math">\begin{align}
+P_{\bigtriangleup} &amp;= P(0 &lt; l_1, l_2, l_3 &lt; \frac{1}{2}) \nonumber \newline 
+                   &amp;= 1 - P(l_1 \ge \frac{1}{2} | l_2 \ge \frac{1}{2} | l_3 \ge \frac{1}{2}) \nonumber \newline 
+                   &amp;= 1 - \left(P(l_1 \ge \frac{1}{2}) + P(l_2 \ge \frac{1}{2}) + P(l_3 \ge \frac{1}{2})\right). \nonumber \newline 
+\end{align}</div>
+<div class="math">\begin{align}
+P(l_1 \ge \frac{1}{2}) &amp;= P(min\\{X_1, X_2\\} \ge \frac{1}{2}) = P(X_1 \ge \frac{1}{2}, X_2 \ge \frac{1}{2}) \nonumber \newline 
+                       &amp;= P(X_1 \ge \frac{1}{2}) P(X_2 \ge \frac{1}{2}) \nonumber \newline 
+                       &amp;= \frac{1}{2} \times \frac{1}{2} = \frac{1}{4}. \nonumber
+\end{align}</div>
+<p><span class="math">\(l_3\)</span> is symmetric to <span class="math">\(l_1\)</span>, 
+so 
+<span class="math">\(P(l_3 \ge \frac{1}{2}) = \frac{1}{4}\)</span>.</p>
+<p>It can be shown (see Method II) that <span class="math">\(P(l_2 \ge \frac{1}{2}) = \frac{1}{4}\)</span>,
+so 
+</p>
+<div class="math">\begin{align}
+P_{\bigtriangleup} &amp;= 1 - \left(P(l_1 \ge \frac{1}{2}) + P(l_2 \ge \frac{1}{2}) + P(l_3 \ge \frac{1}{2})\right) \nonumber \newline 
+                       &amp;= 1 - \left(\frac{1}{4} + \frac{1}{4} + \frac{1}{4}\right) = \frac{1}{4} = 0.25. \nonumber
+\end{align}</div>
+<h3 id="method-ii-visualization">Method II: Visualization</h3>
+<p><div align="middle">
+    <figure>
+        <img src="http://dclong.github.io/media/fun_problems/triangle/triangle.jpg" 
+        alt="Probability to Form a Triangle" 
+        height="400" width="400"/>
+        <figcaption>
+            Figure 1: Probability to Form a Triangle.
+        </figcaption>
+    </figure>
+</div></p>
+<p>Let <span class="math">\(X_1\)</span> and <span class="math">\(X_2\)</span> be defined as above. 
+For the convenience of visualization, 
+Figure 1 uses <span class="math">\(X\)</span> to stand for <span class="math">\(X_1\)</span> and <span class="math">\(Y\)</span> to stand for <span class="math">\(X_2\)</span>.
+The pair <span class="math">\((X, Y)\)</span> is uniformly distributed 
+in the unit square <span class="math">\([0,1] \times [0,1]\)</span>
+as shown in Figure 1.
+To form a triangle, 
+<span class="math">\(X\)</span> and <span class="math">\(Y\)</span> need to satisfy the following conditions.
+</p>
+<div class="math">\begin{align}
+              |X - Y| &amp;&lt; \frac{1}{2}, \newline
+    (X - \frac{1}{2}) &amp;  (Y - \frac{1}{2}) &lt; 0
+\end{align}</div>
+<p>Condition (1) requires that the middle part of the 3 pieces 
+cannot be greater than <span class="math">\(\frac{1}{2}\)</span>.
+It is equivalent to 
+</p>
+<div class="math">\begin{align}
+    Y &amp;&gt; x - \frac{1}{2}, \newline
+    Y &amp;&lt; x + \frac{1}{2},
+\end{align}</div>
+<p>
+which corresponds to the hexagon in the middle of the unit square 
+(consisting of <span class="math">\(B_1\)</span>, <span class="math">\(B_2\)</span>, <span class="math">\(T_1\)</span> and <span class="math">\(T_2\)</span>).
+Condition (2) requires that <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> cannot be 
+both smaller than <span class="math">\(\frac{1}{2}\)</span> 
+or bother greater than <span class="math">\(\frac{1}{2}\)</span>,
+which excludes areas <span class="math">\(B_1\)</span> and <span class="math">\(B_2\)</span>.
+So when <span class="math">\(X\)</span> and <span class="math">\(Y\)</span> falls into <span class="math">\(T_1\)</span> or <span class="math">\(T_2\)</span> (grean areas),
+the 3 pieces of sticks can form a triangle. 
+It is easy to see that the area/probability is <span class="math">\(\frac{1}{4}\)</span>.</p>
+<p>Let <span class="math">\(l_1\)</span>, <span class="math">\(l_2\)</span> and <span class="math">\(l_3\)</span> be defined as in Method I.
+<span class="math">\(l_1 &gt; \frac{1}{2}\)</span> corresponds to the area <span class="math">\(B_2\)</span> 
+whose area/probability is <span class="math">\(\frac{1}{4}\)</span>;
+<span class="math">\(l_2 &gt; \frac{1}{2}\)</span> corresponds to the areas <span class="math">\(A_1\)</span> and <span class="math">\(A_2\)</span>.
+Their areas/probabilities sums to <span class="math">\(\frac{1}{4}\)</span>.
+<span class="math">\(l_3 &gt; \frac{1}{2}\)</span> corresponds to the area <span class="math">\(B_1\)</span>
+whose area/probability is <span class="math">\(\frac{1}{2}\)</span>.</p>
+<p>The R code used to generate Figure 1 is given below.</p>
+<div class="highlight"><pre><span></span><span class="n">par</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="ss">&quot;black&quot;</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="ss">&quot;solid&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">plot</span> <span class="k">without</span> <span class="n">axes</span>
+<span class="n">plot</span><span class="p">(</span><span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="k">type</span><span class="o">=</span><span class="ss">&quot;n&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">F</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="ss">&quot;y&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">add</span> <span class="n">a</span> <span class="n">square</span> 
+<span class="n">rect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">add</span> <span class="n">x</span> <span class="k">and</span> <span class="n">y</span> <span class="n">axes</span>
+<span class="k">at</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lab</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="ss">&quot;0&quot;</span><span class="p">,</span> <span class="ss">&quot;0.5&quot;</span><span class="p">,</span> <span class="ss">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="k">at</span><span class="o">=</span><span class="k">at</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">lab</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="k">at</span><span class="o">=</span><span class="k">at</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">lab</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">add</span> <span class="mi">2</span> <span class="n">green</span> <span class="n">lines</span> <span class="k">with</span> <span class="n">slope</span> <span class="mi">1</span>
+<span class="n">abline</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;green&quot;</span><span class="p">)</span>
+<span class="n">abline</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;green&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">add</span> <span class="n">a</span> <span class="n">vertical</span> <span class="n">line</span>
+<span class="n">abline</span><span class="p">(</span><span class="n">v</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;blue&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">add</span> <span class="n">a</span> <span class="n">horizontal</span> <span class="n">line</span>
+<span class="n">abline</span><span class="p">(</span><span class="n">h</span><span class="o">=</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">top</span> <span class="k">left</span> <span class="n">triangle</span><span class="p">,</span> <span class="n">grayed</span>
+<span class="n">x</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">polygon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;gray&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">bottom</span> <span class="k">right</span> <span class="n">triangle</span><span class="p">,</span> <span class="n">grayed</span>
+<span class="n">x</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">polygon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;gray&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">bottom</span> <span class="k">left</span> <span class="k">and</span> <span class="n">top</span> <span class="k">right</span> <span class="n">squares</span><span class="p">,</span> <span class="n">grayed</span>
+<span class="n">x</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">polygon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;gray&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">add</span> <span class="mi">2</span> <span class="k">inner</span> <span class="n">green</span> <span class="n">triangles</span>
+<span class="n">x</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">polygon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;green&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">flag</span> <span class="n">the</span> <span class="n">top</span> <span class="k">left</span> <span class="n">gray</span> <span class="n">triangle</span> <span class="k">as</span> <span class="n">A1</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="mi">6</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;A1&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">flag</span> <span class="n">the</span> <span class="n">bottom</span> <span class="k">right</span> <span class="n">gray</span> <span class="n">triangle</span> <span class="k">as</span> <span class="n">A2</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">6</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;A2&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">flag</span> <span class="n">the</span> <span class="n">bottom</span> <span class="k">left</span> <span class="n">gray</span> <span class="n">square</span> <span class="k">as</span> <span class="n">B1</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;B1&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">flag</span> <span class="n">the</span> <span class="n">top</span> <span class="k">right</span> <span class="n">gray</span> <span class="n">square</span> <span class="k">as</span> <span class="n">B2</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;B2&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">flag</span> <span class="n">the</span> <span class="mi">2</span> <span class="k">inner</span> <span class="n">green</span> <span class="n">triangles</span> <span class="k">as</span> <span class="n">T1</span> <span class="k">and</span> <span class="n">T2</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;T1&quot;</span><span class="p">)</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="mi">1</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">7</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;T2&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">label</span> <span class="n">the</span> <span class="p">(</span><span class="k">upper</span><span class="p">)</span> <span class="n">green</span> <span class="n">line</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;y = x + 0.5&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">label</span> <span class="n">the</span> <span class="p">(</span><span class="k">lower</span><span class="p">)</span> <span class="n">green</span> <span class="n">line</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span> <span class="o">-</span> <span class="mi">0</span><span class="p">.</span><span class="mi">5</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;y = x - 0.5&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h3 id="method-iii-order-statistics">Method III: Order Statistics</h3>
+<p><div align="middle">
+    <figure>
+        <img src="http://dclong.github.io/media/fun_problems/triangle/order_stat.jpg" 
+        alt="Probability to Form a Triangle" 
+        height="400" width="400"/>
+        <figcaption>
+            Figure 2: Probability to Form a Triangle.
+        </figcaption>
+    </figure>
+</div>
+Let <span class="math">\(X_1\)</span> and <span class="math">\(X_2\)</span> be as defined above.
+Let <span class="math">\(X_{(1)} = min\{X_1, X_2\}\)</span> and <span class="math">\(X_{(2)} = max\{X_1, X_2\}\)</span>,
+then 
+<span class="math">\(X_{(1)}\)</span> and <span class="math">\(X_{(2)}\)</span> 
+are order statistics.
+From the theorem of order statistics we know that 
+the join density of 
+<span class="math">\(X_{(1)}\)</span> and <span class="math">\(X_{(2)}\)</span> 
+is constant 2 with support <span class="math">\(0 &lt; X_{(1)} &lt; X_{(2)} &lt; 1\)</span>.
+To form an triangle, 
+<span class="math">\(X_{(1)}\)</span> and <span class="math">\(X_{(2)}\)</span> have to satisfy the following condition.
+</p>
+<div class="math">$$
+    0 &lt; x_{(1)} &lt; \frac{1}{2} &lt; X_{(2)} &lt; X_{(1)} + \frac{1}{2}.
+$$</div>
+<p>
+The probability for the 3 pieces of sticks to form an triangle is thus</p>
+<div class="math">\begin{equation}
+    \int_{0}^{\frac{1}{2}} \int_{\frac{1}{2}}^{x_1+\frac{1}{2}} 2\, dx_2\,dx_1  
+    = \int_{0}^{\frac{1}{2}} 2x_1 dx_1 = x_1^2|_{0}^{\frac{1}{2}} = \frac{1}{4}. 
+\end{equation}</div>
+<p>The support of the joint density of <span class="math">\(X_{(1)}\)</span> and <span class="math">\(X_{(2)}\)</span> 
+is the big triangle in Figure 2. 
+For the convenience of visualization,
+Figure 2 uses <span class="math">\(X\)</span> to stand for <span class="math">\(X_{(1)}\)</span> 
+and <span class="math">\(Y\)</span>  to stand for <span class="math">\(X_{(2)}\)</span>.
+The integral domain of (5) is the green area T in Figure 2.</p>
+<p>The R code to generate Figure 2 is given below.</p>
+<div class="highlight"><pre><span></span><span class="n">par</span><span class="p">(</span><span class="n">col</span><span class="o">=</span><span class="ss">&quot;black&quot;</span><span class="p">,</span> <span class="n">lty</span><span class="o">=</span><span class="ss">&quot;solid&quot;</span><span class="p">)</span>
+<span class="n">plot</span><span class="p">(</span><span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span> <span class="k">type</span><span class="o">=</span><span class="ss">&quot;n&quot;</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="n">F</span><span class="p">,</span> <span class="n">xlab</span><span class="o">=</span><span class="ss">&quot;x&quot;</span><span class="p">,</span> <span class="n">ylab</span><span class="o">=</span><span class="ss">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">polygon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="n">segments</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">segments</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span>
+<span class="n">abline</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;blue&quot;</span><span class="p">)</span>
+<span class="k">at</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">lab</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="ss">&quot;0&quot;</span><span class="p">,</span> <span class="ss">&quot;0.5&quot;</span><span class="p">,</span> <span class="ss">&quot;1&quot;</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="k">at</span><span class="o">=</span><span class="k">at</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">lab</span><span class="p">)</span>
+<span class="n">axis</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">pos</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="k">at</span><span class="o">=</span><span class="k">at</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">lab</span><span class="p">)</span>
+<span class="o">#</span> <span class="n">middle</span> <span class="n">triangle</span>
+<span class="n">x</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="k">c</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">polygon</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;green&quot;</span><span class="p">)</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="p">.</span><span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">2</span><span class="p">.</span><span class="mi">7</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;T&quot;</span><span class="p">)</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="o">/</span><span class="mi">4</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;y = x + 0.5&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span>
+<span class="nb">text</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">.</span><span class="mi">45</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="ss">&quot;y = x&quot;</span><span class="p">,</span> <span class="n">col</span><span class="o">=</span><span class="ss">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+
+
+<h2 id="dependent-uniformly-distributed">Dependent Uniformly Distributed</h2>
+<p>Let <span class="math">\(X_1\)</span> and <span class="math">\(X_2\)</span> be defined as above. 
+In this situation we assume that 
+</p>
+<div class="math">$$X_1 \sim U(0, 1),$$</div>
+<div class="math">$$X_2 | X_1  \sim U(X_1, 1).$$</div>
+<div class="math">\begin{align}
+P_{\bigtriangleup} &amp;= \int_{0}^{\frac{1}{2}} \frac{1}{1-x_1} \int_{\frac{1}{2}}^{x_1+\frac{1}{2}} dx_2\, dx_1 \nonumber \newline  
+        &amp;= \int_{0}^{\frac{1}{2}} \frac{x_1}{1-x_1}dx_1 = log2 - \frac{1}{2} \approx 0.1931. \nonumber
+\end{align}</div>
+<p>The Dirichlet distribution is a distribution 
+that is frequently used in Bayesian non-parametric models.
+It has a stick-breaking construction. 
+Let <span class="math">\(Y_1 = X_1\)</span>, <span class="math">\(Y_2 = X_2 - X_1\)</span> and <span class="math">\(Y_3 = 1 - X_1 - X_2\)</span>.
+The specification of the joint distribution of <span class="math">\(Y_1\)</span> and <span class="math">\(Y_2\)</span> 
+sounds a lot like a the construction of a Dirichlet distribution,
+however, it is not!
+Given <span class="math">\(Y_1 = X_1 \sim U(0, 1) \overset{d}{=} B(1, 1)\)</span>, 
+if <span class="math">\(Y_2 \sim (1-Y_1)B(\alpha, \beta)\)</span>,
+where <span class="math">\(\alpha + \beta = 1\)</span>, 
+then the joint distribution of <span class="math">\(Y_1\)</span>, <span class="math">\(Y_2\)</span> and <span class="math">\(Y_3\)</span> is Dirichlet distribution
+with concentration parameters 1, <span class="math">\(\alpha\)</span> and <span class="math">\(\beta\)</span>.</p>
+<h2 id="dirichlet-distributed">Dirichlet Distributed</h2>
+<p>Let <span class="math">\(Y_1\)</span>, <span class="math">\(Y_2\)</span> and <span class="math">\(Y_3\)</span> be defined as above. 
+In this situation we assume that 
+</p>
+<div class="math">$$(Y_1, Y_2, Y_3) \sim Dir(1, \frac{1}{2}, \frac{1}{2}),$$</div>
+<p>
+that is 
+</p>
+<div class="math">$$X_1 \sim U(0, 1),$$</div>
+<div class="math">$$X_2 | X_1  \sim X_1 + (1-X_1) U(\frac{1}{2}, \frac{1}{2}).$$</div>
+<div class="math">\begin{align}
+P_{\bigtriangleup} &amp;= \int_{0}^{\frac{1}{2}} \int_{\frac{1}{2}-x_1}^{\frac{1}{2}} \frac{1}{\pi} x_2^{1/2}(1-x_1-x_2)^{1/2} dx_2\, dx_1 \nonumber \newline
+&amp;= \frac{2}{\pi} - \frac{1}{2} \approx 0.1366. \nonumber
+\end{align}</div>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2014-12-16T19:47:59-08:00" pubdate>Dec 16, 2014</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/fun-problems.html">fun problems</a>
+    <a class="category" href="http://www.legendu.net/en/tag/stick-breaking.html">stick breaking</a>
+    <a class="category" href="http://www.legendu.net/en/tag/probability.html">probability</a>
+    <a class="category" href="http://www.legendu.net/en/tag/statistics.html">statistics</a>
+    <a class="category" href="http://www.legendu.net/en/tag/triangle.html">triangle</a>
+    <a class="category" href="http://www.legendu.net/en/tag/dirichlet-distribution.html">Dirichlet distribution</a>
+    <a class="category" href="http://www.legendu.net/en/tag/graph.html">graph</a>
+    <a class="category" href="http://www.legendu.net/en/tag/plot.html">plot</a>
+    <a class="category" href="http://www.legendu.net/en/tag/visualization.html">visualization</a>
+    <a class="category" href="http://www.legendu.net/en/tag/r.html">R</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/stick-breaking-problems/';
+          var disqus_url = 'http://www.legendu.net/en/blog/stick-breaking-problems/';
+          var disqus_title = 'Stick Breaking Problems';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

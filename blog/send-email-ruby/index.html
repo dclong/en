@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Send Email in Ruby</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Send Email in Ruby</h1>
+      <p class="meta"><time datetime="2012-06-07T00:00:00-07:00" pubdate>Jun 07, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/ruby/ruby.png" height="200" width="240" align="right"/></p>
+<p>A few days ago, I started writing my first Ruby program which read my Verizon
+family plan statements, calculate bills for each member and send emails to
+notify them. The part of reading PDF document and calculating bill is easy. I
+stuck at the sending email part. There are many Ruby libraries for sending
+emails, but I want one that allows me to use my Gmail account. For security
+reasons, I use a backup Gmail for sending emails. So I want a Ruby library which
+allows me to set the "Reply-to" header, the "From" header and can send emails to
+multiple recipients at a time. I tried a few options, such as "net/smtp",
+"mikell/mail", "pony" and finally I was recommended the library "actionmailer".
+Among all these libraries, "actionmailer" meets my requirement well and has good
+documentation. The following the function I wrote to send email to members in my
+family plan.</p>
+<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">email_bills</span><span class="ss">(</span><span class="nv">subject</span>,<span class="nv">body</span><span class="ss">)</span>
+    <span class="nv">require</span> <span class="s1">&#39;</span><span class="s">action_mailer</span><span class="s1">&#39;</span>
+    <span class="nv">ActionMailer</span>::<span class="nv">Base</span>.<span class="nv">raise_delivery_errors</span> <span class="o">=</span> <span class="nv">true</span>
+    <span class="nv">ActionMailer</span>::<span class="nv">Base</span>.<span class="nv">delivery_method</span> <span class="o">=</span> :<span class="nv">smtp</span>
+    <span class="nv">member_emails</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">dclong@iastate.edu,lisa19850925@gmail.com,lynnyu2009@gmail.com,klins@iastate.edu</span><span class="s2">&quot;</span>
+    # <span class="nv">member_emails</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="s">duchuanlong@gmail.com</span><span class="s1">&#39;</span>
+    # <span class="nv">read</span> <span class="nv">in</span> <span class="nv">password</span> <span class="k">for</span> <span class="s1">&#39;</span><span class="s">firedragon.du@gmail.com</span><span class="s1">&#39;</span>
+    <span class="nv">password</span> <span class="o">=</span> <span class="nv">read_password</span>
+    <span class="nv">ActionMailer</span>::<span class="nv">Base</span>.<span class="nv">smtp_settings</span> <span class="o">=</span> {
+        :<span class="nv">address</span>   <span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">; &quot;smtp.gmail.com&quot;,</span>
+        :<span class="nv">port</span>      <span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">; 587,</span>
+        :<span class="nv">domain</span>    <span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">; &quot;gmail.com&quot;,</span>
+        :<span class="nv">authentication</span> <span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">; :plain,</span>
+        :<span class="nv">user_name</span>      <span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">; &quot;firedragon.du@gmail.com&quot;,</span>
+        :<span class="nv">password</span>       <span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">; password,</span>
+        :<span class="nv">enable_starttls_auto</span> <span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">; true</span>
+    }
+    <span class="nv">mail</span> <span class="o">=</span> <span class="nv">ActionMailer</span>::<span class="nv">Base</span>.<span class="nv">mail</span><span class="ss">(</span>:<span class="nv">to</span><span class="o">=&amp;</span><span class="nv">gt</span><span class="c1">;member_emails)</span>
+    <span class="nv">mail</span>.<span class="nv">from</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">duchuanlong@gmail.com</span><span class="s2">&quot;</span>
+    <span class="nv">mail</span>.<span class="nv">reply_to</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">duchuanlong@gmail.com</span><span class="s2">&quot;</span>
+    <span class="nv">mail</span>.<span class="nv">subject</span> <span class="o">=</span> <span class="nv">subject</span>
+    <span class="nv">mail</span>.<span class="nv">body</span> <span class="o">=</span> <span class="nv">body</span>
+    <span class="nv">mail</span>.<span class="nv">deliver</span>
+<span class="k">end</span>
+<span class="nv">def</span> <span class="nv">read_password</span><span class="ss">()</span>
+    <span class="nv">require</span> <span class="s1">&#39;</span><span class="s">highline/import</span><span class="s1">&#39;</span>
+    <span class="k">return</span> <span class="nv">ask</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">Please enter the password for &quot;firedragon.du@gmail.com&quot;:</span><span class="s1">&#39;</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="ss">)</span>{
+        <span class="o">|</span><span class="nv">q</span><span class="o">|</span>
+        <span class="nv">q</span>.<span class="nv">echo</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="s">*</span><span class="s2">&quot;</span>
+    }
+<span class="k">end</span>
+</pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2012-06-07T00:00:00-07:00" pubdate>Jun 07, 2012</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/smtp.html">smtp</a>
+    <a class="category" href="http://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/en/tag/verizon.html">Verizon</a>
+    <a class="category" href="http://www.legendu.net/en/tag/pdf.html">PDF</a>
+    <a class="category" href="http://www.legendu.net/en/tag/ruby.html">Ruby</a>
+    <a class="category" href="http://www.legendu.net/en/tag/email.html">email</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/send-email-ruby/';
+          var disqus_url = 'http://www.legendu.net/en/blog/send-email-ruby/';
+          var disqus_title = 'Send Email in Ruby';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

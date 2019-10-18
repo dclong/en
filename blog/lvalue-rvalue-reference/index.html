@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Lvalue Reference and Rvalue Reference</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Lvalue Reference and Rvalue Reference</h1>
+      <p class="meta"><time datetime="2015-01-15T02:17:12-08:00" pubdate>Jan 15, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/cpp/left-right.jpg" height="180" width="200" align="right"/></p>
+<h2 id="difference-betwen-lvalue-and-rvalue-reference">Difference betwen Lvalue and Rvalue Reference</h2>
+<ol>
+<li>
+<p>Lvalue and Rvalue are terrible names. 
+They are due to historical reasonal but people stuck with these names.</p>
+</li>
+<li>
+<p>A lvalue reference has a name while a rvalue reference has no name, in other words, 
+a lvalue reference is persistent while a rvalue reference is temporary.
+Let <code>f(vector&lt;int&gt; &amp;&amp; x)</code> be a function/method (can be a constructor) 
+which takes a rvalue reference as argument.
+It is common to misunderstand <code>x</code> as a rvalue reference. 
+When a rvalue reference/temporary object is passed to <code>f</code>, 
+it is moved to <code>x</code>,
+however, <code>x</code> itself is not a rvalue reference/temporary object because it has a name.
+<code>&amp;&amp;</code> only means that it is OK to move <code>x</code>, but does not mean that <code>x</code> is a rvalue reference/temporary object.
+And at the place where you intend to move <code>x</code>, 
+you must use <code>std::move</code> manually to move it, 
+otherwise, it get copied. 
+Values return by functions/methods and expression are temporary values, 
+so you do have to use <code>std::move</code> to move them when you pass them 
+to functions/emthods that take a rvalue reference as argument.</p>
+</li>
+<li>
+<p>You can take the address of a lvalue reference but you cannot take the address of a rvalue reference. </p>
+</li>
+<li>
+<p>When you apply <code>std::move</code> on a primitive type variable (double, int and so on), 
+it is usually lefted unchanged. 
+This means that copy is usually the fastest way to implement
+move on primitive types, but it is not guaranteed that copy is 
+always used (different compiler might have different implementation on this). 
+After being moved a variable still have a valid but unspecified value.
+So do not use the value in a moved variable until you given it a new known value.  </p>
+</li>
+<li>
+<p>A lvalue referece cannot be moved. 
+The reason is that such operation is not necessary. 
+To move the object that the lvalue reference points to, 
+one can move the object directly.</p>
+</li>
+<li>
+<p>You cannot use a vecotor (similar for other containers) of lvalue references,
+because lvalue references have to be initialized to point to valid objects when they are created. 
+An alternative way is to use vector of pointers/iterators instead. </p>
+</li>
+<li>
+<p>Always use <code>const</code> lvalue reference, unless you intend to change the referenced object. </p>
+</li>
+</ol>
+<h2 id="how-to-use-rvalue-reference">How to Use Rvalue Reference</h2>
+<ol>
+<li>
+<p>Do not write &amp;&amp; to return type of a function,
+and there is no need to return a local variable using <code>std::move</code>.
+When return a local variable, it is automatically move in C++11. 
+However, if the local variable is static, then it is not moved as expected.</p>
+</li>
+<li>
+<p>When you copy content of an argument in a function, 
+overload it with rvalue reference and move the content.</p>
+</li>
+<li>
+<p>When you write a class with the copy constructor and the assignment operator, 
+write also the move constructor and the move assignment operator.</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-01-15T02:17:12-08:00" pubdate>Jan 15, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/cc.html">C/C++</a>
+    <a class="category" href="http://www.legendu.net/en/tag/reference.html">reference</a>
+    <a class="category" href="http://www.legendu.net/en/tag/programming.html">programming</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/lvalue-rvalue-reference/';
+          var disqus_url = 'http://www.legendu.net/en/blog/lvalue-rvalue-reference/';
+          var disqus_title = 'Lvalue Reference and Rvalue Reference';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

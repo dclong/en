@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips for Ruby</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips for Ruby</h1>
+      <p class="meta"><time datetime="2012-08-25T00:00:00-07:00" pubdate>Aug 25, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/ruby/ruby.png" height="200" width="200" align="right"/></p>
+<h2 id="array">Array</h2>
+<ol>
+<li>
+<p>The method <code>push</code> inserts an element to the back of the arry; 
+the method <code>insert</code> inserts an element to any place of the array.</p>
+</li>
+<li>
+<p>The method <code>pop</code> removes the last element of the array;
+the method <code>delete</code> removes any specified element from the array.</p>
+</li>
+<li>
+<p>The method <code>concat</code> combines the array with another one;
+the method <code>join</code> concatenates all elements in the array separated 
+by the specified delimiter. </p>
+</li>
+</ol>
+<h2 id="string">String</h2>
+<ol>
+<li>
+<p>Use the method <code>to_i</code> to convert a string to integer.</p>
+</li>
+<li>
+<p>You use both single and double quotes to denote string. 
+The difference is that single quotes preserves 
+escape characters while double quotes interprete escape characters.</p>
+</li>
+<li>
+<p>The method <code>end_with?</code> check whether a string ends with the specified string.</p>
+</li>
+<li>
+<p>The method <code>upcase</code> returns a copy of the string with lower case letters
+replaced with their upper case letters; 
+the method <code>downcase</code> returns a copy of the string with upper case letters 
+replaced with their lower case letters;
+the method <code>swapcase</code> return a copy of the string with lower case letters 
+replaced with their upper case letters and upper case character replaced with 
+their lower case letters. </p>
+</li>
+<li>
+<p>Use the method <code>strip</code> to remove leading and trailing white spaces.</p>
+</li>
+</ol>
+<h2 id="input-and-output">Input and Output</h2>
+<ol>
+<li>
+<p>Both the function <code>puts</code> and <code>print</code> display the content of objects 
+on the console. The difference is that the function <code>puts</code> add a new line
+to the end if their is no one while <code>print</code> not.</p>
+</li>
+<li>
+<p>The function <code>gets</code> read in input from the console. 
+You can use the <code>chomp</code> method to ignore new lines,
+i.e., you can use <code>gets.chomp</code> to read a single line from the console.</p>
+</li>
+</ol>
+<h2 id="file-and-directory">File and Directory</h2>
+<ol>
+<li>
+<p>You can use the method <code>Dir.entries</code> to query files and subdirectories
+in a directory.</p>
+</li>
+<li>
+<p>The method <code>File.delete</code> removes files specified files. 
+The number of files passed as arguments is returned. </p>
+</li>
+</ol>
+<h2 id="flow-control">Flow Control</h2>
+<ol>
+<li>You cannot use <code>else if</code> in Ruby, instead you can use <code>elsif</code>.</li>
+</ol>
+<h2 id="object-and-class">Object and Class</h2>
+<ol>
+<li>
+<p>Use <code>methods</code> to query all methods of an object.</p>
+</li>
+<li>
+<p>You'd not define a function with the same as some directly usable function/method in Ruby.</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2012-08-25T00:00:00-07:00" pubdate>Aug 25, 2012</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/array.html">array</a>
+    <a class="category" href="http://www.legendu.net/en/tag/io.html">IO</a>
+    <a class="category" href="http://www.legendu.net/en/tag/ruby.html">Ruby</a>
+    <a class="category" href="http://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/en/tag/string.html">string</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/tips-ruby/';
+          var disqus_url = 'http://www.legendu.net/en/blog/tips-ruby/';
+          var disqus_title = 'Tips for Ruby';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

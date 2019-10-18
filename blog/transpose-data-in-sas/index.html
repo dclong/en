@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Transpose Data in SAS</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Transpose Data in SAS</h1>
+      <p class="meta"><time datetime="2015-08-26T22:09:17-07:00" pubdate>Aug 26, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p>You can use the transpose procedure to tranpose a fat/thin data to a thin/fat data in SAS.
+For example, 
+suppose we have a data set s1 in SAS.</p>
+<div class="highlight"><pre><span></span><span class="kr">data </span>s1; 
+    <span class="k">input</span> famid faminc96 faminc97 faminc98 spend96 spend97 spend98 ; 
+<span class="k">    datalines; </span><span class="x"></span>
+<span class="x">1 40000 40500 41000 38000 39000 40000 </span>
+<span class="x">2 45000 45400 45800 42000 43000 44000 </span>
+<span class="x">3 75000 76000 77000 70000 71000 72000 </span>
+<span class="x">; </span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<p>You can transpose the fat data set to a thin one using the transpose procedure.</p>
+<div class="highlight"><pre><span></span><span class="kr">proc transpose </span>data=s1 <span class="k">out</span>=s2 (<span class="k">rename</span>=(<span class="kc">_name_</span>=year)) prefix=<span class="k">x</span>;
+    <span class="k">by</span> famid;
+    var faminc96-faminc98<span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<p>This gives you the following data set.</p>
+<table>
+<thead>
+<tr>
+<th align="center">famid</th>
+<th align="center">year</th>
+<th align="center">x1</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1</td>
+<td align="center">faminc96</td>
+<td align="center">40000</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">faminc97</td>
+<td align="center">40500</td>
+</tr>
+<tr>
+<td align="center">1</td>
+<td align="center">faminc98</td>
+<td align="center">41000</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">faminc96</td>
+<td align="center">45000</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">faminc97</td>
+<td align="center">45400</td>
+</tr>
+<tr>
+<td align="center">2</td>
+<td align="center">faminc98</td>
+<td align="center">45800</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">faminc96</td>
+<td align="center">75000</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">faminc97</td>
+<td align="center">76000</td>
+</tr>
+<tr>
+<td align="center">3</td>
+<td align="center">faminc98</td>
+<td align="center">77000</td>
+</tr>
+</tbody>
+</table>
+<p>You can transpose this thin data back to a fat one. </p>
+<div class="highlight"><pre><span></span><span class="kr">proc transpose </span>data=s2 <span class="k">out</span>=s3 (<span class="k">drop</span>=<span class="kc">_name_</span>);
+    <span class="k">by</span> famid ;
+    id year<span class="kr">;</span>
+<span class="kr">run;</span>
+</pre></div>
+
+
+<p>The following are a few tips.</p>
+<ol>
+<li>
+<p>The <code>id</code> statement specifies one or more variables in the input data set 
+whose formatted values name the transposed variables in the output data set.</p>
+</li>
+<li>
+<p>The <code>var</code> statement specified variables in the input data set to be transposed. </p>
+</li>
+<li>
+<p>The <code>by</code> statement defines groups and the transpose will be done in each <code>by</code> group.</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-08-26T22:09:17-07:00" pubdate>Aug 26, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="http://www.legendu.net/en/tag/sas.html">SAS</a>
+    <a class="category" href="http://www.legendu.net/en/tag/data-manipulation.html">data manipulation</a>
+    <a class="category" href="http://www.legendu.net/en/tag/transpose.html">transpose</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/transpose-data-in-sas/';
+          var disqus_url = 'http://www.legendu.net/en/blog/transpose-data-in-sas/';
+          var disqus_title = 'Transpose Data in SAS';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

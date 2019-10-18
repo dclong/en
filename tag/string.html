@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - string</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2019-08-30T22:30:27-07:00" pubdate>Aug 30, 2019</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p><code>\</code> needs to be escaped (i.e., use <code>\\</code>) in triple quotes.</p>
+</li>
+<li>
+<p>There are a few ways to write a long string in Python.
+    The first way is of course to have the long string on the the same line,
+    which can be ugly.</p>
+<div class="highlight"><pre><span></span><span class="n">long_string</span> <span class="o">=</span> <span class="s1">&#39;This is a very looooooooooooooooooooooooooooooooooooooooooooooooooooooong string.&#39;</span>
+</pre></div>
+
+
+<p>The …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/string-in-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/string-in-java/">String in Java</a>
+      </h1>
+      <p class="meta"><time datetime="2015-02-20T10:58:20-08:00" pubdate>Feb 20, 2015</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="string">String</h2>
+<ol>
+<li>
+<p>String is a immutable class in Java. 
+Extensive operations on strings (e.g., <code>+</code> in a big loop) is usually very slow before Java 7
+(the <code>+</code> operator is optimized by the compiler automatically starting from Java 7).
+To avoid this problem (in older versions of Java), 
+you can use the …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/string-in-java/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/string-in-MATLAB/">String in MATLAB</a>
+      </h1>
+      <p class="meta"><time datetime="2015-02-20T10:40:42-08:00" pubdate>Feb 20, 2015</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>To display special characters (e.g. <code>\n</code>, <code>\t</code> and so on),
+you have to use <code>sprintf</code> to format it first. 
+<code>fprintf</code> does the job of formatting and printing together.</p>
+</li>
+<li>
+<p>Unlike R, 
+numbers in MATLAB will not be silently converted to strings when needed.
+You must use the function <code>num2str</code> to …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/string-in-MATLAB/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/pass-array-r-other-language/">Compare R with Other Languages on Data Manipulation</a>
+      </h1>
+      <p class="meta"><time datetime="2015-01-13T13:14:35-08:00" pubdate>Jan 13, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/r/r.png" height="200" width="240" align="right"/>
+Here I compare R with other languages such as C/C++, Java, MATLAB, Python and so
+on data manipulation. I list a few advantages and disadvantages of R on data
+manipulation compared with other programming languages. </p>
+<p>Generally speaking, it is very convenient to manipulate data in R. Using function
+<code>read …</code></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/pass-array-r-other-language/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/summary-string-popular-programming-language/">String in Different Programming Languages</a>
+      </h1>
+      <p class="meta"><time datetime="2014-09-14T16:34:30-07:00" pubdate>Sep 14, 2014</time></p>
+</header>
+
+  <div class="entry-content"><p>A string is essentially a sequence of characters. 
+This is how string is implemented in many programming languages (string in Java is different).
+For this reason, you can operate string like an array in some programming languages.
+This post is a shallow summary on strings in different programming languages.
+For …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/summary-string-popular-programming-language/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/tips-ruby/">Tips for Ruby</a>
+      </h1>
+      <p class="meta"><time datetime="2012-08-25T00:00:00-07:00" pubdate>Aug 25, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/ruby/ruby.png" height="200" width="200" align="right"/></p>
+<h2 id="array">Array</h2>
+<ol>
+<li>
+<p>The method <code>push</code> inserts an element to the back of the arry; 
+the method <code>insert</code> inserts an element to any place of the array.</p>
+</li>
+<li>
+<p>The method <code>pop</code> removes the last element of the array;
+the method <code>delete</code> removes any specified element from the array.</p>
+</li>
+<li>
+<p>The method <code>concat</code> combines the …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/tips-ruby/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/en/tag/string2.html">&larr; Older</a>
+
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-java/">String in Java</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-MATLAB/">String in MATLAB</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/pass-array-r-other-language/">Compare R with Other Languages on Data Manipulation</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/summary-string-popular-programming-language/">String in Different Programming Languages</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

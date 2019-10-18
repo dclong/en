@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - OS</title><link href="http://www.legendu.net/en/" rel="alternate"></link><link href="http://www.legendu.net/en/feeds/os.atom.xml" rel="self"></link><id>http://www.legendu.net/en/</id><updated>2017-10-22T13:26:28-07:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Install GNU Utils Using Homebrew</title><link href="http://www.legendu.net/en/blog/install-gnu-utils-using-homebrew/" rel="alternate"></link><published>2017-10-22T13:26:28-07:00</published><updated>2017-10-22T13:26:28-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-22:/en/blog/install-gnu-utils-using-homebrew/</id><summary type="html">&lt;h1 id="configuration"&gt;Configuration&lt;/h1&gt;
+&lt;p&gt;Run the following command in terminal before you install any GNU utils using Homebrew.
+It will ensures that the installed GNU utils get used by default.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/local/opt/findutils/libexec/gnubin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;MANPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/local/opt/findutils/libexec/gnuman:&lt;/span&gt;&lt;span class="nv"&gt;$MANPATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice that upgrading your Mac …&lt;/p&gt;</summary><content type="html">&lt;h1 id="configuration"&gt;Configuration&lt;/h1&gt;
+&lt;p&gt;Run the following command in terminal before you install any GNU utils using Homebrew.
+It will ensures that the installed GNU utils get used by default.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/local/opt/findutils/libexec/gnubin:&lt;/span&gt;&lt;span class="nv"&gt;$PATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;MANPATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/usr/local/opt/findutils/libexec/gnuman:&lt;/span&gt;&lt;span class="nv"&gt;$MANPATH&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice that upgrading your Mac OS will reset the 2 environment variables.
+So you will have to run the above commands again after you upgrading your Mac OS.&lt;/p&gt;
+&lt;h1 id="gnu-core-utils"&gt;GNU Core Utils&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install coreutils
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="key-commands"&gt;Key Commands&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install binutils
+brew install diffutils
+brew install ed --default-names
+brew install findutils --with-default-names
+brew install gawk
+brew install gnu-indent --with-default-names
+brew install gnu-sed --with-default-names
+brew install gnu-tar --with-default-names
+brew install gnu-which --with-default-names
+brew install gnutls
+brew install grep --with-default-names
+brew install gzip
+brew install screen
+brew install watch
+brew install wdiff --with-gettext
+brew install wget
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="os-x-ships-a-gnu-version-but-too-old"&gt;OS X ships a GNU version, but too old&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install bash
+brew install emacs
+brew install gdb &lt;span class="c1"&gt;# gdb requires further actions to make it work. See `brew info gdb`.&lt;/span&gt;
+brew install gpatch
+brew install m4
+brew install make
+brew install nano
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="other-commands-non-gnu"&gt;Other commands (non-GNU)&lt;/h1&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;brew install file-formula
+brew install git
+brew install less
+brew install openssh
+brew install perl518 &lt;span class="c1"&gt;# must run &amp;quot;brew tap homebrew/versions&amp;quot; first!&lt;/span&gt;
+brew install python
+brew install rsync
+brew install svn
+brew install unzip
+brew install vim --override-system-vi
+brew install macvim --override-system-vim --custom-system-icons
+brew install zsh
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h1 id="references"&gt;References&lt;/h1&gt;
+&lt;p&gt;&lt;a href="https://www.topbug.net/blog/2013/04/14/install-and-use-gnu-command-line-tools-in-mac-os-x/"&gt;Install and Use GNU Command Line Tools in Mac OSX&lt;/a&gt;&lt;/p&gt;</content><category term="macOS"></category><category term="Homebrew"></category><category term="GNU"></category></entry></feed>

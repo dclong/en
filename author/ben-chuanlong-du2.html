@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Articles by Ben Chuanlong Du</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/tips-for-installing-debian/">Tips on Installing Debian Series Linux Distributions</a>
+      </h1>
+      <p class="meta"><time datetime="2019-05-11T01:05:59-07:00" pubdate>May 11, 2019</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="before-installation">Before Installation</h2>
+<ol>
+<li>
+<p>You can either create a boot CD/DVD or flash drive to install debian.
+    The way I prefer is to instal debian using a bootable flash drive 
+    because many laptops do not have CD/DVD trays. 
+    To write a debian image to flash drive, you can use the …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/tips-for-installing-debian/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/compare-two-directories-on-linux/">Compare Two Directories on Linux</a>
+      </h1>
+      <p class="meta"><time datetime="2019-05-10T19:13:40-07:00" pubdate>May 10, 2019</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="on-the-same-machine">On the Same Machine</h2>
+<p>If the two directories are on the same machine, 
+you can use either <code>colordiff</code> (preferred over <code>diff</code>) or <code>git diff</code>
+to find the differences between them. </p>
+<div class="highlight"><pre><span></span>colordiff -qr dir_1 dir_2
+</pre></div>
+
+
+<div class="highlight"><pre><span></span>git diff --no-index dir_1 dir_2
+</pre></div>
+
+
+<h2 id="on-different-machines">On Different Machines</h2>
+<p>It is a little bit tricky when the …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/compare-two-directories-on-linux/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/summary-parallel-computing/">Parallel Computing in Different Programming Languages</a>
+      </h1>
+      <p class="meta"><time datetime="2019-04-28T11:50:22-07:00" pubdate>Apr 28, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>There many different ways for parallel computing. 
+This article focus on multithreading computing.
+Generally speaking, commercial softwares have very good support for parallel computing. 
+For example, Mathematica, MATLAB and Revolution R all have solid support for parallel computing. 
+Mathematica and MATLAB also have good support for GPU computing. </p>
+<h2 id="python">Python</h2>
+<p>Multithreading …</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/summary-parallel-computing/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/ruby-read-pdf/">Read PDF in Ruby</a>
+      </h1>
+      <p class="meta"><time datetime="2019-04-18T17:57:21-07:00" pubdate>Apr 18, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/ruby/ruby.png" height="200" width="240" align="right"/></p>
+<p>"pdf-reader" is a good Ruby libary for reading pdf document. 
+You can install it via RubyGems using the following command.</p>
+<div class="highlight"><pre><span></span><span class="n">sudo</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">pdf</span><span class="o">-</span><span class="n">reader</span>
+</pre></div>
+
+
+<p>You have to load the library before you use it. 
+To load it, use the command below. </p>
+<div class="highlight"><pre><span></span><span class="n">require</span> <span class="s1">&#39;pdf-reader&#39;</span>
+</pre></div>
+
+
+<p>For more information, see the <a href="https://github.com/yob/pdf-reader">project …</a></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/ruby-read-pdf/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/use-eclipse-as-your-ide/">Use Eclipse as Your IDE</a>
+      </h1>
+      <p class="meta"><time datetime="2019-03-29T09:30:34-07:00" pubdate>Mar 29, 2019</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>There are at least 3 ways to jump to errors quickly in Eclipse</p>
+<ul>
+<li>Click these red icons on the right margin.</li>
+<li>Click the <code>Previous Annotation</code> button 
+or <code>Next Annotation</code> buttons on the tool bar or under the <code>Navigation</code> menu.</li>
+<li>Use hot keys (<code>Ctrl+.</code> for <code>Next Annotation</code> and <code>Ctrl+,</code> for <code>Previous …</code></li></ul></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/use-eclipse-as-your-ide/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/advanced-use-head-tail/">Advanced Use of "head" and "tail"</a>
+      </h1>
+      <p class="meta"><time datetime="2019-03-29T09:29:01-07:00" pubdate>Mar 29, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>Besides passing an unsigned integer as parameter to the option <code>-n</code>, 
+you can also pass a signed integer to it.
+When a signed integer is passed to <code>-n</code>, 
+it means from/to (inclusive/exclusive similar to most programming languages) the row with this index (1-based). 
+More specifically, 
+<code>head -n +/-k …</code></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/advanced-use-head-tail/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/en/author/ben-chuanlong-du3.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/en/author/ben-chuanlong-du.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/summary-random-number-generators/">Summary on Random Number Generators</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/good-ways-scientific-computing/">Good Ways to Do Scientific Computing</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

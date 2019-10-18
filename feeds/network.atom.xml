@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Network</title><link href="http://www.legendu.net/en/" rel="alternate"></link><link href="http://www.legendu.net/en/feeds/network.atom.xml" rel="self"></link><id>http://www.legendu.net/en/</id><updated>2019-03-07T23:42:48-08:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Proxy for `sudo`</title><link href="http://www.legendu.net/en/blog/proxy-for-sudo/" rel="alternate"></link><published>2019-03-07T23:42:48-08:00</published><updated>2019-03-07T23:42:48-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-07:/en/blog/proxy-for-sudo/</id><summary type="html">&lt;p&gt;You can setup proxy in a terminal by export environment variables &lt;code&gt;http_proxy&lt;/code&gt; and `https_proxy'.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However,
+you might find the exported environment variables are not visible to &lt;code&gt;sudo&lt;/code&gt;.
+This can be resovled by simplying adding the &lt;code&gt;-E&lt;/code&gt; (preserve environment) option to &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo …&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;You can setup proxy in a terminal by export environment variables &lt;code&gt;http_proxy&lt;/code&gt; and `https_proxy'.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However,
+you might find the exported environment variables are not visible to &lt;code&gt;sudo&lt;/code&gt;.
+This can be resovled by simplying adding the &lt;code&gt;-E&lt;/code&gt; (preserve environment) option to &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo -E command_to_run
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="question"&gt;Question&lt;/h2&gt;
+&lt;p&gt;Can a socks proxy be used as a HTTP/HTTPS proxy directly?&lt;/p&gt;</content><category term="Network"></category><category term="proxy"></category><category term="environment variable"></category><category term="sudo"></category></entry></feed>

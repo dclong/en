@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Manage Docker Images and Containers</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Manage Docker Images and Containers</h1>
+      <p class="meta"><time datetime="2019-06-23T02:38:23-07:00" pubdate>Jun 23, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>It is suggested that you use <a href="https://osquery.io/">osquery</a>
+to query Docker images, containers, etc.</p>
+<h2 id="remove-containers">Remove Containers</h2>
+<p>Note that running containers will NOT be removed by default.
+This is what users want generally speaking. 
+You can use the option <code>-f</code> to force removing running containers,
+but use it with caution and at your own risk.</p>
+<ol>
+<li>
+<p>Remove all existing containers (not images).</p>
+<div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">rm</span> <span class="err">$</span><span class="p">(</span><span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">aq</span><span class="p">)</span>
+<span class="o">#</span> <span class="k">or</span> <span class="n">you</span> <span class="n">can</span> <span class="n">use</span> <span class="n">pipe</span>
+<span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">aq</span> <span class="o">|</span> <span class="n">xargs</span> <span class="n">docker</span> <span class="n">rm</span>
+<span class="o">#</span> <span class="k">or</span> <span class="n">you</span> <span class="n">can</span> <span class="n">osquery</span>
+<span class="n">osqueryi</span> <span class="ss">&quot;select id from docker_containers&quot;</span> <span class="c1">--list --header=false | xargs docker rm</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Remove exited containers.</p>
+<div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">ps</span> <span class="o">-</span><span class="n">aqf</span> <span class="n">status</span><span class="o">=</span><span class="n">exited</span> <span class="o">|</span> <span class="n">xargs</span> <span class="n">docker</span> <span class="n">rm</span>
+<span class="n">osqueryi</span> <span class="ss">&quot;select id from docker_containers where state=exited&quot;</span> <span class="c1">--list --header=false | xargs docker rm</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="remove-images">Remove Images</h2>
+<p>Note that images required by running containers will NOT be removed by default.
+This is what users want generally speaking. 
+You can use the option <code>-f</code> to force removing images,
+but use it with caution and at your own risk.</p>
+<ol>
+<li>
+<p>Remove images without names (with the help of <code>awk</code>).</p>
+<div class="highlight"><pre><span></span><span class="nv">docker</span> <span class="nv">images</span> <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{ if ($1 == &quot;&amp;lt;none&amp;gt;&quot;) print $3 }</span><span class="s1">&#39;</span> <span class="o">|</span> <span class="nv">xargs</span> <span class="nv">docker</span> <span class="nv">rmi</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Remove images without versions (with the help of <code>awk</code>).</p>
+<div class="highlight"><pre><span></span><span class="nv">docker</span> <span class="nv">images</span> <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{ if ($2 == &quot;&amp;lt;none&amp;gt;&quot;) print $3 }</span><span class="s1">&#39;</span> <span class="o">|</span> <span class="nv">xargs</span> <span class="nv">docker</span> <span class="nv">rmi</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Remove images without names or versions (with the help of <code>awk</code>).</p>
+<div class="highlight"><pre><span></span><span class="nv">docker</span> <span class="nv">images</span> <span class="o">|</span> <span class="nv">awk</span> <span class="s1">&#39;</span><span class="s">{ if ($1 == &quot;&amp;lt;none&amp;gt;&quot; || $2 == &quot;&amp;lt;none&amp;gt;&quot;) print $3 }</span><span class="s1">&#39;</span> <span class="o">|</span> <span class="nv">xargs</span> <span class="nv">docker</span> <span class="nv">rmi</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Remove images without names or versions (with the help of <code>osquery</code>).</p>
+<div class="highlight"><pre><span></span><span class="n">osqueryi</span> <span class="ss">&quot;select id from docker_images where tags = &#39;&#39;&quot;</span> <span class="c1">--list --header=false | xargs docker rmi</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Remove all images belong to the eclipse organization with the help of <code>sed</code> and <code>q</code>. </p>
+<div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">images</span> <span class="n">sed</span> <span class="err">&#39;</span><span class="n">s</span><span class="o">/</span> <span class="err">\</span><span class="o">+/</span><span class="err">\</span><span class="n">t</span><span class="o">/</span><span class="n">g</span><span class="err">&#39;</span> <span class="n">q</span> <span class="o">-</span><span class="n">tH</span> <span class="s">&quot;select [image id] from - where repository like &#39;eclipse/%&#39;&quot;</span> <span class="n">xargs</span> <span class="n">docker</span> <span class="n">rmi</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Remove all images belong to the eclipse organization with the help of <code>osquery</code>. </p>
+<div class="highlight"><pre><span></span><span class="n">osqueryi</span> <span class="ss">&quot;select id from docker_images where tags like &#39;eclipse/%&#39;&quot;</span> <span class="c1">--list --header=false | xargs docker rmi</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>You can force removing an image with the <code>--force</code> option.</p>
+<div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">rmi</span> <span class="n">ubuntu</span> <span class="c1">--force</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>If you have multiple tags on the same docker image, 
+    you cannot remove the docker image by image id (without using <code>--force</code>.)
+    One way (without using <code>--force</code>) is to specify the tag name to remove.</p>
+</li>
+</ol>
+<h2 id="get-container-id-inside-container">Get Container ID Inside Container</h2>
+<p>You can get the container ID inside the docker container 
+by running the following command.</p>
+<div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="k">self</span><span class="o">/</span><span class="n">cgroup</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">o</span>  <span class="o">-</span><span class="n">e</span> <span class="ss">&quot;docker-.*.scope&quot;</span> <span class="o">|</span> <span class="n">head</span> <span class="o">-</span><span class="n">n</span> <span class="mi">1</span> <span class="o">|</span> <span class="n">sed</span> <span class="ss">&quot;s/docker-\(.*\).scope/\\1/&quot;</span>
+</pre></div>
+
+
+<p>Or another simpler way is to run</p>
+<div class="highlight"><pre><span></span><span class="n">echo</span> <span class="err">$</span><span class="n">HOSTNAME</span>
+</pre></div>
+
+
+<p>But it will not work in the following two cases. </p>
+<ol>
+<li>
+<p>if hostname is explicitly specified with <code>--hostname</code> flag. </p>
+</li>
+<li>
+<p>when using <code>--net=host</code> mode.</p>
+</li>
+</ol>
+<h2 id="importexport-docker-containerimages">Import/Export Docker Container/Images</h2>
+<p><a href="https://blog.giantswarm.io/moving-docker-container-images-around/">Moving Docker Containers and Images Around</a></p>
+<ol>
+<li>
+<p>Save a docker image to a tar.gz file.</p>
+<div class="highlight"><pre><span></span><span class="n">docker</span> <span class="n">save</span> <span class="n">image</span> <span class="o">|</span> <span class="n">gzip</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">image</span><span class="p">.</span><span class="n">tar</span><span class="p">.</span><span class="n">gz</span>
+</pre></div>
+
+
+</li>
+<li>
+<p>Load a docker image from tar file.</p>
+<div class="highlight"><pre><span></span><span class="n">docker</span> <span class="k">load</span> <span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span> <span class="n">image</span><span class="p">.</span><span class="n">tar</span>
+</pre></div>
+
+
+</li>
+</ol>
+<h2 id="kill-a-process-in-a-container">Kill a Process in a Container</h2>
+<div class="highlight"><pre><span></span>docker <span class="nb">exec</span> container_name <span class="nb">kill</span> process_name
+</pre></div>
+
+
+<h2 id="volume">Volume</h2>
+<ol>
+<li>
+<p>ALWAYS create a directory in the Docker container first
+    before you mount a volume into it.
+    If the directory (to mount into) in the Docker container does not exists,
+    it will be created automatically by the root user
+    (unless you specified a different user to run the Docker container).
+    The newly created directory is owned by the root,
+    which might not be as expected.</p>
+</li>
+<li>
+<p>AVOID mounting a volume into your home directory in the Docker container.</p>
+<ul>
+<li>
+<p>You might screw up the permission of your home directory in the Docker container.</p>
+</li>
+<li>
+<p>If you mount your home on the host into your home in the Docker container,
+    you might accidentally overwrite things in your home directory on the host.</p>
+</li>
+</ul>
+<p>It is recommend that you always mount a volume to <code>/some_dir</code> and then link to home if needed.</p>
+</li>
+<li>
+<p>When you mount a volume from the host to a Docker container,
+    make sure that you have the right permissions to the directory on the host,
+    o.w., you might run into various issues (such as the Docker container fails to start).</p>
+</li>
+<li>
+<p>You following instructions in 
+        <a href="https://stackoverflow.com/questions/30642844/how-to-list-docker-mounted-volumes-from-within-the-container">this discussion</a>
+    to list mounted volumens.
+    Another way is to use <a href="https://osquery.io/">osquery</a>.</p>
+</li>
+</ol>
+<h2 id="permission">Permission</h2>
+<ol>
+<li>
+<p>It is suggested that you have your user name added into the <code>docker</code> group
+    so that you can run Docker commands without using <code>sudo</code>.</p>
+</li>
+<li>
+<p>Inside a Docker container,
+    files created belong to the user in the Docker container.
+    If the files are created in a mounted host directory,
+    then on the host these files belong to the user with the same user ID.</p>
+</li>
+</ol>
+<h2 id="port">Port</h2>
+<ol>
+<li>Do NOT forget to forward ports from the host to the Docker containers
+    while using docker containers.
+    For example,
+    if you run a Flask application in a Docker,
+    you have to forward a port on the host to the port 5000 in the Docker container.
+    If you run multiple services in a Docker container (not recommended),
+    you have to forward all needed ports into the Docker container.</li>
+</ol>
+<h2 id="sharing-files">Sharing Files</h2>
+<p>Copying file between a docker container and the host.</p>
+<div class="highlight"><pre><span></span>docker cp foo.txt mycontainer:/foo.txt
+docker cp mycontainer:/foo.txt foo.txt
+</pre></div>
+
+
+<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p>By default log in a Docker container is redirected to the standard output.
+    However,
+    you won't be able to see the log if you start the Docker container as a deamon (using the <code>-d</code> option).
+    For debugging purposes,
+    it is suggested that you use the <code>-it</code> options instead the <code>-d</code> option.
+    A more general and robust way is of course to redirect log of applications to a file.</p>
+</li>
+<li>
+<p>Multiple running instances of the same Docker image
+    do not interact with each other.
+    The are running isolated.</p>
+</li>
+<li>
+<p>Amazon AWS is blocked in China (currently).
+    Do NOT run Docker services on Amazon if your users are in the mainland of China.</p>
+</li>
+</ol>
+<h2 id="issues-solutions">Issues &amp; Solutions</h2>
+<h3 id="issueerror-1">Issue/Error 1</h3>
+<blockquote>
+<p>docker: Error response from daemon: Get https://registry-1.docker.io/v2/dclong/jupyterlab-rstudio/manifests/latest: dial tcp 50.17.62.194:443: getsockopt: connection refused</p>
+</blockquote>
+<p>First retry starting the Docker container.
+If it still does not work
+then restart the Docker daemon using the command below will resolve the issue.</p>
+<div class="highlight"><pre><span></span>    <span class="n">service</span> <span class="n">docker</span> <span class="k">restart</span>
+</pre></div>
+
+
+<h2 id="issueerror-2">Issue/Error 2</h2>
+<blockquote>
+<p>Jupyter notebook connection failed</p>
+</blockquote>
+<p>Due to proxy!!! Connect without proxy works!!!</p>
+<p>https://stackoverflow.com/questions/31280465/ipython-notebook-connection-failed-issue</p>
+<h2 id="issueerror-3">Issue/Error 3</h2>
+<blockquote>
+<p>Docker Error: Returned a Non-zero Code: 137</p>
+</blockquote>
+<p>This issue is due to out of memory error.
+To fix it,
+you can either add more RAM or add more swap memory.</p>
+<p>https://samwize.com/2016/05/19/docker-error-returned-a-non-zero-code-137/</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2019-06-23T02:38:23-07:00" pubdate>Jun 23, 2019</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/software.html">software</a>
+    <a class="category" href="http://www.legendu.net/en/tag/docker.html">Docker</a>
+    <a class="category" href="http://www.legendu.net/en/tag/docker-image.html">Docker image</a>
+    <a class="category" href="http://www.legendu.net/en/tag/container.html">container</a>
+    <a class="category" href="http://www.legendu.net/en/tag/management.html">management</a>
+    <a class="category" href="http://www.legendu.net/en/tag/remove.html">remove</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/docker-image-and-container-management/';
+          var disqus_url = 'http://www.legendu.net/en/blog/docker-image-and-container-management/';
+          var disqus_title = 'Manage Docker Images and Containers';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

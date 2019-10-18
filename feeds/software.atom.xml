@@ -1,0 +1,2363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Software</title><link href="http://www.legendu.net/en/" rel="alternate"></link><link href="http://www.legendu.net/en/feeds/software.atom.xml" rel="self"></link><id>http://www.legendu.net/en/</id><updated>2019-08-18T00:23:13-07:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>My Docker Images</title><link href="http://www.legendu.net/en/blog/my-docker-images/" rel="alternate"></link><published>2019-08-18T00:23:13-07:00</published><updated>2019-08-18T00:23:13-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-08-18:/en/blog/my-docker-images/</id><summary type="html">&lt;h2 id="tips"&gt;Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;dclong/jupyterlab&lt;/code&gt; Docker image is well maintained (which is the base image of &lt;code&gt;dclong/jupyterhub&lt;/code&gt;), 
+    however, 
+    many of the &lt;code&gt;dclong/jupyterlab-*&lt;/code&gt; Docker images are not maintained any more.
+    Please use the corresponding &lt;code&gt;dclong/jupyterhub-*&lt;/code&gt;  Docker images instead.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There is an issue with the &lt;code&gt;dclong/xubuntu*&lt;/code&gt; Docker images due …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="tips"&gt;Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;dclong/jupyterlab&lt;/code&gt; Docker image is well maintained (which is the base image of &lt;code&gt;dclong/jupyterhub&lt;/code&gt;), 
+    however, 
+    many of the &lt;code&gt;dclong/jupyterlab-*&lt;/code&gt; Docker images are not maintained any more.
+    Please use the corresponding &lt;code&gt;dclong/jupyterhub-*&lt;/code&gt;  Docker images instead.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There is an issue with the &lt;code&gt;dclong/xubuntu*&lt;/code&gt; Docker images due to Xfce on Ubuntu 18.04.
+    It is suggested that you use the corresponding &lt;code&gt;dclong/lubuntu*&lt;/code&gt; Docker images instead,
+    which are based on LXQt.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="usage"&gt;Usage&lt;/h2&gt;
+&lt;h3 id="install-docker"&gt;Install Docker&lt;/h3&gt;
+&lt;p&gt;You must have Docker installed.
+If you are on Ubuntu,
+the just use the command below to install the community edition of Docker.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo apt-get install docker.io
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If you'd rather install the enterprise edition
+or if you are on other platforms,
+please refer to the offical Docker doc &lt;a href="https://docs.docker.com/install/"&gt;Install Docker&lt;/a&gt;.&lt;/p&gt;
+&lt;h3 id="pull-the-docker-image"&gt;Pull the Docker Image&lt;/h3&gt;
+&lt;p&gt;Taking &lt;code&gt;dclong/jupyterhub-ds&lt;/code&gt; as an example,
+you can pull it using the command below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker pull dclong/jupyterhub-ds
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For people in mainland of China,
+please refer to the post
+&lt;a href="http://www.legendu.net/en/blog/speedup-docker-pulling-and-pushing/"&gt;Speedup Docker Pulling and Pushing&lt;/a&gt;
+on ways to speed up pushing/pulling of Docker images.
+If you don't bother,
+then just use the command below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker pull registry.docker-cn.com/dclong/jupyterhub-ds
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="start-a-container"&gt;Start a Container&lt;/h3&gt;
+&lt;p&gt;Below are some Docker command arguments explained.
+These are for properly handling file permissions in the Docker container and on the host.
+Keep the default if you don't know what are the best to use.
+&lt;code&gt;DOCKER_PASSWORD&lt;/code&gt; is probably the only argument you want to and should change.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;DOCKER_USER&lt;/code&gt;: The user to be created (dynamically) in the container.
+    By default, the name of the current user on the host is used.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DOCKER_USER_ID&lt;/code&gt;: The ID of the user to be created in the container.
+    By default, the ID of the current user on the host is used.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DOCKER_PASSWORD&lt;/code&gt;: The password of the user to be created.
+    By default, it's the same as the user name.
+    You'd better change it for security reasons.
+    Of course, users can always change it later using the command &lt;code&gt;passwd&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DOCKER_GROUP_ID&lt;/code&gt;: The group of the user to be created.
+    By default, it's the group ID of the current user on the host.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;DOCKER_ADMIN_USER&lt;/code&gt; (&lt;code&gt;dclong/jupyterhub-*&lt;/code&gt; only): The admin of the JupyterLab server.
+    By default, it's the user to be created in the container.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;USER_MEM_LIMIT&lt;/code&gt; (&lt;code&gt;dclong/jupyterhub-*&lt;/code&gt; only): The memory limit that each user can use.
+    Note that this optional is not in effect now.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The root directory of JupyterLab/Jupyter notebooks is &lt;code&gt;/workdir&lt;/code&gt; in the container.
+You can mount directory on the host to it as you wish.
+Below are illustration using the Docker image &lt;code&gt;dclong/jupyterhub-ds&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The following command starts a container 
+and mounts the current working directory and &lt;code&gt;/home&lt;/code&gt; on the host machine 
+to &lt;code&gt;/workdir&lt;/code&gt; and &lt;code&gt;/home_host&lt;/code&gt; in the container respectively.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;run&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt; \
+    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="nv"&gt;jupyterhub&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ds&lt;/span&gt; \
+    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;opt&lt;/span&gt; &lt;span class="nv"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;8000&lt;/span&gt;:&lt;span class="mi"&gt;8000&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;5006&lt;/span&gt;:&lt;span class="mi"&gt;5006&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;un&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_USER_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;u&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;un&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_GROUP_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_ADMIN_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;un&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt; `&lt;span class="nv"&gt;pwd&lt;/span&gt;`:&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;workdir&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt; `&lt;span class="k"&gt;dirname&lt;/span&gt; $&lt;span class="nv"&gt;HOME&lt;/span&gt;`:&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;home_host&lt;/span&gt; \
+    &lt;span class="nv"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;jupyterhub&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ds&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The following command (only works on Linux) does the same as the above one 
+except that it limits the use of CPU and memory.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;run&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;d&lt;/span&gt; \
+    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;name&lt;/span&gt; &lt;span class="nv"&gt;jupyterhub&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ds&lt;/span&gt; \
+    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;log&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;opt&lt;/span&gt; &lt;span class="nv"&gt;max&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;size&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;50&lt;/span&gt;&lt;span class="nv"&gt;m&lt;/span&gt; \
+    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;memory&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;((&lt;/span&gt;$&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;head&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;proc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;meminfo&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{print $2}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt; &lt;span class="mi"&gt;4&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="mi"&gt;5&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt;&lt;span class="nv"&gt;k&lt;/span&gt; \
+    &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;cpus&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;$&lt;span class="ss"&gt;((&lt;/span&gt;`&lt;span class="nv"&gt;nproc&lt;/span&gt;` &lt;span class="o"&gt;-&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="ss"&gt;))&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;8000&lt;/span&gt;:&lt;span class="mi"&gt;8000&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;p&lt;/span&gt; &lt;span class="mi"&gt;5006&lt;/span&gt;:&lt;span class="mi"&gt;5006&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;un&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_USER_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;u&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_PASSWORD&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;un&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_GROUP_ID&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;g&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;e&lt;/span&gt; &lt;span class="nv"&gt;DOCKER_ADMIN_USER&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;`&lt;span class="nv"&gt;id&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;un&lt;/span&gt;` \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt; `&lt;span class="nv"&gt;pwd&lt;/span&gt;`:&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;workdir&lt;/span&gt; \
+    &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;v&lt;/span&gt; `&lt;span class="k"&gt;dirname&lt;/span&gt; $&lt;span class="nv"&gt;HOME&lt;/span&gt;`:&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;home_host&lt;/span&gt; \
+    &lt;span class="nv"&gt;dclong&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;jupyterhub&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;ds&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="use-the-jupyterhub-server"&gt;Use the JupyterHub Server&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open your browser and and visit &lt;code&gt;your_host_ip:8000&lt;/code&gt;
+  where &lt;code&gt;your_host_ip&lt;/code&gt; is the URL/ip address of your server.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Login to the JupyterHub server 
+  using your user name (by default your user name on the host machine)
+  and password (by default your user name on the host machine). &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It is strongly suggested (for security reasons) that you change your password (using the command &lt;code&gt;passwd&lt;/code&gt;)
+  in the container.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Enjoy JupyterLab notebook!&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="add-a-new-user-to-the-jupyterhub-server"&gt;Add a New User to the JupyterHub Server&lt;/h2&gt;
+&lt;p&gt;By default,
+any user in the Docker container can visit the JupyterHub server.
+So if you want to grant access to a new user,
+just create an account for him in the Docker container.
+You can of course use the well know commands &lt;code&gt;useradd&lt;/code&gt;, &lt;code&gt;adduser&lt;/code&gt;, etc. to achive it.
+To make things easier for you,
+there are some shell scripts in the directory &lt;code&gt;/scripts/&lt;/code&gt; to create usres for you.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;/scripts/sys/create_user.sh&lt;/code&gt;: Create a new user. It's the base script for creating users.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/scripts/sys/create_user_group.sh&lt;/code&gt;: Create a new user with the given (existing) group.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/scripts/sys/create_user_nogroup.sh&lt;/code&gt;: Create a new user with group name &lt;code&gt;nogroup&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;/scripts/sys/create_user_docker.sh&lt;/code&gt;: Create a new user with group name &lt;code&gt;docker&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;You can use the option &lt;code&gt;-h&lt;/code&gt; to print help doc for these commands.
+For example, &lt;code&gt;/scripts/sys/create_user_nogroup.sh -h&lt;/code&gt; prints the below help doc.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;Create a new user with the group name &lt;span class="s2"&gt;&amp;quot;nogroup&amp;quot;&lt;/span&gt;.
+Syntax: create_user_nogroup user user_id &lt;span class="o"&gt;[&lt;/span&gt;password&lt;span class="o"&gt;]&lt;/span&gt;
+Arguments:
+user: user name
+user_id: user id
+password: Optional password of the user. If not provided, &lt;span class="k"&gt;then&lt;/span&gt; the user name is used as the password.
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Now suppose you want to create a new user &lt;code&gt;dclong&lt;/code&gt; with user ID &lt;code&gt;2000&lt;/code&gt; and group name &lt;code&gt;nogroup&lt;/code&gt;,
+you can use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;sudo /scripts/sys/create_user_nogroup.sh dclong &lt;span class="m"&gt;2000&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Since we didn't specify a password for the user,
+the default password (same as the user name) is used.&lt;/p&gt;
+&lt;h2 id="remote-connection-to-desktop-in-the-container"&gt;Remote Connection to Desktop in the Container&lt;/h2&gt;
+&lt;p&gt;If you are running a Docker container with a desktop environment (&lt;code&gt;dclong/lubuntu*&lt;/code&gt; or &lt;code&gt;dclong/xubuntu*&lt;/code&gt;),
+you can connect to the desktop environment in the Docker container using NoMachine.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Download the NoMachine client from &lt;a href="https://www.nomachine.com/download"&gt;https://www.nomachine.com/download&lt;/a&gt;.&lt;/li&gt;
+&lt;li&gt;Install the NoMachine client on your computer.&lt;/li&gt;
+&lt;li&gt;Create a new connection from your computer 
+    to the desktop environment in the Docker image using the NX protocol and port 4000.
+    You will be asked for a user name and password.
+    By default,
+    the user name used to start the Docker container on the host machine 
+    is used as both the user name and password in the Docker container.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="use-spark-in-jupyterlab-notebook"&gt;Use Spark in JupyterLab Notebook&lt;/h2&gt;
+&lt;h3 id="spark-the-beakerx-scala-kernel"&gt;Spark - The BeakerX Scala Kernel&lt;/h3&gt;
+&lt;p&gt;Currently &lt;a href="https://hub.docker.com/r/dclong/jupyterhub-ds/"&gt;dclong/jupyterhub-ds&lt;/a&gt; uses the BeakerX Scala kernel.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open a JupyterLab notebook with the BeakerX Scala kernel from the launcher.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download Spark (say, 2.3.1) dependencies. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="c"&gt;%%classpath add mvn&lt;/span&gt;
+&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;spark&lt;/span&gt; &lt;span class="n"&gt;spark&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;core_2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt; &lt;span class="mf"&gt;2.3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;span class="n"&gt;org&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;apache&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;spark&lt;/span&gt; &lt;span class="n"&gt;spark&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;sql_2&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;11&lt;/span&gt; &lt;span class="mf"&gt;2.3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Create a SparkSession object.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.apache.spark.sql.SparkSession&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.apache.spark.sql.functions._&lt;/span&gt;
+
+&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="n"&gt;spark&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SparkSession&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;local[2]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;appName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Spark Example&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;spark.some.config.option&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;some-value&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getOrCreate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;spark.implicits._&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Use Spark as usual. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;val&lt;/span&gt; &lt;span class="nv"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;Range&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;, &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;.&lt;span class="nv"&gt;toDF&lt;/span&gt;
+&lt;span class="nv"&gt;df&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="spark-the-almond-scala-kernel"&gt;Spark - The Almond Scala Kernel&lt;/h3&gt;
+&lt;p&gt;Currently &lt;a href="https://hub.docker.com/r/dclong/jupyterhub-almond/"&gt;dclong/jupyterhub-almond&lt;/a&gt; uses the Almond Scala kernel.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open a JupyterLab notebook with the Almond Scala kernel from the launcher.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Download Spark (say, 2.3.1) dependencies. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;interp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;load&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ivy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;org.apache.spark&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;spark-core_2.11&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;%&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;2.3.1&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Create a SparkSession object.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.apache.spark.sql.SparkSession&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;org.apache.spark.sql.functions._&lt;/span&gt;
+
+&lt;span class="n"&gt;val&lt;/span&gt; &lt;span class="n"&gt;spark&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SparkSession&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;builder&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;master&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;local[2]&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;appName&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Spark Example&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;spark.some.config.option&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;some-value&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getOrCreate&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;spark.implicits._&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Use Spark as usual. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;val&lt;/span&gt; &lt;span class="nv"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;Range&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;, &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;.&lt;span class="nv"&gt;toDF&lt;/span&gt;
+&lt;span class="nv"&gt;df&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Please refer to 
+&lt;a href="https://github.com/almond-sh/examples/blob/master/notebooks/spark.ipynb"&gt;almond-sh/examples&lt;/a&gt;
+for more details.&lt;/p&gt;
+&lt;h3 id="spark-apache-toree"&gt;Spark - Apache Toree&lt;/h3&gt;
+&lt;p&gt;Currently &lt;a href="https://hub.docker.com/r/dclong/jupyterhub-toree/"&gt;dclong/jupyterhub-toree&lt;/a&gt; uses the Apache Toree Scala kernel.&lt;/p&gt;
+&lt;p&gt;The Docker image 
+&lt;a href="https://github.com/dclong/docker-jupyterhub-toree"&gt;dclong/jupyterhub-toree&lt;/a&gt;
+has Spark and Apache Toree installed and configured.
+Since Spark is already installed in it, 
+you don't need to download and install Spark by yourself.
+By default, 
+a Spark Session object named &lt;code&gt;spark&lt;/code&gt; is created automatically just like spark-shell.
+So, you can use Spark/Scala out-of-box in a JupyterLab notebook with the &lt;code&gt;Scala - Apache Toree&lt;/code&gt; kernel.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open a JupyterLab notebook with the &lt;code&gt;Scala - Apache Toree&lt;/code&gt; kernel from the launcher.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use Spark as usual.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;val&lt;/span&gt; &lt;span class="nv"&gt;df&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nv"&gt;Range&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;, &lt;span class="mi"&gt;10&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;.&lt;span class="nv"&gt;toDF&lt;/span&gt;
+&lt;span class="nv"&gt;df&lt;/span&gt;.&lt;span class="k"&gt;show&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h3 id="pyspark-pyspark-and-findspark"&gt;PySpark - pyspark and findspark&lt;/h3&gt;
+&lt;p&gt;The Docker image
+&lt;a href="https://github.com/dclong/docker-jupyterhub-toree"&gt;dclong/jupyterhub-toree&lt;/a&gt;
+has Spark (2.4.3) and the Python packages &lt;code&gt;pyspark&lt;/code&gt; and &lt;code&gt;findspark&lt;/code&gt; installed and configured.
+For convenience, 
+a symbolic link of the Spark home directory (&lt;code&gt;/opt/spark-2.4.3-bin-hadoop2.7&lt;/code&gt;) is made to &lt;code&gt;/opt/spark&lt;/code&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open a JupyterLab notebook with the &lt;code&gt;Scala - Apache Toree&lt;/code&gt; kernel from the launcher.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find and initialize PySpark.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;findspark&lt;/span&gt;
+&lt;span class="c1"&gt;# A symbolic link of the Spark Home is made to /opt/spark for convenience&lt;/span&gt;
+&lt;span class="n"&gt;findspark&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;init&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;/opt/spark&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;pyspark&lt;/span&gt;
+&lt;span class="n"&gt;sc&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;pyspark&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SparkContext&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;appName&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;myAppName&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;ol&gt;
+&lt;li&gt;Use Spark as usual.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;textFile&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="list-of-images-and-detailed-information"&gt;List of Images and Detailed Information&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/gitpod-svim/"&gt;dclong/gitpod-svim&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/gitpod-py3/"&gt;dclong/gitpod-py3&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/deepin_b/"&gt;dclong/deepin_b&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/deepin_cn/"&gt;dclong/deepin_cn&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/deepin/"&gt;dclong/deepin&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/ubuntu_b/"&gt;dclong/ubuntu_b&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;OS: Ubuntu 18.04&lt;br&gt;
+Time Zone: US Pacific Time&lt;br&gt;
+Desktop Environment: None&lt;br&gt;
+Remote Desktop: None  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/proxychains/"&gt;dclong/proxychains&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/linuxbrew/"&gt;dclong/linuxbrew&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/samba/"&gt;dclong/samba&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/nfs/"&gt;dclong/nfs&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/nodejs/"&gt;dclong/nodejs&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/typescript/"&gt;dclong/typescript&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jdk/"&gt;dclong/jdk&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/scala/"&gt;dclong/scala&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/hadoop/"&gt;dclong/hadoop&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/hive/"&gt;dclong/hive&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/spark/"&gt;dclong/spark&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/zeppelin/"&gt;dclong/zeppelin&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/h2o/"&gt;dclong/h2o&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/r-base/"&gt;dclong/r-base&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/r-pop/"&gt;dclong/r-pop&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/rstudio/"&gt;dclong/rstudio&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/qt5/"&gt;dclong/qt5&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/conda/"&gt;dclong/conda&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/conda-build/"&gt;dclong/conda-build&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/conda-yarn/"&gt;dclong/conda-yarn&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/tdodbc/"&gt;dclong/tdodbc&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/tdodbc-py/"&gt;dclong/tdodbc-py&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/python/"&gt;dclong/python&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Python 3.6  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/theia/"&gt;dclong/theia&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/wdb/"&gt;dclong/wdb&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/python-jdk/"&gt;dclong/python-jdk&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/python-nodejs/"&gt;dclong/python-nodejs&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/mlflow/"&gt;dclong/mlflow&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/flask/"&gt;dclong/flask&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/dryscrape/"&gt;dclong/dryscrape&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyter/"&gt;dclong/jupyter&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Jupyter Notebook: 5.7.0  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyter-nodejs/"&gt;dclong/jupyter-nodejs&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;NodeJS: 10.15.0  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterlab"&gt;dclong/jupyterlab&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JupyterLab: 0.35.4  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub/"&gt;dclong/jupyterhub&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;JupyterHub: 0.9.3  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub-ts/"&gt;dclong/jupyterhub-ts&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub-julia/"&gt;dclong/jupyterhub-julia&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub-jdk/"&gt;dclong/jupyterhub-jdk&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;OpenJDK 8&lt;br&gt;
+Maven: 3.3.9  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub-py/"&gt;dclong/jupyterhub-py&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;numpy scipy pandas dask&lt;br&gt;
+torch torchvision tensorflow keras h2o&lt;br&gt;
+gensim nltk&lt;br&gt;
+scikit-learn xgboost&lt;br&gt;
+matplotlib seaborn bokeh plotly&lt;br&gt;
+tabulate&lt;br&gt;
+JayDeBeApi pymysql pymongo sqlalchemy&lt;br&gt;
+pysocks requests[socks] Scrapy beautifulsoup4 wget  ansible  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/holoviews/"&gt;dclong/holoviews&lt;/a&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub-ai/"&gt;dclong/jupyterhub-ai&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;torch torchvision tensorflow keras h2o&lt;br&gt;
+gensim pytext    &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub-beakerx/"&gt;dclong/jupyterhub-beakerx&lt;/a&gt;  &lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;SQL (based on JDBC) via BeakerX 1.1.0&lt;br&gt;
+Scala 2.11.12 via BeakerX 1.1.0&lt;br&gt;
+Java 8, Clojure, Groovy, Kotlin via BeakerX 1.1.0  &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/jupyterhub-ds/"&gt;dclong/jupyterhub-ds&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/ubuntu_cn/"&gt;dclong/ubuntu_cn&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu/"&gt;dclong/lubuntu&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-qt5/"&gt;dclong/lubuntu-qt5&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-pyside2/"&gt;dclong/lubuntu-pyside2&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-nodejs/"&gt;dclong/lubuntu-nodejs&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-vscode/"&gt;dclong/lubuntu-vscode&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-py/"&gt;dclong/lubuntu-py&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-pycharm/"&gt;dclong/lubuntu-pycharm&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-jdk/"&gt;dclong/lubuntu-jdk&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-scala/"&gt;dclong/lubuntu-scala&lt;/a&gt;  &lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/lubuntu-intellij/"&gt;dclong/lubuntu-intellij&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu/"&gt;dclong/xubuntu&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu-nodejs/"&gt;dclong/xubuntu-nodejs&lt;/a&gt;  &lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu-vscode/"&gt;dclong/xubuntu-vscode&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu-py/"&gt;dclong/xubuntu-py&lt;/a&gt;  &lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu-pycharm/"&gt;dclong/xubuntu-pycharm&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu-jdk/"&gt;dclong/xubuntu-jdk&lt;/a&gt;  &lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu-scala/"&gt;dclong/xubuntu-scala&lt;/a&gt;  &lt;ul&gt;
+&lt;li&gt;&lt;a href="https://hub.docker.com/r/dclong/xubuntu-intellij/"&gt;dclong/xubuntu-intellij&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id="known-issues"&gt;Known Issues&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;The subprocess managment issue.
+    This is not an issue at all in most use cases.
+    This Docker image launch service using a shell script
+    so there won't be orphan subprocesses
+    when the process of the Docker container is killed.
+    However, launching by shell script is not the best way for managing processes.
+    Please refer to &lt;a href="https://blog.phusion.nl/2015/01/20/docker-and-the-pid-1-zombie-reaping-problem/#asimpleinitsystem"&gt;A Simple Init System&lt;/a&gt;
+    for more details.
+    I might switch to the &lt;a href="https://github.com/Supervisor/supervisor"&gt;Supervisor&lt;/a&gt; for process management
+    or use the base image of &lt;a href="https://hub.docker.com/r/phusion/baseimage/"&gt;pushion/baseimage&lt;/a&gt; in future.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="software"></category><category term="Docker"></category><category term="Docker image"></category><category term="Ubuntu"></category><category term="JupyterLab"></category><category term="Lubuntu"></category><category term="dclong"></category></entry><entry><title>Manage Docker Images and Containers</title><link href="http://www.legendu.net/en/blog/docker-image-and-container-management/" rel="alternate"></link><published>2019-06-23T02:38:23-07:00</published><updated>2019-06-23T02:38:23-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-06-23:/en/blog/docker-image-and-container-management/</id><summary type="html">&lt;p&gt;It is suggested that you use &lt;a href="https://osquery.io/"&gt;osquery&lt;/a&gt;
+to query Docker images, containers, etc.&lt;/p&gt;
+&lt;h2 id="remove-containers"&gt;Remove Containers&lt;/h2&gt;
+&lt;p&gt;Note that running containers will NOT be removed by default.
+This is what users want generally speaking. 
+You can use the option &lt;code&gt;-f&lt;/code&gt; to force removing running containers,
+but use it with caution and at …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It is suggested that you use &lt;a href="https://osquery.io/"&gt;osquery&lt;/a&gt;
+to query Docker images, containers, etc.&lt;/p&gt;
+&lt;h2 id="remove-containers"&gt;Remove Containers&lt;/h2&gt;
+&lt;p&gt;Note that running containers will NOT be removed by default.
+This is what users want generally speaking. 
+You can use the option &lt;code&gt;-f&lt;/code&gt; to force removing running containers,
+but use it with caution and at your own risk.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Remove all existing containers (not images).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;ps&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;aq&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;use&lt;/span&gt; &lt;span class="n"&gt;pipe&lt;/span&gt;
+&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;ps&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;aq&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;xargs&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;or&lt;/span&gt; &lt;span class="n"&gt;you&lt;/span&gt; &lt;span class="n"&gt;can&lt;/span&gt; &lt;span class="n"&gt;osquery&lt;/span&gt;
+&lt;span class="n"&gt;osqueryi&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;select id from docker_containers&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;--list --header=false | xargs docker rm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove exited containers.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;ps&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;aqf&lt;/span&gt; &lt;span class="n"&gt;status&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;exited&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;xargs&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;rm&lt;/span&gt;
+&lt;span class="n"&gt;osqueryi&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;select id from docker_containers where state=exited&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;--list --header=false | xargs docker rm&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="remove-images"&gt;Remove Images&lt;/h2&gt;
+&lt;p&gt;Note that images required by running containers will NOT be removed by default.
+This is what users want generally speaking. 
+You can use the option &lt;code&gt;-f&lt;/code&gt; to force removing images,
+but use it with caution and at your own risk.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Remove images without names (with the help of &lt;code&gt;awk&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;images&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{ if ($1 == &amp;quot;&amp;amp;lt;none&amp;amp;gt;&amp;quot;) print $3 }&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;xargs&lt;/span&gt; &lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;rmi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove images without versions (with the help of &lt;code&gt;awk&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;images&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{ if ($2 == &amp;quot;&amp;amp;lt;none&amp;amp;gt;&amp;quot;) print $3 }&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;xargs&lt;/span&gt; &lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;rmi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove images without names or versions (with the help of &lt;code&gt;awk&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;images&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{ if ($1 == &amp;quot;&amp;amp;lt;none&amp;amp;gt;&amp;quot; || $2 == &amp;quot;&amp;amp;lt;none&amp;amp;gt;&amp;quot;) print $3 }&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;xargs&lt;/span&gt; &lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;rmi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove images without names or versions (with the help of &lt;code&gt;osquery&lt;/code&gt;).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;osqueryi&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;select id from docker_images where tags = &amp;#39;&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;--list --header=false | xargs docker rmi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove all images belong to the eclipse organization with the help of &lt;code&gt;sed&lt;/code&gt; and &lt;code&gt;q&lt;/code&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;images&lt;/span&gt; &lt;span class="n"&gt;sed&lt;/span&gt; &lt;span class="err"&gt;&amp;#39;&lt;/span&gt;&lt;span class="n"&gt;s&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt; &lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="o"&gt;+/&lt;/span&gt;&lt;span class="err"&gt;\&lt;/span&gt;&lt;span class="n"&gt;t&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;g&lt;/span&gt;&lt;span class="err"&gt;&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;q&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;tH&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;select [image id] from - where repository like &amp;#39;eclipse/%&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="n"&gt;xargs&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;rmi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Remove all images belong to the eclipse organization with the help of &lt;code&gt;osquery&lt;/code&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;osqueryi&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;select id from docker_images where tags like &amp;#39;eclipse/%&amp;#39;&amp;quot;&lt;/span&gt; &lt;span class="c1"&gt;--list --header=false | xargs docker rmi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can force removing an image with the &lt;code&gt;--force&lt;/code&gt; option.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;rmi&lt;/span&gt; &lt;span class="n"&gt;ubuntu&lt;/span&gt; &lt;span class="c1"&gt;--force&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you have multiple tags on the same docker image, 
+    you cannot remove the docker image by image id (without using &lt;code&gt;--force&lt;/code&gt;.)
+    One way (without using &lt;code&gt;--force&lt;/code&gt;) is to specify the tag name to remove.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="get-container-id-inside-container"&gt;Get Container ID Inside Container&lt;/h2&gt;
+&lt;p&gt;You can get the container ID inside the docker container 
+by running the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;proc&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="k"&gt;self&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;cgroup&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;grep&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;o&lt;/span&gt;  &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;e&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;docker-.*.scope&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;head&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;n&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;sed&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;s/docker-\(.*\).scope/\\1/&amp;quot;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or another simpler way is to run&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;echo&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="n"&gt;HOSTNAME&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;But it will not work in the following two cases. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;if hostname is explicitly specified with &lt;code&gt;--hostname&lt;/code&gt; flag. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;when using &lt;code&gt;--net=host&lt;/code&gt; mode.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="importexport-docker-containerimages"&gt;Import/Export Docker Container/Images&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://blog.giantswarm.io/moving-docker-container-images-around/"&gt;Moving Docker Containers and Images Around&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Save a docker image to a tar.gz file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="n"&gt;save&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="n"&gt;gzip&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;gt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;gz&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Load a docker image from tar file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="k"&gt;load&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="n"&gt;lt&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt; &lt;span class="n"&gt;image&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tar&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="kill-a-process-in-a-container"&gt;Kill a Process in a Container&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; container_name &lt;span class="nb"&gt;kill&lt;/span&gt; process_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="volume"&gt;Volume&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;ALWAYS create a directory in the Docker container first
+    before you mount a volume into it.
+    If the directory (to mount into) in the Docker container does not exists,
+    it will be created automatically by the root user
+    (unless you specified a different user to run the Docker container).
+    The newly created directory is owned by the root,
+    which might not be as expected.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;AVOID mounting a volume into your home directory in the Docker container.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;You might screw up the permission of your home directory in the Docker container.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you mount your home on the host into your home in the Docker container,
+    you might accidentally overwrite things in your home directory on the host.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;It is recommend that you always mount a volume to &lt;code&gt;/some_dir&lt;/code&gt; and then link to home if needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When you mount a volume from the host to a Docker container,
+    make sure that you have the right permissions to the directory on the host,
+    o.w., you might run into various issues (such as the Docker container fails to start).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You following instructions in 
+        &lt;a href="https://stackoverflow.com/questions/30642844/how-to-list-docker-mounted-volumes-from-within-the-container"&gt;this discussion&lt;/a&gt;
+    to list mounted volumens.
+    Another way is to use &lt;a href="https://osquery.io/"&gt;osquery&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="permission"&gt;Permission&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is suggested that you have your user name added into the &lt;code&gt;docker&lt;/code&gt; group
+    so that you can run Docker commands without using &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Inside a Docker container,
+    files created belong to the user in the Docker container.
+    If the files are created in a mounted host directory,
+    then on the host these files belong to the user with the same user ID.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="port"&gt;Port&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Do NOT forget to forward ports from the host to the Docker containers
+    while using docker containers.
+    For example,
+    if you run a Flask application in a Docker,
+    you have to forward a port on the host to the port 5000 in the Docker container.
+    If you run multiple services in a Docker container (not recommended),
+    you have to forward all needed ports into the Docker container.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="sharing-files"&gt;Sharing Files&lt;/h2&gt;
+&lt;p&gt;Copying file between a docker container and the host.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker cp foo.txt mycontainer:/foo.txt
+docker cp mycontainer:/foo.txt foo.txt
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;By default log in a Docker container is redirected to the standard output.
+    However,
+    you won't be able to see the log if you start the Docker container as a deamon (using the &lt;code&gt;-d&lt;/code&gt; option).
+    For debugging purposes,
+    it is suggested that you use the &lt;code&gt;-it&lt;/code&gt; options instead the &lt;code&gt;-d&lt;/code&gt; option.
+    A more general and robust way is of course to redirect log of applications to a file.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Multiple running instances of the same Docker image
+    do not interact with each other.
+    The are running isolated.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Amazon AWS is blocked in China (currently).
+    Do NOT run Docker services on Amazon if your users are in the mainland of China.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="issues-solutions"&gt;Issues &amp;amp; Solutions&lt;/h2&gt;
+&lt;h3 id="issueerror-1"&gt;Issue/Error 1&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;docker: Error response from daemon: Get https://registry-1.docker.io/v2/dclong/jupyterlab-rstudio/manifests/latest: dial tcp 50.17.62.194:443: getsockopt: connection refused&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;First retry starting the Docker container.
+If it still does not work
+then restart the Docker daemon using the command below will resolve the issue.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;    &lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="k"&gt;restart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="issueerror-2"&gt;Issue/Error 2&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Jupyter notebook connection failed&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;Due to proxy!!! Connect without proxy works!!!&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/31280465/ipython-notebook-connection-failed-issue&lt;/p&gt;
+&lt;h2 id="issueerror-3"&gt;Issue/Error 3&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Docker Error: Returned a Non-zero Code: 137&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This issue is due to out of memory error.
+To fix it,
+you can either add more RAM or add more swap memory.&lt;/p&gt;
+&lt;p&gt;https://samwize.com/2016/05/19/docker-error-returned-a-non-zero-code-137/&lt;/p&gt;</content><category term="software"></category><category term="Docker"></category><category term="Docker image"></category><category term="container"></category><category term="management"></category><category term="remove"></category></entry><entry><title>Install Python in Mac</title><link href="http://www.legendu.net/en/blog/install-python-in-mac/" rel="alternate"></link><published>2019-05-24T01:46:40-07:00</published><updated>2019-05-24T01:46:40-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-05-24:/en/blog/install-python-in-mac/</id><summary type="html">&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Anaconda and Homebrew installs Python locally rather than system-wide.
+  You have to install …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Anaconda and Homebrew installs Python locally rather than system-wide.
+  You have to install Python using an official installation package manually 
+  (downloading the installation package and double click to install)
+  if you need a system-wide installation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The recommended way to instlal Python on Mac is to use Homebrew.
+  However, 
+  there are limited choices of Python versions in Homebrew.
+  Go with Anaconda Python if you cannot find the version you need in Homebrew.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/51125013/how-can-i-install-a-previous-version-of-python-3-in-macos-using-homebrew&lt;/p&gt;
+&lt;p&gt;https://osxuninstaller.com/uninstall-guides/properly-uninstall-python-mac/&lt;/p&gt;</content><category term="software"></category><category term="install"></category><category term="Python"></category><category term="macOS"></category></entry><entry><title>Examples of Using pdftk to Manipulating PDF Files</title><link href="http://www.legendu.net/en/blog/pdftk-examples/" rel="alternate"></link><published>2019-05-12T15:25:00-07:00</published><updated>2019-05-12T15:25:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-05-12:/en/blog/pdftk-examples/</id><summary type="html">&lt;p&gt;Even though &lt;code&gt;pdftk&lt;/code&gt; is a great command-line tool,
+it is suggested that you use Python libraries to manipulating PDFs.
+Please refer to 
+&lt;a href="http://www.legendu.net/misc/blog/editing-PDF-files/"&gt;Editing PDF Files&lt;/a&gt;
+and
+&lt;a href="http://www.legendu.net/misc/blog/pypdf2-examples/"&gt;PyPDF2 Examples&lt;/a&gt;
+for more details.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Fill in forms in an I-9 doc. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# &lt;span class="nv"&gt;dump&lt;/span&gt; &lt;span class="nv"&gt;fields&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;form&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;optional&lt;/span&gt;, &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;human&lt;/span&gt; &lt;span class="nv"&gt;examination&lt;/span&gt; &lt;span class="nv"&gt;only&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;pdftk&lt;/span&gt; &lt;span class="nv"&gt;i9 …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Even though &lt;code&gt;pdftk&lt;/code&gt; is a great command-line tool,
+it is suggested that you use Python libraries to manipulating PDFs.
+Please refer to 
+&lt;a href="http://www.legendu.net/misc/blog/editing-PDF-files/"&gt;Editing PDF Files&lt;/a&gt;
+and
+&lt;a href="http://www.legendu.net/misc/blog/pypdf2-examples/"&gt;PyPDF2 Examples&lt;/a&gt;
+for more details.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Fill in forms in an I-9 doc. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;# &lt;span class="nv"&gt;dump&lt;/span&gt; &lt;span class="nv"&gt;fields&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;form&lt;/span&gt; &lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;optional&lt;/span&gt;, &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="nv"&gt;human&lt;/span&gt; &lt;span class="nv"&gt;examination&lt;/span&gt; &lt;span class="nv"&gt;only&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="nv"&gt;pdftk&lt;/span&gt; &lt;span class="nv"&gt;i9&lt;/span&gt;.&lt;span class="nv"&gt;pdf&lt;/span&gt; &lt;span class="nv"&gt;dump_data_fields&lt;/span&gt; &lt;span class="o"&gt;&amp;amp;&lt;/span&gt;&lt;span class="nv"&gt;gt&lt;/span&gt;&lt;span class="c1"&gt;; fields.txt &lt;/span&gt;
+# &lt;span class="nv"&gt;generate&lt;/span&gt; &lt;span class="nv"&gt;a&lt;/span&gt; &lt;span class="nv"&gt;FDF&lt;/span&gt; &lt;span class="nv"&gt;data&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt;
+&lt;span class="nv"&gt;pdftk&lt;/span&gt; &lt;span class="nv"&gt;i9&lt;/span&gt;.&lt;span class="nv"&gt;pdf&lt;/span&gt; &lt;span class="nv"&gt;generate_fdf&lt;/span&gt; &lt;span class="nv"&gt;output&lt;/span&gt; &lt;span class="nv"&gt;data&lt;/span&gt;.&lt;span class="nv"&gt;fdf&lt;/span&gt; 
+# &lt;span class="nv"&gt;after&lt;/span&gt; &lt;span class="nv"&gt;fill&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;fileds&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;FDF&lt;/span&gt; &lt;span class="nv"&gt;file&lt;/span&gt;, &lt;span class="nv"&gt;run&lt;/span&gt; &lt;span class="nv"&gt;the&lt;/span&gt; &lt;span class="nv"&gt;following&lt;/span&gt; &lt;span class="nv"&gt;command&lt;/span&gt;
+&lt;span class="nv"&gt;pdftk&lt;/span&gt; &lt;span class="nv"&gt;i9&lt;/span&gt;.&lt;span class="nv"&gt;pdf&lt;/span&gt; &lt;span class="nv"&gt;fill_form&lt;/span&gt; &lt;span class="nv"&gt;data&lt;/span&gt;.&lt;span class="nv"&gt;fdf&lt;/span&gt; &lt;span class="nv"&gt;output&lt;/span&gt; &lt;span class="nv"&gt;i9_2&lt;/span&gt;.&lt;span class="nv"&gt;pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If the PDF form to fill in using &lt;code&gt;pdftk&lt;/code&gt; is encrypted, 
+you have to decrypt it first. 
+&lt;a href="http://smallpdf.com/"&gt;SmallPDF&lt;/a&gt; is a good online service,
+which can help you unlock PDF documents if you don't have the encryption password.&lt;/p&gt;
+&lt;p&gt;Notice that some PDF forms (e.g., time card, I-9 form, etc.) 
+cannot be saved (only a blank copy can be saved). 
+after filled in using Adobe Reader.
+&lt;code&gt;pdftk&lt;/code&gt; provides a solution to this problem.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Extract pages (from 149 to 186) 
+    from the PDF file "training.pdf" 
+    as "chap_05.pdf"&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdftk&lt;/span&gt; &lt;span class="n"&gt;training&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="mi"&gt;149&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;186&lt;/span&gt; &lt;span class="k"&gt;output&lt;/span&gt; &lt;span class="n"&gt;chap_05&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Combine all my i-20s (all PDF files in current directory) into a single file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdftk&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="k"&gt;output&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="n"&gt;_all&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Combine scaned pages into the right order.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdftk&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20141206171918820&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;20141206171951015&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;A1&lt;/span&gt; &lt;span class="n"&gt;B1&lt;/span&gt; &lt;span class="n"&gt;A2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;3&lt;/span&gt; &lt;span class="k"&gt;output&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rotate the first PDF page to 90 degrees clockwise&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;pdftk&lt;/span&gt; &lt;span class="nv"&gt;in&lt;/span&gt;.&lt;span class="nv"&gt;pdf&lt;/span&gt; &lt;span class="nv"&gt;cat&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="nv"&gt;east&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;end&lt;/span&gt; &lt;span class="nv"&gt;output&lt;/span&gt; &lt;span class="nv"&gt;out&lt;/span&gt;.&lt;span class="nv"&gt;pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rotate all pages in the second PDF file to 180 degrees&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdftk&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;m11&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;m25&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="n"&gt;A&lt;/span&gt; &lt;span class="n"&gt;Bsouth&lt;/span&gt; &lt;span class="k"&gt;output&lt;/span&gt; &lt;span class="n"&gt;comed&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Rotate an entire PDF document to 180 degrees&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;pdftk&lt;/span&gt; &lt;span class="k"&gt;in&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt; &lt;span class="n"&gt;cat&lt;/span&gt; &lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;endsouth&lt;/span&gt; &lt;span class="k"&gt;output&lt;/span&gt; &lt;span class="k"&gt;out&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pdf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="pdftk"></category><category term="software"></category><category term="examples"></category><category term="PDF"></category></entry><entry><title>Use Eclipse as Your IDE</title><link href="http://www.legendu.net/en/blog/use-eclipse-as-your-ide/" rel="alternate"></link><published>2019-03-29T09:30:34-07:00</published><updated>2019-03-29T09:30:34-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-03-29:/en/blog/use-eclipse-as-your-ide/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There are at least 3 ways to jump to errors quickly in Eclipse&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Click these red icons on the right margin.&lt;/li&gt;
+&lt;li&gt;Click the &lt;code&gt;Previous Annotation&lt;/code&gt; button 
+or &lt;code&gt;Next Annotation&lt;/code&gt; buttons on the tool bar or under the &lt;code&gt;Navigation&lt;/code&gt; menu.&lt;/li&gt;
+&lt;li&gt;Use hot keys (&lt;code&gt;Ctrl+.&lt;/code&gt; for &lt;code&gt;Next Annotation&lt;/code&gt; and &lt;code&gt;Ctrl+,&lt;/code&gt; for &lt;code&gt;Previous …&lt;/code&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There are at least 3 ways to jump to errors quickly in Eclipse&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Click these red icons on the right margin.&lt;/li&gt;
+&lt;li&gt;Click the &lt;code&gt;Previous Annotation&lt;/code&gt; button 
+or &lt;code&gt;Next Annotation&lt;/code&gt; buttons on the tool bar or under the &lt;code&gt;Navigation&lt;/code&gt; menu.&lt;/li&gt;
+&lt;li&gt;Use hot keys (&lt;code&gt;Ctrl+.&lt;/code&gt; for &lt;code&gt;Next Annotation&lt;/code&gt; and &lt;code&gt;Ctrl+,&lt;/code&gt; for &lt;code&gt;Previous Annotation&lt;/code&gt; by default).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To tidy code, 
+    use the &lt;code&gt;Format&lt;/code&gt; button under the &lt;code&gt;Source&lt;/code&gt; menu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To quickly comment selected code in Eclipse, 
+    you can use hot keys &lt;code&gt;Crtl+/&lt;/code&gt;. 
+    To uncomment selected code, 
+    simply press the hot keys again.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To quickly import a package which has no &lt;code&gt;.jar&lt;/code&gt; files 
+    (i.e. you have available all source code) to an existing project, 
+    you can simply drag the package on the &lt;code&gt;src&lt;/code&gt; folder 
+    in the corresponding project in eclipse. 
+    Another way is to first create a new package with the same
+    name as the existing package, 
+    then right click on the newly created
+    package and choose &lt;code&gt;Import...&lt;/code&gt; in the short menu. 
+    In the prompt out,
+    you can choose either &lt;code&gt;Archive File&lt;/code&gt; or &lt;code&gt;File System&lt;/code&gt; under
+    the &lt;code&gt;General&lt;/code&gt; tab depending on whether there are &lt;code&gt;.jar&lt;/code&gt; files in the package
+    or not. 
+    Then you can choose which files you want to import into
+    the package and click finish after you have done.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To change a variable name, you'd better use refactor which will
+    automatically change all occurrences.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use &lt;code&gt;TODO&lt;/code&gt; to add task in eclipse.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To build projects manually, 
+    follow instructions 
+    &lt;a href="http://help.eclipse.org/helios/index.jsp?topic=%2Forg.eclipse.platform.doc.user%2Ftasks%2Ftasks-75.htm"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="IDE"></category><category term="programming"></category><category term="Eclipse"></category><category term="software"></category><category term="editor"></category></entry><entry><title>Use Git Behind a Proxy</title><link href="http://www.legendu.net/en/blog/use-git-behind-a-proxy/" rel="alternate"></link><published>2019-03-07T23:42:48-08:00</published><updated>2019-03-07T23:42:48-08:00</updated><author><name>Chuanlong (Ben) Du</name></author><id>tag:www.legendu.net,2019-03-07:/en/blog/use-git-behind-a-proxy/</id><summary type="html">&lt;p&gt;Here is a good article on &lt;a href="http://www.librebyte.net/en/git/git-behind-a-proxy-or-firewall/"&gt;Git Behind a Proxy or Firewall&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you do not already know the proxy in use (in your office), 
+    read the post &lt;a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/"&gt;Find out Proxy in Use&lt;/a&gt;
+    to figure the proxy (in your office).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following commands in terminal or Windows command prompt …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Here is a good article on &lt;a href="http://www.librebyte.net/en/git/git-behind-a-proxy-or-firewall/"&gt;Git Behind a Proxy or Firewall&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you do not already know the proxy in use (in your office), 
+    read the post &lt;a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/"&gt;Find out Proxy in Use&lt;/a&gt;
+    to figure the proxy (in your office).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following commands in terminal or Windows command prompt to configure Git.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--global http.proxy http://username:password@proxy_ip:port&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="c1"&gt;--global https.proxy https://username:password@proxy_ip:port&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or you can directly add the following lines into your Git configuration file,
+which is usually &lt;code&gt;~/.gitconfig&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="k"&gt;[http]&lt;/span&gt;
+    &lt;span class="na"&gt;proxy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://username:password@proxy_ip:port&lt;/span&gt;
+&lt;span class="k"&gt;[https]&lt;/span&gt;
+    &lt;span class="na"&gt;proxy&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;http://username:password@proxy_ip:port&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The Git protocol is usually not supported in office.
+    In this case,
+    you have to use the https protocols.
+    When using the https protocols,
+    you will be prompted for password every time you pull from a private repository 
+    or push to a repository,
+    which is annoying.
+    To make this less painful,
+    you can define shortcuts/hotstrings to auto fill passwords for you using AutoHotkey/AutoKey.
+    This is not very secure,
+    but I do not worry too much about it as the password is saved on the office laptop only
+    and is unlikely to be exposed to other people.
+    There are other solutions to cache Git passwords on Windows,
+    but I will not go into the hassle.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you come across the error of "SSL certificate problem: unable to get local issuer certificate",
+    you have to run the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="c1"&gt;--global http.sslVerify false&lt;/span&gt;
+&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt; &lt;span class="c1"&gt;--global https.sslVerify false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or you can add&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sslVerify&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;to the [http] and [https] section in the git configuration directly.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note that working in a Linux virtual machine on your office laptop with Windows OS
+can possibly help you circumvent the proxy issue.&lt;/p&gt;
+&lt;h2 id="question"&gt;Question&lt;/h2&gt;
+&lt;p&gt;Can a socks proxy be used as a HTTP/HTTPS proxy for Git?&lt;/p&gt;</content><category term="software"></category><category term="Git"></category><category term="proxy"></category><category term="protocol"></category></entry><entry><title>Use wget with Proxy</title><link href="http://www.legendu.net/en/blog/use-wget-behind-proxy/" rel="alternate"></link><published>2019-03-07T23:42:48-08:00</published><updated>2019-03-07T23:42:48-08:00</updated><author><name>Chuanlong (Ben) Du</name></author><id>tag:www.legendu.net,2019-03-07:/en/blog/use-wget-behind-proxy/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you don't already know the proxy in use (in your company),
+    read the post &lt;a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/"&gt;Find out Proxy in Use&lt;/a&gt;
+    to figure it out.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Put the following lines into your wget configuration file,
+    which is usually &lt;code&gt;~/.wget&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;use_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;http_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nl"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;https_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nl"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you don't already know the proxy in use (in your company),
+    read the post &lt;a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/"&gt;Find out Proxy in Use&lt;/a&gt;
+    to figure it out.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Put the following lines into your wget configuration file,
+    which is usually &lt;code&gt;~/.wget&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;use_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;on&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;http_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nl"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;https_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nl"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;span class="n"&gt;ftp_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nl"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;&lt;span class="w"&gt;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use wget to download files.
+    A illustration is given below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;wget&lt;/span&gt; &lt;span class="c1"&gt;--no-check-certificate --load-cookies=/home/mobaxterm/ff_cookies.txt -p https://bitbucket.org/dclong/config/get/master.zip&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;You have to use the &lt;code&gt;--no-check-certificate&lt;/code&gt; option
+if you encounter "certificate verification" errors.
+Another way to do this is to set environment variables &lt;code&gt;http_proxy&lt;/code&gt;, &lt;code&gt;https_proxy&lt;/code&gt; and &lt;code&gt;ftp_proxy&lt;/code&gt; etc.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="question"&gt;Question&lt;/h2&gt;
+&lt;p&gt;A HTTP proxy can be used as HTTPS/FTP proxy for wget,
+but can a socks proxy be used as HTTP/HTTPS/FTP proxy for wget?&lt;/p&gt;</content><category term="software"></category><category term="download"></category><category term="wget"></category><category term="proxy"></category></entry><entry><title>Ways to Download Files Using Selenium Webdrive</title><link href="http://www.legendu.net/en/blog/ways-to-download-files-using-selenium-webdrive/" rel="alternate"></link><published>2019-02-10T17:14:12-08:00</published><updated>2019-02-10T17:14:12-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-02-10:/en/blog/ways-to-download-files-using-selenium-webdrive/</id><summary type="html">&lt;p&gt;Selenium WebDrive cannot have no control of system Dialog, 
+so you have to avoid the Dialog when downloading files using WebDrive.&lt;/p&gt;
+&lt;p&gt;The first way is to enable automatical download in the browser
+that you use with Seleniu WebDrive. 
+So when click a file link, 
+the file is automatically downloaded to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Selenium WebDrive cannot have no control of system Dialog, 
+so you have to avoid the Dialog when downloading files using WebDrive.&lt;/p&gt;
+&lt;p&gt;The first way is to enable automatical download in the browser
+that you use with Seleniu WebDrive. 
+So when click a file link, 
+the file is automatically downloaded to the directory that you set.
+The second (and better way) is to export the cookie of the browser,
+extract the download link and then use the command &lt;code&gt;wget&lt;/code&gt; or &lt;code&gt;curl&lt;/code&gt; to download it. 
+Surely you have to use the cookie with &lt;code&gt;wget&lt;/code&gt; or &lt;code&gt;curl&lt;/code&gt; if authentication is required on the web.&lt;/p&gt;</content><category term="Web"></category><category term="WebDrive"></category><category term="automation"></category><category term="Selenium"></category><category term="software"></category></entry><entry><title>Cygwin Ports</title><link href="http://www.legendu.net/en/blog/cygwin-ports/" rel="alternate"></link><published>2019-02-10T13:28:49-08:00</published><updated>2019-02-10T13:28:49-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2019-02-10:/en/blog/cygwin-ports/</id><summary type="html">&lt;p&gt;&lt;a href="http://cygwinports.org/"&gt;Cygwin Ports Project&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you want to use a package that is missing in Cygwin 
+(especially on the x86_64 version as some packages has not been ported to it yet),
+You can install it from 
+&lt;a href="https://sourceware.org/cygwinports/"&gt;Cygwin Ports&lt;/a&gt;
+following the instruction below if available.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download the newest version of Cygwin installtion …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://cygwinports.org/"&gt;Cygwin Ports Project&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;If you want to use a package that is missing in Cygwin 
+(especially on the x86_64 version as some packages has not been ported to it yet),
+You can install it from 
+&lt;a href="https://sourceware.org/cygwinports/"&gt;Cygwin Ports&lt;/a&gt;
+following the instruction below if available.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download the newest version of Cygwin installtion program.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Launch the Cygwin installation program with the &lt;code&gt;-K&lt;/code&gt; flag in a Cygwin shell.
+    For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;cygstart&lt;/span&gt; &lt;span class="c1"&gt;-- /path/to/setup-x86.exe -K http://cygwinports.org/ports.gpg&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On the "Choose Installation Type" page, 
+    select "Install from Internet".&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On the "Choose Download Site(s)" page, 
+    select a distro mirror, 
+    then enter &lt;a href="ftp://ftp.cygwinports.org/pub/cygwinports"&gt;ftp://ftp.cygwinports.org/pub/cygwinports&lt;/a&gt; 
+    in the User URL field and press Add (making sure that both are highlighted).
+    You can just select the download site and proceed with it if you have added it before.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Proceed with package selection and installation, 
+    making sure to install any indicated dependencies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Windows"></category><category term="virtualization"></category><category term="software"></category><category term="Cygwin"></category><category term="ports"></category></entry><entry><title>Jupyter Notebook Support in Bitbucket</title><link href="http://www.legendu.net/en/blog/jupyter-notebook-support-in-bitbucket/" rel="alternate"></link><published>2017-12-19T23:34:17-08:00</published><updated>2017-12-19T23:34:17-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-12-19:/en/blog/jupyter-notebook-support-in-bitbucket/</id><summary type="html">&lt;p&gt;GitHub has built-in support for Jupyter Notebooks. 
+Bitbucket supports Jupyter Notebooks via a fileview addon. 
+It works on both publick and private notebooks.
+Follow the steps below to install the addon.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Click on your avatar in the lower left corner on your homepage of Bitbucket.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select the option &lt;code&gt;App marketplace …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;GitHub has built-in support for Jupyter Notebooks. 
+Bitbucket supports Jupyter Notebooks via a fileview addon. 
+It works on both publick and private notebooks.
+Follow the steps below to install the addon.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Click on your avatar in the lower left corner on your homepage of Bitbucket.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select the option &lt;code&gt;App marketplace&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Find the addon &lt;code&gt;Notebook Viewer&lt;/code&gt; in the listings. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the addon &lt;code&gt;Notebook Viewer&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open a notebook in one of your Bitbucket repository.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click on &lt;code&gt;Default file viwer&lt;/code&gt; (to the left of the button Edit) and select &lt;code&gt;IPython Viwer&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://bitbucket.org/site/master/issues/11318/enable-rich-rendering-of-jupyter-notebooks"&gt;https://bitbucket.org/site/master/issues/11318/enable-rich-rendering-of-jupyter-notebooks&lt;/a&gt;&lt;/p&gt;</content><category term="programming"></category><category term="Bitbucket"></category><category term="Jupyter Notebook"></category><category term="JupyterLab"></category><category term="software"></category><category term="GitHub"></category></entry><entry><title>Speedup Docker Pulling and Pushing</title><link href="http://www.legendu.net/en/blog/speedup-docker-pulling-and-pushing/" rel="alternate"></link><published>2017-11-29T20:28:31-08:00</published><updated>2017-11-29T20:28:31-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-11-29:/en/blog/speedup-docker-pulling-and-pushing/</id><summary type="html">&lt;p&gt;Pulling/pushing Docker images is extremely slow in China. 
+There are a few ways to speed up docker pulling/pushing in China.&lt;/p&gt;
+&lt;h2 id="using-the-official-china-mirror"&gt;Using the Official China Mirror&lt;/h2&gt;
+&lt;p&gt;Now the best way is to use the offical China mirror.
+Please refer to 
+&lt;a href="https://www.docker-cn.com/registry-mirror"&gt;Docker 中国官方镜像加速&lt;/a&gt;
+for details.
+You have to restart the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Pulling/pushing Docker images is extremely slow in China. 
+There are a few ways to speed up docker pulling/pushing in China.&lt;/p&gt;
+&lt;h2 id="using-the-official-china-mirror"&gt;Using the Official China Mirror&lt;/h2&gt;
+&lt;p&gt;Now the best way is to use the offical China mirror.
+Please refer to 
+&lt;a href="https://www.docker-cn.com/registry-mirror"&gt;Docker 中国官方镜像加速&lt;/a&gt;
+for details.
+You have to restart the Docker daemon in order for the configuration to take effect.
+If you are Ubuntu, 
+then you can use the following command to restart the daemon.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;service&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="k"&gt;restart&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="old-way"&gt;Old Way&lt;/h2&gt;
+&lt;p&gt;One way to speedup Docker visiting is to use &lt;a href="https://www.daocloud.io/"&gt;DaoCloud&lt;/a&gt; as a proxy.
+All you have to do is simply adding the following line into the file &lt;code&gt;/etc/default/docker&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;DOCKER_OPTS=&amp;quot;--registry-mirror=&amp;#39;http://a92c904a.m.daocloud.io&amp;#39;&amp;quot;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Please refer to &lt;a href="https://www.daocloud.io/mirror#accelerator-doc"&gt;https://www.daocloud.io/mirror#accelerator-doc&lt;/a&gt; for more details.&lt;/p&gt;</content><category term="software"></category><category term="Docker"></category><category term="speedup"></category><category term="performance"></category><category term="DaoCloud"></category></entry><entry><title>Make Your Life Easier with Portable Applications</title><link href="http://www.legendu.net/en/blog/portable-apps/" rel="alternate"></link><published>2017-11-18T09:51:49-08:00</published><updated>2017-11-18T09:51:49-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-11-18:/en/blog/portable-apps/</id><summary type="html">&lt;p&gt;Using portable applications is a good way to make your digital life easier. 
+They do not eat up your disk quickly nor do they mess up the registry of your Windows OS.
+You can always copy these applications from one computer to another and use it out of box.
+Or …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Using portable applications is a good way to make your digital life easier. 
+They do not eat up your disk quickly nor do they mess up the registry of your Windows OS.
+You can always copy these applications from one computer to another and use it out of box.
+Or you can install portable applications on a flash drive 
+and use it on any computer with a Windows OS.
+&lt;a href="http://www.portableapps.com/"&gt;PortableApps&lt;/a&gt; offers all kinds of portable apps.
+What is better is that it also offers a plotform 
+which integrate many functionalities together 
+such as installing portable apps (directly from the repository), 
+updating portable apps, 
+searching for installed apps, etc.
+There is also a &lt;a href="http://www.portableappc.com/"&gt;Chinese website&lt;/a&gt; 
+whcih offers portable apps with Chinese characteristics 
+that are compatible with the PortableApps platform. &lt;/p&gt;
+&lt;p&gt;There are some software that I use often 
+but is not support offically by PortableApps yet.
+For example, Cygwin and Python.
+There is a good portable version of Cygwin named 
+&lt;a href="https://github.com/CybeSystems/CygwinPortable"&gt;CygwinPortable&lt;/a&gt;
+on GitHub.
+It uses ConEmu for the console which supports multi-tabs 
+and can also be used as Windows command prompt. 
+CygwinPortable also allows you to create users and define the default user, 
+which is very convenient.
+Another advantage of CygwinPortable 
+(over &lt;a href="http://mobaxterm.mobatek.net/"&gt;MobaXterm&lt;/a&gt; and other portable version of Cygwin)
+is that it has built-in Python suppport,
+which makes Vim and other software installed on it Python-supported.
+Though CygwinPortable has built-in Python support, 
+the Python coming with it has limitations due to library dependencies.
+For example, 
+some Python packages such as FuzzyWuzzy and NLTK fails to work in CygwinPortable.
+&lt;a href="http://portablepython.com/"&gt;Anaconda Python&lt;/a&gt; is great portable distribution of Python.
+It comes with many popular Python packages 
+such as NumPy, SciPy, Matplotlib, PIL, PyQt, etc.
+and also code editors such as PyCharm, PyScripter and IDLE.&lt;/p&gt;</content><category term="application"></category><category term="Chinese"></category><category term="software"></category><category term="portable"></category><category term="apps"></category><category term="CygwinPortable"></category><category term="Portable Python"></category></entry><entry><title>Install the Latest Version of Docker CE on Ubuntu</title><link href="http://www.legendu.net/en/blog/docker-installation/" rel="alternate"></link><published>2017-10-22T13:24:32-07:00</published><updated>2017-10-22T13:24:32-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-22:/en/blog/docker-installation/</id><summary type="html">&lt;p&gt;You can install the latest version of Docker CE on Ubuntu 16.04 using the commands below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="n"&gt;repository&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ce&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt;
+&lt;span class="n"&gt;gpasswd …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;You can install the latest version of Docker CE on Ubuntu 16.04 using the commands below.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="n"&gt;repository&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;repository&lt;/span&gt; &lt;span class="ss"&gt;&amp;quot;deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable&amp;quot;&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="k"&gt;update&lt;/span&gt;
+&lt;span class="n"&gt;wajig&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;ce&lt;/span&gt;
+&lt;span class="o"&gt;#&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="k"&gt;user&lt;/span&gt; &lt;span class="k"&gt;to&lt;/span&gt; &lt;span class="n"&gt;the&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt; &lt;span class="k"&gt;group&lt;/span&gt;
+&lt;span class="n"&gt;gpasswd&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt; &lt;span class="err"&gt;$&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;whoami&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt;
+&lt;span class="n"&gt;newgrp&lt;/span&gt; &lt;span class="n"&gt;docker&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;</content><category term="software"></category><category term="docker"></category><category term="installation"></category><category term="ubuntu"></category><category term="latest"></category><category term="docker-ce"></category></entry><entry><title>List Running Jupyter Notebook Servers</title><link href="http://www.legendu.net/en/blog/list-running-jupyter-notebook-servers/" rel="alternate"></link><published>2017-10-22T12:21:29-07:00</published><updated>2017-10-22T12:21:29-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-10-22:/en/blog/list-running-jupyter-notebook-servers/</id><summary type="html">&lt;p&gt;You can list running Jupyter Notebook servers using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jupyter&lt;/span&gt; &lt;span class="n"&gt;notebook&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It works well most of the time. 
+However, 
+if the servers are launched using the root account (e.g., in a Docker container), 
+you might encounter issues. 
+In this case,
+a better alternative is to list …&lt;/p&gt;</summary><content type="html">&lt;p&gt;You can list running Jupyter Notebook servers using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;jupyter&lt;/span&gt; &lt;span class="n"&gt;notebook&lt;/span&gt; &lt;span class="n"&gt;list&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;It works well most of the time. 
+However, 
+if the servers are launched using the root account (e.g., in a Docker container), 
+you might encounter issues. 
+In this case,
+a better alternative is to list running servers using Python script.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;notebook&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;notebookapp&lt;/span&gt;
+&lt;span class="n"&gt;servers&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;list&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;notebookapp&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;list_running_servers&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+&lt;span class="k"&gt;print&lt;/span&gt; &lt;span class="n"&gt;servers&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;For more please refer to 
+&lt;a href="https://stackoverflow.com/questions/41782255/how-to-get-the-current-jupyter-notebook-servers-in-python"&gt;https://stackoverflow.com/questions/41782255/how-to-get-the-current-jupyter-notebook-servers-in-python&lt;/a&gt;.&lt;/p&gt;</content><category term="software"></category><category term="notebook"></category><category term="Jupyter Notebook"></category><category term="JupyterLab"></category><category term="Python"></category><category term="root"></category><category term="running servers"></category><category term="list"></category></entry><entry><title>Docker on Windows</title><link href="http://www.legendu.net/en/blog/docker-on-windows/" rel="alternate"></link><published>2017-08-26T20:09:10-07:00</published><updated>2017-08-26T20:09:10-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-08-26:/en/blog/docker-on-windows/</id><summary type="html">&lt;p&gt;While Docker can be used on Windows (10 and later) now, 
+there are all kinds of issues. 
+It is suggested that you avoid running Docker on Windows at this time 
+unless you absolutely have to.&lt;/p&gt;
+&lt;h2 id="installtion"&gt;Installtion&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Docker is natively supported on Win 10 and later. 
+However, 
+you need to enable …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;While Docker can be used on Windows (10 and later) now, 
+there are all kinds of issues. 
+It is suggested that you avoid running Docker on Windows at this time 
+unless you absolutely have to.&lt;/p&gt;
+&lt;h2 id="installtion"&gt;Installtion&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Docker is natively supported on Win 10 and later. 
+However, 
+you need to enable Hyper-V and Virtualization (enabled by default usually).
+Follow the steps below to enable Hyper-V.&lt;/p&gt;
+&lt;p&gt;a. In the Control Panel, click Programs &amp;gt; Programs and Features.&lt;/p&gt;
+&lt;p&gt;b. Click Turn Windows features on or off.&lt;/p&gt;
+&lt;p&gt;c. Click Hyper-V, click OK, and then click Close.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="usage"&gt;Usage&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Best to run Docker commands in CMD rather than in cygwin.
+First, 
+Cygwin paths (when mounting volumes) are not recognized by Docker on Windows.
+Second, 
+some docker commands will simply fail.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="issues"&gt;Issues&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It seems that file permission mapping does NOT work on Windows.
+(not sure, need to confirm ...)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There is issue to mount volumes to a docker container on Windows. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Software"></category><category term="Docker"></category><category term="Widnows"></category><category term="Windows 10"></category><category term="Hyper-V"></category><category term="Virtualization"></category></entry><entry><title>Cygwin Come to Rescue Linux Fans on Windows</title><link href="http://www.legendu.net/en/blog/cygwin-rescue-linux-fan/" rel="alternate"></link><published>2017-03-19T10:37:20-07:00</published><updated>2017-03-19T10:37:20-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-19:/en/blog/cygwin-rescue-linux-fan/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is suggested that you use 32 bit Cygwin as it has a better package support.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some tools (e.g., terminator) are not included in the regular release of Cygwin, 
+    but can be installed using 
+    &lt;a href="http://www.legendu.net/en/blog/cygwin-ports/"&gt;Cygwin Ports&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configuration files for many applications (e.g., bash and Vim)
+    in Linux can …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is suggested that you use 32 bit Cygwin as it has a better package support.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some tools (e.g., terminator) are not included in the regular release of Cygwin, 
+    but can be installed using 
+    &lt;a href="http://www.legendu.net/en/blog/cygwin-ports/"&gt;Cygwin Ports&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Configuration files for many applications (e.g., bash and Vim)
+    in Linux can be migrated to Cygwin directly 
+    and work out of the box. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You might get an error about "... unexpected token ..." 
+    if you edit your bash script in Windows and try to run it under Cygwin. 
+    You can fix the problem by convert DOS text file format to Unix/Linux text file format 
+    using the command &lt;code&gt;dos2unix&lt;/code&gt;. 
+    You can do the opposite using the command &lt;code&gt;unix2dos&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you are running Cygwin behind a (corpate) firewall,
+    you have to choose "use http proxy" when you install packages.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To install new packages,
+    run the Cygwin installer again and select new packages that you want to install.
+    Installed packages will be kept by default.
+    There's a script &lt;code&gt;apt-cyg&lt;/code&gt; witten by Stephen Jungels 
+    which gives users similar experience to &lt;code&gt;apt-get&lt;/code&gt; and &lt;code&gt;wajig&lt;/code&gt; in Debian/Ubuntu.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use &lt;code&gt;keychain&lt;/code&gt; to manager your SSH public key in Cygwin.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sometimes Cygwin fails to download and install new packages
+    (even there is no problem with the network and proxy). 
+    Restalling it can often solve the problem in this situation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use gawk instead if awk does not work in Cygwin.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It is best to put your configurations files in the $HOME/archives.
+    And link to the home directory in Cygwin.
+    Do not put data directly in Cygwin, 
+    because it makes things not portable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;rename&lt;/code&gt; utility on Cygwin/MobaXterm has very limited functionality. 
+    It mimics the &lt;code&gt;rename&lt;/code&gt; command on older version (2.6) of Linux.
+    The new version of &lt;code&gt;rename&lt;/code&gt; (on latest version of Linux) 
+    is not compatible with the older version one (on Cygwin/MobaXterm).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;By default, 
+    the &lt;code&gt;PATH&lt;/code&gt; environment variable in Cygwin contains some Windows executable paths 
+    before Cygwin executable paths.
+    This shelter some Linux commands from being used directly.
+    For example, Windows has a &lt;code&gt;find&lt;/code&gt; command which might shelter the Linux &lt;code&gt;find&lt;/code&gt; command.
+    If this is case, you can either use the full path to the Linux &lt;code&gt;find&lt;/code&gt; command,
+    or you can put it into a Cygwin executable path before Windows executable paths. 
+    Sometimes, this causes seriously problems. 
+    For example, if you install R and its executables into the PATH environemtn variable,
+    its executables shelter Cygwin's and make it not work well.
+    It is suggested that you manually prepend $HOME/bin, /usr/local/bin, /usr/bin, etc. 
+    into $PATH in the &lt;code&gt;.bashrc&lt;/code&gt; file in Cygwin.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="recommended-packages"&gt;Recommended Packages&lt;/h2&gt;
+&lt;h3 id="compiler-related"&gt;Compiler Related&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;make, cmake&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="python-related"&gt;Python Related&lt;/h3&gt;
+&lt;p&gt;python-dateutil (via &lt;a href="http://www.legendu.net/en/blog/cygwin-ports/"&gt;Cygwin Ports&lt;/a&gt;), python-pip (manually)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;pip install python-dateutil
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;python-setuptools (contains easy_install)&lt;/p&gt;
+&lt;p&gt;However, notice that if you have Python (e.g., Anaconda Python) installed on Windows, 
+it might confuse yourself about which one you are using ...
+Avoid installing Python on Windows if you have it installed in Cygwin
+or at least be careful about the path ...&lt;/p&gt;
+&lt;p&gt;it seems to me that the best way to install Python packages on Cygwin is to use Python directly, &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;python setup.py --install package_name
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h4 id="packages-that-fail-to-work"&gt;Packages that Fail to Work&lt;/h4&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;FuzzyWuzzy&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NLTK&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NumPy&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="git-related"&gt;Git Related&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;git&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;git-completion (required for Git to auto complete in Cygwin)&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="editor"&gt;Editor&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Vim&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="text-manipulation-tools"&gt;Text Manipulation Tools&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;colordiff&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="available-tools-installed-by-default"&gt;Available Tools Installed by Default&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;cd, ls, cp, mv, chmod, chown, ln &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;du, df&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;grep, sed, awk &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="availabe-tools-not-installed-by-default"&gt;Availabe Tools not Installed by Default&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;terminator (available via &lt;a href="http://www.legendu.net/en/blog/cygwin-ports/"&gt;Cygwin Ports&lt;/a&gt;)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;shutdown, halt, reboot (availabe via the &lt;code&gt;shutdown&lt;/code&gt; package)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;openssh-client, scp, rsync, keychain (keyring for ssh)  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;wget (better supported in 32 bit version of Cygwin until 1.7.35), curl, unison, w3m&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;gcc, git&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;screen (no help doc available, which is odd)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Vim &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pdftk (only available on 32 bit as of Mar 6, 2015)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tmux&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;convert (in the ImageMagic package)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;rename (available via the util-linux package, 
+    not as powerful as rename in linux but OK for simple batch rename)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;clear (available via the ncurses package)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TexMacs&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Texlive&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dos2unix, unix2dos&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="missing-tools"&gt;Missing Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;openssh-server&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;dvipng&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;netstat (use X-NetStat as an alternative)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;pandoc, wkhtmltopdf, pdfgrep&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Linux"></category><category term="Windows"></category><category term="virtualization"></category><category term="software"></category><category term="Cygwin"></category></entry><entry><title>Tips for AWK</title><link href="http://www.legendu.net/en/blog/awk-tips/" rel="alternate"></link><published>2017-03-19T10:22:17-07:00</published><updated>2017-03-19T10:22:17-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-19:/en/blog/awk-tips/</id><summary type="html">&lt;p&gt;&lt;a href="http://www.grymoire.com/Unix/Awk.html"&gt;AWK Tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;For small structured text files, 
+    it is suggested that you use the &lt;a href="http://harelba.github.io/q/"&gt;q&lt;/a&gt;
+    command to manipulate it.&lt;/p&gt;
+&lt;p&gt;For complicated logic, 
+it is suggested that you use a scripting language (e.g., Python) instead. 
+I personally discourage using of &lt;code&gt;awk&lt;/code&gt; 
+unless you have a large file (that q cannot …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;a href="http://www.grymoire.com/Unix/Awk.html"&gt;AWK Tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;For small structured text files, 
+    it is suggested that you use the &lt;a href="http://harelba.github.io/q/"&gt;q&lt;/a&gt;
+    command to manipulate it.&lt;/p&gt;
+&lt;p&gt;For complicated logic, 
+it is suggested that you use a scripting language (e.g., Python) instead. 
+I personally discourage using of &lt;code&gt;awk&lt;/code&gt; 
+unless you have a large file (that q cannot handle) 
+and the operations you want do are simple.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Basic syntax of &lt;code&gt;awk&lt;/code&gt;&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;BEGIN {start_action} {action} END {stop_action}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Whether to user single or double quote depends on
+    whether you use column variables in the expression.
+    This is consistent with shell variable substitution.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;awk&lt;/code&gt; ignorecase when working on files make unnecessary redundant output
+    very annoying, not sure why&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;awk&lt;/code&gt; does not recognize escaped characters in CSV formatted. 
+    Make sure that the file &lt;code&gt;awk&lt;/code&gt; works on is in simple format.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="field-delimiter"&gt;Field Delimiter&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The delimiter must be quoted. 
+    For example, 
+    if the field delimiter is tab,
+    you must use &lt;code&gt;awk -F'\t'&lt;/code&gt; rather than &lt;code&gt;awk -F\t&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The filed delimiter of AWK supports can be a regular expression.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;awk&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;F&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;[/=]&amp;#39;&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $3 &amp;quot;\t&amp;quot; $5 &amp;quot;\t&amp;quot; $8}&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="columnfield-filteringmanipulation"&gt;Column/Field Filtering/Manipulation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Select 1st and 3rd column (seprated by tab)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print $1 &amp;quot;\t&amp;quot; $3}&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Sum of the 5th filed.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;BEGIN {s=0} {s=s+$5} END {print s}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="rows-filteringmanipulation"&gt;Rows Filtering/Manipulation&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Print rows of the file with the first field greater than 3.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{ if($1 &amp;amp;gt; 3) print }&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt; &lt;span class="nv"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Print Docker image IDs that has no repositories names.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;images&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{ if ($1 == &amp;quot;&amp;amp;lt;none&amp;amp;gt;&amp;quot;) print $3 }&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Print Docker image IDs whose name contains &lt;code&gt;che&lt;/code&gt; using regular expression match.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="nv"&gt;images&lt;/span&gt; &lt;span class="o"&gt;|&lt;/span&gt; &lt;span class="nv"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;&lt;span class="s"&gt;{if ($1 ~ &amp;quot;che&amp;quot;) print $3}&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Print rows with 2 fileds.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;NF == 2&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or more verbosally (and more portable)&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;NF == 2 {print} {}&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Count the number of fields in each line.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;awk&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;{print NF}&amp;#39;&lt;/span&gt; &lt;span class="n"&gt;file_name&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/15386632/awk-4th-column-everything-matching-wildcard-before-the&lt;/p&gt;</content><category term="tips"></category><category term="awk"></category><category term="text manipulation"></category></entry><entry><title>Selectively Disable Vimperator on Webpages</title><link href="http://www.legendu.net/en/blog/selectively-disable-vimperator/" rel="alternate"></link><published>2017-03-04T13:28:47-08:00</published><updated>2017-03-04T13:28:47-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-03-04:/en/blog/selectively-disable-vimperator/</id><summary type="html">&lt;p&gt;You can press &lt;code&gt;shift + esc&lt;/code&gt; to disable Vimperator on pages and &lt;code&gt;insert&lt;/code&gt; to enable it again. 
+This is not good solution as often times you wan to disable Vimperator on a few pages 
+but still have it enabled on other pages. 
+You can achieve this by configurating the &lt;code&gt;~/.vimperatorrc&lt;/code&gt; file …&lt;/p&gt;</summary><content type="html">&lt;p&gt;You can press &lt;code&gt;shift + esc&lt;/code&gt; to disable Vimperator on pages and &lt;code&gt;insert&lt;/code&gt; to enable it again. 
+This is not good solution as often times you wan to disable Vimperator on a few pages 
+but still have it enabled on other pages. 
+You can achieve this by configurating the &lt;code&gt;~/.vimperatorrc&lt;/code&gt; file.
+Below is an example of disabling Vimperator on Google main, calendar, reader and tasks. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;autocmd&lt;/span&gt; &lt;span class="n"&gt;LocationChange&lt;/span&gt; &lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;                             &lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="n"&gt;modes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;passAllKeys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;span class="n"&gt;autocmd&lt;/span&gt; &lt;span class="n"&gt;LocationChange&lt;/span&gt; &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;            &lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="n"&gt;modes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;passAllKeys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+&lt;span class="n"&gt;autocmd&lt;/span&gt; &lt;span class="n"&gt;LocationChange&lt;/span&gt; &lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;calendar&lt;/span&gt;    &lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="n"&gt;modes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;passAllKeys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+&lt;span class="n"&gt;autocmd&lt;/span&gt; &lt;span class="n"&gt;LocationChange&lt;/span&gt; &lt;span class="n"&gt;www&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;reader&lt;/span&gt;      &lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="n"&gt;modes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;passAllKeys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;true&lt;/span&gt;
+&lt;span class="n"&gt;autocmd&lt;/span&gt; &lt;span class="n"&gt;LocationChange&lt;/span&gt; &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="err"&gt;\\&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tasks&lt;/span&gt;      &lt;span class="n"&gt;js&lt;/span&gt; &lt;span class="n"&gt;modes&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;passAllKeys&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="k"&gt;false&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Instead of using &lt;code&gt;autocmd&lt;/code&gt;, 
+you can also use &lt;code&gt;ignorekeys&lt;/code&gt;. 
+Below is an exampel of disabling Vimperator on Yahoo and Google mail.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;ignorekeys&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;yahoo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;ignorekeys&lt;/span&gt; &lt;span class="k"&gt;add&lt;/span&gt; &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;google&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;h2 id="reference"&gt;Reference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://stackoverflow.com/questions/14271624/disable-vimperator-temporarily"&gt;Disable Vimperator Temporarily&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;</content><category term="software"></category><category term="Vimperator"></category><category term="Vim"></category><category term="Firefox"></category><category term="browser"></category></entry><entry><title>Using Bash in Docker</title><link href="http://www.legendu.net/en/blog/Using-Bash-in-Docker/" rel="alternate"></link><published>2017-01-14T13:54:14-08:00</published><updated>2017-01-14T13:54:14-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-01-14:/en/blog/Using-Bash-in-Docker/</id><summary type="html">&lt;p&gt;If the docker container was started using &lt;code&gt;/bin/bash&lt;/code&gt; 
+(you can check using &lt;code&gt;docker ps&lt;/code&gt;) command you can access it using &lt;code&gt;attach&lt;/code&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker attach container_name_or_id
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If the docker container was started but not with &lt;code&gt;/bin/bash&lt;/code&gt;,
+you have to create a bash instance inside the container using &lt;code&gt;exec&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="nb"&gt;exec …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;If the docker container was started using &lt;code&gt;/bin/bash&lt;/code&gt; 
+(you can check using &lt;code&gt;docker ps&lt;/code&gt;) command you can access it using &lt;code&gt;attach&lt;/code&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker attach container_name_or_id
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;If the docker container was started but not with &lt;code&gt;/bin/bash&lt;/code&gt;,
+you have to create a bash instance inside the container using &lt;code&gt;exec&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;docker &lt;span class="nb"&gt;exec&lt;/span&gt; -it container_name_or_id /bin/bash 
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Notice that &lt;code&gt;attach&lt;/code&gt; does not create a new instance of bash 
+but use the already created one in the corresponding docker container.
+However, 
+both &lt;code&gt;exec&lt;/code&gt; and &lt;code&gt;run&lt;/code&gt; create new bash instances.&lt;/p&gt;
+&lt;h2 id="examples"&gt;Examples&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nv"&gt;docker&lt;/span&gt; &lt;span class="k"&gt;exec&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;it&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;u&lt;/span&gt; &lt;span class="nv"&gt;dclong&lt;/span&gt; &lt;span class="nv"&gt;jupyterlab&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;py&lt;/span&gt; &lt;span class="nv"&gt;jupyter&lt;/span&gt; &lt;span class="nv"&gt;nbconvert&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;to&lt;/span&gt; &lt;span class="nv"&gt;html&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;execute&lt;/span&gt; &lt;span class="o"&gt;--&lt;/span&gt;&lt;span class="nv"&gt;ExecutePreprocessor&lt;/span&gt;.&lt;span class="nb"&gt;timeout&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;600&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;workdir&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="nv"&gt;spend&lt;/span&gt;.&lt;span class="nv"&gt;ipynb&lt;/span&gt; 
+&lt;/pre&gt;&lt;/div&gt;</content><category term="software"></category><category term="docker"></category><category term="bash"></category><category term="shell"></category></entry><entry><title>Start RStudio Server After Upgrading</title><link href="http://www.legendu.net/en/blog/start-rstudio-server-after-upgrading/" rel="alternate"></link><published>2016-12-10T02:09:11-08:00</published><updated>2016-12-10T02:09:11-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-12-10:/en/blog/start-rstudio-server-after-upgrading/</id><summary type="html">&lt;p&gt;It is quite often that the RStudio server cannot be start after upgrading. 
+This is due to running R session in the background. 
+A simple solution is to just restart the host machine. 
+However, it is very risky to start servers (especially remote shared ones).
+An alternative way is to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It is quite often that the RStudio server cannot be start after upgrading. 
+This is due to running R session in the background. 
+A simple solution is to just restart the host machine. 
+However, it is very risky to start servers (especially remote shared ones).
+An alternative way is to find the R session in the background,
+kill it and then start the RStudio server.
+The following instruction assumes that 
+the port 8787 (default) is used by RStudio server.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Find processes that listen to the port 8787.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;fuser&lt;/span&gt; &lt;span class="mi"&gt;8787&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Kill all processes that listen to the port 8787. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;fuser&lt;/span&gt; &lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;k&lt;/span&gt; &lt;span class="mi"&gt;8787&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;tcp&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Or you can also use the command &lt;code&gt;kill&lt;/code&gt; to terminate processes. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Start RStudio server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;rstudio&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;server&lt;/span&gt; &lt;span class="k"&gt;start&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="software"></category><category term="IDE"></category><category term="RStudio"></category></entry><entry><title>Install the rJava Package in R</title><link href="http://www.legendu.net/en/blog/install-the-rjava-package-in-r/" rel="alternate"></link><published>2016-12-10T01:44:32-08:00</published><updated>2016-12-10T01:44:32-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-12-10:/en/blog/install-the-rjava-package-in-r/</id><summary type="html">&lt;p&gt;The most convenient way is to install the corresponding Linux package if exists.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cran&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rjava&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, this Linux package is often outdated.
+Follow the steps below if you'd rather install rJava manually.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install OpenJDK and configure Java. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;openjdk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-*&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;R …&lt;/span&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;The most convenient way is to install the corresponding Linux package if exists.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;r&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;cran&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="n"&gt;rjava&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;However, this Linux package is often outdated.
+Follow the steps below if you'd rather install rJava manually.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install OpenJDK and configure Java. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;openjdk&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="mi"&gt;7&lt;/span&gt;&lt;span class="o"&gt;-*&lt;/span&gt;
+&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;R&lt;/span&gt; &lt;span class="n"&gt;CMD&lt;/span&gt; &lt;span class="n"&gt;javareconf&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install the &lt;code&gt;rJava&lt;/code&gt; package in R.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;install&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;packages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="ss"&gt;&amp;quot;rJava&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;).&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;If it does not work, 
+please set the &lt;code&gt;JAVA_HOME&lt;/code&gt; environment variable manually in step 1
+and then try step 2 again.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="nb"&gt;export&lt;/span&gt; &lt;span class="nv"&gt;JAVA_HOME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;/usr/lib/jvm/java-7-openjdk-amd64/jre
+&lt;/pre&gt;&lt;/div&gt;</content><category term="R"></category><category term="rJava"></category><category term="Java"></category><category term="Linux"></category></entry><entry><title>Scientific References</title><link href="http://www.legendu.net/en/blog/scientfic-reference/" rel="alternate"></link><published>2016-07-13T00:05:06-07:00</published><updated>2016-07-13T00:05:06-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/en/blog/scientfic-reference/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;JabRef&lt;/code&gt; is an open-source cross-plotform software for managing scientific references.
+&lt;code&gt;Mendeley&lt;/code&gt; is a good cost-free cross-platform software for managing scientific references.
+It introduces the concept of social research.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you use bibtex in your LaTeX code, 
+you have to compile your code using &lt;code&gt;pdflatex/latex&lt;/code&gt;, &lt;code&gt;bibtex&lt;/code&gt;, &lt;code&gt;pdflatex/latex&lt;/code&gt; and &lt;code&gt;pdflatex …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;JabRef&lt;/code&gt; is an open-source cross-plotform software for managing scientific references.
+&lt;code&gt;Mendeley&lt;/code&gt; is a good cost-free cross-platform software for managing scientific references.
+It introduces the concept of social research.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you use bibtex in your LaTeX code, 
+you have to compile your code using &lt;code&gt;pdflatex/latex&lt;/code&gt;, &lt;code&gt;bibtex&lt;/code&gt;, &lt;code&gt;pdflatex/latex&lt;/code&gt; and &lt;code&gt;pdflatex/latex&lt;/code&gt; in sequence.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;natbib&lt;/code&gt; is a LaTeX package for citing references, and it is compatible with bibtex.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you use author and date style references and there are duplicate
+authors and years, &lt;code&gt;natbib&lt;/code&gt; print out the whole list of names and years
+by default instead of using abbreviation for names. To avoid this
+problem, you can add letters to the end of years. (not sure about this ...)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;\eqref&lt;/code&gt; command is convenient way to reference equations in LaTeX.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="LaTeX"></category><category term="reference"></category><category term="research"></category><category term="Bibtex"></category><category term="software"></category></entry><entry><title>Convert LaTeX to Word</title><link href="http://www.legendu.net/en/blog/convert-latex-to-word/" rel="alternate"></link><published>2016-07-13T00:02:08-07:00</published><updated>2016-07-13T00:02:08-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/en/blog/convert-latex-to-word/</id><summary type="html">&lt;p&gt;&lt;code&gt;pandoc&lt;/code&gt; is a general purpose tool for converting between different type of documents, 
+however, 
+it is not good at converting LaTeX code to word.
+&lt;code&gt;tex4ht&lt;/code&gt; is a better tool for converting LaTeX code to word. 
+The following are instructions to use &lt;code&gt;tex4ht&lt;/code&gt; to convert LaTeX to word.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Compile your LaTeX …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;pandoc&lt;/code&gt; is a general purpose tool for converting between different type of documents, 
+however, 
+it is not good at converting LaTeX code to word.
+&lt;code&gt;tex4ht&lt;/code&gt; is a better tool for converting LaTeX code to word. 
+The following are instructions to use &lt;code&gt;tex4ht&lt;/code&gt; to convert LaTeX to word.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Compile your LaTeX code. 
+Make sure that there are no error messages. 
+Do not remove the temporary files produced when compiling your LaTeX code, 
+as they are required by the &lt;code&gt;tex4ht&lt;/code&gt; command. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Convert your LaTeX code to html document using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;mk4ht&lt;/span&gt; &lt;span class="n"&gt;mzlatex&lt;/span&gt; &lt;span class="n"&gt;you_latex_doc&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;tex&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Open the html document using office tools (Microsoft Word, LibreOffice Writer, AbiWord, etc).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Save a copy of the html document to the right format you want. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="html"></category><category term="LaTeX"></category><category term="Office"></category><category term="software"></category><category term="Word"></category></entry><entry><title>TeXstudio, Bravo!</title><link href="http://www.legendu.net/en/blog/texstudio-bravo/" rel="alternate"></link><published>2016-07-13T00:01:26-07:00</published><updated>2016-07-13T00:01:26-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-07-13:/en/blog/texstudio-bravo/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/bravo/bravo.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I have heard about this LaTeX IDE for a long time. I
+tried it today on a Debian virtual machine. It works like a charm. I like the preview
+function a lot. Using inline preview, you can see compiled result while you are
+typing. It works even with user-defined commands …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/bravo/bravo.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I have heard about this LaTeX IDE for a long time. I
+tried it today on a Debian virtual machine. It works like a charm. I like the preview
+function a lot. Using inline preview, you can see compiled result while you are
+typing. It works even with user-defined commands. 
+This is very helpful for people who has to use massive math expression in
+LaTeX, which make TeXstudio comparable to the WYSIWYG LaTeX IDE "LyX". The
+advatantage of TeXstudio over Lyx is obvious. You write pure LaTeX code. You
+do not have to remember many shortcuts and commands specific to LyX. TeXstudio has
+tons of other features such as auto-complete, highlighting, structure view, reversing
+search and so on. It is also cross platform! TeXstudio has the potential to be
+the terminator of debate on LaTeX IDEs. &lt;/p&gt;</content><category term="LyX"></category><category term="LaTeX"></category><category term="IDE"></category><category term="software"></category><category term="WYSIWYG"></category><category term="TeXstudio"></category></entry><entry><title>Useful Plugins for Eclipse</title><link href="http://www.legendu.net/en/blog/useful-plugins-for-eclipse/" rel="alternate"></link><published>2015-08-26T22:07:38-07:00</published><updated>2015-08-26T22:07:38-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-08-26:/en/blog/useful-plugins-for-eclipse/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/eclipse/cdt.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="terminal-plug-in"&gt;Terminal Plug-in&lt;/h2&gt;
+&lt;p&gt;"Terminal Plug-in" is a fully-working command-line terminal for Eclipse.&lt;/p&gt;
+&lt;h2 id="easyshell"&gt;EasyShell&lt;/h2&gt;
+&lt;p&gt;"EasyShell" allows to open a shell window or file manager from the popup menu 
+in the navigation tree or editor view.&lt;/p&gt;
+&lt;h2 id="vrapper"&gt;Vrapper&lt;/h2&gt;
+&lt;p&gt;Vrapper provides Vim-like scheme for Eclispe.
+You can edit code similar as what you do in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/eclipse/cdt.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="terminal-plug-in"&gt;Terminal Plug-in&lt;/h2&gt;
+&lt;p&gt;"Terminal Plug-in" is a fully-working command-line terminal for Eclipse.&lt;/p&gt;
+&lt;h2 id="easyshell"&gt;EasyShell&lt;/h2&gt;
+&lt;p&gt;"EasyShell" allows to open a shell window or file manager from the popup menu 
+in the navigation tree or editor view.&lt;/p&gt;
+&lt;h2 id="vrapper"&gt;Vrapper&lt;/h2&gt;
+&lt;p&gt;Vrapper provides Vim-like scheme for Eclispe.
+You can edit code similar as what you do in Vim 
+plus that you can use mouse to copy and paste code. 
+In my opinion, 
+it is better than either Eclipse or Vim alone. 
+The configuration file of Vrapper is &lt;code&gt;.vrapper&lt;/code&gt; or &lt;code&gt;_vrapperrc&lt;/code&gt; (on Windows).&lt;/p&gt;
+&lt;p&gt;The &lt;a href="http://eclim.org/"&gt;Eclim&lt;/a&gt; project provides a great alternative to the Vrapper plugin. 
+Eclim is a seemless integration of Eclipse and the native Vim (rather than a Vim plugin). 
+All plugins in Vim works well. &lt;/p&gt;
+&lt;h2 id="codeinterview-plugin"&gt;CodeInterview Plugin&lt;/h2&gt;
+&lt;p&gt;"CodeInterview Plugin" allows you to write code in Eclipse instead of on CodeInterview directly. 
+This is helpful if you will be interviewed for coding skills on CodeInterview.&lt;/p&gt;</content><category term="Vim"></category><category term="Eclipse"></category><category term="shell"></category><category term="C/C++"></category><category term="IDE"></category><category term="software"></category><category term="plugins"></category><category term="addons"></category></entry><entry><title>Software I Use in Windows System</title><link href="http://www.legendu.net/en/blog/softwares-windows/" rel="alternate"></link><published>2015-03-13T10:54:07-07:00</published><updated>2015-03-13T10:54:07-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-13:/en/blog/softwares-windows/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/windows/windows.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I switched from Windows System to Linux System half a year ago. 
+The following is a summary of softwares I used in Windows system. 
+I keep the list here in case I have to switch back to Windows sometime.
+Surely a good way to avoid reintalling software is to portable …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/windows/windows.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I switched from Windows System to Linux System half a year ago. 
+The following is a summary of softwares I used in Windows system. 
+I keep the list here in case I have to switch back to Windows sometime.
+Surely a good way to avoid reintalling software is to portable applications. 
+There is a post on my blog discussing this top.&lt;/p&gt;
+&lt;h2 id="linux-tools"&gt;Linux Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Virtualbox/VMware&lt;/li&gt;
+&lt;li&gt;coLinux&lt;/li&gt;
+&lt;li&gt;andLinux&lt;/li&gt;
+&lt;li&gt;Cygwin&lt;/li&gt;
+&lt;li&gt;GnuWin32&lt;/li&gt;
+&lt;li&gt;UnxUtils&lt;/li&gt;
+&lt;li&gt;MinGW/MSYS&lt;/li&gt;
+&lt;li&gt;console2&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="archive-tools"&gt;Archive Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;zip (come with with Windows)&lt;/li&gt;
+&lt;li&gt;7zip &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="communication"&gt;Communication&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;QQ&lt;/li&gt;
+&lt;li&gt;Skype &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="network"&gt;Network&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;IIS (for webhosting)&lt;/li&gt;
+&lt;li&gt;Cisco VPN Client (for connecting to work network)  &lt;/li&gt;
+&lt;li&gt;Chrome and Firefox (for surfing web)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="pdf"&gt;PDF&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Adobe Reader (for reading pdf documents)&lt;/li&gt;
+&lt;li&gt;Latex and Texstudio (for word processing)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="scientific-computing"&gt;Scientific Computing&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;R, Rtools and Rstudio (for statistical computing and graphics)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="anit-virus"&gt;Anit-virus&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Microsoft Security Essentials&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="downloading-tools"&gt;Downloading Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;QQ Xuanfeng&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="other-things"&gt;Other Things&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Classic Shell&lt;/li&gt;
+&lt;/ol&gt;</content><category term="anti-virus"></category><category term="Windows"></category><category term="software"></category><category term="archive"></category><category term="Linux"></category><category term="virtualization"></category></entry><entry><title>Conversation Mode in Thunderbird</title><link href="http://www.legendu.net/en/blog/conversation-mode-in-thunderbird/" rel="alternate"></link><published>2015-03-10T20:19:01-07:00</published><updated>2015-03-10T20:19:01-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-10:/en/blog/conversation-mode-in-thunderbird/</id><summary type="html">&lt;p&gt;There is a Thunderbird add-on &lt;code&gt;Conversation&lt;/code&gt; 
+which enables you read emails in the Gmail-like conversation mode.
+However, 
+it has some limitations. 
+For example, many shortcuts do not work if you use the &lt;code&gt;Conversation&lt;/code&gt; add-on.
+Actually, thunderbird has a built-in conversation mode.
+To enable the built-in conversation mode,
+you need to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;There is a Thunderbird add-on &lt;code&gt;Conversation&lt;/code&gt; 
+which enables you read emails in the Gmail-like conversation mode.
+However, 
+it has some limitations. 
+For example, many shortcuts do not work if you use the &lt;code&gt;Conversation&lt;/code&gt; add-on.
+Actually, thunderbird has a built-in conversation mode.
+To enable the built-in conversation mode,
+you need to popup the menu,
+select &lt;code&gt;View&lt;/code&gt; -&amp;gt; &lt;code&gt;Sort by&lt;/code&gt;,
+and check both &lt;code&gt;Date&lt;/code&gt; and &lt;code&gt;Threaded&lt;/code&gt;.
+The makes emails in a folder shown in the conversation mode. 
+However, it does not help much if you do not all emails in one folder 
+(e.g., you probably don't have the sent emails in the Inbox folder).
+You cannot of course setup Thunderbird to put all emails in the Inbox folder,
+however,
+there is a universal and more useful way to read emails in conversation mode.
+You can open an email (and all other emails in the same conversation) in conversation mode, 
+following the instructions below.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Right click on the message. &lt;/li&gt;
+&lt;li&gt;Select &lt;code&gt;Open Message in Conversation&lt;/code&gt; in the popup menu.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;An even quicker way is to use the shortcut "CTRL + SHIFT + O" after selecting the message.&lt;/p&gt;</content><category term="software"></category><category term="Thunderbird"></category><category term="conversation mode"></category></entry><entry><title>Useful Shortcuts for Thunderbird</title><link href="http://www.legendu.net/en/blog/useful-shortcuts-for-thunderbird/" rel="alternate"></link><published>2015-03-10T19:18:24-07:00</published><updated>2015-03-10T19:18:24-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-03-10:/en/blog/useful-shortcuts-for-thunderbird/</id><summary type="html">&lt;h2 id="message"&gt;Message&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;F8: Message Preview Pane &lt;/li&gt;
+&lt;li&gt;CTRL + N: New email&lt;/li&gt;
+&lt;li&gt;CTRL + O: Open email&lt;/li&gt;
+&lt;li&gt;CTRL + SHIFT + O: Open in conversation&lt;/li&gt;
+&lt;li&gt;CTRL + U: Email source&lt;/li&gt;
+&lt;li&gt;CTRL + R: Reply to an email&lt;/li&gt;
+&lt;li&gt;CTRL + SHIFT + R: Reply to all&lt;/li&gt;
+&lt;li&gt;CTRL + L: Foward email&lt;/li&gt;
+&lt;li&gt;CTRL + E: Edit email as new&lt;/li&gt;
+&lt;li&gt;CTRL + ENTER: Send current email …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="message"&gt;Message&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;F8: Message Preview Pane &lt;/li&gt;
+&lt;li&gt;CTRL + N: New email&lt;/li&gt;
+&lt;li&gt;CTRL + O: Open email&lt;/li&gt;
+&lt;li&gt;CTRL + SHIFT + O: Open in conversation&lt;/li&gt;
+&lt;li&gt;CTRL + U: Email source&lt;/li&gt;
+&lt;li&gt;CTRL + R: Reply to an email&lt;/li&gt;
+&lt;li&gt;CTRL + SHIFT + R: Reply to all&lt;/li&gt;
+&lt;li&gt;CTRL + L: Foward email&lt;/li&gt;
+&lt;li&gt;CTRL + E: Edit email as new&lt;/li&gt;
+&lt;li&gt;CTRL + ENTER: Send current email &lt;/li&gt;
+&lt;li&gt;CTRL + SHIFT + ENTER: Send email later (you need the SendLater add-on)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="misc"&gt;Misc&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;CTRL + W: Close window&lt;/li&gt;
+&lt;li&gt;CTRL + SHIFT + M: Move again&lt;/li&gt;
+&lt;li&gt;CTRL + SHIFT + B: Open address book&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="menu"&gt;Menu&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;ALT + F: pop up the "File" menu&lt;/li&gt;
+&lt;li&gt;ALT + E: pop up the "Edit" menu&lt;/li&gt;
+&lt;li&gt;ALT + V: pop up the "View" menu&lt;/li&gt;
+&lt;li&gt;ALT + S: pop up the "History" menu&lt;/li&gt;
+&lt;li&gt;ALT + B: pop up the "Bookmark" menu&lt;/li&gt;
+&lt;li&gt;ALT + T: Pop up the "Tool" menu.&lt;/li&gt;
+&lt;li&gt;ALT + H: pop up the "Help" menu&lt;/li&gt;
+&lt;/ol&gt;</content><category term="software"></category><category term="Thunderbird"></category><category term="email client"></category><category term="shortcut"></category><category term="hotkey"></category></entry><entry><title>RStudio Does Not Start</title><link href="http://www.legendu.net/en/blog/rstudio-not-start/" rel="alternate"></link><published>2015-02-26T12:45:00-08:00</published><updated>2015-02-26T12:45:00-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-26:/en/blog/rstudio-not-start/</id><summary type="html">&lt;p&gt;Rstudio is the best cross-platform IDE for R so far. 
+It is a lot like the IDE of MATLAB.
+Once I came across the problem that Rstudio did not start. 
+I search website for a solution but has no luck. 
+I have seen broken configuration files prevent applications 
+from working …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Rstudio is the best cross-platform IDE for R so far. 
+It is a lot like the IDE of MATLAB.
+Once I came across the problem that Rstudio did not start. 
+I search website for a solution but has no luck. 
+I have seen broken configuration files prevent applications 
+from working correctly a lot.
+So I tried removing the configuration directory ".rstudio-desktop" from my home directory, 
+and Rstudio worked properly again!
+This trick also works for many other applications, 
+e.g., forefix, latex (temporary files), etc.&lt;/p&gt;</content><category term="IDE"></category><category term="R"></category><category term="statistics"></category><category term="software"></category><category term="configuration"></category><category term="RStudio"></category><category term="CRAN"></category></entry><entry><title>Tips for Excel</title><link href="http://www.legendu.net/en/blog/tips-for-excel/" rel="alternate"></link><published>2015-02-20T10:57:28-08:00</published><updated>2015-02-20T10:57:28-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-20:/en/blog/tips-for-excel/</id><summary type="html">&lt;h2 id="about-statistics-functions"&gt;About Statistics Functions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Excel is not a reliable software for statistical analysis. 
+It's not even capable for simple operations such as calculating 
+mean and standard deviation when numbers are very big 
+(at least before version 2007, not sure about later versions). 
+If you do have to use Excel for statistical …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="about-statistics-functions"&gt;About Statistics Functions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Excel is not a reliable software for statistical analysis. 
+It's not even capable for simple operations such as calculating 
+mean and standard deviation when numbers are very big 
+(at least before version 2007, not sure about later versions). 
+If you do have to use Excel for statistical analysis, 
+you'd better verify the results.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A bug in Excel 2007 (not sure about later versions) 
+is that the degrees of freedoms of the Chisquare distribution can only be positive integers. 
+If you pass a real number to related functions (density, cdf, etc), 
+the degrees of freedom will first be coerced to an integer 
+(I forget the exact behavior, but it's probably rounding down) and then do the calculation. 
+No warning is shown in this process. Fotunately, 
+the Gamma distribution behaves right in Excel. 
+Be aware of the relationship between Chisquare distribution and Gamma distribution, you can circumambulate this bug. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It seems that the F distribution in Excel can only have integer
+degrees of freedom. If not, the degrees of freedoms will changed to
+integers first. I don't know how to circumvent this problem easily.
+Sure we can write our own functions but it's not worth doing that.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="tips"&gt;Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;To unhide a workbook, 
+click the "View" tab and then click the "unhide" button in the window group.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use the hotkey CTRL + Left/Right/Up/Down Arrow to quickly jump to the end of a used range.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can use macros/functions defined in a workbook if it is open. 
+So you can use put all your macros/functions into a single workbook 
+and just open it for use when needed.
+Or you can put all your macros/functions into "PERSONAL.xlsb" which is a hidden workbook that is always open.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;insert multiple lines at the same time, select multiple lines, right click and insert&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;after selecting a bunch of cells, right bottom, statistics, you can add more ...
+However, 
+hidden cells in the selection are ignore when calculating statistics.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;On the Home tab, in the Editing group, click the arrow next to the Clear button Button image, and then do one of the following:
+        To clear all contents, formats, and comments that are contained in the selected cells, click Clear All.
+        To clear only the formats that are applied to the selected cells, click Clear Formats.
+        To clear only the contents in the selected cells, leaving any formats and comments in place, click Clear Contents.
+        To clear any comments that are attached to the selected cells, click Clear Comments.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;counting number of selected cells: bottom right bar  trick -&amp;gt; select ... -&amp;gt; bottom right, summary &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;trust center -&amp;gt; trust location&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="chart"&gt;Chart&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;If you select 1 row/column of data with k cells and insert a chart, 
+you get a chart of 1 series at k locations. 
+However, 
+if you select a block of data with m rows and n columns, 
+you get a chart of m series at n locations.&lt;/li&gt;
+&lt;/ol&gt;</content><category term="statistics"></category><category term="MS Office"></category><category term="software"></category><category term="Excel"></category><category term="bug"></category><category term="tips"></category></entry><entry><title>Resizing Hard Disk of Guest Machine in Virtualbox</title><link href="http://www.legendu.net/en/blog/resizing-hard-disk-of-guest-machine-in-virtualbox/" rel="alternate"></link><published>2015-02-20T10:57:11-08:00</published><updated>2015-02-20T10:57:11-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-20:/en/blog/resizing-hard-disk-of-guest-machine-in-virtualbox/</id><summary type="html">&lt;p&gt;Suppose you have virtual hard disk in VirtualBox called &lt;code&gt;xp.vdi&lt;/code&gt;, 
+you can resize it (megabytes) using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;VBoxManage&lt;/span&gt; &lt;span class="n"&gt;modifyhd&lt;/span&gt; &lt;span class="n"&gt;xp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vdi&lt;/span&gt; &lt;span class="c1"&gt;--resize 40960&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The command currently doesn't support vmdk virtual disk. 
+So if you have a virtual disk called &lt;code&gt;xp.vmdk&lt;/code&gt;,
+you have to first convert it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Suppose you have virtual hard disk in VirtualBox called &lt;code&gt;xp.vdi&lt;/code&gt;, 
+you can resize it (megabytes) using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;VBoxManage&lt;/span&gt; &lt;span class="n"&gt;modifyhd&lt;/span&gt; &lt;span class="n"&gt;xp&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;vdi&lt;/span&gt; &lt;span class="c1"&gt;--resize 40960&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;The command currently doesn't support vmdk virtual disk. 
+So if you have a virtual disk called &lt;code&gt;xp.vmdk&lt;/code&gt;,
+you have to first convert it into a vdi disk using command&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;VBoxManage&lt;/span&gt; &lt;span class="n"&gt;clonehd&lt;/span&gt; &lt;span class="c1"&gt;--format VDI xp.vmdk xp.vdi&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;and then resize the vdi file using previous command.
+If you want a (resized) vmdk virtual disk rather than a vdi virtual disk,
+you can convert the resized vdi virtual disk to vmdk format using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;VBoxManage&lt;/span&gt; &lt;span class="n"&gt;clonehd&lt;/span&gt; &lt;span class="c1"&gt;--format vmdk xp.vdi xp.vmdk&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Note that the above commands only resize the virtual disk,
+it doesn't resizes partitions inside the virtual disk.
+You must manually resize partiions. 
+This is easy to do for Windows 7/8 guest machines. 
+If have other type of guest machiens (e.g., XP),
+you can use partition tools (e.g., GParted) to manually resize partitions.
+Take GParted for example,
+you can download it, 
+mount it into a virtual CD/DVD, 
+boot your guest machine into GParted,
+and then use the graphical tool to resize partitions.
+It's very intuitive once you get there.&lt;/p&gt;</content><category term="partition"></category><category term="gparted"></category><category term="virtualbox"></category><category term="software"></category><category term="vmdk"></category><category term="resize"></category><category term="resizing"></category></entry><entry><title>Convert PDF to EPS</title><link href="http://www.legendu.net/en/blog/convert-pdf-to-eps/" rel="alternate"></link><published>2015-02-20T10:37:41-08:00</published><updated>2015-02-20T10:37:41-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-02-20:/en/blog/convert-pdf-to-eps/</id><summary type="html">&lt;p&gt;There are tons of tools for converting PDF pictures to EPS pictures in Linux. 
+The &lt;code&gt;pdf2ps&lt;/code&gt; command is a good one.
+It produces EPS pictures without losing much resolution. 
+The general purpose tools &lt;code&gt;convert&lt;/code&gt; does not produce as good quality EPS figures.&lt;/p&gt;</summary><content type="html">&lt;p&gt;There are tons of tools for converting PDF pictures to EPS pictures in Linux. 
+The &lt;code&gt;pdf2ps&lt;/code&gt; command is a good one.
+It produces EPS pictures without losing much resolution. 
+The general purpose tools &lt;code&gt;convert&lt;/code&gt; does not produce as good quality EPS figures.&lt;/p&gt;</content><category term="Image"></category><category term="eps"></category><category term="Linux"></category><category term="PDF"></category><category term="software"></category><category term="Graphics"></category></entry><entry><title>Interact with System Clipboard in Vim</title><link href="http://www.legendu.net/en/blog/interact-between-different-vim-sessions/" rel="alternate"></link><published>2014-12-26T10:35:12-08:00</published><updated>2014-12-26T10:35:12-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-12-26:/en/blog/interact-between-different-vim-sessions/</id><summary type="html">&lt;p&gt;The following are ways for a Vim session 
+to interact (copy/cut, paste) with other Vim sessions or other applications.&lt;/p&gt;
+&lt;h2 id="use-x-windows-clipboard-directly"&gt;Use X Windows Clipboard Directly&lt;/h2&gt;
+&lt;p&gt;If you prefer to use X windows clipboard as the default buffer for Vim,
+put &lt;code&gt;set clipboard=unnamedplus&lt;/code&gt; in your &lt;code&gt;.vimrc&lt;/code&gt; file.
+This obviously makes …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The following are ways for a Vim session 
+to interact (copy/cut, paste) with other Vim sessions or other applications.&lt;/p&gt;
+&lt;h2 id="use-x-windows-clipboard-directly"&gt;Use X Windows Clipboard Directly&lt;/h2&gt;
+&lt;p&gt;If you prefer to use X windows clipboard as the default buffer for Vim,
+put &lt;code&gt;set clipboard=unnamedplus&lt;/code&gt; in your &lt;code&gt;.vimrc&lt;/code&gt; file.
+This obviously makes your Vim talk to the system clipboard (all the time).
+However, 
+this makes different Vim sessions interact with each other 
+which might or might not what you want.
+Generally speaking,
+this is not recommended if you want to interact with system clipboard within Vim.&lt;/p&gt;
+&lt;h2 id="use-vim-buffers-recommended"&gt;Use Vim Buffers (recommended)&lt;/h2&gt;
+&lt;p&gt;You need to install a GUI version of Vim (e.g., &lt;code&gt;vim-gnome&lt;/code&gt;) 
+before you use this way to interact with the system clipboard.
+You can simply use the &lt;code&gt;+&lt;/code&gt; (sometimes &lt;code&gt;*&lt;/code&gt;) register. 
+For example, 
+you can use &lt;code&gt;"+yy&lt;/code&gt; to copy the current line in Vim to the system clipboard
+and &lt;code&gt;"+p&lt;/code&gt; to paste from from the system clipboard to Vim.&lt;/p&gt;
+&lt;h2 id="the-shift-key"&gt;The SHIFT Key&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Hold &lt;code&gt;SHIFT&lt;/code&gt; while you select text in Vim using mouse. 
+You can then right click on the selection and choose &lt;code&gt;Copy&lt;/code&gt; to copy it to the system clipboard, 
+or you can use &lt;code&gt;CTRL + SHFIT + C&lt;/code&gt; to copy the selection to the system clipboard.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You can right click and choose &lt;code&gt;paste&lt;/code&gt; in Vim to pate from the system clipboard into Vim, 
+or you can use &lt;code&gt;CTRL + SHIFT + V&lt;/code&gt; to paste from the system clipboard into Vim.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Another way to copy from Vim to a text editor is to first select text in Vim with &lt;code&gt;SHFIT&lt;/code&gt; pressed, 
+and then middle-click in the text editor.
+Notice that &lt;code&gt;CTRL + V&lt;/code&gt; won't work, 
+because you did not use &lt;code&gt;CTRL + SHFIT + C&lt;/code&gt; (or &lt;code&gt;right click -&amp;gt; paste&lt;/code&gt;) to copy the selection to the system clipboard.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="use-a-temporary-bufferfile"&gt;Use a Temporary Buffer/File&lt;/h2&gt;
+&lt;p&gt;It's very convenient to copy/cut and paste text between different buffers/files of a same Vim session. 
+So you can use temporary buffer/file to interact with other Vim sessions or other applications.&lt;/p&gt;
+&lt;h2 id="see-also"&gt;See Also&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://vim.wikia.com/wiki/Accessing_the_system_clipboard"&gt;http://vim.wikia.com/wiki/Accessing_the_system_clipboard&lt;/a&gt;&lt;/p&gt;</content><category term="Vim"></category><category term="software"></category><category term="Linux"></category><category term="clipboard"></category><category term="copy"></category><category term="paste"></category></entry><entry><title>Fix Microphone Problem of Skype in Debian</title><link href="http://www.legendu.net/en/blog/fix-skype-microphone-problem-in-debian/" rel="alternate"></link><published>2013-08-21T00:00:00-07:00</published><updated>2013-08-21T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2013-08-21:/en/blog/fix-skype-microphone-problem-in-debian/</id><summary type="html">&lt;p&gt;Install Pulseaudio if you only have ALSA. 
+ALSA alone does NOT work with skype whatever people 
+on the #Debian channel might think and tell you.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pulseaudio&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Install pulseaudio volume control&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pavucontrol&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Run Skype.&lt;/p&gt;
+&lt;p&gt;Go to the Sound devices sections. 
+Click on the …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Install Pulseaudio if you only have ALSA. 
+ALSA alone does NOT work with skype whatever people 
+on the #Debian channel might think and tell you.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pulseaudio&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Install pulseaudio volume control&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="n"&gt;sudo&lt;/span&gt; &lt;span class="n"&gt;apt&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="k"&gt;get&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pavucontrol&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;Run Skype.&lt;/p&gt;
+&lt;p&gt;Go to the Sound devices sections. 
+Click on the Open PulseAudio Volume Control button. 
+pavucontrol will open.&lt;/p&gt;
+&lt;p&gt;In every tab maximize ALL the volume sliders.
+Go to the configuration tab. Mine has two sections. 
+One is called RV710/730. 
+Turn this off in the dropdown menu below it.
+The other one is called "Internal Audio". 
+Choose "Analog Stereo Duplex" in the dropdown menu.
+When you go back to the "Input Devices" tab now, 
+you will see that there is an setting for "Internal Audio Analog Stereo". 
+Crank this to 100%.
+In the "Output Devices" tab, 
+choose the "Analog Output" port from the dropdown menu. 
+Crank the front left as well as front right channel to the max 100%.&lt;/p&gt;</content><category term="audio"></category><category term="Software"></category><category term="Linux"></category></entry><entry><title>MATLAB IDE</title><link href="http://www.legendu.net/en/blog/MATLAB-ide/" rel="alternate"></link><published>2012-12-04T00:00:00-08:00</published><updated>2012-12-04T00:00:00-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2012-12-04:/en/blog/MATLAB-ide/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Command &lt;code&gt;help&lt;/code&gt; offers help on functions, classes, packages and so on, 
+but it support command style only, 
+i.e. it can only be used without parentheses.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;Shift+F1&lt;/code&gt; hot key in command window opens the function browser in MATLAB. 
+The &lt;code&gt;F1&lt;/code&gt; hot key opens the help document for function …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Command &lt;code&gt;help&lt;/code&gt; offers help on functions, classes, packages and so on, 
+but it support command style only, 
+i.e. it can only be used without parentheses.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;Shift+F1&lt;/code&gt; hot key in command window opens the function browser in MATLAB. 
+The &lt;code&gt;F1&lt;/code&gt; hot key opens the help document for function
+where the cursor is. 
+The &lt;code&gt;Ctrl+SPACE&lt;/code&gt; hot key pop out parameter hint for the function where the cursor is.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;Ctrl+C&lt;/code&gt; hot key in command window halts the current execution if any. 
+This is helpful if you want to stop a time-consuming evaluation, 
+e.g. when you forget to put an semicolon 
+after an expression which produces a very large output. 
+Note that this can also be dangerous 
+if you do want to run a time-consuming program in MATLAB. 
+A safe way is to lock the computer 
+if you do not have to use it while the code is running, 
+or at least you should minimize the MATLAB command window 
+so that it will not be interrupted by your misoperation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="IDE"></category><category term="software"></category><category term="MATLAB"></category></entry><entry><title>Make Eclipse Support C++11</title><link href="http://www.legendu.net/en/blog/eclipse-cpp11/" rel="alternate"></link><published>2012-08-20T00:00:00-07:00</published><updated>2012-08-20T00:00:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2012-08-20:/en/blog/eclipse-cpp11/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/eclipse/cdt.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make a new C++ project&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Default options for everything&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once created, right-click the project and go to "Properties"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C/C++ Build -&amp;gt; Settings -&amp;gt; Tool Settings -&amp;gt; GCC C++ Compiler -&amp;gt; Miscellaneous -&amp;gt; Other Flags. 
+Put -std=c++0x at the end. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C++ General -&amp;gt; Paths and Symbols -&amp;gt; Symbols -&amp;gt; GNU C++. 
+Click "Add..." and paste &lt;code&gt;__GXX_EXPERIMENTAL_CXX0X__ …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/eclipse/cdt.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make a new C++ project&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Default options for everything&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once created, right-click the project and go to "Properties"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C/C++ Build -&amp;gt; Settings -&amp;gt; Tool Settings -&amp;gt; GCC C++ Compiler -&amp;gt; Miscellaneous -&amp;gt; Other Flags. 
+Put -std=c++0x at the end. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C++ General -&amp;gt; Paths and Symbols -&amp;gt; Symbols -&amp;gt; GNU C++. 
+Click "Add..." and paste &lt;code&gt;__GXX_EXPERIMENTAL_CXX0X__&lt;/code&gt; (ensure to append and prepend two underscores) 
+into "Name" and leave "Value" blank.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Hit Apply, do whatever it asks you to do, then hit OK.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</content><category term="C/C++"></category><category term="software"></category><category term="eclipse"></category></entry></feed>

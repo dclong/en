@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>The Sum and Product Puzzle</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">The Sum and Product Puzzle</h1>
+      <p class="meta"><time datetime="2015-02-04T23:47:19-08:00" pubdate>Feb 04, 2015</time></p>
+</header>
+
+  <div class="entry-content"><p>I talked about an interesting problem <a href="http://www.legendu.net/en/blog/sun-bin-pang-juan/">in this post</a>.
+I had onsite-inteviews from Wolfram at the end of April this year,
+and I decided to talk how to solve the problem using Mathematica.
+I did some research and realized that the problem is a well-known one
+which is called the <em>Sum and Product Puzzle</em> (aka the <em>Impossible Puzzle</em>). 
+The <em>Sum and Product Puzzle</em> has several different versions. 
+I reframe the one mentioned in my previous post as follows.</p>
+<blockquote>
+<p>Two numbers (not necessarily unique) between 2 and 99 are chosen. 
+The sum of them is told to Sam and the product of them is told to Peter .</p>
+<p>Sam: "Now I don't know what the 2 numbers are, 
+but I'm sure you don't know either."</p>
+<p>Peter: "I have to thank you for the information, 
+because I did have no idea of what the 2 numbers are, 
+but now I already know."</p>
+<p>Sam: "Now the same here."</p>
+<p>Question: what are the two numbers?</p>
+</blockquote>
+<h2 id="notations">Notations</h2>
+<p>R: range of the 2 numbers, which is {2,3,. . . ,99} in this case</p>
+<p>x0 , y0: a (the) solution to the Puzzle</p>
+<h2 id="mathematical-information-hidden-in-words">Mathematical Information Hidden in Words</h2>
+<p>"Now I don't know what the 2 numbers are, 
+but I'm pretty sure you don't know either." </p>
+<ol>
+<li>
+<p><span class="math">\(\exists\)</span> multiple pairs of <span class="math">\(x, y\in R\)</span> such that <span class="math">\(x+y=x_0+y_0\)</span></p>
+</li>
+<li>
+<p>For each pair of <span class="math">\(x,y\in R\)</span> such that <span class="math">\(x+y=x_0+y_0\)</span>, 
+<span class="math">\(\exists\)</span> multiple pairs of <span class="math">\(x',y'\in R\)</span> such that <span class="math">\(x'\times y'=x \times y\)</span></p>
+</li>
+</ol>
+<p>Let's called the above conditions set I.</p>
+<p>"I have to thank you for the information, 
+because I did have no idea of what the 2 numbers are, 
+but now I already know."</p>
+<ol>
+<li>
+<p><span class="math">\(\exists\)</span> multiple pairs of <span class="math">\(x, y\in R\)</span> 
+such that <span class="math">\(x\times y=x_0\times y_0\)</span> (already in conditions set I). </p>
+</li>
+<li>
+<p>Among all pairs <span class="math">\(x,y\in R\)</span> such that <span class="math">\(x\times y=x_0\times y_0\)</span>, 
+<span class="math">\(\exists\)</span> an unique pair satisfying conditions set I. </p>
+</li>
+</ol>
+<p>Let's called the above conditions set II.</p>
+<p>"Now the same here"</p>
+<ol>
+<li>
+<p><span class="math">\(\exists\)</span> multiple pairs of <span class="math">\(x, y\in R\)</span> 
+such that <span class="math">\(x+y=x_0+y_0\)</span> (already in conditions set I). </p>
+</li>
+<li>
+<p>Among all pairs <span class="math">\(x,y\in R\)</span> such that <span class="math">\(x+y=x_0+y_0\)</span>, 
+<span class="math">\(\exists\)</span> an unique pair satisfying conditions set II. </p>
+</li>
+</ol>
+<p>Let's called the above conditions set III.</p>
+<h2 id="algorithm-to-solve-the-sum-and-product-puzzle">Algorithm to Solve the Sum and Product Puzzle</h2>
+<p>A/The solution (pair of <span class="math">\(x_0\)</span> and <span class="math">\(y_0\)</span>) 
+must satisfies conditions set I, II and III at the same time. </p>
+<ol>
+<li>
+<p>Construct all possible combinations of <span class="math">\(x,y\in R\)</span>. </p>
+</li>
+<li>
+<p>Select pairs (among all possible pairs) that satisfy conditions set I, II and III at the same time. </p>
+</li>
+</ol>
+<h2 id="mathematica-code-for-the-sum-and-product-puzzle">Mathematica Code for the Sum and Product Puzzle</h2>
+<div class="highlight"><pre><span></span><span class="n">TwoAddends</span><span class="o">[</span><span class="n">s_Integer, range_List</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">Module</span><span class="o">[</span><span class="n">{lower, upper},</span>
+<span class="n">   lower = range[[1</span><span class="o">]</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="nf">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">range</span><span class="o">[</span><span class="n">[2</span><span class="o">]</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="nc">Table</span><span class="o">[</span><span class="n">{i, s - i}, {i, Max[lower, s - upper</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="nf">Min</span><span class="o">[</span><span class="n">upper, s - lower, s/2</span><span class="o">]</span><span class="err">}]</span><span class="w"></span>
+<span class="err">]</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">TwoFactors</span><span class="o">[</span><span class="n">p_Integer, range_List</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">Module</span><span class="o">[</span><span class="n">{lower, upper, div, n},</span>
+<span class="n">   lower = range[[1</span><span class="o">]</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="nf">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">range</span><span class="o">[</span><span class="n">[2</span><span class="o">]</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">div</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Select</span><span class="o">[</span><span class="n">Divisors[p</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="nf">Max</span><span class="o">[</span><span class="n">lower, p/upper</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="err">#</span><span class="w"> </span><span class="o">&amp;</span><span class="n">lt</span><span class="p">;</span><span class="o">=</span><span class="w"> </span><span class="nf">Min</span><span class="o">[</span><span class="n">upper, p/lower, Sqrt[p</span><span class="o">]</span><span class="err">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="k">Map</span><span class="o">[</span><span class="n">{#, p/#} &amp;amp;, div</span><span class="o">]</span><span class="w"></span>
+<span class="err">]</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">S1</span><span class="o">[</span><span class="n">pair_List, range_List</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">Module</span><span class="o">[</span><span class="n">{s, candidates},</span>
+<span class="n">   s = Total[pair</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">candidates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TwoAddends</span><span class="o">[</span><span class="n">s, range</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">Length</span><span class="o">[</span><span class="n">candidates</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="n">Apply</span><span class="o">[</span><span class="n">And, Length[TwoFactors[Times @@ #, range</span><span class="o">]</span><span class="err">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="o">/</span><span class="err">@</span><span class="w"> </span><span class="n">candidates</span><span class="err">]</span><span class="w"></span>
+<span class="err">]</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">P1</span><span class="o">[</span><span class="n">pair_List, range_List</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">Module</span><span class="o">[</span><span class="n">{p, candidates},</span>
+<span class="n">   p = Times @@ pair;</span>
+<span class="n">   candidates = TwoFactors[p, range</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">Length</span><span class="o">[</span><span class="n">candidates</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="n">Total</span><span class="o">[</span><span class="n">Boole[S1[#, range</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="o">/</span><span class="err">@</span><span class="w"> </span><span class="n">candidates</span><span class="err">]]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="err">]</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">S2</span><span class="o">[</span><span class="n">pair_List, range_List</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">Module</span><span class="o">[</span><span class="n">{s, candidates},</span>
+<span class="n">   s = Total[pair</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">candidates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">TwoAddends</span><span class="o">[</span><span class="n">s, range</span><span class="o">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">Length</span><span class="o">[</span><span class="n">candidates</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span><span class="w"> </span><span class="mi">1</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="n">Total</span><span class="o">[</span><span class="n">Boole[P1[#, range</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="o">/</span><span class="err">@</span><span class="w"> </span><span class="n">candidates</span><span class="err">]]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="w"></span>
+<span class="err">]</span><span class="p">;</span><span class="w"></span>
+
+<span class="n">SumProductPuzzle</span><span class="o">[</span><span class="n">range_List</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">Module</span><span class="o">[</span><span class="n">{lower, upper, candidates},</span>
+<span class="n">   lower = range[[1</span><span class="o">]</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="nf">upper</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">range</span><span class="o">[</span><span class="n">[2</span><span class="o">]</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="n">candidates</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Flatten</span><span class="o">[</span><span class="n">Table[{i, j}, {i, lower, upper}, {j, i, upper}</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="err">]</span><span class="p">;</span><span class="w"></span>
+<span class="w">   </span><span class="k">Select</span><span class="o">[</span><span class="n">candidates, S1[#, range</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="n">P1</span><span class="o">[</span><span class="n">#, range</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="w"> </span><span class="n">S2</span><span class="o">[</span><span class="n">#, range</span><span class="o">]</span><span class="w"> </span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="err">]</span><span class="w"></span>
+<span class="err">]</span><span class="w"></span>
+</pre></div>
+
+
+<p>All code and results for this project are hosted on GitHub at <a href="https://github.com/dclong/sum_prod">sum_prod</a>.
+As I will continue to study this problem, 
+it is the best place to find the most updated code and results for this problem.</p>
+<h2 id="result">Result</h2>
+<p>Run the function <code>SumProductPuzzle</code> to find a/the solution to the puzzle.</p>
+<div class="highlight"><pre><span></span><span class="x">SumProductPuzzle[{2, 99}]</span>
+<span class="cp">{{</span><span class="m">4</span><span class="o">,</span> <span class="m">13</span><span class="cp">}}</span><span class="x"></span>
+</pre></div>
+
+
+<h2 id="some-discussions-about-the-sum-and-product-puzzle">Some Discussions about the Sum and Product Puzzle</h2>
+<p>It is of great interest to find all ranges of the form <span class="math">\([2, U]\)</span>
+such that there is an unique solution to the puzzle in these ranges.</p>
+<p>Use the following code to do computation in parallel</p>
+<div class="highlight"><pre><span></span><span class="n">DistributeDefinitions</span><span class="o">[</span><span class="n">TwoAddends, TwoFactors, S1, P1, S2, SumProductPuzzle</span><span class="o">]</span><span class="w"></span>
+<span class="n">rr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Table</span><span class="o">[</span><span class="n">ParallelSubmit[{i}, SumProductPuzzle[{2, i}</span><span class="o">]</span><span class="err">]</span><span class="p">,</span><span class="w"> </span><span class="err">{</span><span class="n">i</span><span class="p">,</span><span class="w"> </span><span class="mi">61</span><span class="p">,</span><span class="w"> </span><span class="mi">600</span><span class="err">}]</span><span class="w"></span>
+<span class="n">WaitAll</span><span class="o">[</span><span class="n">rr</span><span class="o">]</span><span class="w"></span>
+</pre></div>
+
+
+<ol>
+<li>The solution depends on the range (can have no, unique or multiple answers).</li>
+<li>There is no solution in [2, U] for <span class="math">\(2 \le U \le 61\)</span>.</li>
+<li>I have verified that an unique solution exists in [2, U] for <span class="math">\(62 \le U \le 610\)</span>.</li>
+<li>As the Mathematica code I wrote is more for illustrating my ideas 
+and runs slowly.
+I will reimplement the algorithm with previous calculated results cached in Java
+to further study this problem.</li>
+</ol>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    var location_protocol = (false) ? 'https' : document.location.protocol;
+    if (location_protocol !== 'http' && location_protocol !== 'https') location_protocol = 'https:';
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = location_protocol + '//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML';
+    mathjaxscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js'], equationNumbers: { autoNumber: 'AMS' }, Macros: {} }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-02-04T23:47:19-08:00" pubdate>Feb 04, 2015</time>  <span class="categories">
+    <a class="category" href="http://www.legendu.net/en/tag/puzzle.html">puzzle</a>
+    <a class="category" href="http://www.legendu.net/en/tag/mathematica.html">Mathematica</a>
+    <a class="category" href="http://www.legendu.net/en/tag/math.html">math</a>
+    <a class="category" href="http://www.legendu.net/en/tag/work.html">Work</a>
+    <a class="category" href="http://www.legendu.net/en/tag/fun-problems.html">fun problems</a>
+    <a class="category" href="http://www.legendu.net/en/tag/sum.html">sum</a>
+    <a class="category" href="http://www.legendu.net/en/tag/product.html">product</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/runtime-paths-in-python/">Runtime Paths in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/configuration-scripts-for-the-blog-project-on-notebooks.ai/">Configuration Scripts for the Blog Project on Notebooks.Ai</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/string-in-python/">String in Python</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/docker-image-and-container-management/">Manage Docker Images and Containers</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+      
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/apple.html">Apple</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/linux.html">Linux</a></li>
+        <li><a href="http://www.legendu.net/en/category/network.html">Network</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/programming.html">Programming</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+        <li><a href="http://www.legendu.net/en/category/statistics.html">Statistics</a></li>
+        <li><a href="http://www.legendu.net/en/category/work.html">Work</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <p class="tagcloud">
+  </p>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/the-sum-and-product-puzzle/';
+          var disqus_url = 'http://www.legendu.net/en/blog/the-sum-and-product-puzzle/';
+          var disqus_title = 'The Sum and Product Puzzle';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

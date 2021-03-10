@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Benjamin Du</title><link>http://www.legendu.net/en/</link><description>And let it direct your passion with reason.</description><lastBuildDate>Wed, 10 Mar 2021 13:07:08 -0800</lastBuildDate><item><title>Remote Development in Visual Studio Code</title><link>http://www.legendu.net/en/blog/remote-development-in-visual-studio-code/</link><description>&lt;p&gt;There are 2 approaches to develop remotely in Visual Studio Code.
+The first way is to leverage the extension pack
+&lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack"&gt;Remote Development&lt;/a&gt;.
+For more details, 
+please refer to 
+&lt;a href="https://code.visualstudio.com/blogs/2019/05/02/remote-development"&gt;Remote Development with VS Code&lt;/a&gt;
+and
+&lt;a href="https://code.visualstudio.com/docs/remote/remote-overview"&gt;VS Code Remote Development&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The second (prefered) approach is to leverage 
+&lt;a href="https://github.com/cdr/code-server"&gt;cdr/code-server&lt;/a&gt;.
+For more details …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 10 Mar 2021 13:07:08 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-03-10:/en/blog/remote-development-in-visual-studio-code/</guid><category>Software</category><category>Software</category><category>Visual Studio Code</category><category>vscode</category><category>VS Code</category><category>remote development</category><category>Visual Studio Code server</category><category>vscode server</category></item><item><title>Managing Virtual Environments in Poetry</title><link>http://www.legendu.net/en/blog/managing-virtual-environments-in-poetry/</link><description>&lt;h2 id="where-to-create-virtual-environments"&gt;Where to Create Virtual Environments&lt;/h2&gt;
+&lt;p&gt;By default,
+Poetry create virtual environment in &lt;code&gt;$HOME/.poetry&lt;/code&gt; for cahcing/sharing purpose.
+However,
+it is inconvenient if you use Docker-based web IDE for a Python project 
+as you will lose the created virtual environment once the Docker container is restarted.
+In that situation, 
+you …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 25 Feb 2021 23:14:43 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-02-25:/en/blog/managing-virtual-environments-in-poetry/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>Poetry</category><category>virtual environment</category><category>shell</category></item><item><title>Python Logging</title><link>http://www.legendu.net/en/blog/python-logging/</link><description>&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/python-logging-module/"&gt;logging&lt;/a&gt;
+    is a Python module for logging coming with the standard library
+    while
+    &lt;a href="http://www.legendu.net/misc/blog/python-logging-made-stupidly-simple-with-loguru/"&gt;loguru&lt;/a&gt;
+    is a popular 3rd-party logging library.
+    Unless you do not want your Python package/script to depend on 3rd-party libraries,
+    &lt;code&gt;loguru&lt;/code&gt; is preferred to &lt;code&gt;logging&lt;/code&gt; for multiple reasons.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;loguru is easy and fun to …&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 12 Jan 2021 10:43:38 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-01-12:/en/blog/python-logging/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>logging</category><category>loguru</category><category>rich</category></item><item><title>Build a Fat JAR Using Maven Without a Java Project</title><link>http://www.legendu.net/en/blog/build-a-fat-jar-using-maven-without-a-java-project/</link><description>&lt;p&gt;You can use Maven to download dependencies of Java packages without creating a Java project.
+For example,
+if you want to download all dependencies of &lt;code&gt;arrow-jvm&lt;/code&gt; and &lt;code&gt;arrow-memory&lt;/code&gt; 
+and build everything into a single fat jar (for easy use in other places),
+you can first crate a file &lt;code&gt;pom.xml …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 21 Nov 2020 17:22:39 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-11-21:/en/blog/build-a-fat-jar-using-maven-without-a-java-project/</guid><category>Computer Science</category><category>Computer Science</category><category>Java</category><category>Maven</category><category>POM</category><category>JAR</category><category>fat jar</category><category>assembly</category></item><item><title>Comparing Similarity of Two Different Clusterings</title><link>http://www.legendu.net/en/blog/comparing-similarity-of-two-different-clusterings/</link><description>&lt;p&gt;The paper
+&lt;a href="http://staff.ustc.edu.cn/~zwp/teach/MVA/cluster_validation.pdf"&gt;Comparing Clusterings - An Overview&lt;/a&gt;
+has a good view of different metrics for comparing the similarity of 2 clusterings.
+Overall, Normalized Mutual Information sounds like a good one.
+It is implemented in sklearn as 
+&lt;a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html#sklearn.metrics.normalized_mutual_info_score"&gt;sklearn.metrics.normalized_mutual_info_score&lt;/a&gt;
+.
+Of course, 
+there are many more metrics for measuring similarity of 2 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Oct 2020 10:41:11 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-30:/en/blog/comparing-similarity-of-two-different-clusterings/</guid><category>Computer Science</category><category>Computer Science</category><category>clustering</category><category>similarity</category><category>cluster</category><category>metric</category><category>sklearn</category><category>paper</category></item><item><title>Static Type Checking of Python Scripts Using pytype</title><link>http://www.legendu.net/en/blog/static-type-checking-of-Python-Scripts-using-pytype/</link><description>&lt;h2 id="configuration"&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;There are 3 ways to control the behavior of `pytype.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Pass command-line options to &lt;code&gt;pytype&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Specify a configuration file using &lt;code&gt;pytype --config /path/to/config/file ...&lt;/code&gt;.
+    You can generate an example configuration file 
+    using the command &lt;code&gt;pytype --generate-config pytype.cfg&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If no configuration file is found,
+    pytype uses the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Oct 2020 09:16:10 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-30:/en/blog/static-type-checking-of-Python-Scripts-using-pytype/</guid><category>Computer Science</category><category>Computer Science</category><category>Python</category><category>type annotation</category><category>static</category><category>type checking</category><category>pytype</category></item><item><title>Call Java Using PyJNIus from Python</title><link>http://www.legendu.net/en/blog/call-java-using-pyjnius-from-python/</link><description>&lt;p&gt;PyJNIus is a simple-to-use Java interface for Python.
+However,
+&lt;a href="https://github.com/jpype-project/jpype"&gt;JPype&lt;/a&gt;
+is a better alternative.&lt;/p&gt;
+&lt;h3 id="installation"&gt;Installation&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install Cython
+pip install pyjnius
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="example-with-imported-jar"&gt;Example with Imported Jar&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;CLASSPATH&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/path/to/your.jar&amp;quot;&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;jnius&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;
+&lt;span class="n"&gt;YourClass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;yourObj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: Avoid using the same …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 25 Oct 2020 20:15:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-25:/en/blog/call-java-using-pyjnius-from-python/</guid><category>Computer Science</category><category>Computer Science</category><category>Python</category><category>PyJNIus</category><category>Java</category><category>JVM</category></item><item><title>Avoid Database Lock in SQLite3</title><link>http://www.legendu.net/en/blog/avoid-database-lock-in-sqlite3/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;According to https://www.sqlite.org/lockingv3.html,
+    POSIX advisory locking is known to be buggy or even unimplemented on many NFS implementations 
+    (including recent versions of Mac OS X) 
+    and that there are reports of locking problems for network filesystems under Windows. 
+    So, the &lt;strong&gt;rule of thumb&lt;/strong&gt; is to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 24 Oct 2020 09:49:04 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-24:/en/blog/avoid-database-lock-in-sqlite3/</guid><category>Computer Science</category><category>Computer Science</category><category>SQLite3</category><category>database</category><category>lock</category><category>connection</category></item><item><title>Shell Equivalent in Different Operating Systems</title><link>http://www.legendu.net/en/blog/shell-equivalent-in-different-operating-systems/</link><description>&lt;p&gt;PowerShell examples are used for Windows in the table below.&lt;/p&gt;
+&lt;div style="overflow-x:auto;"&gt;
+&lt;style&gt;
+    tr:nth-child(even) {background-color: #f2f2f2}
+&lt;/style&gt;
+&lt;table style="width:100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt; &lt;/th&gt;
+    &lt;th&gt; OS &lt;/th&gt;
+    &lt;th&gt; Command &lt;/th&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="3"&gt; Add user &lt;br&gt; to group &lt;/td&gt;
+    &lt;td&gt; Linux &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    sudo gpasswd -a user_name group_name
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; macOS &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    sudo dseditgroup -o edit -a $username_to_add -t user admin
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; Windows &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    NA
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="3"&gt; Download a file &lt;/td&gt;
+    &lt;td rowspan="2"&gt; Linux/Unix &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    curl -sSL http://file.example.com …&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 02 Oct 2020 09:22:34 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-02:/en/blog/shell-equivalent-in-different-operating-systems/</guid><category>Computer Science</category><category>Computer Science</category><category>OS</category><category>Linux</category><category>macOS</category><category>Windows</category><category>Shell</category><category>PowerShell</category></item><item><title>Install Python in Mac</title><link>http://www.legendu.net/en/blog/install-python-in-mac/</link><description>&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Avoid installing multiple versions of Python in your system. 
+    It usually brings more …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 19 Feb 2020 10:18:07 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-02-19:/en/blog/install-python-in-mac/</guid><category>Software</category><category>software</category><category>install</category><category>Python</category><category>macOS</category></item><item><title>Trust a JupyterLab Notebook</title><link>http://www.legendu.net/en/blog/trust-a-jupyterlab-notebook/</link><description>&lt;p&gt;By default, 
+IPython (kernel of Jupyter/Lab notebook) disables executation of untrusted code without explicit user input.
+If you have notebook whose output containings JavaScript (e.g., JS-based visualiation)
+and code wasn't run by you (e.g., the notebook is shared by someone else),
+the JS-based output won't be shown …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 29 Jan 2020 20:14:09 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-01-29:/en/blog/trust-a-jupyterlab-notebook/</guid><category>Software</category><category>Software</category><category>tools</category><category>JupyterLab</category><category>trust notebook</category></item><item><title>Extracting PDF pages using the Python Package PyPDF2</title><link>http://www.legendu.net/en/blog/python-pdf-pypdf2/</link><description>&lt;p&gt;The Python package PyPDF2 can be used to extract pages from a PDF file.
+The function &lt;code&gt;extract_pages&lt;/code&gt; below is a wrapper over PyPDF2 
+which makes it even easier to extract pages from a PDF file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_pages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subfiles&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Extract pages from a PDF …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 07 Jan 2020 10:00:53 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-01-07:/en/blog/python-pdf-pypdf2/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>PyPDF2</category><category>PyPDF</category><category>example</category><category>PDF</category><category>extract pages</category></item><item><title>Runtime Paths in Python</title><link>http://www.legendu.net/en/blog/runtime-paths-in-python/</link><description>&lt;p&gt;&lt;code&gt;__file__&lt;/code&gt; is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then &lt;code&gt;__file__&lt;/code&gt; is the path of the symbolic link.
+Of course, you can use &lt;code&gt;os.path.realpath&lt;/code&gt; to get real path of files.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pathlib.Path …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 18 Oct 2019 10:20:43 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-18:/en/blog/runtime-paths-in-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>runtime paths</category></item><item><title>Understand Execuation of SQL Statements</title><link>http://www.legendu.net/en/blog/understand-execuation-of-sql-statements/</link><description>&lt;p&gt;A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after &lt;code&gt;select&lt;/code&gt; 
+and rows you want to select after &lt;code&gt;from&lt;/code&gt;.
+A SQL statement is executed as follows.
+First, 
+the (inner|left|right|full) &lt;code&gt;join (on)&lt;/code&gt; is executed if any (see …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 10 Jun 2016 11:25:18 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-10:/en/blog/understand-execuation-of-sql-statements/</guid><category>Computer Science</category><category>programming</category><category>SQL</category><category>join on</category><category>having</category><category>where</category><category>group by</category><category>null value</category></item></channel></rss>

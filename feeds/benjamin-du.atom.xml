@@ -1,0 +1,1213 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Benjamin Du</title><link href="http://www.legendu.net/en/" rel="alternate"></link><link href="http://www.legendu.net/en/feeds/benjamin-du.atom.xml" rel="self"></link><id>http://www.legendu.net/en/</id><updated>2021-03-10T13:07:08-08:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Remote Development in Visual Studio Code</title><link href="http://www.legendu.net/en/blog/remote-development-in-visual-studio-code/" rel="alternate"></link><published>2021-03-10T13:07:08-08:00</published><updated>2021-03-10T13:07:08-08:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2021-03-10:/en/blog/remote-development-in-visual-studio-code/</id><summary type="html">&lt;p&gt;There are 2 approaches to develop remotely in Visual Studio Code.
+The first way is to leverage the extension pack
+&lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack"&gt;Remote Development&lt;/a&gt;.
+For more details, 
+please refer to 
+&lt;a href="https://code.visualstudio.com/blogs/2019/05/02/remote-development"&gt;Remote Development with VS Code&lt;/a&gt;
+and
+&lt;a href="https://code.visualstudio.com/docs/remote/remote-overview"&gt;VS Code Remote Development&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The second (prefered) approach is to leverage 
+&lt;a href="https://github.com/cdr/code-server"&gt;cdr/code-server&lt;/a&gt;.
+For more details …&lt;/p&gt;</summary><content type="html">&lt;p&gt;There are 2 approaches to develop remotely in Visual Studio Code.
+The first way is to leverage the extension pack
+&lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack"&gt;Remote Development&lt;/a&gt;.
+For more details, 
+please refer to 
+&lt;a href="https://code.visualstudio.com/blogs/2019/05/02/remote-development"&gt;Remote Development with VS Code&lt;/a&gt;
+and
+&lt;a href="https://code.visualstudio.com/docs/remote/remote-overview"&gt;VS Code Remote Development&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The second (prefered) approach is to leverage 
+&lt;a href="https://github.com/cdr/code-server"&gt;cdr/code-server&lt;/a&gt;.
+For more details, 
+please refer to 
+&lt;a href="http://www.legendu.net/misc/blog/visual-studio-code-server/"&gt;Visual Studio Code Server&lt;/a&gt;.
+Visual Studio Code Server is prefer to the Remote Development extension pack 
+as Visual Studio Code Server requires no installation or configuration on the client machine.
+A browser is all your need to use Visual Studio Code Server once it is setup.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://code.visualstudio.com/docs/remote/containers"&gt;Developing inside a Container&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://code.visualstudio.com/docs/remote/containers-advanced"&gt;Advanced Container Configuration&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://code.visualstudio.com/docs/remote/containers-advanced#_developing-inside-a-container-on-a-remote-docker-host&lt;/p&gt;</content><category term="Software"></category><category term="Software"></category><category term="Visual Studio Code"></category><category term="vscode"></category><category term="VS Code"></category><category term="remote development"></category><category term="Visual Studio Code server"></category><category term="vscode server"></category></entry><entry><title>Managing Virtual Environments in Poetry</title><link href="http://www.legendu.net/en/blog/managing-virtual-environments-in-poetry/" rel="alternate"></link><published>2021-02-25T23:14:43-08:00</published><updated>2021-02-25T23:14:43-08:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2021-02-25:/en/blog/managing-virtual-environments-in-poetry/</id><summary type="html">&lt;h2 id="where-to-create-virtual-environments"&gt;Where to Create Virtual Environments&lt;/h2&gt;
+&lt;p&gt;By default,
+Poetry create virtual environment in &lt;code&gt;$HOME/.poetry&lt;/code&gt; for cahcing/sharing purpose.
+However,
+it is inconvenient if you use Docker-based web IDE for a Python project 
+as you will lose the created virtual environment once the Docker container is restarted.
+In that situation, 
+you …&lt;/p&gt;</summary><content type="html">&lt;h2 id="where-to-create-virtual-environments"&gt;Where to Create Virtual Environments&lt;/h2&gt;
+&lt;p&gt;By default,
+Poetry create virtual environment in &lt;code&gt;$HOME/.poetry&lt;/code&gt; for cahcing/sharing purpose.
+However,
+it is inconvenient if you use Docker-based web IDE for a Python project 
+as you will lose the created virtual environment once the Docker container is restarted.
+In that situation, 
+you have to create a new virtual environment, 
+set up the Python interpreter again,
+which is tedious.
+Fortunately, 
+Poetry allows to create virtual environment in th root directory of a Python project,
+and it is recommended to do so for the situation described above.
+Run the following command to configure Poetry to create virtual environment in the root directory of the current project.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry config --local virtualenvs.in-project &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice that the above configure works for the current project only.
+Use the following command
+if you want to make Poetry always create virtual environment in the root directory of a project.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry config virtualenvs.in-project &lt;span class="nb"&gt;true&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="create-a-virtual-environment"&gt;Create a Virtual Environment&lt;/h2&gt;
+&lt;p&gt;Poetry supports the &lt;code&gt;env&lt;/code&gt; subcomamnd starting from version 1.0.0.
+You can use &lt;code&gt;poetry env use python_version&lt;/code&gt; to specify the Python version to use for the project.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry env use python3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="activate-vitual-environment"&gt;Activate Vitual Environment&lt;/h2&gt;
+&lt;p&gt;The virtual environment shell can be activated using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry shell
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you have the virtual environment created in the directory &lt;code&gt;.venv&lt;/code&gt; 
+under the root directory of the project,
+you can also use the following command to activate the virtual environment.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;. .venv/bin/activate
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="show-information-of-the-vitual-environment"&gt;Show Information of the Vitual Environment&lt;/h2&gt;
+&lt;p&gt;You can list information of virtual environments using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;poetry env info
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://python-poetry.org/docs/managing-environments/&lt;/p&gt;
+&lt;p&gt;https://github.com/python-poetry/poetry/issues/108&lt;/p&gt;</content><category term="Computer Science"></category><category term="programming"></category><category term="Python"></category><category term="Poetry"></category><category term="virtual environment"></category><category term="shell"></category></entry><entry><title>Python Logging</title><link href="http://www.legendu.net/en/blog/python-logging/" rel="alternate"></link><published>2021-01-12T10:43:38-08:00</published><updated>2021-01-12T10:43:38-08:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2021-01-12:/en/blog/python-logging/</id><summary type="html">&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/python-logging-module/"&gt;logging&lt;/a&gt;
+    is a Python module for logging coming with the standard library
+    while
+    &lt;a href="http://www.legendu.net/misc/blog/python-logging-made-stupidly-simple-with-loguru/"&gt;loguru&lt;/a&gt;
+    is a popular 3rd-party logging library.
+    Unless you do not want your Python package/script to depend on 3rd-party libraries,
+    &lt;code&gt;loguru&lt;/code&gt; is preferred to &lt;code&gt;logging&lt;/code&gt; for multiple reasons.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;loguru is easy and fun to …&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/python-logging-module/"&gt;logging&lt;/a&gt;
+    is a Python module for logging coming with the standard library
+    while
+    &lt;a href="http://www.legendu.net/misc/blog/python-logging-made-stupidly-simple-with-loguru/"&gt;loguru&lt;/a&gt;
+    is a popular 3rd-party logging library.
+    Unless you do not want your Python package/script to depend on 3rd-party libraries,
+    &lt;code&gt;loguru&lt;/code&gt; is preferred to &lt;code&gt;logging&lt;/code&gt; for multiple reasons.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;loguru is easy and fun to use &lt;/li&gt;
+&lt;li&gt;Good out-of-box experience. They default settings work well for most situations. 
+    For example,
+    loguru works with Spark by default while logging needs additional configurations.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/willmcgugan/rich"&gt;rich&lt;/a&gt;
+    is a Python library for rich text and beautiful formatting in the terminal.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://github.com/Delgan/loguru/issues/120&lt;/p&gt;
+&lt;p&gt;https://realpython.com/python-logging/&lt;/p&gt;
+&lt;p&gt;https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/34619790/pylint-message-logging-format-interpolation"&gt;PyLint message: logging-format-interpolation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;http://www.legendu.net/misc/blog/python-logging-made-stupidly-simple-with-loguru/&lt;/p&gt;</content><category term="Computer Science"></category><category term="programming"></category><category term="Python"></category><category term="logging"></category><category term="loguru"></category><category term="rich"></category></entry><entry><title>Build a Fat JAR Using Maven Without a Java Project</title><link href="http://www.legendu.net/en/blog/build-a-fat-jar-using-maven-without-a-java-project/" rel="alternate"></link><published>2020-11-21T17:22:39-08:00</published><updated>2020-11-21T17:22:39-08:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-11-21:/en/blog/build-a-fat-jar-using-maven-without-a-java-project/</id><summary type="html">&lt;p&gt;You can use Maven to download dependencies of Java packages without creating a Java project.
+For example,
+if you want to download all dependencies of &lt;code&gt;arrow-jvm&lt;/code&gt; and &lt;code&gt;arrow-memory&lt;/code&gt; 
+and build everything into a single fat jar (for easy use in other places),
+you can first crate a file &lt;code&gt;pom.xml …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;You can use Maven to download dependencies of Java packages without creating a Java project.
+For example,
+if you want to download all dependencies of &lt;code&gt;arrow-jvm&lt;/code&gt; and &lt;code&gt;arrow-memory&lt;/code&gt; 
+and build everything into a single fat jar (for easy use in other places),
+you can first crate a file &lt;code&gt;pom.xml&lt;/code&gt; containing the following content
+and then run the command &lt;code&gt;mvn assembly:single&lt;/code&gt;.
+A copy of the built fat JAR can be download at 
+&lt;a href="http://www.legendu.net/media/java/arrow-jvm-1.0-jar-with-dependencies.jar"&gt;arrow-jvm-1.0-jar-with-dependencies.jar&lt;/a&gt;
+.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;&amp;lt;project&lt;/span&gt; &lt;span class="na"&gt;xmlns=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://maven.apache.org/POM/4.0.0&amp;quot;&lt;/span&gt; &lt;span class="na"&gt;xmlns:xsi=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://www.w3.org/2001/XMLSchema-instance&amp;quot;&lt;/span&gt;
+        &lt;span class="na"&gt;xsi:schemaLocation=&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd&amp;quot;&lt;/span&gt;&lt;span class="nt"&gt;&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;modelVersion&amp;gt;&lt;/span&gt;4.0.0&lt;span class="nt"&gt;&amp;lt;/modelVersion&amp;gt;&lt;/span&gt;
+
+    &lt;span class="nt"&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;net.legendu&lt;span class="nt"&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;arrow-jvm&lt;span class="nt"&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;version&amp;gt;&lt;/span&gt;1.0&lt;span class="nt"&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;packaging&amp;gt;&lt;/span&gt;jar&lt;span class="nt"&gt;&amp;lt;/packaging&amp;gt;&lt;/span&gt;
+
+    &lt;span class="nt"&gt;&amp;lt;name&amp;gt;&lt;/span&gt;arrow-jvm&lt;span class="nt"&gt;&amp;lt;/name&amp;gt;&lt;/span&gt;
+
+    &lt;span class="nt"&gt;&amp;lt;properties&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;project.build.sourceEncoding&amp;gt;&lt;/span&gt;UTF-8&lt;span class="nt"&gt;&amp;lt;/project.build.sourceEncoding&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/properties&amp;gt;&lt;/span&gt;
+
+    &lt;span class="nt"&gt;&amp;lt;dependencies&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.arrow&lt;span class="nt"&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;arrow-jdbc&lt;span class="nt"&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.0.0&lt;span class="nt"&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;dependency&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.arrow&lt;span class="nt"&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;arrow-memory&lt;span class="nt"&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;version&amp;gt;&lt;/span&gt;2.0.0&lt;span class="nt"&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;type&amp;gt;&lt;/span&gt;pom&lt;span class="nt"&gt;&amp;lt;/type&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;/dependency&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/dependencies&amp;gt;&lt;/span&gt;
+
+    &lt;span class="nt"&gt;&amp;lt;build&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;plugins&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-assembly-plugin&lt;span class="nt"&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;archive&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;manifest&amp;gt;&lt;/span&gt;
+                &lt;span class="nt"&gt;&amp;lt;mainClass&amp;gt;&lt;/span&gt;com.uwekorn.Main&lt;span class="nt"&gt;&amp;lt;/mainClass&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;/manifest&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;/archive&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;descriptorRefs&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;descriptorRef&amp;gt;&lt;/span&gt;jar-with-dependencies&lt;span class="nt"&gt;&amp;lt;/descriptorRef&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;/descriptorRefs&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;plugin&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;groupId&amp;gt;&lt;/span&gt;org.apache.maven.plugins&lt;span class="nt"&gt;&amp;lt;/groupId&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;artifactId&amp;gt;&lt;/span&gt;maven-compiler-plugin&lt;span class="nt"&gt;&amp;lt;/artifactId&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;version&amp;gt;&lt;/span&gt;3.8.0&lt;span class="nt"&gt;&amp;lt;/version&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;configuration&amp;gt;&lt;/span&gt;
+                &lt;span class="nt"&gt;&amp;lt;source&amp;gt;&lt;/span&gt;8&lt;span class="nt"&gt;&amp;lt;/source&amp;gt;&lt;/span&gt;
+                &lt;span class="nt"&gt;&amp;lt;target&amp;gt;&lt;/span&gt;8&lt;span class="nt"&gt;&amp;lt;/target&amp;gt;&lt;/span&gt;
+            &lt;span class="nt"&gt;&amp;lt;/configuration&amp;gt;&lt;/span&gt;
+        &lt;span class="nt"&gt;&amp;lt;/plugin&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/plugins&amp;gt;&lt;/span&gt;
+    &lt;span class="nt"&gt;&amp;lt;/build&amp;gt;&lt;/span&gt;
+&lt;span class="nt"&gt;&amp;lt;/project&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</content><category term="Computer Science"></category><category term="Computer Science"></category><category term="Java"></category><category term="Maven"></category><category term="POM"></category><category term="JAR"></category><category term="fat jar"></category><category term="assembly"></category></entry><entry><title>Comparing Similarity of Two Different Clusterings</title><link href="http://www.legendu.net/en/blog/comparing-similarity-of-two-different-clusterings/" rel="alternate"></link><published>2020-10-30T10:41:11-07:00</published><updated>2020-10-30T10:41:11-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-10-30:/en/blog/comparing-similarity-of-two-different-clusterings/</id><summary type="html">&lt;p&gt;The paper
+&lt;a href="http://staff.ustc.edu.cn/~zwp/teach/MVA/cluster_validation.pdf"&gt;Comparing Clusterings - An Overview&lt;/a&gt;
+has a good view of different metrics for comparing the similarity of 2 clusterings.
+Overall, Normalized Mutual Information sounds like a good one.
+It is implemented in sklearn as 
+&lt;a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html#sklearn.metrics.normalized_mutual_info_score"&gt;sklearn.metrics.normalized_mutual_info_score&lt;/a&gt;
+.
+Of course, 
+there are many more metrics for measuring similarity of 2 …&lt;/p&gt;</summary><content type="html">&lt;p&gt;The paper
+&lt;a href="http://staff.ustc.edu.cn/~zwp/teach/MVA/cluster_validation.pdf"&gt;Comparing Clusterings - An Overview&lt;/a&gt;
+has a good view of different metrics for comparing the similarity of 2 clusterings.
+Overall, Normalized Mutual Information sounds like a good one.
+It is implemented in sklearn as 
+&lt;a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html#sklearn.metrics.normalized_mutual_info_score"&gt;sklearn.metrics.normalized_mutual_info_score&lt;/a&gt;
+.
+Of course, 
+there are many more metrics for measuring similarity of 2 clusters 
+(e.g., &lt;a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.adjusted_rand_score.html"&gt;Adjusted Rand Index&lt;/a&gt;)
+implemented in sklearn. 
+For more details,
+please refer to 
+&lt;a href="https://scikit-learn.org/stable/modules/classes.html#clustering-metrics"&gt;Clustering Metrics&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://staff.ustc.edu.cn/~zwp/teach/MVA/cluster_validation.pdf"&gt;Comparing Clusterings - An Overview&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;https://hal.inria.fr/hal-01514872/document&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Computer Science"></category><category term="Computer Science"></category><category term="clustering"></category><category term="similarity"></category><category term="cluster"></category><category term="metric"></category><category term="sklearn"></category><category term="paper"></category></entry><entry><title>Static Type Checking of Python Scripts Using pytype</title><link href="http://www.legendu.net/en/blog/static-type-checking-of-Python-Scripts-using-pytype/" rel="alternate"></link><published>2020-10-30T09:16:10-07:00</published><updated>2020-10-30T09:16:10-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-10-30:/en/blog/static-type-checking-of-Python-Scripts-using-pytype/</id><summary type="html">&lt;h2 id="configuration"&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;There are 3 ways to control the behavior of `pytype.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Pass command-line options to &lt;code&gt;pytype&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Specify a configuration file using &lt;code&gt;pytype --config /path/to/config/file ...&lt;/code&gt;.
+    You can generate an example configuration file 
+    using the command &lt;code&gt;pytype --generate-config pytype.cfg&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If no configuration file is found,
+    pytype uses the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="configuration"&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;There are 3 ways to control the behavior of `pytype.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Pass command-line options to &lt;code&gt;pytype&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Specify a configuration file using &lt;code&gt;pytype --config /path/to/config/file ...&lt;/code&gt;.
+    You can generate an example configuration file 
+    using the command &lt;code&gt;pytype --generate-config pytype.cfg&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If no configuration file is found,
+    pytype uses the first &lt;code&gt;setup.cfg&lt;/code&gt; it founds 
+    and use the &lt;code&gt;[pytype]&lt;/code&gt; section. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Please refer to 
+&lt;a href="https://github.com/dclong/xinstall/blob/dev/xinstall/data/pytype/setup.cfg"&gt;xinstalll::pytype/setup.cfg&lt;/a&gt;
+for an example of configuration file of &lt;code&gt;pytype&lt;/code&gt;.&lt;/p&gt;
+&lt;h2 id="exclude-files-andor-directories"&gt;Exclude Files and/or Directories&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use the &lt;code&gt;--exclude&lt;/code&gt; option. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;PATH&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;.venv/bin:&lt;span class="nv"&gt;$PATH&lt;/span&gt; pytype xinstall --exclude xinstall/data
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Specify files and/or directories to exclude in the configuration file &lt;code&gt;setup.cfg&lt;/code&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;[pytype]&lt;/span&gt;
+&lt;span class="na"&gt;exclude&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&lt;/span&gt;
+&lt;span class="s"&gt;    **/*_test.py &lt;/span&gt;
+&lt;span class="s"&gt;    **/test_*.py&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="silent-errors"&gt;Silent Errors&lt;/h2&gt;
+&lt;p&gt;Please refer to 
+&lt;a href="https://google.github.io/pytype/user_guide.html#silencing-errors"&gt;Silencing errors&lt;/a&gt;
+for detailed explanations.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://google.github.io/pytype/faq.html&lt;/p&gt;
+&lt;p&gt;https://google.github.io/pytype/user_guide.html&lt;/p&gt;
+&lt;p&gt;https://google.github.io/pytype/&lt;/p&gt;</content><category term="Computer Science"></category><category term="Computer Science"></category><category term="Python"></category><category term="type annotation"></category><category term="static"></category><category term="type checking"></category><category term="pytype"></category></entry><entry><title>Call Java Using PyJNIus from Python</title><link href="http://www.legendu.net/en/blog/call-java-using-pyjnius-from-python/" rel="alternate"></link><published>2020-10-25T20:15:13-07:00</published><updated>2020-10-25T20:15:13-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-10-25:/en/blog/call-java-using-pyjnius-from-python/</id><summary type="html">&lt;p&gt;PyJNIus is a simple-to-use Java interface for Python.
+However,
+&lt;a href="https://github.com/jpype-project/jpype"&gt;JPype&lt;/a&gt;
+is a better alternative.&lt;/p&gt;
+&lt;h3 id="installation"&gt;Installation&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install Cython
+pip install pyjnius
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="example-with-imported-jar"&gt;Example with Imported Jar&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;CLASSPATH&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/path/to/your.jar&amp;quot;&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;jnius&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;
+&lt;span class="n"&gt;YourClass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;yourObj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: Avoid using the same …&lt;/p&gt;</summary><content type="html">&lt;p&gt;PyJNIus is a simple-to-use Java interface for Python.
+However,
+&lt;a href="https://github.com/jpype-project/jpype"&gt;JPype&lt;/a&gt;
+is a better alternative.&lt;/p&gt;
+&lt;h3 id="installation"&gt;Installation&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip install Cython
+pip install pyjnius
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="example-with-imported-jar"&gt;Example with Imported Jar&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;CLASSPATH&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/path/to/your.jar&amp;quot;&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;jnius&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;
+&lt;span class="n"&gt;YourClass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;yourObj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: Avoid using the same name for an instance varialbe and a method in the same class.
+Even though Java is able to distinguish between them 
+PyJNIus is not able to. 
+A method will be hide by the instance variable with the same name 
+if you use the Jar via PyJNIus in Python.
+Generally speaking,
+it is a bad idea to have the same for an instance variable and a method
+as it might confuse other programming languages (e.g., Kotlin) and frameworks too.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/java-interfaces-for-python"&gt;Java Interfaces for Python&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/kivy/pyjnius"&gt;PyJNIus&lt;/a&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</content><category term="Computer Science"></category><category term="Computer Science"></category><category term="Python"></category><category term="PyJNIus"></category><category term="Java"></category><category term="JVM"></category></entry><entry><title>Avoid Database Lock in SQLite3</title><link href="http://www.legendu.net/en/blog/avoid-database-lock-in-sqlite3/" rel="alternate"></link><published>2020-10-24T09:49:04-07:00</published><updated>2020-10-24T09:49:04-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-10-24:/en/blog/avoid-database-lock-in-sqlite3/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;According to https://www.sqlite.org/lockingv3.html,
+    POSIX advisory locking is known to be buggy or even unimplemented on many NFS implementations 
+    (including recent versions of Mac OS X) 
+    and that there are reports of locking problems for network filesystems under Windows. 
+    So, the &lt;strong&gt;rule of thumb&lt;/strong&gt; is to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;According to https://www.sqlite.org/lockingv3.html,
+    POSIX advisory locking is known to be buggy or even unimplemented on many NFS implementations 
+    (including recent versions of Mac OS X) 
+    and that there are reports of locking problems for network filesystems under Windows. 
+    So, the &lt;strong&gt;rule of thumb&lt;/strong&gt; is to avoid using SQLite3 on network filesystems (Samba, NFS, etc). 
+    You are guaranteed to encounter issues in the long run 
+    (even though there lots articles talking about ways to alleviate the problem).
+    Use JSON (on NFS) if you don't really need database
+    or use MySQL, etc. if a database is needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the &lt;code&gt;autocommit&lt;/code&gt; mode by using the option &lt;code&gt;isolation_level=None&lt;/code&gt; 
+    when you use the &lt;code&gt;sqlite3&lt;/code&gt; module in Python.
+    Notice that even if SQLite3 uses &lt;code&gt;autocommit&lt;/code&gt; by default,
+    the Python module &lt;code&gt;sqlite3&lt;/code&gt; does not have &lt;code&gt;autocommit&lt;/code&gt; turned on by default.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="ways-to-fix-the-error-operationerror-database-is-locked"&gt;Ways to Fix The Error "OperationError: Database is locked"&lt;/h2&gt;
+&lt;p&gt;The best practice is to create a backup of the datase
+which has no locks on it. 
+After that, replace the database with its backup copy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="err"&gt;Sqlite&amp;gt; .backup main backup.Sqlite&lt;/span&gt;
+&lt;span class="err"&gt;Sqlite&amp;gt; .exit&lt;/span&gt;
+&lt;span class="err"&gt;$mv .x.Sqlite old.Sqlite&lt;/span&gt;
+&lt;span class="err"&gt;$mv backup.Sqlite .x.Sqlite&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also directly make a copy of the original SQLite3 file to backup it.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://www.sqlite.org/lockingv3.html&lt;/p&gt;
+&lt;p&gt;https://www.arysontechnologies.com/blog/fix-sqlite-error-database-locked/&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://access.redhat.com/solutions/120733"&gt;Can SQLite and TDB databases be used with NFS?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/151026/how-do-i-unlock-a-sqlite-database"&gt;How do I unlock a SQLite database?&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://forum.duplicati.com/t/the-database-file-is-locked-error-even-when-the-file-is-newly-created/6893"&gt;“The database file is locked” error even when the file is newly created&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://docs.python.org/3.8/library/sqlite3.html#sqlite3.connect&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/3172929/operationalerror-database-is-locked/3172950#:~:text=OperationalError%3A%20database%20is%20locked%20errors,the%20lock%20the%20be%20released."&gt;OperationalError: database is locked&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/53270520/how-to-know-which-process-is-responsible-for-a-operationalerror-database-is-lo/53470118#53470118"&gt;How to know which process is responsible for a “OperationalError: database is locked”?&lt;/a&gt;&lt;/p&gt;</content><category term="Computer Science"></category><category term="Computer Science"></category><category term="SQLite3"></category><category term="database"></category><category term="lock"></category><category term="connection"></category></entry><entry><title>Shell Equivalent in Different Operating Systems</title><link href="http://www.legendu.net/en/blog/shell-equivalent-in-different-operating-systems/" rel="alternate"></link><published>2020-10-02T09:22:34-07:00</published><updated>2020-10-02T09:22:34-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-10-02:/en/blog/shell-equivalent-in-different-operating-systems/</id><summary type="html">&lt;p&gt;PowerShell examples are used for Windows in the table below.&lt;/p&gt;
+&lt;div style="overflow-x:auto;"&gt;
+&lt;style&gt;
+    tr:nth-child(even) {background-color: #f2f2f2}
+&lt;/style&gt;
+&lt;table style="width:100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt; &lt;/th&gt;
+    &lt;th&gt; OS &lt;/th&gt;
+    &lt;th&gt; Command &lt;/th&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="3"&gt; Add user &lt;br&gt; to group &lt;/td&gt;
+    &lt;td&gt; Linux &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    sudo gpasswd -a user_name group_name
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; macOS &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    sudo dseditgroup -o edit -a $username_to_add -t user admin
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; Windows &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    NA
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="3"&gt; Download a file &lt;/td&gt;
+    &lt;td rowspan="2"&gt; Linux/Unix &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    curl -sSL http://file.example.com …&lt;/code&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;PowerShell examples are used for Windows in the table below.&lt;/p&gt;
+&lt;div style="overflow-x:auto;"&gt;
+&lt;style&gt;
+    tr:nth-child(even) {background-color: #f2f2f2}
+&lt;/style&gt;
+&lt;table style="width:100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt; &lt;/th&gt;
+    &lt;th&gt; OS &lt;/th&gt;
+    &lt;th&gt; Command &lt;/th&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="3"&gt; Add user &lt;br&gt; to group &lt;/td&gt;
+    &lt;td&gt; Linux &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    sudo gpasswd -a user_name group_name
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; macOS &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    sudo dseditgroup -o edit -a $username_to_add -t user admin
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; Windows &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    NA
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="3"&gt; Download a file &lt;/td&gt;
+    &lt;td rowspan="2"&gt; Linux/Unix &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    curl -sSL http://file.example.com -o output
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;code&gt; 
+    wget http://file.example.com -O output
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; Windows &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    (New-Object System.Net.WebClient).DownloadFile("http://prdownloads.sourceforge.net/swig/swigwin-4.0.1.zip","swigwin-4.0.1.zip");
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="2"&gt; Compress/Decompress Archives &lt;/td&gt;
+    &lt;td&gt; Linux/Unix &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    [Compress and Decompressing Archives in Linux](http://www.legendu.net/en/blog/compress-and-decompress-in-linux/)
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; Windows &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    Expand-Archive .\swigwin-4.0.1.zip .;
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="2"&gt; Set PATH &lt;/td&gt;
+    &lt;td&gt; Linux/Unix &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    export PATH=/new/path:$PATH
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; Windows &lt;/td&gt;
+    &lt;td&gt; &lt;code&gt; 
+    $env:Path += ";.\swigwin-4.0.1";
+    &lt;/code&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+
+&lt;/table&gt;
+&lt;/div&gt;</content><category term="Computer Science"></category><category term="Computer Science"></category><category term="OS"></category><category term="Linux"></category><category term="macOS"></category><category term="Windows"></category><category term="Shell"></category><category term="PowerShell"></category></entry><entry><title>Install Python in Mac</title><link href="http://www.legendu.net/en/blog/install-python-in-mac/" rel="alternate"></link><published>2020-02-19T10:18:07-08:00</published><updated>2020-02-19T10:18:07-08:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-02-19:/en/blog/install-python-in-mac/</id><summary type="html">&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Avoid installing multiple versions of Python in your system. 
+    It usually brings more …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install a Anaconda Python distribution locally.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;A few comments about different ways of installation.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Avoid installing multiple versions of Python in your system. 
+    It usually brings more troubles than conveniences.
+    Docker is usually a much better option 
+    when you need different versions of Python.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Anaconda and Homebrew installs Python locally rather than system-wide.
+  You have to install Python using an official installation package manually 
+  (downloading the installation package and double click to install)
+  if you need a system-wide installation.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The recommended way to instlal Python on Mac is to use Homebrew.
+  However, 
+  there are limited choices of Python versions in Homebrew.
+  Go with Anaconda Python if you cannot find the version you need in Homebrew.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/51125013/how-can-i-install-a-previous-version-of-python-3-in-macos-using-homebrew&lt;/p&gt;
+&lt;p&gt;https://osxuninstaller.com/uninstall-guides/properly-uninstall-python-mac/&lt;/p&gt;</content><category term="Software"></category><category term="software"></category><category term="install"></category><category term="Python"></category><category term="macOS"></category></entry><entry><title>Trust a JupyterLab Notebook</title><link href="http://www.legendu.net/en/blog/trust-a-jupyterlab-notebook/" rel="alternate"></link><published>2020-01-29T20:14:09-08:00</published><updated>2020-01-29T20:14:09-08:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-01-29:/en/blog/trust-a-jupyterlab-notebook/</id><summary type="html">&lt;p&gt;By default, 
+IPython (kernel of Jupyter/Lab notebook) disables executation of untrusted code without explicit user input.
+If you have notebook whose output containings JavaScript (e.g., JS-based visualiation)
+and code wasn't run by you (e.g., the notebook is shared by someone else),
+the JS-based output won't be shown …&lt;/p&gt;</summary><content type="html">&lt;p&gt;By default, 
+IPython (kernel of Jupyter/Lab notebook) disables executation of untrusted code without explicit user input.
+If you have notebook whose output containings JavaScript (e.g., JS-based visualiation)
+and code wasn't run by you (e.g., the notebook is shared by someone else),
+the JS-based output won't be shown by default.
+For more explanation,
+please refer to 
+&lt;a href="https://jupyter-notebook.readthedocs.io/en/stable/security.html#notebook-security"&gt;Notebook Security&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;There are currently 2 ways to trust a notebook.
+First, you can trust (multiple) notebooks via command-line.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter trust path_to_notebook.ipynb
+jupyter trust notebook1.ipynb notebook2.ipynb
+jupyter trust *.ipynb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Second, 
+you can trust a notebook using the &lt;code&gt;Trust Notebook&lt;/code&gt; comamnd from the command tab in the left panel.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Click the on the &lt;code&gt;Commands&lt;/code&gt; tab in the left panel.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Search for &lt;code&gt;Trust Notebook&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click the &lt;code&gt;Trust Notebook&lt;/code&gt; button to trust a notebook.
+    You will get a prompt to confirm your action.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="Trust a Notebook" src="https://user-images.githubusercontent.com/824507/71461881-4ff7aa80-2766-11ea-8c35-0de71284907b.png"&gt;&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://jupyter-notebook.readthedocs.io/en/stable/security.html#notebook-security"&gt;Notebook Security&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://jupyter-notebook.readthedocs.io/en/stable/notebook.html#trusting-notebooks"&gt;Trusting Notebooks&lt;/a&gt;&lt;/p&gt;</content><category term="Software"></category><category term="Software"></category><category term="tools"></category><category term="JupyterLab"></category><category term="trust notebook"></category></entry><entry><title>Extracting PDF pages using the Python Package PyPDF2</title><link href="http://www.legendu.net/en/blog/python-pdf-pypdf2/" rel="alternate"></link><published>2020-01-07T10:00:53-08:00</published><updated>2020-01-07T10:00:53-08:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2020-01-07:/en/blog/python-pdf-pypdf2/</id><summary type="html">&lt;p&gt;The Python package PyPDF2 can be used to extract pages from a PDF file.
+The function &lt;code&gt;extract_pages&lt;/code&gt; below is a wrapper over PyPDF2 
+which makes it even easier to extract pages from a PDF file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_pages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subfiles&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Extract pages from a PDF …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;The Python package PyPDF2 can be used to extract pages from a PDF file.
+The function &lt;code&gt;extract_pages&lt;/code&gt; below is a wrapper over PyPDF2 
+which makes it even easier to extract pages from a PDF file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;extract_pages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;subfiles&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Mapping&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;str&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;]])&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Extract pages from a PDF file and write into sub PDF file.&lt;/span&gt;
+&lt;span class="sd"&gt;    :param file: The raw PDF file to extract pages from.&lt;/span&gt;
+&lt;span class="sd"&gt;    :param subfiles: A dictionary specifying sub PDF files &lt;/span&gt;
+&lt;span class="sd"&gt;    and the corresponding list of pages from the raw PDF file.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;fin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;rb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;reader&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PdfFileReader&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;indexes&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;subfiles&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="n"&gt;_extract_pages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;indexes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;file&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;fin&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;close&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;_extract_pages&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+    &lt;span class="n"&gt;reader&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;PdfFileReader&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;indexes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;Sequence&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt; &lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="nb"&gt;str&lt;/span&gt;
+&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="o"&gt;-&amp;gt;&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;A helper function for extract_pages.&lt;/span&gt;
+&lt;span class="sd"&gt;    :param reader: A PdfFileReader object.&lt;/span&gt;
+&lt;span class="sd"&gt;    :param indexes: Index (0-based) of pages to extract.&lt;/span&gt;
+&lt;span class="sd"&gt;    :param output: The path of the sub PDF file to write the extracted pages to.&lt;/span&gt;
+&lt;span class="sd"&gt;    &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;writer&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;PdfFileWriter&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;index&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;indexes&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;writer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;addPage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;reader&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;getPage&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;index&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="k"&gt;with&lt;/span&gt; &lt;span class="nb"&gt;open&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;output&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;wb&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="n"&gt;fout&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;writer&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;write&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;fout&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Below is a concrete example of using the function &lt;code&gt;extract_pages&lt;/code&gt;
+to extract pages from the PDF file&lt;code&gt;scan.pdf&lt;/code&gt; into 3 sub PDF files 
+&lt;code&gt;tod.pdf&lt;/code&gt; (pages 0-3), &lt;code&gt;loi.pdf&lt;/code&gt; (page 4) and &lt;code&gt;cia.pdf&lt;/code&gt; (pages 5-15).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;subfiles&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="o"&gt;{&lt;/span&gt;
+  &lt;span class="s1"&gt;&amp;#39;tod.pdf&amp;#39;&lt;/span&gt;: range&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;,
+  &lt;span class="s1"&gt;&amp;#39;loi.pdf&amp;#39;&lt;/span&gt;: &lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="m"&gt;4&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;,
+  &lt;span class="s1"&gt;&amp;#39;cia.pdf&amp;#39;&lt;/span&gt;: range&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="m"&gt;5&lt;/span&gt;, &lt;span class="m"&gt;16&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;}&lt;/span&gt;
+extract_pages&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;scan.pdf&amp;#39;&lt;/span&gt;, subfiles&lt;span class="o"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The above functions are included in 
+&lt;a href="https://github.com/dclong/dsutil/blob/dev/dsutil/pdf.py"&gt;dsutil.pdf&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/490195/split-a-multi-page-pdf-file-into-multiple-pdf-files-with-python&lt;/p&gt;</content><category term="Computer Science"></category><category term="programming"></category><category term="Python"></category><category term="PyPDF2"></category><category term="PyPDF"></category><category term="example"></category><category term="PDF"></category><category term="extract pages"></category></entry><entry><title>Runtime Paths in Python</title><link href="http://www.legendu.net/en/blog/runtime-paths-in-python/" rel="alternate"></link><published>2019-10-18T10:20:43-07:00</published><updated>2019-10-18T10:20:43-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2019-10-18:/en/blog/runtime-paths-in-python/</id><summary type="html">&lt;p&gt;&lt;code&gt;__file__&lt;/code&gt; is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then &lt;code&gt;__file__&lt;/code&gt; is the path of the symbolic link.
+Of course, you can use &lt;code&gt;os.path.realpath&lt;/code&gt; to get real path of files.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pathlib.Path …&lt;/code&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;code&gt;__file__&lt;/code&gt; is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then &lt;code&gt;__file__&lt;/code&gt; is the path of the symbolic link.
+Of course, you can use &lt;code&gt;os.path.realpath&lt;/code&gt; to get real path of files.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pathlib.Path.cwd()&lt;/code&gt;, &lt;code&gt;os.getcwd()&lt;/code&gt; and &lt;code&gt;'.'&lt;/code&gt; returns/represents the path where the Python script was invoked,
+which is often different from &lt;code&gt;__file__&lt;/code&gt;.&lt;/p&gt;</content><category term="Computer Science"></category><category term="programming"></category><category term="Python"></category><category term="runtime paths"></category></entry><entry><title>Understand Execuation of SQL Statements</title><link href="http://www.legendu.net/en/blog/understand-execuation-of-sql-statements/" rel="alternate"></link><published>2016-06-10T11:25:18-07:00</published><updated>2016-06-10T11:25:18-07:00</updated><author><name>Benjamin Du</name></author><id>tag:www.legendu.net,2016-06-10:/en/blog/understand-execuation-of-sql-statements/</id><summary type="html">&lt;p&gt;A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after &lt;code&gt;select&lt;/code&gt; 
+and rows you want to select after &lt;code&gt;from&lt;/code&gt;.
+A SQL statement is executed as follows.
+First, 
+the (inner|left|right|full) &lt;code&gt;join (on)&lt;/code&gt; is executed if any (see …&lt;/p&gt;</summary><content type="html">&lt;p&gt;A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after &lt;code&gt;select&lt;/code&gt; 
+and rows you want to select after &lt;code&gt;from&lt;/code&gt;.
+A SQL statement is executed as follows.
+First, 
+the (inner|left|right|full) &lt;code&gt;join (on)&lt;/code&gt; is executed if any (see more explanation later).
+Second, 
+the &lt;code&gt;where&lt;/code&gt; condition is executed. Conditions before grouping (aggregation) must go into the &lt;code&gt;where&lt;/code&gt; clause.
+Third, 
+&lt;code&gt;group by (having)&lt;/code&gt; is executed. 
+Conditions after grouping (aggregation) must go into the &lt;code&gt;having&lt;/code&gt; clause.
+Fourth, 
+the &lt;code&gt;sort by&lt;/code&gt; statement is executed if any.
+Last, columns (specified in the &lt;code&gt;from&lt;/code&gt; clause) are selected.&lt;/p&gt;
+&lt;p&gt;An &lt;code&gt;inner join&lt;/code&gt; first creates a cross join of tables in the &lt;code&gt;join&lt;/code&gt; clause 
+(i.e., a Cartesian product of rows from tables in the &lt;code&gt;join&lt;/code&gt; clause), 
+then it selects rows satisfying the &lt;code&gt;on&lt;/code&gt; condition from the cross join result. 
+A &lt;code&gt;left/right/full join&lt;/code&gt; consists of 2 sub steps. 
+First, an &lt;code&gt;inner join (on)&lt;/code&gt; is performed. 
+Second, unmatched rows in the left/right/both table(s) are appended into the resulting table of &lt;code&gt;inner join (on)&lt;/code&gt;. 
+This means that all rows in the left/right/both table(s) will be in the resulting table
+if there is no &lt;code&gt;where&lt;/code&gt; or &lt;code&gt;having&lt;/code&gt; condition in the query.
+Notice that unmatched rows in the left/right/both table(s) uses &lt;code&gt;NULL&lt;/code&gt; values for columns in the other table,
+which is different from the Cartesian product (which uses values of the matched row). 
+After joining, 
+the &lt;code&gt;where&lt;/code&gt; clause is executed. 
+This means that the &lt;code&gt;where&lt;/code&gt; condition is executed after the &lt;code&gt;on&lt;/code&gt; condition in &lt;code&gt;join&lt;/code&gt;. 
+For an &lt;code&gt;inner join&lt;/code&gt;, 
+the &lt;code&gt;where&lt;/code&gt; condition can be put in the &lt;code&gt;on&lt;/code&gt; condition 
+using &lt;code&gt;and&lt;/code&gt; because no extras (unmatched rows) are appended after the &lt;code&gt;on&lt;/code&gt; condition is executed. 
+However, for a &lt;code&gt;left/right/full join&lt;/code&gt; (extra unmatched rows are appended after &lt;code&gt;on&lt;/code&gt; condition is executed) 
+the &lt;code&gt;where&lt;/code&gt; condition cannot be combined with the &lt;code&gt;on&lt;/code&gt; condition (using &lt;code&gt;and&lt;/code&gt;), generally speaking. 
+For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;inner&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;returns the same result as &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;inner&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="k"&gt;and&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;returns different result from&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;select&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="k"&gt;is&lt;/span&gt; &lt;span class="k"&gt;null&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;generally speaking. 
+For good practice, you'd better separate the &lt;code&gt;where&lt;/code&gt; and &lt;code&gt;on&lt;/code&gt; conditions.&lt;/p&gt;
+&lt;p&gt;Let's see some real examples to better understand the execution of SQL code.
+Suppose we have 2 tables A and B (see below) both of which contain only 1 integer column named &lt;code&gt;id&lt;/code&gt;.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="right"&gt;id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;11&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;13&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;14&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="right"&gt;id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="right"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;The following presents some join queries and corresponding results.
+Note that question marks (&lt;code&gt;?&lt;/code&gt;) stand for null values in the following results.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;A inner join B&lt;/span&gt;
+&lt;span class="cm"&gt;Only matched rows are kept, which is easy to understand.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;inner&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;A left join B&lt;/span&gt;
+&lt;span class="cm"&gt;Unmatched rows in A are kept but B.id is null for these unmatched rows.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice &lt;code&gt;B.id&lt;/code&gt; is set to null for rows in table A that do not have matching rows in table B.&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;and&lt;/span&gt; 
+   &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; 
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;6&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;9&lt;/td&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;10&lt;/td&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;8&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;7&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;Use where to further select records after inner join.&lt;/span&gt;
+&lt;span class="cm"&gt;Together with the query above, &lt;/span&gt;
+&lt;span class="cm"&gt;it shows the different between `on condition1 and condition2` and `on condition1 where condition2`.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+   &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; 
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;id&lt;/th&gt;
+&lt;th align="center"&gt;id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;11&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;13&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;3&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;4&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;5&lt;/td&gt;
+&lt;td align="center"&gt;14&lt;/td&gt;
+&lt;td align="center"&gt;?&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="cm"&gt;/*&lt;/span&gt;
+&lt;span class="cm"&gt;Use where to further select records. &lt;/span&gt;
+&lt;span class="cm"&gt;Notice that rows with B.id being `null` are dropped &lt;/span&gt;
+&lt;span class="cm"&gt;because they are not eligible for condition `B.id &amp;gt;10`.&lt;/span&gt;
+&lt;span class="cm"&gt;*/&lt;/span&gt;
+&lt;span class="k"&gt;select&lt;/span&gt; 
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;from&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;
+&lt;span class="k"&gt;left&lt;/span&gt; &lt;span class="k"&gt;join&lt;/span&gt;
+    &lt;span class="n"&gt;B&lt;/span&gt;
+&lt;span class="k"&gt;on&lt;/span&gt;
+    &lt;span class="n"&gt;A&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+&lt;span class="k"&gt;where&lt;/span&gt; 
+   &lt;span class="n"&gt;B&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="o"&gt;&amp;gt;&lt;/span&gt; &lt;span class="mi"&gt;10&lt;/span&gt; 
+&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th align="center"&gt;&lt;/th&gt;
+&lt;th align="center"&gt;A.id&lt;/th&gt;
+&lt;th align="center"&gt;B.id&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;1&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;td align="center"&gt;12&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td align="center"&gt;2&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;td align="center"&gt;15&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://social.msdn.microsoft.com/Forums/getfile/208801&lt;/p&gt;</content><category term="Computer Science"></category><category term="programming"></category><category term="SQL"></category><category term="join on"></category><category term="having"></category><category term="where"></category><category term="group by"></category><category term="null value"></category></entry></feed>

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Ben Du</title><link>http://www.legendu.net/en/</link><description>And let it direct your passion with reason.</description><lastBuildDate>Mon, 01 Mar 2021 10:41:40 -0800</lastBuildDate><item><title>Persist DataFrame in Spark</title><link>http://www.legendu.net/en/blog/spark-persist-dataframe/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-&amp;amp;-Trap"&gt;Tips &amp;amp; Trap&lt;a class="anchor-link" href="#Tips-&amp;amp;-Trap"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;DataFrame.cache&lt;/code&gt; caches/persists a DataFrame to the default storage level (&lt;code&gt;MEMORY_AND_DISK&lt;/code&gt;)
+ while &lt;code&gt;DataFrame.persist&lt;/code&gt; is more flexible on storage leve.
+ Notice that &lt;code&gt;DataFrame.persist()&lt;/code&gt; is equivalent to &lt;code&gt;DataFrame.cache()&lt;/code&gt;. 
+ To sum up,
+ &lt;code&gt;DataFrame.persist&lt;/code&gt; is preferred over &lt;code&gt;DataFrame.cache&lt;/code&gt;. 
+ In addition,
+ &lt;code&gt;DataFrame.persist&lt;/code&gt; is perferred over &lt;code&gt;DataFrame.checkpoint&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The definition of the class &lt;code&gt;pyspark.StorageLevel&lt;/code&gt; is as below.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 01 Mar 2021 10:41:40 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-03-01:/en/blog/spark-persist-dataframe/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Spark</category><category>DataFrame</category><category>persist</category><category>big data</category><category>cache</category><category>checkpoint</category></item><item><title>Hands on the Python Module argparse</title><link>http://www.legendu.net/en/blog/hands-on-the-python-module-argparse/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;argparse&lt;/code&gt; is the best library to use to parse command-line arguments in Python.
+ It is included in Python standard libaries
+ (which menas that you can use it out of the box).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It is suggestedd that you &lt;strong&gt;always log a parsed Namespace object&lt;/strong&gt;
+ so that you can check whether it is as expected.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 24 Dec 2020 12:00:55 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-12-24:/en/blog/hands-on-the-python-module-argparse/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>argparse</category><category>cli</category><category>command line</category><category>command-line</category><category>parse</category><category>argument</category></item><item><title>Sample Rows from a Spark DataFrame</title><link>http://www.legendu.net/en/blog/spark-dataframe-sample/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;TABLESAMPLE&lt;/code&gt; must be immedidately after a table name.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;WHERE&lt;/code&gt; clause in the following SQL query runs after &lt;code&gt;TABLESAMPLE&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; SELECT 
+     *
+ FROM 
+     table_name 
+ TABLESAMPLE (10 PERCENT) 
+ WHERE 
+     id = 1
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to run a &lt;code&gt;WHERE&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 05 Nov 2020 00:13:37 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-11-05:/en/blog/spark-dataframe-sample/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Spark</category><category>DataFrame</category><category>sample</category><category>TABLESAMPLE</category></item><item><title>User-defined Function (UDF) in PySpark</title><link>http://www.legendu.net/en/blog/pyspark-udf/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Pandas UDFs are preferred to UDFs
+ as Pandas UDFs are typically much faster than UDFs.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The easist way to define a UDF in PySpark is to use the &lt;code&gt;@udf&lt;/code&gt; tag,
+ and similarly the easist way to define a Pandas UDF in PySpark is to use the &lt;code&gt;@pandas_udf&lt;/code&gt; tag.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You need to specify the return type of the UDF, 
+ e.g., &lt;code&gt;StringType()&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Tue, 03 Nov 2020 15:43:52 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-11-03:/en/blog/pyspark-udf/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>HPC</category><category>high performance computing</category><category>PySpark</category><category>UDF</category><category>pandas</category><category>pandas_udf</category><category>pandas UDF</category></item><item><title>Union DataFrames in Spark</title><link>http://www.legendu.net/en/blog/spark-dataframe-union/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Comment"&gt;Comment&lt;a class="anchor-link" href="#Comment"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;union&lt;/code&gt; relies on column order rather than column names. 
+ This is the same as in SQL.
+ For columns that the type don't match, 
+ the super type is used.
+ However, 
+ this is really dangerous if you are careful. 
+ It is suggested that you define a function call unionByName to hanle this.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 30 Oct 2020 19:44:44 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-30:/en/blog/spark-dataframe-union/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Spark</category><category>DataFrame</category><category>union</category></item><item><title>Work with Long Strings in Python</title><link>http://www.legendu.net/en/blog/work-with-long-strings-in-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This article discusses different ways to write long strings in Python.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Long-String-in-One-Line"&gt;Long String in One Line&lt;a class="anchor-link" href="#Long-String-in-One-Line"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A long string can be put on the the same line,
+which is ugly of course.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sat, 24 Oct 2020 09:35:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-24:/en/blog/work-with-long-strings-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>string</category><category>str</category><category>character</category><category>long</category><category>long strings</category></item><item><title>The eval Function in Python</title><link>http://www.legendu.net/en/blog/the-eval-function-in-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The function &lt;code&gt;eval&lt;/code&gt; takes a single line of code as string,
+evaluates it,
+and returns the value.
+Notice that objects in the evaluated expression 
+must be present in the current scope,
+otherwise, 
+exceptions will be thrown.&lt;/p&gt;
+&lt;p&gt;Even though &lt;code&gt;eval&lt;/code&gt; (together with &lt;code&gt;exec&lt;/code&gt;) might be useful in some situations,
+e.g., when implementing a REPL. 
+It is strongly suggested that you avoid using &lt;code&gt;eval&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sat, 10 Oct 2020 12:26:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-10:/en/blog/the-eval-function-in-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>eval</category><category>ast</category></item><item><title>Deleting Docker Image Tags on DockerHub using the Python Module requests</title><link>http://www.legendu.net/en/blog/python-requests-dockerhub/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips"&gt;Tips&lt;a class="anchor-link" href="#Tips"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;You can use &lt;a href="https://curl.trillworks.com/"&gt;Convert curl syntax to Python, Node.js, PHP, R&lt;/a&gt;
+ or &lt;a href="https://github.com/NickCarneiro/curlconverter/"&gt;curlconverter&lt;/a&gt;
+ to convert CURL commands to Python requests code.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Get-All-Tags-of-a-Docker-Image"&gt;Get All Tags of a Docker Image&lt;a class="anchor-link" href="#Get-All-Tags-of-a-Docker-Image"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 06 Apr 2020 18:24:23 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-04-06:/en/blog/python-requests-dockerhub/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>DockerHub</category><category>Docker Hub</category><category>Docker</category><category>image</category><category>tag</category><category>delete</category><category>requests</category><category>RESTful</category></item><item><title>Manipulate Videos Using OpenCV in Python</title><link>http://www.legendu.net/en/blog/python-opencv-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The code below converts a MOV vidoe file to a MP4 vidoe file using OpenCV in Python.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 06 Apr 2020 14:52:30 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-04-06:/en/blog/python-opencv-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>computer vision</category><category>CV</category><category>video</category><category>OpenCV</category></item><item><title>Manipulate Videos Using MoviePy in Python</title><link>http://www.legendu.net/en/blog/python-moviepy/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;Convert part (the 50 - 60 second) of a MOV video into a MP4 video.
+Notice that MP4 and Webm as the output format are support 
+while MOV and AVI (as the output format) are not.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 06 Apr 2020 14:39:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-04-06:/en/blog/python-moviepy/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>computer vision</category><category>CV</category><category>video</category><category>MoviePy</category></item><item><title>Construct pandas DataFrames in Python</title><link>http://www.legendu.net/en/blog/construct-pandas-dataframe-python/</link><description>&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 07 Nov 2019 00:00:00 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-11-07:/en/blog/construct-pandas-dataframe-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>pandas</category><category>DataFrame</category><category>construct</category></item><item><title>Unpacking Assignment in Python</title><link>http://www.legendu.net/en/blog/unpacking-assignment-in-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The unpacking assignment assigns elements of a tuple/list to variables at once.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Tue, 22 Oct 2019 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-22:/en/blog/unpacking-assignment-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>unpacking assignment</category><category>unpack</category><category>assignment</category><category>tuple</category><category>list</category></item></channel></rss>

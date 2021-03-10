@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Computer Science category</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="http://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="http://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="http://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="http://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="http://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="http://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:http://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:http://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="http://www.legendu.net">Home</a></li>
+    <li><a href="http://www.legendu.net/en">Blog</a></li>
+    <li><a href="http://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="http://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/special-characters-to-avoid/">Special Characters to Avoid in Strings</a>
+      </h1>
+      <p class="meta"><time datetime="2020-12-03T21:56:32-08:00" pubdate>Dec 03, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p>This articles talks about special characters to avoid in various places. 
+You might not encounter issues most of the time when violating rules stated below,
+however, 
+you never know when things will break.
+It is more for a good-practice suggestion.</p>
+<h2 id="string-for-shell">String for Shell</h2>
+<ol>
+<li>When you pass parameters from one program …</li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/special-characters-to-avoid/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/build-a-fat-jar-using-maven-without-a-java-project/">Build a Fat JAR Using Maven Without a Java Project</a>
+      </h1>
+      <p class="meta"><time datetime="2020-11-21T17:22:39-08:00" pubdate>Nov 21, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p>You can use Maven to download dependencies of Java packages without creating a Java project.
+For example,
+if you want to download all dependencies of <code>arrow-jvm</code> and <code>arrow-memory</code> 
+and build everything into a single fat jar (for easy use in other places),
+you can first crate a file <code>pom.xml …</code></p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/build-a-fat-jar-using-maven-without-a-java-project/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/spark-dataframe-sample/">Sample Rows from a Spark DataFrame</a>
+      </h1>
+      <p class="meta"><time datetime="2020-11-05T00:13:37-08:00" pubdate>Nov 05, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li><p><code>TABLESAMPLE</code> must be immedidately after a table name.</p>
+</li>
+<li><p>The <code>WHERE</code> clause in the following SQL query runs after <code>TABLESAMPLE</code>.</p>
+
+<pre><code> SELECT 
+     *
+ FROM 
+     table_name 
+ TABLESAMPLE (10 PERCENT) 
+ WHERE 
+     id = 1
+
+</code></pre>
+<p>If you want to run a <code>WHERE</code></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/spark-dataframe-sample/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/union-RDDs-in-spark/">Union RDDs in Spark</a>
+      </h1>
+      <p class="meta"><time datetime="2020-11-03T23:49:38-08:00" pubdate>Nov 03, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p>No deduplication is done (to be efficient) when unioning RDDs/DataFrames in Spark 2.1.0+.</p>
+<ol>
+<li>
+<p>Union 2 RDDs.</p>
+<div class="highlight"><pre><span></span><code><span class="err">df1.union(df2)</span>
+<span class="err">// or for old-fashioned RDD</span>
+<span class="err">rdd1.union(rdd_2)</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Union multiple RDDs.</p>
+<div class="highlight"><pre><span></span><code><span class="err">df = spark.union([df1, df2, df3]) // spark is a SparkSession object</span>
+<span class="err">// or for old-fashioned RDD</span>
+<span class="err">rdd = sc.union …</span></code></pre></div></li></ol></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/union-RDDs-in-spark/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/pyspark-udf/">User-defined Function (UDF) in PySpark</a>
+      </h1>
+      <p class="meta"><time datetime="2020-11-03T15:43:52-08:00" pubdate>Nov 03, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li><p>Pandas UDFs are preferred to UDFs
+ as Pandas UDFs are typically much faster than UDFs.</p>
+</li>
+<li><p>The easist way to define a UDF in PySpark is to use the <code>@udf</code> tag,
+ and similarly the easist way to define a Pandas UDF in PySpark is to use the <code>@pandas_udf</code> tag.</p>
+</li>
+<li><p>You need to specify the return type of the UDF, 
+ e.g., <code>StringType()</code></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/pyspark-udf/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="http://www.legendu.net/en/blog/spark-dataframe-union/">Union DataFrames in Spark</a>
+      </h1>
+      <p class="meta"><time datetime="2020-10-30T19:44:44-07:00" pubdate>Oct 30, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Comment">Comment<a class="anchor-link" href="#Comment">&#182;</a></h2><ol>
+<li><p><code>union</code> relies on column order rather than column names. 
+ This is the same as in SQL.
+ For columns that the type don't match, 
+ the super type is used.
+ However, 
+ this is really dangerous if you are careful. 
+ It is suggested that you define a function call unionByName to hanle this.</p></div>
+  <footer>
+    <a rel="full-article" href="http://www.legendu.net/en/blog/spark-dataframe-union/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="http://www.legendu.net/en/category/computer-science3.html">&larr; Older</a>
+
+      <a class="next" href="http://www.legendu.net/en/category/computer-science.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/install-python-packages/">Install Python Packages Using pip</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/spark-persist-dataframe/">Persist DataFrame in Spark</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/managing-virtual-environments-in-poetry/">Managing Virtual Environments in Poetry</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/collections-and-iterators-in-cpp/">Collections and Iterators in C++</a>
+      </li>
+      <li class="post">
+          <a href="http://www.legendu.net/en/blog/python-logging/">Python Logging</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="http://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="http://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="http://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="http://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="http://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="http://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="http://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="http://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/dclong">@dclong</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'http://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'dclong',
+              count: 3,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="http://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+            <li><a href="https://www.facebook.com/chuanlong.du" target="_blank">Facebook</a></li>
+        <!--
+            <li><a href="http://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30259661-1']);
+    _gaq.push(['_trackPageview']);
+    (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

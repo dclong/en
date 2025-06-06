@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Articles by Benjamin Du</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/parse-toml-file-in-python/">Parse TOML Files in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2021-04-26T09:37:58-07:00" pubdate>Apr 26, 2021</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>There are 2 popular Python libraries 
+    <a href="https://github.com/sdispater/tomlkit">tomlkit</a>
+    and
+    <a href="https://github.com/uiri/toml">toml</a>
+    for parsing TOML formatted files in Python.
+    <a href="https://github.com/sdispater/tomlkit">tomlkit</a>
+    is preferred to 
+    <a href="https://github.com/uiri/toml">toml</a>
+    as it is more flexible and style-preserving.</p>
+</li>
+<li>
+<p>A TOML file always interpret a key (even a bare ASCII integer) as string. 
+    For this reason, a dict with numerical keys …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/parse-toml-file-in-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/tips-on-pyspark/">Process Big Data Using PySpark</a>
+      </h1>
+      <p class="meta"><time datetime="2021-04-30T11:49:58-07:00" pubdate>Apr 30, 2021</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>PySpark 2.4 and older does not support Python 3.8.
+    You have to use Python 3.7 with PySpark 2.4 or older.</p>
+</li>
+<li>
+<p>It can be extremely helpful to run a PySpark application locally to detect possible issues
+    before submitting it to the Spark cluster.</p>
+<div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/env bash …</span></code></pre></div></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/tips-on-pyspark/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/build-docker-images-on-kubernetes/">Build Docker Images on Kubernetes</a>
+      </h1>
+      <p class="meta"><time datetime="2021-09-14T18:12:30-07:00" pubdate>Sep 14, 2021</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/build-docker-images-using-buildkit-on-kubernetes">BuildKit</a>
+    is a good tool for building Docker images on a Kubernetes cluster 
+    where you have root access.</p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/build-docker-images-using-kaniko">Kaniko</a>
+    is another usable tool 
+    but it is not as intuitive as 
+    <a href="https://github.com/vmware-tanzu/buildkit-cli-for-kubectl">buildkit-cli-for-kubectl</a>
+    to use.
+    As a matter of fact,
+    tricky issues might arise when building Docker images using Kaniko.</p>
+</li>
+<li>
+<p><a href="https://github.com/containers/buildah">buildah</a>
+    is …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/build-docker-images-on-kubernetes/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/build-docker-images-using-buildkit-on-kubernetes/">Build Docker Images Using BuildKit on Kubernetes</a>
+      </h1>
+      <p class="meta"><time datetime="2021-09-15T16:43:40-07:00" pubdate>Sep 15, 2021</time></p>
+</header>
+
+  <div class="entry-content"><p><a href="https://github.com/vmware-tanzu/buildkit-cli-for-kubectl">buildkit-cli-for-kubectl</a>
+is a plugin for kubectl 
+which provides a similar experience building Docker images on Kubernetes
+as building Docker images locally using <code>docker build</code>.
+<a href="https://github.com/vmware-tanzu/buildkit-cli-for-kubectl">buildkit-cli-for-kubectl</a>
+works perfectly in a personal/development Kubernetes cluster (e.g., minikube running locally),
+however,
+it doesn't work in an enterprise production environment 
+due to permission …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/build-docker-images-using-buildkit-on-kubernetes/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/get-centos-version/">Get CentOS Version</a>
+      </h1>
+      <p class="meta"><time datetime="2022-01-01T13:47:32-08:00" pubdate>Jan 01, 2022</time></p>
+</header>
+
+  <div class="entry-content"><p>You can get the version of CentOS
+using the following command.</p>
+<div class="highlight"><pre><span></span><code>rpm<span class="w"> </span>-q<span class="w"> </span>centos-release
+</code></pre></div>
+
+<p>This trick can be used to get the version of the CentOS distribution on a Spark cluster.
+Basically, 
+you run this command in the driver or workers to print the versions 
+and then parse the log …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/get-centos-version/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/control-number-of-partitions-of-a-dataframe-in-spark/">Control Number of Partitions of a DataFrame in Spark</a>
+      </h1>
+      <p class="meta"><time datetime="2021-12-11T17:21:56-08:00" pubdate>Dec 11, 2021</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips-and-Traps">Tips and Traps<a class="anchor-link" href="#Tips-and-Traps">&#182;</a></h2><ol>
+<li><p><code>DataFrame.repartition</code> repartitions the DataFrame by <strong>hash code</strong> of each row. 
+ If you specify a (multiple) column(s) (instead of number of partitions) 
+ to the method <code>DataFrame.repartition</code>,
+ then hash code of the column(s) are calculated for repartition. 
+ In some situations,
+ there are lots of hash conflictions 
+ even if the total number of rows is small (e.g., a few thousand),
+ which means that
+ <span style="color:red"> partitions generated might be skewed </span></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/control-number-of-partitions-of-a-dataframe-in-spark/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="https://www.legendu.net/en/author/benjamin-du4.html">&larr; Older</a>
+
+      <a class="next" href="https://www.legendu.net/en/author/benjamin-du2.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/expose-local-services-to-public-using-ngrok/">Expose Local Services to Public Using ngrok</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/the-right-way-to-export-PATH-in-shell/">The Right Way to Export PATH in Shell</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/parallel-RNGs-with-rayon-in-rust/">Parallel RNGs With Rayon in Rust</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/useful-rust-crates-for-developing-command-line-apps/">Useful Rust Crates for Developing Command Line Apps</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

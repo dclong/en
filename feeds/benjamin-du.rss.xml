@@ -1,0 +1,585 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Benjamin Du</title><link>https://www.legendu.net/en/</link><description>And let it direct your passion with reason.</description><lastBuildDate>Fri, 30 May 2025 14:37:08 -0700</lastBuildDate><item><title>Install Python in macOS</title><link>https://www.legendu.net/en/blog/install-python-in-mac/</link><description>&lt;p&gt;There are a few ways to install Python in Mac. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install system-wide via the official Python installation package.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install locally using Homebrew (recommended).&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;You should avoid installing multiple versions of Python in your system. 
+It usually brings more troubles than conveniences.
+Python virtual environemnts (
+  via &lt;a href="https://www.legendu.net/misc/blog/manage-python-projects-using-uv"&gt;uv&lt;/a&gt; 
+) and Docker containers are …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 19 Feb 2019 10:18:07 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-02-19:/en/blog/install-python-in-mac/</guid><category>Software</category><category>software</category><category>install</category><category>Python</category><category>macOS</category><category>uv</category></item><item><title>Expose Local Services to Public Using ngrok</title><link>https://www.legendu.net/en/blog/expose-local-services-to-public-using-ngrok/</link><description>&lt;p&gt;You can expose a local service to public using &lt;code&gt;ngrok&lt;/code&gt;.
+Follow instructions in the 
+&lt;a href="https://dashboard.ngrok.com/get-started/setup"&gt;official documentation of ngrok&lt;/a&gt;
+to setup &lt;code&gt;ngrok&lt;/code&gt;. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install ngrok.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;snap&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;ngrok
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Login to &lt;a href="https://ngrok.com"&gt;ngrok.com&lt;/a&gt; 
+    to identify your ngrok token.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Connect your account following instructions. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ngrok&lt;span class="w"&gt; &lt;/span&gt;config&lt;span class="w"&gt; &lt;/span&gt;add-authtoken&lt;span class="w"&gt; &lt;/span&gt;your_token
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Start a http tunnel forwarding …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 22 Jan 2022 14:33:10 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-01-22:/en/blog/expose-local-services-to-public-using-ngrok/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>local</category><category>public</category><category>HTTPS</category><category>ngrok</category></item><item><title>The Right Way to Export PATH in Shell</title><link>https://www.legendu.net/en/blog/the-right-way-to-export-PATH-in-shell/</link><description>&lt;p&gt;Some people suggest exporting &lt;code&gt;PATH&lt;/code&gt; only in &lt;code&gt;.bash_profile&lt;/code&gt; 
+instead of in &lt;code&gt;.bashrc&lt;/code&gt; (for Bash).
+The helps but does not resolve the issue of possible duplicated paths in &lt;code&gt;$PATH&lt;/code&gt;.
+The right way is to check for existence of the path in the &lt;code&gt;$PATH&lt;/code&gt; environment variable first,
+and add it only when …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 09 Nov 2020 11:10:06 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-11-09:/en/blog/the-right-way-to-export-PATH-in-shell/</guid><category>Computer Science</category><category>Computer Science</category><category>Shell</category><category>Bash</category><category>PATH</category><category>bashrc</category><category>bash_profile</category></item><item><title>Parallel RNGs With Rayon in Rust</title><link>https://www.legendu.net/en/blog/parallel-RNGs-with-rayon-in-rust/</link><description>&lt;p&gt;&lt;a href="https://rust-random.github.io/book/guide-parallel.html"&gt;The Rust Rand Book - Parallel RNGs&lt;/a&gt;
+has a very good summary about parallel RNGs.
+It also gives code examples using the rayon library.
+However,
+a few things to notice.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://docs.rs/rand/latest/rand/rngs/struct.ThreadRng.html"&gt;rand::ThreadRng&lt;/a&gt;
+    (obtained by calling &lt;a href="https://docs.rs/rand/latest/rand/fn.thread_rng.html"&gt;rand::thread_rng&lt;/a&gt;)
+    is often used in code examples of parallel RNGs
+    as it uses thread-local storage …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 05 Jul 2023 08:42:27 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2023-07-05:/en/blog/parallel-RNGs-with-rayon-in-rust/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Rust</category><category>parallel</category><category>concurrency</category><category>thread</category><category>multi-thread</category><category>RNG</category><category>PRNG</category><category>random number generator</category></item><item><title>Useful Rust Crates for Developing Command Line Apps</title><link>https://www.legendu.net/en/blog/useful-rust-crates-for-developing-command-line-apps/</link><description>&lt;h2 id="command-line-arguments-parsing"&gt;Command-line Arguments Parsing&lt;/h2&gt;
+&lt;h3 id="clap"&gt;&lt;a href="https://crates.io/crates/clap"&gt;clap&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://crates.io/crates/clap"&gt;clap&lt;/a&gt;
+is a simple to use, efficient, and full-featured Command Line Argument Parser.&lt;/p&gt;
+&lt;h3 id="structopt"&gt;&lt;a href="https://crates.io/crates/structopt"&gt;structopt&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Parse command line argument by defining a struct.&lt;/p&gt;
+&lt;h2 id="terminal-interface"&gt;Terminal Interface&lt;/h2&gt;
+&lt;h3 id="ratatui"&gt;&lt;a href="https://crates.io/crates/ratatui"&gt;ratatui&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://crates.io/crates/ratatui"&gt;RataTUI&lt;/a&gt;
+is a library to build rich terminal user interfaces or dashboards&lt;/p&gt;
+&lt;h3 id="tui"&gt;&lt;a href="https://crates.io/crates/tui"&gt;tui&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://crates.io/crates/tui"&gt;tui&lt;/a&gt;
+is a library to build rich terminal …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 13 Jan 2023 16:14:03 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2023-01-13:/en/blog/useful-rust-crates-for-developing-command-line-apps/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Rust</category><category>command</category><category>line</category><category>app</category><category>application</category></item><item><title>Seed Many RNGs in Rust</title><link>https://www.legendu.net/en/blog/seed-many-rngs-in-rust/</link><description>&lt;p&gt;There are different ways to seed many RNGs (for parallel RNGs).
+Below summarizes 3 popular ways.
+Seeding RNGs using 
+&lt;code&gt;std::collections::hash_map::RandomState&lt;/code&gt;
+or &lt;code&gt;rand::thread_rng&lt;/code&gt;
+is preferred.&lt;/p&gt;
+&lt;h2 id="seed-using-system-time"&gt;Seed Using System Time&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nt"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;std&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;time&lt;/span&gt;&lt;span class="o"&gt;::&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;&lt;span class="err"&gt;SystemTime,&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;UNIX_EPOCH&lt;/span&gt;&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+&lt;span class="nt"&gt;use&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;rand&lt;/span&gt;&lt;span class="p"&gt;::&lt;/span&gt;&lt;span class="nd"&gt;SmallRng&lt;/span&gt;&lt;span class="o"&gt;;&lt;/span&gt;
+
+&lt;span class="nt"&gt;fn&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nt"&gt;main&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="err"&gt;let&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;seed&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="err"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;SystemTime&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;:&lt;/span&gt;&lt;span class="nf"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;duration_since&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;UNIX_EPOCH&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;unwrap&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="w"&gt;        &lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="nf"&gt;as_nanos …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 05 Jul 2023 22:39:36 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2023-07-05:/en/blog/seed-many-rngs-in-rust/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Rust</category><category>RNG</category><category>random number generator</category><category>seed</category></item><item><title>Tips on Bytehound</title><link>https://www.legendu.net/en/blog/tips-on-bytehound/</link><description>&lt;p&gt;Bytehound works with Rust stable 
+(Rust nightly is not required)
+.&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;gcc&lt;span class="w"&gt; &lt;/span&gt;nodejs&lt;span class="w"&gt; &lt;/span&gt;npm
+npm&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;yarn
+cargo&lt;span class="w"&gt; &lt;/span&gt;build&lt;span class="w"&gt; &lt;/span&gt;--release&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;bytehound-preload
+cargo&lt;span class="w"&gt; &lt;/span&gt;build&lt;span class="w"&gt; &lt;/span&gt;--release&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;bytehound-cli
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or if you use 
+&lt;a href="https://github.com/legendu-net/icon"&gt;icon&lt;/a&gt;,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;icon&lt;span class="w"&gt; &lt;/span&gt;bytehound&lt;span class="w"&gt; &lt;/span&gt;-ic
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="usage"&gt;Usage&lt;/h2&gt;
+&lt;p&gt;Run your application with bytehound to collect memory usage data.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;export …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 08 Jan 2023 21:33:57 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2023-01-08:/en/blog/tips-on-bytehound/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Rust</category><category>Bytehound</category><category>memory</category><category>profiling</category></item><item><title>GitHub API</title><link>https://www.legendu.net/en/blog/github-api/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Shell-Command---gh"&gt;Shell Command - &lt;a href="https://github.com/cli/cli"&gt;gh&lt;/a&gt;&lt;a class="anchor-link" href="#Shell-Command---gh"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;a href="https://github.com/cli/cli"&gt;gh&lt;/a&gt; 
+is GitHub's official command-line tool.
+Persoanlly,
+I'm not a fan of gh 
+mainly because I'm not a fan of 
+writing complicated (&amp;gt;10 lines) shell scripts.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Python-Bindings---ghapi"&gt;Python Bindings - &lt;a href="https://github.com/fastai/ghapi"&gt;ghapi&lt;/a&gt;&lt;a class="anchor-link" href="#Python-Bindings---ghapi"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href="https://github.com/fastai/ghapi"&gt;ghapi&lt;/a&gt;
+ provides 100% always-updated coverage of the entire GitHub REST API
+ by automatically converting the OpenAPI spec to a Pythonic API. 
+ ghapi is always up to date with the latest changes to GitHub APIs.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 08 May 2022 01:01:02 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-05-08:/en/blog/github-api/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>REST</category><category>RESTful</category><category>API</category><category>GitHub</category><category>gh</category><category>ghapi</category></item><item><title>Install Rust Globally in Linux</title><link>https://www.legendu.net/en/blog/install-rust-globally/</link><description>&lt;p&gt;There are 3 ways to install a global standalone version of Rust in Linux.
+The recommended way is to use &lt;code&gt;rustup&lt;/code&gt; with customized environment variables.&lt;/p&gt;
+&lt;h2 id="using-a-package-management-tool"&gt;Using a Package Management Tool&lt;/h2&gt;
+&lt;p&gt;Some Linux distributions provide packages for Rust.
+Taking Debian/Ubuntu based Linux distributions as an example,
+you can install a …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 02 Jun 2022 15:21:12 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-06-02:/en/blog/install-rust-globally/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Rust</category><category>standalone</category><category>Linux</category><category>rust-src</category></item><item><title>Take Screenshot on Linux</title><link>https://www.legendu.net/en/blog/take-screenshot-on-linux/</link><description>&lt;h2 id="ksnip"&gt;&lt;a href="https://github.com/ksnip/ksnip"&gt;ksnip&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/ksnip/ksnip"&gt;Ksnip&lt;/a&gt;
+is a Qt-based cross-platform screenshot tool that provides many annotation features for your screenshots.
+It is one of the best screenshot applications.&lt;/p&gt;
+&lt;h3 id="installation-using-snap"&gt;Installation Using snap&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;snap&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;ksnip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="flameshot"&gt;&lt;a href="https://github.com/flameshot-org/flameshot"&gt;flameshot&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/flameshot-org/flameshot"&gt;Flameshot&lt;/a&gt;
+is a simple cross-platform screenshot software.&lt;/p&gt;
+&lt;h2 id="shutter"&gt;&lt;a href="http://shutter-project.org/"&gt;Shutter&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="http://shutter-project.org/"&gt;Shutter&lt;/a&gt;
+is a good screenshot application for Linux (only).&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 06 Sep 2021 12:09:39 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-06:/en/blog/take-screenshot-on-linux/</guid><category>Computer Science</category><category>Computer Science</category><category>software</category><category>tools</category><category>Linux</category><category>Shutter</category><category>screenshot</category><category>flameshot</category><category>ksnip</category></item><item><title>GitHub Action Task Stuck At Expected</title><link>https://www.legendu.net/en/blog/github-action-task-stuck-at-expected/</link><description>&lt;p&gt;Github pull request - Waiting for status to be reported&lt;/p&gt;
+&lt;p&gt;&lt;img alt="github-action-wf" src="https://i.stack.imgur.com/xHqbI.png"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The simplest manually solution is to close the PR and reopen it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;In my case, 
+    the issue was due to &lt;code&gt;GITHUB_TOKEN&lt;/code&gt; was used for the GitHub Action
+    &lt;a href="https://github.com/peter-evans/create-pull-request"&gt;create-pull-request&lt;/a&gt;
+    .
+    Creating a repository secret 
+    and use it to authenticate the GitHub Action
+    &lt;a href="https://github.com/peter-evans/create-pull-request"&gt;create-pull-request …&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 15 Sep 2021 01:11:06 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-15:/en/blog/github-action-task-stuck-at-expected/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>GitHub</category><category>Actions</category><category>task</category><category>check</category><category>stuck</category><category>expected</category></item><item><title>Read Tensorboard Logs</title><link>https://www.legendu.net/en/blog/read-tensorboard-logs/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Using-pandas.read_csv"&gt;Using pandas.read_csv&lt;a class="anchor-link" href="#Using-pandas.read_csv"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;This approaches requires you to have a running TensorBoard
+which is serving the data you want to read.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Check the checkbox "Show data download links".
+ See highlighted in the top-left corner of the screenshot below for an example.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Select an experimentation whose you'd like to download.
+ See highlighted in the bottom-right corner of the screenshot for an example.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 24 Sep 2021 22:14:34 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-24:/en/blog/read-tensorboard-logs/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>TensorBoard</category><category>read</category><category>file</category><category>log</category></item><item><title>Parse TOML Files in Python</title><link>https://www.legendu.net/en/blog/parse-toml-file-in-python/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There are 2 popular Python libraries 
+    &lt;a href="https://github.com/sdispater/tomlkit"&gt;tomlkit&lt;/a&gt;
+    and
+    &lt;a href="https://github.com/uiri/toml"&gt;toml&lt;/a&gt;
+    for parsing TOML formatted files in Python.
+    &lt;a href="https://github.com/sdispater/tomlkit"&gt;tomlkit&lt;/a&gt;
+    is preferred to 
+    &lt;a href="https://github.com/uiri/toml"&gt;toml&lt;/a&gt;
+    as it is more flexible and style-preserving.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A TOML file always interpret a key (even a bare ASCII integer) as string. 
+    For this reason, a dict with numerical keys …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 26 Apr 2021 09:37:58 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-26:/en/blog/parse-toml-file-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>TOML</category><category>parse</category><category>load</category><category>dump</category><category>tomlkit</category></item><item><title>Process Big Data Using PySpark</title><link>https://www.legendu.net/en/blog/tips-on-pyspark/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;PySpark 2.4 and older does not support Python 3.8.
+    You have to use Python 3.7 with PySpark 2.4 or older.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It can be extremely helpful to run a PySpark application locally to detect possible issues
+    before submitting it to the Spark cluster.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="ch"&gt;#!/usr/bin/env bash …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Apr 2021 11:49:58 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-30:/en/blog/tips-on-pyspark/</guid><category>Computer Science</category><category>programming</category><category>PySpark</category><category>Python</category><category>Spark</category><category>tips</category><category>HPC</category><category>high performance computing</category></item><item><title>Build Docker Images on Kubernetes</title><link>https://www.legendu.net/en/blog/build-docker-images-on-kubernetes/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/build-docker-images-using-buildkit-on-kubernetes"&gt;BuildKit&lt;/a&gt;
+    is a good tool for building Docker images on a Kubernetes cluster 
+    where you have root access.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/build-docker-images-using-kaniko"&gt;Kaniko&lt;/a&gt;
+    is another usable tool 
+    but it is not as intuitive as 
+    &lt;a href="https://github.com/vmware-tanzu/buildkit-cli-for-kubectl"&gt;buildkit-cli-for-kubectl&lt;/a&gt;
+    to use.
+    As a matter of fact,
+    tricky issues might arise when building Docker images using Kaniko.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/containers/buildah"&gt;buildah&lt;/a&gt;
+    is …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 14 Sep 2021 18:12:30 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-14:/en/blog/build-docker-images-on-kubernetes/</guid><category>Computer Science</category><category>Computer Science</category><category>Software</category><category>tools</category><category>Kubernetes</category><category>k8s</category><category>Docker</category><category>container</category><category>image</category><category>build</category></item><item><title>Build Docker Images Using BuildKit on Kubernetes</title><link>https://www.legendu.net/en/blog/build-docker-images-using-buildkit-on-kubernetes/</link><description>&lt;p&gt;&lt;a href="https://github.com/vmware-tanzu/buildkit-cli-for-kubectl"&gt;buildkit-cli-for-kubectl&lt;/a&gt;
+is a plugin for kubectl 
+which provides a similar experience building Docker images on Kubernetes
+as building Docker images locally using &lt;code&gt;docker build&lt;/code&gt;.
+&lt;a href="https://github.com/vmware-tanzu/buildkit-cli-for-kubectl"&gt;buildkit-cli-for-kubectl&lt;/a&gt;
+works perfectly in a personal/development Kubernetes cluster (e.g., minikube running locally),
+however,
+it doesn't work in an enterprise production environment 
+due to permission …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 15 Sep 2021 16:43:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-15:/en/blog/build-docker-images-using-buildkit-on-kubernetes/</guid><category>Computer Science</category><category>Computer Science</category><category>software</category><category>tools</category><category>Kubernetes</category><category>k8s</category><category>BuildKit</category><category>Docker</category><category>image</category><category>build</category><category>container</category></item><item><title>Get CentOS Version</title><link>https://www.legendu.net/en/blog/get-centos-version/</link><description>&lt;p&gt;You can get the version of CentOS
+using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;rpm&lt;span class="w"&gt; &lt;/span&gt;-q&lt;span class="w"&gt; &lt;/span&gt;centos-release
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This trick can be used to get the version of the CentOS distribution on a Spark cluster.
+Basically, 
+you run this command in the driver or workers to print the versions 
+and then parse the log …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 01 Jan 2022 13:47:32 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-01-01:/en/blog/get-centos-version/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>CentOS</category><category>Linux</category><category>version</category><category>Spark</category><category>big data</category></item><item><title>Control Number of Partitions of a DataFrame in Spark</title><link>https://www.legendu.net/en/blog/control-number-of-partitions-of-a-dataframe-in-spark/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;DataFrame.repartition&lt;/code&gt; repartitions the DataFrame by &lt;strong&gt;hash code&lt;/strong&gt; of each row. 
+ If you specify a (multiple) column(s) (instead of number of partitions) 
+ to the method &lt;code&gt;DataFrame.repartition&lt;/code&gt;,
+ then hash code of the column(s) are calculated for repartition. 
+ In some situations,
+ there are lots of hash conflictions 
+ even if the total number of rows is small (e.g., a few thousand),
+ which means that
+ &lt;span style="color:red"&gt; partitions generated might be skewed &lt;/span&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 11 Dec 2021 17:21:56 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-12-11:/en/blog/control-number-of-partitions-of-a-dataframe-in-spark/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Spark</category><category>PySpark</category><category>big data</category><category>partition</category><category>repartition</category><category>maxPartitionBytes</category></item><item><title>Spark Issue: Shell Related</title><link>https://www.legendu.net/en/blog/spark-issue:-shell-related/</link><description>&lt;h2 id="symptom-1"&gt;Symptom 1&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;/bin/sh: hdfs: command not found&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="possible-causes-of-symptom-1"&gt;Possible Causes of Symptom 1&lt;/h2&gt;
+&lt;p&gt;The command &lt;code&gt;hdfs&lt;/code&gt; is not on the search path. &lt;/p&gt;
+&lt;h2 id="possible-solutions-to-symptom-1"&gt;Possible Solutions to Symptom 1&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Use the full path to the command.&lt;/li&gt;
+&lt;li&gt;Configure the environment variable &lt;code&gt;PATH&lt;/code&gt; before you use the command.&lt;/li&gt;
+&lt;li&gt;Find other alternatives to the command …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 15 Jan 2022 14:23:15 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-01-15:/en/blog/spark-issue:-shell-related/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Spark</category><category>issue</category><category>Spark issue</category><category>shell</category><category>command</category><category>big data</category></item><item><title>Spark Issue: Namespace Quota Is Exceeded</title><link>https://www.legendu.net/en/blog/spark-issue:-namespace-quota-is-exceeded/</link><description>&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Caused by: org.apache.hadoop.hdfs.protocol.NSQuotaExceededException: The NameSpace quota (directories and files) of directory /user/user_name is exceeded: quota=163840 file count=163841&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="cause"&gt;Cause&lt;/h2&gt;
+&lt;p&gt;The namespace quota of the directory &lt;code&gt;/user/user_name&lt;/code&gt; is execeeded.&lt;/p&gt;
+&lt;h2 id="solutions"&gt;Solutions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Remove non-needed files from the directory &lt;code&gt;/user/user_name&lt;/code&gt; to release some namespace …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 06 Jan 2022 22:33:54 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-01-06:/en/blog/spark-issue:-namespace-quota-is-exceeded/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Spark</category><category>issue</category><category>Spark issue</category><category>NSQuotaExceededException</category><category>namespace</category><category>quota</category><category>big data</category></item><item><title>Spark Issue: Rust Panic</title><link>https://www.legendu.net/en/blog/spark-issue:-rust-panic/</link><description>&lt;p&gt;If you use Rust with Spark/PySpark
+and there are issues in the Rust code,
+you might get Rust panic error messages. &lt;/p&gt;
+&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Error: b"thread 'main' panicked at 'index out of bounds: the len is 15 but the index is 15', src/game.rs:131:39\nnote: run with …&lt;/p&gt;&lt;/blockquote&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 07 Jan 2022 11:12:24 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-01-07:/en/blog/spark-issue:-rust-panic/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Spark</category><category>issue</category><category>Spark issue</category><category>big data</category><category>panic</category><category>panicked at</category><category>Rust</category></item><item><title>Spark Issue: RuntimeException: Unsupported Literal Type Class</title><link>https://www.legendu.net/en/blog/spark-issue:-RuntimeException:-unsupported-literal-type-class/</link><description>&lt;h2 id="symptom"&gt;Symptom&lt;/h2&gt;
+&lt;blockquote&gt;
+&lt;p&gt;java.lang.RuntimeException: Unsupported literal type class java.util.ArrayList [1]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id="possible-causes"&gt;Possible Causes&lt;/h2&gt;
+&lt;p&gt;This happens in PySpark 
+when a Python list is provide where a scalar is required.
+Assuming &lt;code&gt;id0&lt;/code&gt; is an integer column in the DataFrame &lt;code&gt;df&lt;/code&gt;,
+the following code throws the above error.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;2&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;3 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 15 Jan 2022 14:36:45 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2022-01-15:/en/blog/spark-issue:-RuntimeException:-unsupported-literal-type-class/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Spark</category><category>issue</category><category>Spark issue</category><category>big data</category><category>RuntimeException</category><category>type</category><category>unsupported</category></item><item><title>Terminal Multiplexers</title><link>https://www.legendu.net/en/blog/terminal-multiplexers/</link><description>&lt;p&gt;&lt;img alt="zellij" src="https://raw.githubusercontent.com/zellij-org/zellij/main/assets/demo.gif"&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;There are 2 mature popular terminal multiplexer apps: screen and tmux.
+    Both of them are very useful if you want to work on multiple tasks over 1 SSH connection.
+    Screen is relative simple to use while tmux is much more powerful and more complicated to use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Besides enabling users to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 04 Sep 2021 09:56:21 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-04:/en/blog/terminal-multiplexers/</guid><category>Computer Science</category><category>Computer Science</category><category>software</category><category>tools</category><category>Rust</category><category>Zellij</category><category>tmux</category><category>screen</category><category>terminal</category><category>SSH</category></item><item><title>Schedule Cron Tasks in a Docker Container</title><link>https://www.legendu.net/en/blog/schedule-cron-tasks-in-a-docker-container/</link><description>&lt;p&gt;Cron tasks work in a Docker container. 
+However,
+you have to manually start the cron deamon (root or sudo required) using &lt;code&gt;cron&lt;/code&gt; or &lt;code&gt;sudo cron&lt;/code&gt; 
+if it is not configured (via the Docker entrypoint) to start on the start of the Docker container.
+For tutorials on crontab, 
+please refer to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 01 Aug 2019 09:40:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-08-01:/en/blog/schedule-cron-tasks-in-a-docker-container/</guid><category>Software</category><category>software</category><category>Docker</category><category>crontab</category><category>cron</category><category>deamon</category><category>container</category></item><item><title>Regular Expression in Bash</title><link>https://www.legendu.net/en/blog/regular-expression-in-bash/</link><description>&lt;p&gt;It is suggested that you &lt;strong&gt;use Python script instead of Shell script&lt;/strong&gt; as much as possible.
+If you do have to stick with Shell script,
+you can use &lt;code&gt;=~&lt;/code&gt; for regular expression matching in Bash.
+This make Bash syntax extremely flexible and powerful.
+For example, 
+you can match multiple strings using …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 28 Apr 2019 11:53:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-04-28:/en/blog/regular-expression-in-bash/</guid><category>Computer Science</category><category>programming</category><category>Bash</category><category>regular expression</category><category>regex</category></item><item><title>Check Whether a Linux Is Using upstart, systemd or SysV</title><link>https://www.legendu.net/en/blog/check-whether-a-linux-is-using-upstart-systemd-or-sysv/</link><description>&lt;p&gt;The simplest way to check whether a Linux system is running systemd, upstart or SysV 
+is by running the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ps&lt;span class="w"&gt; &lt;/span&gt;-p1&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;grep&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;init\|upstart\|systemd&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://www.2daygeek.com/how-to-determine-which-init-system-manager-is-running-on-linux-system/"&gt;How to determine which system manager is running on Linux System&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://superuser.com/questions/1017959/how-to-know-if-i-am-using-systemd-on-linux"&gt;How to know if I am using systemd on Linux?&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 05 Oct 2021 11:43:26 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-10-05:/en/blog/check-whether-a-linux-is-using-upstart-systemd-or-sysv/</guid><category>Computer Science</category><category>Computer Science</category><category>OS</category><category>Linux</category><category>systemd</category><category>upstart</category><category>SysV</category></item><item><title>PySpark Issue: Java Gateway Process Exited Before Sending the Driver Its Port Number</title><link>https://www.legendu.net/en/blog/pyspark-issue:-Java-gateway-process-exited-before-sending-the-driver-its-port-number/</link><description>&lt;p&gt;I countered the issue when using PySpark locally
+(the issue can happen to a cluster as well).
+It turned out to be caused by a misconfiguration of the environment variable &lt;code&gt;JAVA_HOME&lt;/code&gt; in Docker.&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/31841509/pyspark-exception-java-gateway-process-exited-before-sending-the-driver-its-po"&gt;PySpark: Exception: Java gateway process exited before sending the driver its port number&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 10 Oct 2021 14:23:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-10-10:/en/blog/pyspark-issue:-Java-gateway-process-exited-before-sending-the-driver-its-port-number/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>PySpark</category><category>Spark</category><category>Java</category><category>Python</category><category>big data</category><category>JAVA_HOME</category></item><item><title>Serialize and Deserialize Object Using Pickle in Python</title><link>https://www.legendu.net/en/blog/serialize-and-deserialize-object-using-pickle-in-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Make sure to use the mode &lt;code&gt;rb&lt;/code&gt;/&lt;code&gt;wb&lt;/code&gt; when read/write pickle files.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 03 Oct 2021 23:27:11 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-10-03:/en/blog/serialize-and-deserialize-object-using-pickle-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>pickle</category><category>serialization</category><category>deserialization</category><category>dump</category><category>load</category></item><item><title>Best Filesystem Format for Cross-platform Data Exchanging</title><link>https://www.legendu.net/en/blog/best-filesystem-format-for-cross-platform-data-exchanging/</link><description>&lt;h2 id="fat32"&gt;FAT32&lt;/h2&gt;
+&lt;p&gt;FAT32 is an outdated filesystem. 
+The maximum size for a single file is 4G.
+You should instead exFAT instead of FAT32 where possible.&lt;/p&gt;
+&lt;h2 id="exfat"&gt;&lt;a href="https://en.wikipedia.org/wiki/ExFAT"&gt;exFAT&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;exFAT is great cross-platform filesystem that is support out-of-box by Windows, Linux and macOS.
+There is practically no limit (big enough for average users) on …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 11 Mar 2019 10:24:51 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-11:/en/blog/best-filesystem-format-for-cross-platform-data-exchanging/</guid><category>OS</category><category>OS</category><category>macOS</category><category>Linux</category><category>Windows</category><category>external</category><category>drive</category><category>filesystem</category><category>exFAT</category><category>ext4</category><category>mount</category><category>WSL</category></item><item><title>Visual Studio Code for Python</title><link>https://www.legendu.net/en/blog/vscode-for-python/</link><description>&lt;h2 id="extensions"&gt;Extensions&lt;/h2&gt;
+&lt;p&gt;Please refer to 
+&lt;a href="http://www.legendu.net/misc/blog/useful-visual-studio-code-extensions"&gt;Useful Visual Studio Code Extensions&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id="set-python-environment-for-visual-studio-code-server"&gt;Set Python Environment for Visual Studio Code Server&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;File -&amp;gt; Preference -&amp;gt; Settings&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Click on Workspace.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Search for &lt;code&gt;Python Path&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Change Python Path to the one you want to use.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="Set Python Path" src="https://user-images.githubusercontent.com/824507/69910283-b7b41300-13bd-11ea-83f0-5f959c68532f.png"&gt;&lt;/p&gt;
+&lt;h2 id="debug-a-python-project"&gt;&lt;a href="http://www.legendu.net/misc/blog/debug-python-project-in-visual-studio-code"&gt;Debug a Python Project&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id="visual-studio-live-share"&gt;Visual Studio Live Share&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://visualstudio.microsoft.com/services/live-share/"&gt;Visual Studio Live Share&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://docs.microsoft.com/en-us/visualstudio/liveshare/"&gt;What …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 30 Mar 2019 12:20:46 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-30:/en/blog/vscode-for-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>Visual Studio Code</category><category>vscode</category><category>IDE</category><category>Jupyter notebook</category></item><item><title>Install Newer Version of SQLite3 on Debian Jessie</title><link>https://www.legendu.net/en/blog/install-newer-version-of-sqlite3-on-debian/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;code&gt;/etc/apt/sources.list&lt;/code&gt; and add the following line to the end.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;deb http://www.backports.org/debian jessie-backports main contrib non-free
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;deb http://ftp.us.debian.org/debian/ jessie-backports main contrib non-free
+deb-src http://ftp.us.debian.org/debian/ jessie-backports main contrib non-free
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Make sure the GPG …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 10 Mar 2019 10:27:02 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-10:/en/blog/install-newer-version-of-sqlite3-on-debian/</guid><category>OS</category><category>Linux</category><category>SQLite3</category><category>Debian</category><category>backports</category><category>SQLite</category></item><item><title>Mount NTFS Drive Manually on Mac</title><link>https://www.legendu.net/en/blog/mount-external-hard-drive-manually-on-mac/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;First use &lt;code&gt;diskutil list&lt;/code&gt; to list all avaiable disks 
+    and identifiy the external hard drive to mount.
+    For example,
+    running &lt;code&gt;diskutil list&lt;/code&gt; on my Mac gives me the following output
+    and &lt;code&gt;/dev/disk2s1&lt;/code&gt; is the partition (NTFS) to mount.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;diskutil&lt;span class="w"&gt; &lt;/span&gt;list
+/dev/disk0&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;internal&lt;span class="o"&gt;)&lt;/span&gt;:
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="c1"&gt;#:                       TYPE NAME                    SIZE       IDENTIFIER&lt;/span&gt;
+&lt;span class="w"&gt;   &lt;/span&gt;&lt;span class="m"&gt;0&lt;/span&gt;:&lt;span class="w"&gt;      &lt;/span&gt;GUID_partition_scheme …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 10 Mar 2019 10:25:07 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-10:/en/blog/mount-external-hard-drive-manually-on-mac/</guid><category>OS</category><category>OS</category><category>macOS</category><category>mount</category><category>NTFS</category><category>external drive</category><category>ExFAT</category></item><item><title>Make Windows Restart Regularly</title><link>https://www.legendu.net/en/blog/make-windows-restart-regularly/</link><description>&lt;p&gt;My Windows PC in my office slows down signficantly after running for several days.
+I have cleaned up the startup applications to the most I can. 
+The only way I can think of is to automatically restart the computer early morning every few days. 
+The article 
+&lt;a href="https://www.sysmiks.com/automatic-restart-shut-down-pc/"&gt;[Windows10] How to set …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 13 May 2019 22:55:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-05-13:/en/blog/make-windows-restart-regularly/</guid><category>OS</category><category>OS</category><category>Windows</category><category>Microsoft</category><category>restart</category></item><item><title>Docker for Nvidia GPU</title><link>https://www.legendu.net/en/blog/docker-for-nvidia-gpu/</link><description>&lt;h2 id="instruction-on-using-nvidia-gpu-cuda-for-computing-in-docker"&gt;Instruction on Using Nvidia GPU (CUDA) for Computing in Docker&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Nvidia &lt;code&gt;cuda-drivers&lt;/code&gt; (or equivalent) on your Linux machine
+    following instructions at 
+    &lt;a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux"&gt;CUDA Downloads&lt;/a&gt;.
+    Notice that instead of installing &lt;code&gt;cuda&lt;/code&gt; (using &lt;code&gt;sudo apt-get install cuda&lt;/code&gt;),
+    it is suggested that you install &lt;code&gt;cuda-drivers&lt;/code&gt; only (using &lt;code&gt;sudo apt-get install cuda-drivers&lt;/code&gt;).
+    This is …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 18 Jan 2020 01:02:42 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-01-18:/en/blog/docker-for-nvidia-gpu/</guid><category>Software</category><category>software</category><category>Docker</category><category>GPU</category><category>Nvidia</category></item><item><title>Visualize Nvidia GPU Usage</title><link>https://www.legendu.net/en/blog/visualize-Nvidia-GPU-usage/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;You can use the tool &lt;code&gt;nvtop&lt;/code&gt; (Linux only)
+to visualize the usage of Nvidia GPUs. 
+However, 
+it is only available on Linux
+and is not suitable for tracking and visualize the GPU usage in a long time period. 
+Another simple approach to track and visualize the GPU usage is
+to dump GPU usage statistics into a CSV file
+using the following command&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sat, 18 Sep 2021 16:19:03 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-18:/en/blog/visualize-Nvidia-GPU-usage/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>GPU</category><category>Nvidia</category><category>usage</category><category>visualization</category></item><item><title>Build Docker Images Using Kaniko</title><link>https://www.legendu.net/en/blog/build-docker-images-using-kaniko/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Kaniko works differently from Docker. 
+    It runs inside a Docker container and detect and extract new layers to build Docker images. 
+    Since Kaniko manipulates the filesystem (layers) inside the Docker container,
+    it can have unexpected side effect if not used carefully. 
+    For this reason,
+    the developer team suggests users to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 20 Jul 2021 17:09:59 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-07-20:/en/blog/build-docker-images-using-kaniko/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Kaniko</category><category>Docker</category><category>build</category><category>image</category><category>buildah</category></item><item><title>WSL2 Filesystem</title><link>https://www.legendu.net/en/blog/wsl-2-filesystem/</link><description>&lt;h2 id="performance-issue"&gt;Performance Issue&lt;/h2&gt;
+&lt;p&gt;The performance of IO is extremely bad if you access the the Windows filesystem from WSL 2.
+This is also true if you use Docker in WSL 2 
+(since Docker on WSL 2 share the same kernel as WSL 2).
+It is suggested that you &lt;strong&gt;stick to WSL …&lt;/strong&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 09 Sep 2021 12:18:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-09:/en/blog/wsl-2-filesystem/</guid><category>Computer Science</category><category>Computer Science</category><category>software</category><category>tools</category><category>WSL 2</category><category>filesystem</category><category>file system</category></item><item><title>Shell Equivalent in Different Operating Systems</title><link>https://www.legendu.net/en/blog/shell-equivalent-in-different-operating-systems/</link><description>&lt;p&gt;It suggested that you use IPython shell instead of Bash/Zsh shells.
+Please refer to 
+&lt;a href="http://www.legendu.net/en/blog/ipython-is-the-best-shell/"&gt;IPython Is the Best Shell&lt;/a&gt;
+for detailed discussions.
+If you have to use shell commands,
+it is suggested that you use Linux commands when possible 
+as Linux command are more universal and useful.
+You can …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 02 Sep 2020 09:22:34 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-09-02:/en/blog/shell-equivalent-in-different-operating-systems/</guid><category>Computer Science</category><category>Computer Science</category><category>OS</category><category>Linux</category><category>macOS</category><category>Windows</category><category>Shell</category><category>PowerShell</category></item><item><title>Init for Docker Containers</title><link>https://www.legendu.net/en/blog/init-for-docker-containers/</link><description>&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+**&lt;/p&gt;
+&lt;h2 id="built-in-support"&gt;Built-in Support&lt;/h2&gt;
+&lt;p&gt;Docker has built-in support for init process (which is based on tini) now.
+In short, 
+you just have to specify the option &lt;code&gt;--init&lt;/code&gt;
+when you start a container using …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 05 Mar 2020 11:08:32 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-03-05:/en/blog/init-for-docker-containers/</guid><category>Software</category><category>software</category><category>Docker</category><category>container</category><category>init</category><category>s6</category><category>s6-overlay</category><category>tini</category><category>Supervisord</category><category>dumb-init</category></item><item><title>Run Docker Containers Inside a Docker Container</title><link>https://www.legendu.net/en/blog/run-docker-containers-inside-a-docker-container/</link><description>&lt;p&gt;You can run Docker containers inside a Docker container. 
+To allow this,
+you have to pass the docker socks into the container 
+using the option &lt;code&gt;-v /var/run/docker.sock:/var/run/docker.sock&lt;/code&gt;.
+For more discussions,
+please refer to
+&lt;a href="https://devopscube.com/run-docker-in-docker/#:~:text=To%20run%20docker%20inside%20docker,sock%20as%20a%20volume.&amp;amp;text=Just%20a%20word%20of%20caution,privileges%20over%20your%20docker%20daemon"&gt;How To Run Docker in Docker Container [3 Easy Methods …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 13 Sep 2021 10:55:29 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-09-13:/en/blog/run-docker-containers-inside-a-docker-container/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Docker</category><category>container</category><category>socks</category><category>container in container</category></item><item><title>Understand Execuation of SQL Statements</title><link>https://www.legendu.net/en/blog/understand-execuation-of-sql-statements/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Execuation-Order"&gt;Execuation Order&lt;a class="anchor-link" href="#Execuation-Order"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A SQL statement selects rows and columns from a big (rectangular) table. 
+You put columns that you want to select after &lt;code&gt;SELECT&lt;/code&gt; 
+and rows you want to select after &lt;code&gt;FROM&lt;/code&gt;.
+A SQL statement is executed as follows.
+First, 
+the (INNER|LEFT|RIGHT|FULL) &lt;code&gt;JOIN (ON)&lt;/code&gt; is executed if any (see more explanation later).
+Second, 
+the &lt;code&gt;WHERE&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 17 Aug 2021 08:37:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-08-17:/en/blog/understand-execuation-of-sql-statements/</guid><category>Computer Science</category><category>programming</category><category>SQL</category><category>join on</category><category>having</category><category>where</category><category>group by</category><category>null value</category></item><item><title>Packaging Python Dependencies for PySpark Using python-build-standalone</title><link>https://www.legendu.net/en/blog/packaging-Python-Dependencies-for-PySpark-Using-python-build-standalone/</link><description>&lt;p&gt;You can build a portable Python environment 
+following steps below.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install &lt;a href="https://github.com/indygreg/python-build-standalone"&gt;python-build-standalone&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install Python packages using pip of the installed python-build-standalone distribution.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Pack the whole python-build-standalone directory into a compressed file, e.g., &lt;code&gt;env.tar.gz&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The GitHub repo
+&lt;a href="https://github.com/dclong/python-portable"&gt;dclong/python-portable&lt;/a&gt;
+has good examples of building portable Python environments 
+leveraging …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 26 Apr 2021 09:48:16 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-26:/en/blog/packaging-Python-Dependencies-for-PySpark-Using-python-build-standalone/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>portable</category><category>standalone</category><category>python-build-standalone</category><category>Docker</category><category>environment</category></item><item><title>Packaging Python Dependencies for PySpark Using conda-pack</title><link>https://www.legendu.net/en/blog/packaging-python-dependencies-for-pyspark-using-conda-pack/</link><description>&lt;p&gt;&lt;a href="https://github.com/indygreg/python-build-standalone"&gt;python-build-standalone&lt;/a&gt;
+is a better alternative to conda-pack on managing Python dependencies for PySpark.
+Please refer to 
+&lt;a href="http://www.legendu.net/en/blog/packaging-Python-Dependencies-for-PySpark-Using-python-build-standalone"&gt;Packaging Python Dependencies for PySpark Using python-build-standalone&lt;/a&gt;
+for tutorials on how to use
+&lt;a href="https://github.com/indygreg/python-build-standalone"&gt;python-build-standalone&lt;/a&gt;
+to manage Python dependencies for PySpark.&lt;/p&gt;
+&lt;h2 id="build-portable-python-environments-using-conda-pack"&gt;Build Portable Python Environments Using conda-pack&lt;/h2&gt;
+&lt;p&gt;Please refer to the GitHub repo
+&lt;a href="https://github.com/dclong/conda_environ"&gt;dclong/conda_environ …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Apr 2021 12:13:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-30:/en/blog/packaging-python-dependencies-for-pyspark-using-conda-pack/</guid><category>Computer Science</category><category>programming</category><category>PySpark</category><category>Python</category><category>conda</category><category>conda-pack</category><category>dependency</category><category>Spark</category><category>big data</category><category>portable</category></item><item><title>Build a Fat JAR Using Maven Without a Java Project</title><link>https://www.legendu.net/en/blog/build-a-fat-jar-using-maven-without-a-java-project/</link><description>&lt;p&gt;You can use Maven to download dependencies of Java packages without creating a Java project.
+For example,
+if you want to download all dependencies of &lt;code&gt;arrow-jvm&lt;/code&gt; and &lt;code&gt;arrow-memory&lt;/code&gt; 
+and build everything into a single fat jar (for easy use in other places),
+you can first crate a file &lt;code&gt;pom.xml …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 21 Oct 2020 17:22:39 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-21:/en/blog/build-a-fat-jar-using-maven-without-a-java-project/</guid><category>Computer Science</category><category>Computer Science</category><category>Java</category><category>Maven</category><category>POM</category><category>JAR</category><category>fat jar</category><category>assembly</category></item><item><title>Useful Visual Studio Code Extensions</title><link>https://www.legendu.net/en/blog/useful-visual-studio-code-extensions/</link><description>&lt;h2 id="places-to-find-extensoins"&gt;Places to Find Extensoins&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://marketplace.visualstudio.com/vscode"&gt;Visual Studio Code Marketplace&lt;/a&gt;
+and
+&lt;a href="https://open-vsx.org/"&gt;Open VSX Registry&lt;/a&gt;
+are 2 places to find VSCode compatible extensions.&lt;/p&gt;
+&lt;h2 id="install-vscode-extensions-from-command-line"&gt;Install VSCode Extensions from Command-line&lt;/h2&gt;
+&lt;p&gt;https://stackoverflow.com/questions/34286515/how-to-install-visual-studio-code-extensions-from-command-line/34339780#34339780&lt;/p&gt;
+&lt;h2 id="install-code-server-extensions-from-command-line"&gt;Install Code-Server Extensions from Command-line&lt;/h2&gt;
+&lt;p&gt;If you install extension in Dockerfile using &lt;code&gt;root&lt;/code&gt;,
+the extensions are installed …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Apr 2021 12:19:38 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-30:/en/blog/useful-visual-studio-code-extensions/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>IDE</category><category>VSCode</category><category>Visual Studio Code</category><category>extension</category></item><item><title>Tips on conda-pack</title><link>https://www.legendu.net/en/blog/tips-on-conda-pack/</link><description>&lt;p&gt;It is suggested that you use python-build-standlone instead of conda-pack to build portable Python environments.
+Please refer to
+&lt;a href="http://www.legendu.net/en/blog/packaging-Python-Dependencies-for-PySpark-Using-python-build-standalone/"&gt;Packaging Python Dependencies for PySpark Using Python-Build-Standalone&lt;/a&gt;
+for more details.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;All packages in a virtual environment must be managed by conda (rather than pip)
+    so that it can be packe using conda-pack …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Apr 2021 12:13:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-30:/en/blog/tips-on-conda-pack/</guid><category>Computer Science</category><category>programming</category><category>conda-pack</category><category>conda</category><category>dependency</category><category>virtual environment</category></item><item><title>Tips on pex</title><link>https://www.legendu.net/en/blog/tips-on-pex/</link><description>&lt;h2 id="steps-to-build-a-pex-environment-file"&gt;Steps to Build a pex Environment File&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Start a Python Docker image with the right version of Python interpreter installed.
+    For example,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker&lt;span class="w"&gt; &lt;/span&gt;run&lt;span class="w"&gt; &lt;/span&gt;-it&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;$(&lt;/span&gt;&lt;span class="nb"&gt;pwd&lt;/span&gt;&lt;span class="k"&gt;)&lt;/span&gt;:/workdir&lt;span class="w"&gt; &lt;/span&gt;python:3.5-buster&lt;span class="w"&gt; &lt;/span&gt;/bin/bash
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Install pex.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip3&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;pex
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Build a pex environment file.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pex&lt;span class="w"&gt; &lt;/span&gt;--python&lt;span class="o"&gt;=&lt;/span&gt;python3&lt;span class="w"&gt; &lt;/span&gt;-v&lt;span class="w"&gt; &lt;/span&gt;pyspark&lt;span class="w"&gt; &lt;/span&gt;findspark&lt;span class="w"&gt; &lt;/span&gt;-o …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 26 Apr 2021 10:25:39 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-26:/en/blog/tips-on-pex/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>pex</category><category>dependency</category><category>virtual environment</category></item><item><title>Replace Single Quotes With Double Quotes in Python Code</title><link>https://www.legendu.net/en/blog/replace-single-quotes-with-double-quotes-in-python-code/</link><description>&lt;p&gt;There are 2 ways.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Format the Python code using black,
+    which will automatically convert single quotes to double quotes when applicable.
+    (Note that you can format the code again using yapf 
+    if you want the code to formatted by yapf finally.)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the tool &lt;a href="https://github.com/myint/unify"&gt;myint/unify&lt;/a&gt; to help you.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 15 Apr 2021 11:56:53 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-15:/en/blog/replace-single-quotes-with-double-quotes-in-python-code/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>code</category><category>format</category><category>single</category><category>double</category><category>quotes</category><category>string</category></item><item><title>Remote Development in Visual Studio Code</title><link>https://www.legendu.net/en/blog/remote-development-in-visual-studio-code/</link><description>&lt;p&gt;There are 2 approaches to develop remotely in Visual Studio Code.
+The first way is to leverage the extension pack
+&lt;a href="https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.vscode-remote-extensionpack"&gt;Remote Development&lt;/a&gt;.
+For more details, 
+please refer to 
+&lt;a href="https://code.visualstudio.com/blogs/2019/05/02/remote-development"&gt;Remote Development with VS Code&lt;/a&gt;
+and
+&lt;a href="https://code.visualstudio.com/docs/remote/remote-overview"&gt;VS Code Remote Development&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;The second (prefered) approach is to leverage 
+&lt;a href="https://github.com/cdr/code-server"&gt;cdr/code-server&lt;/a&gt;.
+For more details …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Thu, 10 Oct 2019 13:07:08 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-10:/en/blog/remote-development-in-visual-studio-code/</guid><category>Software</category><category>Software</category><category>Visual Studio Code</category><category>vscode</category><category>VS Code</category><category>remote development</category><category>Visual Studio Code server</category><category>vscode server</category></item><item><title>Debug Python Project in Visual Studio Code</title><link>https://www.legendu.net/en/blog/debug-python-project-in-visual-studio-code/</link><description>&lt;h2 id="ways-to-open-a-command-palette"&gt;Ways to Open a Command Palette&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Use Menu &lt;code&gt;Menu -&amp;gt; View -&amp;gt; Command Palette...&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;Use the shortcut &lt;code&gt;Shift + Command + P&lt;/code&gt; (on macOS).&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img alt="Command Palette" src="https://user-images.githubusercontent.com/824507/108890375-5b40a300-75c2-11eb-801e-481063921e17.png"&gt;&lt;/p&gt;
+&lt;p&gt;You can search for commands in the Command Palette,
+which makes things very convenient.&lt;/p&gt;
+&lt;h2 id="run-tests-or-a-python-file"&gt;Run Tests or a Python File&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;Open the Command Palette.&lt;/li&gt;
+&lt;li&gt;Search for &lt;code&gt;Python: Run&lt;/code&gt; in the …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 23 Apr 2021 10:26:29 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-23:/en/blog/debug-python-project-in-visual-studio-code/</guid><category>Computer Science</category><category>Computer Science</category></item><item><title>Python Logging</title><link>https://www.legendu.net/en/blog/python-logging/</link><description>&lt;h2 id="general-tips"&gt;General Tips&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="http://www.legendu.net/misc/blog/python-logging-module/"&gt;logging&lt;/a&gt;
+    is a Python module for logging coming with the standard library
+    while
+    &lt;a href="http://www.legendu.net/misc/blog/python-logging-made-stupidly-simple-with-loguru/"&gt;loguru&lt;/a&gt;
+    is a popular 3rd-party logging library.
+    Unless you do not want your Python package/script to depend on 3rd-party libraries,
+    &lt;code&gt;loguru&lt;/code&gt; is preferred to &lt;code&gt;logging&lt;/code&gt; for multiple reasons.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;loguru is easy and fun to …&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Tue, 12 Mar 2019 10:43:38 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-03-12:/en/blog/python-logging/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>logging</category><category>loguru</category><category>rich</category></item><item><title>Comparing Similarity of Two Different Clusterings</title><link>https://www.legendu.net/en/blog/comparing-similarity-of-two-different-clusterings/</link><description>&lt;p&gt;The paper
+&lt;a href="http://staff.ustc.edu.cn/~zwp/teach/MVA/cluster_validation.pdf"&gt;Comparing Clusterings - An Overview&lt;/a&gt;
+has a good view of different metrics for comparing the similarity of 2 clusterings.
+Overall, Normalized Mutual Information sounds like a good one.
+It is implemented in sklearn as 
+&lt;a href="https://scikit-learn.org/stable/modules/generated/sklearn.metrics.normalized_mutual_info_score.html#sklearn.metrics.normalized_mutual_info_score"&gt;sklearn.metrics.normalized_mutual_info_score&lt;/a&gt;
+.
+Of course, 
+there are many more metrics for measuring similarity of 2 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 30 Oct 2020 10:41:11 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-30:/en/blog/comparing-similarity-of-two-different-clusterings/</guid><category>Computer Science</category><category>Computer Science</category><category>clustering</category><category>similarity</category><category>cluster</category><category>metric</category><category>sklearn</category><category>paper</category></item><item><title>Static Type Checking of Python Scripts Using pytype</title><link>https://www.legendu.net/en/blog/static-type-checking-of-Python-Scripts-using-pytype/</link><description>&lt;h2 id="configuration"&gt;Configuration&lt;/h2&gt;
+&lt;p&gt;There are 3 ways to control the behavior of `pytype.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Pass command-line options to &lt;code&gt;pytype&lt;/code&gt;. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Specify a configuration file using &lt;code&gt;pytype --config /path/to/config/file ...&lt;/code&gt;.
+    You can generate an example configuration file 
+    using the command &lt;code&gt;pytype --generate-config pytype.cfg&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If no configuration file is found,
+    pytype uses the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 30 Aug 2020 09:16:10 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-08-30:/en/blog/static-type-checking-of-Python-Scripts-using-pytype/</guid><category>Computer Science</category><category>Computer Science</category><category>Python</category><category>type annotation</category><category>static</category><category>type checking</category><category>pytype</category></item><item><title>Call Java Using PyJNIus from Python</title><link>https://www.legendu.net/en/blog/call-java-using-pyjnius-from-python/</link><description>&lt;p&gt;PyJNIus is a simple-to-use Java interface for Python.
+However,
+&lt;a href="https://github.com/jpype-project/jpype"&gt;JPype&lt;/a&gt;
+is a better alternative.&lt;/p&gt;
+&lt;h3 id="installation"&gt;Installation&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;Cython
+pip&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;pyjnius
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="example-with-imported-jar"&gt;Example with Imported Jar&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;os&lt;/span&gt;
+&lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;CLASSPATH&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;/path/to/your.jar&amp;quot;&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;jnius&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;
+&lt;span class="n"&gt;YourClass&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;autoclass&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;to&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;yourObj&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;YourClass&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: Avoid using the same …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Wed, 25 Mar 2020 20:15:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-03-25:/en/blog/call-java-using-pyjnius-from-python/</guid><category>Computer Science</category><category>Computer Science</category><category>Python</category><category>PyJNIus</category><category>Java</category><category>JVM</category></item><item><title>Avoid Database Lock in SQLite3</title><link>https://www.legendu.net/en/blog/avoid-database-lock-in-sqlite3/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;According to https://www.sqlite.org/lockingv3.html,
+    POSIX advisory locking is known to be buggy or even unimplemented on many NFS implementations 
+    (including recent versions of Mac OS X) 
+    and that there are reports of locking problems for network filesystems under Windows. 
+    So, the &lt;strong&gt;rule of thumb&lt;/strong&gt; is to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Mon, 24 Aug 2020 09:49:04 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-08-24:/en/blog/avoid-database-lock-in-sqlite3/</guid><category>Computer Science</category><category>Computer Science</category><category>SQLite3</category><category>database</category><category>lock</category><category>connection</category></item><item><title>Relative Import in Python</title><link>https://www.legendu.net/en/blog/relative-import-in-python/</link><description>&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+**&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Call the package outside it&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add &lt;code&gt;..&lt;/code&gt; into &lt;code&gt;sys.path&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;:::python
+import sys
+sys.path.append("..")&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import"&gt;beyond top level package error in relative import&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://stackoverflow.com/questions/72852/how-to-do-relative-imports-in-python"&gt;How to do relative imports in Python …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 12 Apr 2020 10:08:43 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-04-12:/en/blog/relative-import-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>Python</category><category>class</category></item><item><title>Trust a JupyterLab Notebook</title><link>https://www.legendu.net/en/blog/trust-a-jupyterlab-notebook/</link><description>&lt;p&gt;By default, 
+IPython (kernel of Jupyter/Lab notebook) disables executation of untrusted code without explicit user input.
+If you have notebook whose output containings JavaScript (e.g., JS-based visualiation)
+and code wasn't run by you (e.g., the notebook is shared by someone else),
+the JS-based output won't be shown …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Sun, 29 Dec 2019 20:14:09 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-12-29:/en/blog/trust-a-jupyterlab-notebook/</guid><category>Software</category><category>Software</category><category>tools</category><category>JupyterLab</category><category>trust notebook</category></item><item><title>Runtime Paths in Python</title><link>https://www.legendu.net/en/blog/runtime-paths-in-python/</link><description>&lt;p&gt;&lt;code&gt;__file__&lt;/code&gt; is the path of the Python script.
+Note that if you make a sybolic link to a Python script and run the symbolic link, 
+then &lt;code&gt;__file__&lt;/code&gt; is the path of the symbolic link.
+Of course, you can use &lt;code&gt;os.path.realpath&lt;/code&gt; to get real path of files.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;pathlib.Path …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Benjamin Du</dc:creator><pubDate>Fri, 18 Oct 2019 10:20:43 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-18:/en/blog/runtime-paths-in-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>runtime paths</category></item></channel></rss>

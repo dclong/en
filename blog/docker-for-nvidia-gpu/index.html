@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Docker for Nvidia GPU</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Docker for Nvidia GPU</h1>
+      <p class="meta"><time datetime="2020-01-18T01:02:42-08:00" pubdate>Jan 18, 2020</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="instruction-on-using-nvidia-gpu-cuda-for-computing-in-docker">Instruction on Using Nvidia GPU (CUDA) for Computing in Docker</h2>
+<ol>
+<li>
+<p>Install Nvidia <code>cuda-drivers</code> (or equivalent) on your Linux machine
+    following instructions at 
+    <a href="https://developer.nvidia.com/cuda-downloads?target_os=Linux">CUDA Downloads</a>.
+    Notice that instead of installing <code>cuda</code> (using <code>sudo apt-get install cuda</code>),
+    it is suggested that you install <code>cuda-drivers</code> only (using <code>sudo apt-get install cuda-drivers</code>).
+    This is because the CUDA toolkit (the package <code>cuda</code>) is not needed on your Linux host machine to 
+    run GPU-enabled Docker container starting from Docker 19.03.
+    Of course, 
+    it doesn't hurt to install the package <code>cuda</code> besides using more disk spaces.</p>
+</li>
+<li>
+<p>Confirm that the CUDA drivers have been installed correctly. </p>
+<div class="highlight"><pre><span></span><code>nvidia-smi
+</code></pre></div>
+
+<p>If the command <code>nvidia-smi</code> is available 
+but raises the following error message, </p>
+<blockquote>
+<p>NVIDAI-SMI has failed because it couldn't communicate with the NVIDIA driver.<br>
+Make sure that the latest NVIDIA driver is installed and running.`</p>
+</blockquote>
+<p>reboot your Linux machine and try again.</p>
+</li>
+<li>
+<p>Make sure that you have Docker 19.03+ installed on your Linux machine.</p>
+</li>
+<li>
+<p>Install 
+    <a href="https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/install-guide.html#setting-up-nvidia-container-toolkit">nvidia-docker</a> 
+    on your Linux machine.
+    For example,
+    you can install it on the Debian-series of Linux distributions 
+    (Debian, Ubuntu, Linux Mint, etc.)
+    using the following comamnds.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">distribution</span><span class="o">=</span><span class="k">$(</span>.<span class="w"> </span>/etc/os-release<span class="p">;</span><span class="w"> </span><span class="nb">echo</span><span class="w"> </span><span class="nv">$ID$VERSION_ID</span><span class="k">)</span>
+curl<span class="w"> </span>-s<span class="w"> </span>-L<span class="w"> </span>https://nvidia.github.io/nvidia-docker/gpgkey<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>apt-key<span class="w"> </span>add<span class="w"> </span>-
+curl<span class="w"> </span>-s<span class="w"> </span>-L<span class="w"> </span>https://nvidia.github.io/nvidia-docker/<span class="nv">$distribution</span>/nvidia-docker.list<span class="w"> </span><span class="p">|</span><span class="w"> </span>sudo<span class="w"> </span>tee<span class="w"> </span>/etc/apt/sources.list.d/nvidia-docker.list
+sudo<span class="w"> </span>apt-get<span class="w"> </span>update<span class="w"> </span>
+sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>nvidia-docker2
+</code></pre></div>
+
+</li>
+<li>
+<p>Restart Docker.
+    You can use one of the following command 
+    (depending on whether systemd is used to manage services).</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>systemctl<span class="w"> </span>restart<span class="w"> </span>docker
+<span class="c1"># or </span>
+sudo<span class="w"> </span>service<span class="w"> </span>docker<span class="w"> </span>restart
+</code></pre></div>
+
+</li>
+<li>
+<p>Test that GPU-enabled Docker containers can be run correctly.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>--gpus<span class="w"> </span>all<span class="w"> </span>nvidia/cuda:10.2-base<span class="w"> </span>nvidia-smi
+</code></pre></div>
+
+</li>
+<li>
+<p>Extend official Nvidia Docker images to customize your own Docker images for GPU applications if needed.
+    <a href="https://hub.docker.com/layers/nvidia/cuda">nvidia/cuda:10.1-cudnn7-runtime-ubuntu18.04</a>
+    is the best Docker image to extend, generally speaking.
+    If you are using PyTorch (which has built-in CUDA and CUDNN),
+    you can use <a href="https://hub.docker.com/layers/nvidia/cuda">nvidia/cuda:10.1-base-ubuntu18.04</a> to reduce the size of your Docker image.
+    <a href="https://github.com/floydhub/dockerfiles">floydhub/dockerfiles</a>
+    and
+    <a href="https://github.com/pytorch/pytorch/blob/master/docker/pytorch/Dockerfile">PyTorch Dockerfile</a>
+    are good examples to refer to.
+    If you want to use Python packages that do not have built-in CUDA and CUDNN support, 
+    you might have to install the library <code>cuda-10-1</code> manually.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>cuda-10-1
+</code></pre></div>
+
+</li>
+<li>
+<p>Run GPU applications in Docker containers. 
+    Please refer to 
+    <a href="https://github.com/NVIDIA/nvidia-docker#usage">nvidia-docker#usage</a> 
+    for examples.</p>
+</li>
+</ol>
+<h2 id="general-tips-on-gpu">General Tips on GPU</h2>
+<ol>
+<li>
+<p>You can list all GPU devices using the following command in Linux.</p>
+<div class="highlight"><pre><span></span><code>lspci<span class="w"> </span>-v<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>VGA
+</code></pre></div>
+
+</li>
+<li>
+<p>You can use the following command to query the live GPU usage on both Windows and Linux. </p>
+<div class="highlight"><pre><span></span><code>nvidia-smi<span class="w"> </span>--query-gpu<span class="o">=</span>timestamp,name,pci.bus_id,driver_version,pstate,pcie.link.gen.max,pcie.link.gen.current,temperature.gpu,utilization.gpu,utilization.memory,memory.total,memory.free,memory.used<span class="w"> </span>--format<span class="o">=</span>csv<span class="w"> </span>-l<span class="w"> </span><span class="m">5</span>
+</code></pre></div>
+
+<p>For more discussions,
+please refer to
+<a href="https://nvidia.custhelp.com/app/answers/detail/a_id/3751/~/useful-nvidia-smi-queries">Useful nvidia-smi Queries</a>
+and 
+<a href="http://www.legendu.net/misc/blog/visualize-Nvidia-GPU-usage">Visualize Nvidia GPU Usage</a>
+.
+In additional,
+you can use the command <code>nvtop</code> to check the live usage of GPUs on Linux.
+<code>nvtop</code> is recommended 
+as it presents simple visualizations in addition to the current usage statistics.
+<code>nvtop</code> can be install on Ubuntu using the following command.</p>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>nvtop
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="docker-imges">Docker Imges</h2>
+<p>Below are a few good examples of Docker images supporting Nvidia GPU.</p>
+<ul>
+<li>
+<p><a href="https://github.com/dclong/docker-jupyterhub-pytorch">dclong/docker-jupyterhub-pytorch</a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.0/ubuntu20.04-x86_64/base/Dockerfile">nvidia/cuda:11.0-cudnn-base-ubuntu20.04</a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.0/ubuntu20.04-x86_64/runtime/Dockerfile">nvidia/cuda:11.0-cudnn-runtime-ubuntu20.04</a></p>
+</li>
+<li>
+<p><a href="https://gitlab.com/nvidia/container-images/cuda/-/blob/master/dist/11.0/ubuntu20.04-x86_64/devel/Dockerfile">nvidia/cuda:11.0-cudnn-devel-ubuntu20.04</a></p>
+</li>
+<li>
+<p><a href="https://github.com/floydhub/dockerfiles">Docker Images - FloydHub</a></p>
+</li>
+<li>
+<p><a href="https://github.com/Kaggle/docker-python">Docker Image - Kaggle</a></p>
+</li>
+</ul>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://docs.nvidia.com/cuda/cuda-installation-guide-microsoft-windows/index.html">CUDA Installation Guide for Microsoft Windows</a></p>
+</li>
+<li>
+<p><a href="https://developer.download.nvidia.com/compute/cuda/repos/">Nvidia CUDA Linux Repositories</a></p>
+</li>
+<li>
+<p><a href="https://linuxconfig.org/how-to-install-cuda-on-ubuntu-20-04-focal-fossa-linux">How to install CUDA on Ubuntu 20.04 Focal Fossa Linux</a></p>
+</li>
+<li>
+<p>https://github.com/NVIDIA/nvidia-docker</p>
+</li>
+<li>
+<p>https://github.com/NVIDIA/nvidia-docker#ubuntu-16041804-debian-jessiestretchbuster</p>
+</li>
+<li>
+<p><a href="https://github.com/NVIDIA/nvidia-docker/wiki/Frequently-Asked-Questions#how-do-i-install-the-nvidia-driver">How Do I Install the Nvidia Driver</a>.</p>
+</li>
+<li>
+<p>https://developer.download.nvidia.com/compute/machine-learning/repos/</p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2020-01-18T01:02:42-08:00" pubdate>Jan 18, 2020</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/software.html">software</a>
+    <a class="category" href="https://www.legendu.net/en/tag/docker.html">Docker</a>
+    <a class="category" href="https://www.legendu.net/en/tag/gpu.html">GPU</a>
+    <a class="category" href="https://www.legendu.net/en/tag/nvidia.html">Nvidia</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/docker-for-nvidia-gpu/';
+          var disqus_url = 'https://www.legendu.net/en/blog/docker-for-nvidia-gpu/';
+          var disqus_title = 'Docker for Nvidia GPU';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

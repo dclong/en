@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sun Bin PK Pang Juan</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Sun Bin PK Pang Juan</h1>
+      <p class="meta"><time datetime="2010-05-06T10:57:40-07:00" pubdate>May 06, 2010</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/pk/pk.jpg" height="200" width="240" align="right"/></p>
+<p>Dating back to the time when I was a sophomore, 
+I read a very interesting problem from "Waming", 
+which is a magazine of math department of USTC (University of Science and Technology of China).</p>
+<p>One day Guigu Zi (a famous ancient Chinese sophist, 
+the teacher of Sun Bin and Pang Juan) came up with two numbers between 1 and 100, 
+and told the product of the two numbers to Sun Bin, the sum to Pang Juan. 
+The next day when Pang Juan ran into Sun Bin, he boasted, 
+"Now I don't know what the 2 numbers are, 
+but I'm pretty sure you don't know either." 
+"I have to thank you for the information, 
+because I did have no idea of what the 2 numbers are, but now I already know." 
+responded Sun Bin. 
+Pang Juan thought for a while, smiled and then said, 
+"Now the same here." Question: what are the two numbers?</p>
+<p>If you think are a very smart people and very good at logic, you can spend some time think about this problem. 
+My code (written in Mathmatica) for solving this problem is given below. </p>
+<div class="highlight"><pre><span></span><code><span class="p">(</span><span class="o">*</span><span class="k">function</span><span class="w"> </span><span class="k">filter</span><span class="w"> </span><span class="n">possible</span><span class="w"> </span><span class="n">combinations</span><span class="w"> </span><span class="n">based</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">Pang</span><span class="w"> </span><span class="n">Juan</span><span class="s1">&#39;s first words.*)</span>
+<span class="s1">PangJuan1[comb_] := Module[{i, n, sum, position, j, Result},</span>
+<span class="s1">    Result = comb;</span>
+<span class="s1">    n = Length[Result];</span>
+<span class="s1">    position = {};</span>
+<span class="s1">    For[i = 1, i &lt;= n, i++,</span>
+<span class="s1">        sum = Result[[i, 1]] + Result[[i, 2]];</span>
+<span class="s1">        If[EvenQ[sum] || PrimeQ[sum - 2] || Floor[sum/2] &lt;= 2, AppendTo[position, {i}]]</span>
+<span class="s1">    ];</span>
+<span class="s1">    Result = Delete[Result, position];</span>
+<span class="s1">    Return[Result];</span>
+<span class="s1">];</span>
+<span class="s1">(*function filter possible combinations based on Sun Bin&#39;</span><span class="n">s</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="o">*</span><span class="p">)</span>
+<span class="n">SunBin</span><span class="o">[</span><span class="n">comb_</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="k">Module</span><span class="o">[</span><span class="n">{n, i, prod, divisors, len, counter, DivisorCombinations, Result, positions, FlagLower, FlagUpper},</span>
+<span class="n">    Result = comb;</span>
+<span class="n">    n = Length[Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="n">positions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">;</span>
+<span class="w">    </span><span class="k">For</span><span class="o">[</span><span class="n">i = 1, i &lt;= n, i++,</span>
+<span class="n">        prod = Result[[i, 1</span><span class="o">]</span><span class="err">]</span><span class="o">*</span><span class="k">Result</span><span class="o">[</span><span class="n">[i, 2</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="w">        </span><span class="n">divisors</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Divisors</span><span class="o">[</span><span class="n">prod</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="p">(</span><span class="o">*</span><span class="n">Build</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">possible</span><span class="w"> </span><span class="n">combinations</span><span class="o">*</span><span class="p">)</span>
+<span class="w">        </span><span class="nf">len</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Length</span><span class="o">[</span><span class="n">divisors</span><span class="o">]</span><span class="p">;</span>
+<span class="w">        </span><span class="n">FlagLower</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Floor</span><span class="o">[</span><span class="n">len/2</span><span class="o">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;(</span><span class="o">*</span><span class="n">The</span><span class="w"> </span><span class="n">smallest</span><span class="w"> </span><span class="n">subscript</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bigger</span><span class="w"> </span><span class="n">divisors</span><span class="o">*</span><span class="p">)</span>
+<span class="w">        </span><span class="n">DivisorCombinations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">;</span>
+<span class="w">        </span><span class="p">(</span><span class="o">*</span><span class="n">Find</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">upper</span><span class="w"> </span><span class="n">subscript</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">bigger</span><span class="w"> </span><span class="n">divisors</span><span class="o">*</span><span class="p">)</span>
+<span class="w">        </span><span class="k">For</span><span class="o">[</span><span class="n">FlagUpper = FlagLower, </span>
+<span class="n">            FlagUpper &lt; len &amp;&amp; divisors[[FlagUpper</span><span class="o">]</span><span class="err">]</span><span class="w"> </span><span class="o">&lt;=</span><span class="w"> </span><span class="mi">100</span><span class="p">,</span><span class="w"> </span><span class="n">FlagUpper</span><span class="o">++</span><span class="err">]</span><span class="p">;</span>
+<span class="w">            </span><span class="nf">len</span><span class="o">++</span><span class="p">;</span>
+<span class="w">            </span><span class="k">For</span><span class="o">[</span><span class="n">counter = FlagUpper - 1, counter &gt;= FlagLower, counter--,</span>
+<span class="n">                AppendTo[</span>
+<span class="n">      DivisorCombinations, {divisors[[len - counter</span><span class="o">]</span><span class="err">]</span><span class="p">,</span><span class="w"> </span>
+<span class="w">       </span><span class="n">divisors</span><span class="o">[</span><span class="n">[counter</span><span class="o">]</span><span class="err">]}]</span>
+<span class="w">     </span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="o">*</span><span class="n">There</span><span class="w"> </span><span class="n">should</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="k">only</span><span class="w"> </span><span class="n">one</span><span class="w"> </span><span class="n">possible</span><span class="w"> </span><span class="n">combination</span><span class="w"> </span><span class="n">according</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="err">\</span>
+<span class="n">imformation</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">Pang</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">provided</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">his</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="n">sentence</span><span class="o">*</span><span class="p">)</span>
+<span class="w">    </span><span class="k">If</span><span class="o">[</span><span class="n">Length[DivisorCombinations</span><span class="o">]</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">     </span><span class="n">AppendTo</span><span class="o">[</span><span class="n">positions, {i}</span><span class="o">]</span><span class="p">,</span>
+<span class="w">     </span><span class="k">If</span><span class="o">[</span><span class="n">Length[PangJuan1[DivisorCombinations</span><span class="o">]</span><span class="err">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">      </span><span class="n">AppendTo</span><span class="o">[</span><span class="n">positions, {i}</span><span class="o">]</span>
+<span class="w">      </span><span class="err">]</span>
+<span class="w">     </span><span class="err">]</span>
+<span class="w">    </span><span class="err">]</span><span class="p">;</span>
+<span class="w">   </span><span class="k">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Delete</span><span class="o">[</span><span class="n">Result, positions</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="k">Return</span><span class="o">[</span><span class="n">Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="err">]</span><span class="p">;</span>
+<span class="p">(</span><span class="o">*</span><span class="k">function</span><span class="w"> </span><span class="k">filter</span><span class="w"> </span><span class="n">possible</span><span class="w"> </span><span class="n">combinations</span><span class="w"> </span><span class="n">based</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">Pang</span><span class="w"> </span><span class="n">Juan</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="k">second</span><span class="w"> </span><span class="n">words</span><span class="p">.</span><span class="o">*</span><span class="p">)</span>
+<span class="n">PangJuan2</span><span class="o">[</span><span class="n">comb_</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span>
+<span class="w">  </span><span class="k">Module</span><span class="o">[</span><span class="n">{n, i, sum, AddendCombinations, j, Result, positions, </span>
+<span class="n">    counter},</span>
+<span class="n">   Result = comb;</span>
+<span class="n">   n = Length[Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="n">positions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">;</span>
+<span class="w">   </span><span class="k">For</span><span class="o">[</span><span class="n">i = 1, i &lt;= n, i++,</span>
+<span class="n">    sum = Result[[i, 1</span><span class="o">]</span><span class="err">]</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="k">Result</span><span class="o">[</span><span class="n">[i, 2</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="p">(</span><span class="o">*</span><span class="n">Build</span><span class="w"> </span><span class="n">up</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">possible</span><span class="w"> </span><span class="n">combinations</span><span class="o">*</span><span class="p">)</span>
+
+<span class="w">    </span><span class="n">AddendCombinations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{}</span><span class="p">;</span>
+<span class="w">    </span><span class="n">counter</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">sum</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="w">    </span><span class="k">For</span><span class="o">[</span><span class="n">j = 2, j &lt;= counter, j++,</span>
+<span class="n">     AppendTo[AddendCombinations, {j, sum - j}</span><span class="o">]</span>
+<span class="w">     </span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">If</span><span class="o">[</span><span class="n">Length[SunBin[AddendCombinations</span><span class="o">]</span><span class="err">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">     </span><span class="n">AppendTo</span><span class="o">[</span><span class="n">positions, {i}</span><span class="o">]</span>
+<span class="w">     </span><span class="err">]</span>
+<span class="w">    </span><span class="err">]</span><span class="p">;</span>
+<span class="w">   </span><span class="k">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">Delete</span><span class="o">[</span><span class="n">Result, positions</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="k">Return</span><span class="o">[</span><span class="n">Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="err">]</span><span class="p">;</span>
+<span class="p">(</span><span class="o">*</span><span class="n">construct</span><span class="w"> </span><span class="ow">all</span><span class="w"> </span><span class="n">combinations</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="k">use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">above</span><span class="w"> </span><span class="n">three</span><span class="w"> </span><span class="n">functions</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="err">\</span>
+<span class="k">filter</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="nf">right</span><span class="w"> </span><span class="n">one</span><span class="o">*</span><span class="p">)</span>
+<span class="n">GuiGuzi</span><span class="err">[]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span><span class="w"> </span><span class="k">Module</span><span class="o">[</span><span class="n">{Result},</span>
+<span class="n">   Result = {};</span>
+<span class="n">   For[i = 2, i &lt;= 100, i++,</span>
+<span class="n">    For[j = i, j &lt;= 100, j++,</span>
+<span class="n">      AppendTo[Result, {i, j}</span><span class="o">]</span><span class="p">;</span>
+<span class="w">      </span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="err">]</span><span class="p">;</span>
+<span class="w">   </span><span class="p">(</span><span class="o">*</span><span class="k">Use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">Pang</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">his</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="n">sentence</span><span class="w"> </span><span class="err">\</span>
+<span class="k">to</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">those</span><span class="w"> </span><span class="n">impossible</span><span class="w"> </span><span class="n">combinations</span><span class="o">*</span><span class="p">)</span>
+
+<span class="w">   </span><span class="k">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PangJuan1</span><span class="o">[</span><span class="n">Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="p">(</span><span class="o">*</span><span class="k">Use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">Sun</span><span class="w"> </span><span class="n">Bin</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">those</span><span class="w"> </span><span class="err">\</span>
+<span class="n">impossible</span><span class="w"> </span><span class="n">combinations</span><span class="o">*</span><span class="p">)</span>
+<span class="w">   </span><span class="k">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">SunBin</span><span class="o">[</span><span class="n">Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="p">(</span><span class="o">*</span><span class="k">Use</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">information</span><span class="w"> </span><span class="n">that</span><span class="w"> </span><span class="n">Pang</span><span class="w"> </span><span class="n">Juan</span><span class="w"> </span><span class="n">provide</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">his</span><span class="w"> </span><span class="k">second</span><span class="w"> </span><span class="n">sentenc</span><span class="w"> </span><span class="err">\</span>
+<span class="k">to</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">those</span><span class="w"> </span><span class="n">impossible</span><span class="w"> </span><span class="n">combinations</span><span class="o">*</span><span class="p">)</span>
+
+<span class="w">   </span><span class="k">Result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">PangJuan2</span><span class="o">[</span><span class="n">Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="k">Return</span><span class="o">[</span><span class="n">Result</span><span class="o">]</span><span class="p">;</span>
+<span class="w">   </span><span class="err">]</span><span class="p">;</span>
+<span class="p">(</span><span class="o">*</span><span class="n">run</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">porgram</span><span class="o">*</span><span class="p">)</span>
+<span class="n">GuiGuzi</span><span class="err">[]</span>
+<span class="err">{{</span><span class="mi">4</span><span class="p">,</span><span class="w"> </span><span class="mi">13</span><span class="err">}}</span>
+</code></pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2010-05-06T10:57:40-07:00" pubdate>May 06, 2010</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/puzzle.html">puzzle</a>
+    <a class="category" href="https://www.legendu.net/en/tag/mathematica.html">Mathematica</a>
+    <a class="category" href="https://www.legendu.net/en/tag/fun-problems.html">fun problems</a>
+    <a class="category" href="https://www.legendu.net/en/tag/math.html">math</a>
+    <a class="category" href="https://www.legendu.net/en/tag/number.html">number</a>
+    <a class="category" href="https://www.legendu.net/en/tag/sum.html">sum</a>
+    <a class="category" href="https://www.legendu.net/en/tag/product.html">product</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/sun-bin-pang-juan/';
+          var disqus_url = 'https://www.legendu.net/en/blog/sun-bin-pang-juan/';
+          var disqus_title = 'Sun Bin PK Pang Juan';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Change Shell in Mac</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Change Shell in Mac</h1>
+      <p class="meta"><time datetime="2018-04-02T14:46:43-07:00" pubdate>Apr 02, 2018</time></p>
+</header>
+
+  <div class="entry-content"><p>You can check the current shell in use by running the following command.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$SHELL</span>
+</code></pre></div>
+
+<p>However,
+notice that <code>echo $SHELL</code> does not report the right shell sometimes.
+A more robust way is to use <code>echo $0</code>.</p>
+<p>The default shell can be changed using thee comamnd <code>chsh</code>.
+For example, 
+thee following command changes the default shell to Bash.</p>
+<div class="highlight"><pre><span></span><code>chsh<span class="w"> </span>-s<span class="w"> </span>/bin/bash
+</code></pre></div>
+
+<p>Notice that <a href="https://hyper.is/">Hyper</a>
+does not honor the the environment variable <code>SHELL</code>
+and thus the above way of changing the default shell does not work for Hyper.js.
+One way to change the default shell in Hyper.js 
+is to directly update the field <code>shell</code> 
+in the configuration file <code>~/.hyper.js</code> to be the desire one.
+For example, 
+the configuration file below uses Bash as the default shell.</p>
+<div class="highlight"><pre><span></span><code><span class="o">//</span><span class="w"> </span><span class="n">Future</span><span class="w"> </span><span class="n">versions</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">Hyper</span><span class="w"> </span><span class="n">may</span><span class="w"> </span><span class="n">add</span><span class="w"> </span><span class="n">additional</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">options</span><span class="p">,</span>
+<span class="o">//</span><span class="w"> </span><span class="n">which</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="ow">not</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">merged</span><span class="w"> </span><span class="n">into</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">file</span><span class="o">.</span>
+<span class="o">//</span><span class="w"> </span><span class="n">See</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">hyper</span><span class="o">.</span><span class="k">is</span><span class="c1">#cfg for all currently supported options.</span>
+
+<span class="n">module</span><span class="o">.</span><span class="n">exports</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="n">config</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">choose</span><span class="w"> </span><span class="n">either</span><span class="w"> </span><span class="err">`</span><span class="s1">&#39;stable&#39;</span><span class="err">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">receiving</span><span class="w"> </span><span class="n">highly</span><span class="w"> </span><span class="n">polished</span><span class="p">,</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="err">`</span><span class="s1">&#39;canary&#39;</span><span class="err">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">less</span><span class="w"> </span><span class="n">polished</span><span class="w"> </span><span class="n">but</span><span class="w"> </span><span class="n">more</span><span class="w"> </span><span class="n">frequent</span><span class="w"> </span><span class="n">updates</span>
+<span class="w">    </span><span class="n">updateChannel</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;stable&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="n">font</span><span class="w"> </span><span class="n">size</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">pixels</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">all</span><span class="w"> </span><span class="n">tabs</span>
+<span class="w">    </span><span class="n">fontSize</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">font</span><span class="w"> </span><span class="n">family</span><span class="w"> </span><span class="n">with</span><span class="w"> </span><span class="n">optional</span><span class="w"> </span><span class="n">fallbacks</span>
+<span class="w">    </span><span class="n">fontFamily</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;Menlo, &quot;DejaVu Sans Mono&quot;, Consolas, &quot;Lucida Console&quot;, monospace&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="n">font</span><span class="w"> </span><span class="n">weight</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;bold&#39;</span>
+<span class="w">    </span><span class="n">fontWeight</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">font</span><span class="w"> </span><span class="n">weight</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">bold</span><span class="w"> </span><span class="n">characters</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;normal&#39;</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="s1">&#39;bold&#39;</span>
+<span class="w">    </span><span class="n">fontWeightBold</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;bold&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">line</span><span class="w"> </span><span class="n">height</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="n">unit</span>
+<span class="w">    </span><span class="n">lineHeight</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">letter</span><span class="w"> </span><span class="n">spacing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">relative</span><span class="w"> </span><span class="n">unit</span>
+<span class="w">    </span><span class="n">letterSpacing</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="n">cursor</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">opacity</span><span class="w"> </span><span class="p">(</span><span class="n">hex</span><span class="p">,</span><span class="w"> </span><span class="n">rgb</span><span class="p">,</span><span class="w"> </span><span class="n">hsl</span><span class="p">,</span><span class="w"> </span><span class="n">hsv</span><span class="p">,</span><span class="w"> </span><span class="n">hwb</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">cmyk</span><span class="p">)</span>
+<span class="w">    </span><span class="n">cursorColor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;rgba(248,28,229,0.8)&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="n">under</span><span class="w"> </span><span class="n">BLOCK</span><span class="w"> </span><span class="n">cursor</span>
+<span class="w">    </span><span class="n">cursorAccentColor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="err">`</span><span class="s1">&#39;BEAM&#39;</span><span class="err">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="o">|</span><span class="p">,</span><span class="w"> </span><span class="err">`</span><span class="s1">&#39;UNDERLINE&#39;</span><span class="err">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">_</span><span class="p">,</span><span class="w"> </span><span class="err">`</span><span class="s1">&#39;BLOCK&#39;</span><span class="err">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="err">█</span>
+<span class="w">    </span><span class="n">cursorShape</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;BLOCK&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">without</span><span class="w"> </span><span class="n">backticks</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">without</span><span class="w"> </span><span class="n">quotes</span><span class="p">)</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">blinking</span><span class="w"> </span><span class="n">cursor</span>
+<span class="w">    </span><span class="n">cursorBlink</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">text</span>
+<span class="w">    </span><span class="n">foregroundColor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#fff&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="n">background</span><span class="w"> </span><span class="n">color</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">opacity</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">only</span><span class="w"> </span><span class="n">supported</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">macOS</span>
+<span class="w">    </span><span class="n">backgroundColor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#000&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="n">selection</span><span class="w"> </span><span class="n">color</span>
+<span class="w">    </span><span class="n">selectionColor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;rgba(248,28,229,0.3)&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">border</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="p">(</span><span class="n">window</span><span class="p">,</span><span class="w"> </span><span class="n">tabs</span><span class="p">)</span>
+<span class="w">    </span><span class="n">borderColor</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#333&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">CSS</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">embed</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">main</span><span class="w"> </span><span class="n">window</span>
+<span class="w">    </span><span class="n">css</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">CSS</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">embed</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">terminal</span><span class="w"> </span><span class="n">window</span>
+<span class="w">    </span><span class="n">termCSS</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="s1">&#39;re using a Linux setup which show native menus, set to false</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">default</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Linux</span><span class="p">,</span><span class="w"> </span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Windows</span><span class="p">,</span><span class="w"> </span><span class="n">ignored</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">macOS</span>
+<span class="w">    </span><span class="n">showHamburgerMenu</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="err">`</span><span class="bp">false</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">without</span><span class="w"> </span><span class="n">backticks</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">without</span><span class="w"> </span><span class="n">quotes</span><span class="p">)</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">hide</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">minimize</span><span class="p">,</span><span class="w"> </span><span class="n">maximize</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">close</span><span class="w"> </span><span class="n">buttons</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">additionally</span><span class="p">,</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="err">`</span><span class="s1">&#39;left&#39;</span><span class="err">`</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="n">them</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">left</span><span class="p">,</span><span class="w"> </span><span class="n">like</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">Ubuntu</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">default</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">without</span><span class="w"> </span><span class="n">backticks</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">without</span><span class="w"> </span><span class="n">quotes</span><span class="p">)</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">Linux</span><span class="p">,</span><span class="w"> </span><span class="n">ignored</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">macOS</span>
+<span class="w">    </span><span class="n">showWindowControls</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">padding</span><span class="w"> </span><span class="p">(</span><span class="n">CSS</span><span class="w"> </span><span class="n">format</span><span class="p">,</span><span class="w"> </span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="n">top</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">bottom</span><span class="w"> </span><span class="n">left</span><span class="err">`</span><span class="p">)</span>
+<span class="w">    </span><span class="n">padding</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;12px 14px&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="n">list</span><span class="o">.</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">you</span><span class="s1">&#39;re going to provide the full color palette,</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">including</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="n">cubes</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">grayscale</span><span class="w"> </span><span class="n">map</span><span class="p">,</span><span class="w"> </span><span class="n">just</span><span class="w"> </span><span class="n">provide</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">an</span><span class="w"> </span><span class="n">array</span><span class="w"> </span><span class="n">here</span><span class="w"> </span><span class="n">instead</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">color</span><span class="w"> </span><span class="n">map</span><span class="w"> </span><span class="n">object</span>
+<span class="w">    </span><span class="n">colors</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="n">black</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#000000&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">red</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#C51E14&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">green</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#1DC121&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">yellow</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#C7C329&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">blue</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#0A2FC4&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">magenta</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#C839C5&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">cyan</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#20C5C6&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">white</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#C7C7C7&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightBlack</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#686868&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightRed</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#FD6F6B&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightGreen</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#67F86F&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightYellow</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#FFFA72&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightBlue</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#6A76FB&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightMagenta</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#FD7CFC&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightCyan</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#68FDFE&#39;</span><span class="p">,</span>
+<span class="w">      </span><span class="n">lightWhite</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;#FFFFFF&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">run</span><span class="w"> </span><span class="n">when</span><span class="w"> </span><span class="n">spawning</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">new</span><span class="w"> </span><span class="n">session</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="w"> </span><span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">fish</span><span class="p">)</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">left</span><span class="w"> </span><span class="n">empty</span><span class="p">,</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">system</span><span class="s1">&#39;s login shell will be used by default</span>
+<span class="w">    </span><span class="o">//</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">Windows</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Make</span><span class="w"> </span><span class="n">sure</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">use</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">full</span><span class="w"> </span><span class="n">path</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">binary</span><span class="w"> </span><span class="n">name</span><span class="w"> </span><span class="n">doesn</span><span class="s1">&#39;t work</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Remove</span><span class="w"> </span><span class="err">`</span><span class="o">--</span><span class="n">login</span><span class="err">`</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">shellArgs</span>
+<span class="w">    </span><span class="o">//</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">Bash</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Windows</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Example</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="n">C</span><span class="p">:</span>\\<span class="n">Windows</span>\\<span class="n">System32</span>\\<span class="n">bash</span><span class="o">.</span><span class="n">exe</span><span class="err">`</span>
+<span class="w">    </span><span class="o">//</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">PowerShell</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Windows</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Example</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="n">C</span><span class="p">:</span>\\<span class="n">WINDOWS</span>\\<span class="n">System32</span>\\<span class="n">WindowsPowerShell</span>\\<span class="n">v1</span><span class="o">.</span><span class="mi">0</span>\\<span class="n">powershell</span><span class="o">.</span><span class="n">exe</span><span class="err">`</span>
+<span class="w">    </span><span class="n">shell</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;/bin/bash&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">setting</span><span class="w"> </span><span class="n">shell</span><span class="w"> </span><span class="n">arguments</span><span class="w"> </span><span class="p">(</span><span class="n">i</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">using</span><span class="w"> </span><span class="n">interactive</span><span class="w"> </span><span class="n">shellArgs</span><span class="p">:</span><span class="w"> </span><span class="err">`</span><span class="p">[</span><span class="s1">&#39;-i&#39;</span><span class="p">]</span><span class="err">`</span><span class="p">)</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="err">`</span><span class="p">[</span><span class="s1">&#39;--login&#39;</span><span class="p">]</span><span class="err">`</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">used</span>
+<span class="w">    </span><span class="n">shellArgs</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="s1">&#39;--login&#39;</span><span class="p">],</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">environment</span><span class="w"> </span><span class="n">variables</span>
+<span class="w">    </span><span class="n">env</span><span class="p">:</span><span class="w"> </span><span class="p">{},</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="err">`</span><span class="bp">false</span><span class="err">`</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">no</span><span class="w"> </span><span class="n">bell</span>
+<span class="w">    </span><span class="n">bell</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;SOUND&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">without</span><span class="w"> </span><span class="n">backticks</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">without</span><span class="w"> </span><span class="n">quotes</span><span class="p">),</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">automatically</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">copied</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">clipboard</span>
+<span class="w">    </span><span class="n">copyOnSelect</span><span class="p">:</span><span class="w"> </span><span class="bp">false</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">without</span><span class="w"> </span><span class="n">backticks</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">without</span><span class="w"> </span><span class="n">quotes</span><span class="p">),</span><span class="w"> </span><span class="n">hyper</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">set</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="n">protocol</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">SSH</span>
+<span class="w">    </span><span class="n">defaultSSHApp</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="p">(</span><span class="n">without</span><span class="w"> </span><span class="n">backticks</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">without</span><span class="w"> </span><span class="n">quotes</span><span class="p">),</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">right</span><span class="w"> </span><span class="n">click</span><span class="w"> </span><span class="n">selected</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">copied</span><span class="w"> </span><span class="ow">or</span><span class="w"> </span><span class="n">pasted</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">no</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">selection</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">present</span><span class="w"> </span><span class="p">(</span><span class="err">`</span><span class="bp">true</span><span class="err">`</span><span class="w"> </span><span class="n">by</span><span class="w"> </span><span class="n">default</span><span class="w"> </span><span class="n">on</span><span class="w"> </span><span class="n">Windows</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">disables</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">context</span><span class="w"> </span><span class="n">menu</span><span class="w"> </span><span class="n">feature</span><span class="p">)</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">quickEdit</span><span class="p">:</span><span class="w"> </span><span class="bp">true</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">custom</span><span class="w"> </span><span class="n">bell</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">bellSoundURL</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;http://example.com/bell.mp3&#39;</span><span class="p">,</span>
+
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">advanced</span><span class="w"> </span><span class="n">config</span><span class="w"> </span><span class="n">flags</span><span class="w"> </span><span class="n">please</span><span class="w"> </span><span class="n">refer</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">hyper</span><span class="o">.</span><span class="k">is</span><span class="o">/</span><span class="c1">#cfg</span>
+<span class="w">  </span><span class="p">},</span>
+
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">list</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">plugins</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">fetch</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">install</span><span class="w"> </span><span class="n">from</span><span class="w"> </span><span class="n">npm</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">format</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="err">@</span><span class="n">org</span><span class="o">/</span><span class="p">]</span><span class="n">project</span><span class="p">[</span><span class="c1">#version]</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">examples</span><span class="p">:</span>
+<span class="w">  </span><span class="o">//</span><span class="w">   </span><span class="err">`</span><span class="n">hyperpower</span><span class="err">`</span>
+<span class="w">  </span><span class="o">//</span><span class="w">   </span><span class="err">`@</span><span class="n">company</span><span class="o">/</span><span class="n">project</span><span class="err">`</span>
+<span class="w">  </span><span class="o">//</span><span class="w">   </span><span class="err">`</span><span class="n">project</span><span class="c1">#1.0.1`</span>
+<span class="w">  </span><span class="n">plugins</span><span class="p">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">    </span><span class="s2">&quot;hypercwd&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;hyper-search&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;hyper-pane&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;hyperpower&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;verminal&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;hyper-material-theme&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;hyper-snazzy&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;hyper-one-dark&quot;</span>
+<span class="w">  </span><span class="p">],</span>
+
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">development</span><span class="p">,</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">directory</span><span class="w"> </span><span class="n">under</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="err">`</span><span class="o">~/.</span><span class="n">hyper_plugins</span><span class="o">/</span><span class="n">local</span><span class="o">/</span><span class="err">`</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">include</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">here</span>
+<span class="w">  </span><span class="o">//</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="nb">load</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">avoid</span><span class="w"> </span><span class="n">it</span><span class="w"> </span><span class="n">being</span><span class="w"> </span><span class="err">`</span><span class="n">npm</span><span class="w"> </span><span class="n">install</span><span class="err">`</span><span class="n">ed</span>
+<span class="w">  </span><span class="n">localPlugins</span><span class="p">:</span><span class="w"> </span><span class="p">[],</span>
+
+<span class="w">  </span><span class="n">keymaps</span><span class="p">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="n">Example</span>
+<span class="w">    </span><span class="o">//</span><span class="w"> </span><span class="s1">&#39;window:devtools&#39;</span><span class="p">:</span><span class="w"> </span><span class="s1">&#39;cmd+alt+o&#39;</span><span class="p">,</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<p><a href="https://www.macinstruct.com/tutorials/how-to-tell-what-shell-your-mac-is-using/">How to Tell What Shell Your Mac is Using</a></p>
+<p>https://www.youtube.com/watch?v=fs7yWlB2dSU&amp;feature=youtu.be</p>
+<p>https://github.com/zeit/hyper/issues/81</p>
+<p>https://github.com/zeit/hyper/issues/491</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2018-04-02T14:46:43-07:00" pubdate>Apr 02, 2018</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/macos.html">macOS</a>
+    <a class="category" href="https://www.legendu.net/en/tag/shell.html">shell</a>
+    <a class="category" href="https://www.legendu.net/en/tag/hyper.html">Hyper</a>
+    <a class="category" href="https://www.legendu.net/en/tag/bash.html">Bash</a>
+    <a class="category" href="https://www.legendu.net/en/tag/zsh.html">zsh</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/change-shell-in-mac/';
+          var disqus_url = 'https://www.legendu.net/en/blog/change-shell-in-mac/';
+          var disqus_title = 'Change Shell in Mac';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

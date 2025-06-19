@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on Bytehound</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on Bytehound</h1>
+      <p class="meta"><time datetime="2023-01-08T21:33:57-08:00" pubdate>Jan 08, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p>Bytehound works with Rust stable 
+(Rust nightly is not required)
+.</p>
+<h2 id="installation">Installation</h2>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>gcc<span class="w"> </span>nodejs<span class="w"> </span>npm
+npm<span class="w"> </span>install<span class="w"> </span>-g<span class="w"> </span>yarn
+cargo<span class="w"> </span>build<span class="w"> </span>--release<span class="w"> </span>-p<span class="w"> </span>bytehound-preload
+cargo<span class="w"> </span>build<span class="w"> </span>--release<span class="w"> </span>-p<span class="w"> </span>bytehound-cli
+</code></pre></div>
+
+<p>Or if you use 
+<a href="https://github.com/legendu-net/icon">icon</a>,</p>
+<div class="highlight"><pre><span></span><code>icon<span class="w"> </span>bytehound<span class="w"> </span>-ic
+</code></pre></div>
+
+<h2 id="usage">Usage</h2>
+<p>Run your application with bytehound to collect memory usage data.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">MEMORY_PROFILER_LOG</span><span class="o">=</span>warn
+<span class="nv">LD_PRELOAD</span><span class="o">=</span>./libbytehound.so<span class="w"> </span>./your_application
+</code></pre></div>
+
+<p>Below is an example script, 
+which build the "release-debug" version of the Rust project and run it.</p>
+<div class="highlight"><pre><span></span><code>cargo<span class="w"> </span>build<span class="w"> </span>--profile<span class="w"> </span>release-debug
+<span class="nb">export</span><span class="w"> </span><span class="nv">MEMORY_PROFILER_LOG</span><span class="o">=</span>warn
+<span class="nv">LD_PRELOAD</span><span class="o">=</span>~/.local/lib/libbytehound.so<span class="w"> </span>../../target/release-debug/ofcp_test<span class="w"> </span>play_r1<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--five-cards<span class="w"> </span><span class="s2">&quot;7c Js Qs 3d 2s&quot;</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-sim1<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-sim2<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-sim3<span class="w"> </span><span class="m">10</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--num-sim4<span class="w"> </span><span class="m">10</span>
+</code></pre></div>
+
+<p>Start a web server to visualize the memory profiling data.</p>
+<div class="highlight"><pre><span></span><code>bytehound<span class="w"> </span>server<span class="w"> </span>--port<span class="w"> </span><span class="m">9090</span><span class="w"> </span>-i<span class="w"> </span><span class="m">0</span>.0.0.0<span class="w"> </span>memory-profiling_*.dat
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://github.com/koute/bytehound">ByteHound @ GitHub</a></li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2023-01-08T21:33:57-08:00" pubdate>Jan 08, 2023</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="https://www.legendu.net/en/tag/rust.html">Rust</a>
+    <a class="category" href="https://www.legendu.net/en/tag/bytehound.html">Bytehound</a>
+    <a class="category" href="https://www.legendu.net/en/tag/memory.html">memory</a>
+    <a class="category" href="https://www.legendu.net/en/tag/profiling.html">profiling</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/tips-on-bytehound/';
+          var disqus_url = 'https://www.legendu.net/en/blog/tips-on-bytehound/';
+          var disqus_title = 'Tips on Bytehound';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

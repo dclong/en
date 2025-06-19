@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Install Python Packages Using pip</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Install Python Packages Using pip</h1>
+      <p class="meta"><time datetime="2017-06-05T08:26:34-07:00" pubdate>Jun 05, 2017</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="pypi-statistics">PyPi Statistics</h2>
+<p>You can check download statistics of Python Packages on PYPI at https://pypistats.org/.
+This is especially helpful if you want to choose from multiple packages.</p>
+<h2 id="prefer-pip">Prefer <a href="https://pip.pypa.io/en/stable/reference/">pip</a></h2>
+<p><a href="https://pip.pypa.io/en/stable/reference/">pip</a>
+is preferred over OS tools
+(e.g., <code>apt-get</code>, <code>yum</code>, <code>wajig</code>, <code>aptitude</code>, etc.) for managing Python packages.
+If you are using Anaconda Python,
+use <code>conda</code> (instead of <code>pip</code>) to manage Python packages
+especially when you encounter dependency issues.</p>
+<h2 id="install-pip"><a href="https://pip.pypa.io/en/stable/installing/">Install pip</a></h2>
+<h3 id="on-ubuntu">On Ubuntu</h3>
+<div class="highlight"><pre><span></span><code>apt-get<span class="w"> </span>install<span class="w"> </span>python3-pip
+</code></pre></div>
+
+<h3 id="on-mac">On Mac</h3>
+<p><code>pip</code> should have already been installed when you instal Python using Homebrew or Anaconda.</p>
+<h2 id="bootstrapping-the-pip-installer">Bootstrapping the pip Installer</h2>
+<p>The package <a href="https://docs.python.org/3.8/library/ensurepip.html">ensurepip</a>
+provides support for bootstrapping the pip installer into an existing Python installation or virtual environment.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>python3<span class="w"> </span>-m<span class="w"> </span>ensurepip
+</code></pre></div>
+
+<h2 id="proper-way-of-using-pip">Proper Way of Using pip</h2>
+<ol>
+<li>
+<p>pip can be upgrade using the following command. </p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>pip
+</code></pre></div>
+
+<p>However,
+you should avoid doing this (as it might causes issues) 
+unless you have to upgrade and you are an experienced user.
+It is recommended that you upgrade pip via the system package management tools only.</p>
+</li>
+<li>
+<p>Do NOT use <code>sudo pip install pkg1 pkg2</code> install packages to system-wide locations. 
+    Instead, use <code>pip install --user pkg1 pkg2</code> to install packages to your local directory.</p>
+</li>
+</ol>
+<p>https://github.com/pypa/pip/issues/5599</p>
+<p>https://stackoverflow.com/questions/49940813/pip-no-module-named-internal</p>
+<h2 id="install-a-specific-version-of-a-python-package">Install a Specific Version of a Python Package</h2>
+<ol>
+<li>
+<p>List all available versions of a Python package. </p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">pylibmc</span><span class="o">==</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Install a specific version of a Python package.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span><span class="nv">MySQL_python</span><span class="o">==</span><span class="m">1</span>.2.2
+</code></pre></div>
+
+</li>
+<li>
+<p>Install pyarrow with a verison of at least 0.14.0.
+    Notice that you must quote <code>pyarrow&gt;=0.14.0</code> using single/double quotes.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;pyarrow&gt;=0.14.0&#39;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Install a Python package with a version in a range.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;jupyterlab&gt;=1.2.7,&lt;2.0.0&quot;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>You can install the pre-release version of a package using the <code>--pre</code> option.
+    For example, 
+    the current version of pybuilder (0.11.7) is not compatible with Python 3.7.
+    If you are using Python 3.7 and still want to use the pybuilder package, 
+    you can install the pre-release version (0.12) which is compatible with Python 3.7.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>--pre<span class="w"> </span>pybuilder
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="install-python-packages-from-source">Install Python Packages from Source</h2>
+<ol>
+<li>
+<p>Install Python package from a <code>tar.gz</code> file which contains the source code.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>xinstall-0.23.0.tar.gz
+</code></pre></div>
+
+</li>
+<li>
+<p>Install from the current directory</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>.
+</code></pre></div>
+
+</li>
+<li>
+<p><code>pip</code> 20.0+ supports instaling a peotry managed Python project from GitHub directly.
+    For example,
+    the comamnd below installs the Python package dsutil from the GitHub repository dclong/dsutil directly.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>git+ssh://git@github.com/dclong/dsutil<span class="w"> </span>
+<span class="c1"># or</span>
+pip3<span class="w"> </span>install<span class="w"> </span>git+https://github.com/dclong/xinstall
+<span class="c1"># or install with optional components</span>
+pip3<span class="w"> </span>install<span class="w"> </span>--user<span class="w"> </span>-U<span class="w"> </span><span class="s2">&quot;dsutil[all] @ git+https://github.com/dclong/dsutil@main&quot;</span>
+pip3<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;dsutil[cv] @ file:///home/dclong/dsutil-0.54.1-py3-none-any.whl&quot;</span>
+pip3<span class="w"> </span>install<span class="w"> </span><span class="s2">&quot;dsutil[cv] @ https://github.com/dclong/dsutil/releases/download/v0.54.1/dsutil-0.54.1-py3-none-any.whl&quot;</span>
+</code></pre></div>
+
+<p>If you are behind a corporate proxy,
+you might need 2FA to visit the enterprise GitHub of your company.
+However, 
+2FA is usually not required for Git comamnd line (since it would too much hassle).
+The above way to install Python packages from GitHub repositories directly
+can be a good way to avoid 2FA authentication if you are behind a corporate proxy.</p>
+</li>
+</ol>
+<h2 id="install-python-packages-from-requirementstxt">Install Python Packages from Requirements.txt</h2>
+<p>You can install Python packages from a <code>requirements.txt</code> file.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+</code></pre></div>
+
+<p>Notice that all formats accepted by <code>pip3 install</code> is valid in <code>requirements.txt</code>.
+For example,
+<code>git+https://github.com/dclong/dsutil@master</code> is valid to use in <code>requirements.txt</code>.</p>
+<h2 id="difference-between-ignore-installed-and-force-reinstall">Difference between --ignore-installed and --force-reinstall</h2>
+<p>Sometimes a package is installed by distutils
+which cannot be reinstalled using <code>pip</code>, 
+not even with the <code>--force-reinstall</code> option.
+In that case, 
+you have to use the <code>--ignore-installed</code> option.
+For more discussions,
+please refer to
+<a href="https://stackoverflow.com/questions/51913361/difference-between-pip-install-options-ignore-installed-and-force-reinstall">Difference Between Pip Install Options Ignore Installed and Force Reinstall</a>
+and
+<a href="https://github.com/blockstack/blockstack-core/issues/504">blockstack-core::Issues 504</a>
+.</p>
+<h2 id="install-python-packages-without-installing-dependencies">Install Python Packages Without Installing Dependencies</h2>
+<p>You can install a Python package without installing its dependencies
+using the command below.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>--no-deps<span class="w"> </span>some_package
+</code></pre></div>
+
+<h2 id="upgrade-python-packages">Upgrade Python Packages</h2>
+<p>You can upgrade an already installed Python package to the latest version
+using the command below.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>install<span class="w"> </span>--upgrade<span class="w"> </span>wheel
+</code></pre></div>
+
+<h2 id="list-all-installed-python-packages">List All Installed Python Packages</h2>
+<ol>
+<li>
+<p>List all installed modules.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>list
+</code></pre></div>
+
+</li>
+<li>
+<p>List outdated modules only.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>list<span class="w"> </span>--outdated
+</code></pre></div>
+
+</li>
+<li>
+<p>You can also use <code>help('modules')</code> to show all installed modules in Python.</p>
+</li>
+</ol>
+<h2 id="use-pip-with-proxy">Use pip with Proxy</h2>
+<p>You can export environment variables <code>http_proxy</code> and <code>https_proxy</code>
+or you can use <code>pip</code> with the <code>--proxy</code> option directly.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>--proxy<span class="w"> </span>http://proxy__server_ip:port<span class="w"> </span>install<span class="w"> </span>some_pkg
+</code></pre></div>
+
+<p>When using the <code>--proxy</code> with <code>pip</code>/<code>pip3</code>, 
+you can omit <code>http://</code> and the port if the port is 80.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>--proxy<span class="w"> </span><span class="m">10</span>.135.227.47<span class="w"> </span>search<span class="w"> </span>notifiers
+</code></pre></div>
+
+<p>Notice that sometimes <code>pip</code> does not respect the environment variables.
+In that case, 
+you have to use the option <code>--proxy</code> to pass proxy to <code>pip</code>.
+And even with the option <code>--proxy</code>,
+pip might not work well if you install from a version control system. 
+Just be ware of that.
+<a href="http://www.legendu.net/misc/blog/proxychains-tips/">ProxyChains</a>
+is likely a solution when that issue happens.</p>
+<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p><code>pip</code> supports downloading Python packages without installing them.
+    At the same time,
+    you can disable <code>pip</code> caching using the option <code>--no-cache-dir</code>.
+    For more discussions,
+    please refer to
+    <a href="https://pip.pypa.io/en/latest/reference/pip_install/#caching">Caching</a>
+    .</p>
+</li>
+<li>
+<p><code>export LC_ALL=C</code> resolves an issues (cannot remember which issue exactly) of pip3.</p>
+</li>
+</ol>
+<h2 id="installation-location">Installation Location</h2>
+<p>Please refer to 
+<a href="http://www.legendu.net/misc/blog/the-installation-location-of-python-packages-using-pip/">The Installation Location of Python Packages Using Pip</a>
+for more discussions.</p>
+<h2 id="check-for-existence-of-a-python-package">Check for Existence of a Python Package</h2>
+<p>https://stackoverflow.com/questions/14050281/how-to-check-if-a-python-module-exists-without-importing-it</p>
+<p>The most robust way turns out to be <code>pip3 list</code>,
+because some packages are namespace sub packagess
+which are not exposed (visible to importlib) by default.
+However,
+all installed packages (via pip) are visible to pip.</p>
+<div class="highlight"><pre><span></span><code>pip3<span class="w"> </span>list<span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>-i<span class="w"> </span>pelican-render-math
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<p>https://stackoverflow.com/questions/38613316/how-to-upgrade-pip3</p>
+<p>https://adamj.eu/tech/2019/03/11/pip-install-from-a-git-repository/</p>
+<p>http://stackoverflow.com/questions/36394101/pip-install-locale-error-unsupported-locale-setting</p>
+<p>http://unix.stackexchange.com/questions/87745/what-does-lc-all-c-do</p>
+<p>https://stackoverflow.com/questions/4888027/python-and-pip-list-all-versions-of-a-package-thats-available</p>
+<p>https://stackoverflow.com/questions/5226311/installing-specific-package-versions-with-pip</p>
+<p>https://stackoverflow.com/questions/14149422/using-pip-behind-a-proxy</p>
+<p>https://stackoverflow.com/questions/9510474/removing-pips-cache</p>
+<p>https://stackoverflow.com/questions/36898474/how-to-install-a-module-for-all-users-with-pip-on-linux</p>
+<p><a href="https://stackoverflow.com/questions/8795617/how-to-pip-install-a-package-with-min-and-max-version-range">How to pip install a package with min and max version range?</a></p>
+<p><a href="https://stackoverflow.com/questions/16584552/how-to-state-in-requirements-txt-a-direct-github-source">How to state in requirements.txt a direct github source</a></p>
+<p><a href="https://adamj.eu/tech/2019/03/11/pip-install-from-a-git-repository/">'pip install' From a Git Repository</a></p>
+<p>https://github.com/pypa/pip/issues/4685</p>
+<p>https://github.com/pypa/pip/pull/6391</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-06-05T08:26:34-07:00" pubdate>Jun 05, 2017</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="https://www.legendu.net/en/tag/python.html">Python</a>
+    <a class="category" href="https://www.legendu.net/en/tag/package.html">package</a>
+    <a class="category" href="https://www.legendu.net/en/tag/module.html">module</a>
+    <a class="category" href="https://www.legendu.net/en/tag/install.html">install</a>
+    <a class="category" href="https://www.legendu.net/en/tag/pip.html">pip</a>
+    <a class="category" href="https://www.legendu.net/en/tag/conda.html">conda</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/install-python-packages/';
+          var disqus_url = 'https://www.legendu.net/en/blog/install-python-packages/';
+          var disqus_title = 'Install Python Packages Using pip';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

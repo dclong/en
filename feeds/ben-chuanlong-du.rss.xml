@@ -1,0 +1,1387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Ben Chuanlong Du</title><link>https://www.legendu.net/en/</link><description>And let it direct your passion with reason.</description><lastBuildDate>Thu, 19 Jun 2025 11:03:55 -0700</lastBuildDate><item><title>Tips on the find command in Linux</title><link>https://www.legendu.net/en/blog/find-tips/</link><description>&lt;h2 id="better-alternatives-to-find"&gt;Better Alternatives to &lt;code&gt;find&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;There are some better alternatives to find.
+The Python module &lt;code&gt;pathlib&lt;/code&gt; is the most suitable one for relatively complex jobs.
+&lt;code&gt;fd&lt;/code&gt;, &lt;code&gt;ripgrep&lt;/code&gt;, &lt;code&gt;fselect&lt;/code&gt; and &lt;code&gt;osquery&lt;/code&gt; 
+are other alternatives.&lt;/p&gt;
+&lt;table class="comparison-table"&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;&lt;/th&gt;
+            &lt;th&gt;
+                &lt;a href="https://man7.org/linux/man-pages/man1/find.1.html"&gt;find&lt;/a&gt;
+            &lt;/th&gt;
+            &lt;th&gt;
+                &lt;a href="https://man7.org/linux/man-pages/man1/find.1.html"&gt;fd&lt;/a&gt;
+            &lt;/th&gt;
+            &lt;th&gt;
+                &lt;a href="https://github.com/jhspetersson/fselect"&gt;fselect&lt;/a&gt;
+            &lt;/th&gt;
+            &lt;th&gt;
+                &lt;a href="https://github.com/jhspetersson/fselect"&gt;osquery&lt;/a&gt;
+            &lt;/th&gt;
+            &lt;th&gt;
+                &lt;a href="https://github.com/BurntSushi/ripgrep "&gt;ripgrep (rg)&lt;/a&gt; 
+            &lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;
+            &lt;th scope="row"&gt;&lt;strong&gt;Primary Use Case&lt;/strong&gt;&lt;/th&gt;
+            &lt;td&gt;&lt;strong&gt;File metadata search &amp; execution&lt;/strong&gt; (scripting)&lt;/td&gt;
+            &lt;td&gt;&lt;strong&gt;Interactive file name search …&lt;/strong&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tbody&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 06 Sep 2014 09:43:30 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-09-06:/en/blog/find-tips/</guid><category>OS</category><category>Linux</category><category>find</category><category>tips</category><category>search</category><category>locate</category></item><item><title>My Docker Images</title><link>https://www.legendu.net/en/blog/my-docker-images/</link><description>&lt;h2 id="recommended-docker-images"&gt;Recommended Docker Images and Tags&lt;/h2&gt;
+
+&lt;p&gt;Most of my Docker images have different variants 
+(corresponding to tags &lt;code&gt;latest&lt;/code&gt;, &lt;code&gt;next&lt;/code&gt;, etc) 
+for different use cases.
+And each tag might have histocial versions 
+with the pattern &lt;code&gt;mmddhh&lt;/code&gt; 
+(&lt;code&gt;mm&lt;/code&gt;, &lt;code&gt;dd&lt;/code&gt; and &lt;code&gt;hh&lt;/code&gt; stand for the month, day and hour) 
+for fallback if a tag …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 18 Oct 2018 09:10:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2018-10-18:/en/blog/my-docker-images/</guid><category>Software</category><category>software</category><category>Docker</category><category>Docker image</category><category>Ubuntu</category><category>JupyterLab</category><category>Lubuntu</category><category>dclong</category></item><item><title>Use pdftk to Manipulating PDF Files</title><link>https://www.legendu.net/en/blog/pdftk-examples/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is suggested that 
+    you use Python modules or &lt;a href="https://misc.legendu.net/blog/editing-pdf-files-using-stirling-pdf/"&gt;Stirling-PDF&lt;/a&gt; 
+    instead of &lt;code&gt;pdftk&lt;/code&gt; to manipulating PDFs for several reasons.
+    First, 
+    even though &lt;code&gt;pdftk&lt;/code&gt; is a great command-line tool,
+    it is hard to remember its syntax.
+    On the contratry, 
+    Python code is easy to read and understand (even though it is …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 06 Oct 2013 11:44:58 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-10-06:/en/blog/pdftk-examples/</guid><category>Software</category><category>pdftk</category><category>software</category><category>examples</category><category>PDF</category></item><item><title>Editing PDF Files</title><link>https://www.legendu.net/en/blog/editing-PDF-files/</link><description>&lt;p&gt;&lt;strong&gt;Things on this page are fragmentary and immature notes/thoughts of the author. Please read with your own judgement!&lt;/strong&gt;&lt;/p&gt;
+&lt;div style="overflow-x:auto;"&gt;
+&lt;style&gt;
+    tr:nth-child(even) {background-color: #f2f2f2}
+&lt;/style&gt;
+&lt;table style="width:100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt; Type &lt;/th&gt;
+    &lt;th&gt; Name &lt;/th&gt;
+    &lt;th&gt; Comments &lt;/th&gt;
+  &lt;/tr&gt;
+
+  &lt;tr&gt;
+    &lt;td rowspan="6"&gt; Web Tools &lt;/td&gt;
+    &lt;td&gt; &lt;a href="https://github.com/Stirling-Tools/Stirling-PDF"&gt;Stirling-PDF&lt;/a&gt; &lt;/td&gt;
+    &lt;td&gt;  
+      - robust &lt;br&gt;
+      - local hosted &lt;br&gt;
+      - Docker container based &lt;br&gt;
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;a href="https://app.parseur.com/"&gt;Parseur&lt;/a&gt; &lt;/td&gt;
+    &lt;td&gt;  
+      - AI-based PDF parser
+    &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; &lt;a href="https://www.docusign.com/"&gt;DocuSign&lt;/a&gt;  &lt;/td&gt;
+    &lt;td&gt; 
+        - Great for convert PDF files to MS Office files …&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 30 Jun 2016 10:21:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-30:/en/blog/editing-PDF-files/</guid><category>Software</category><category>software</category><category>PDF</category><category>tools</category><category>edit</category><category>convert</category><category>PDFfiller</category></item><item><title>Android Emulators</title><link>https://www.legendu.net/en/blog/android-emulators/</link><description>&lt;table style="width:100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt; Name &lt;/th&gt;
+    &lt;th&gt; Free &lt;/th&gt;
+    &lt;th&gt; OS &lt;/th&gt;
+    &lt;th&gt; Hyper-v Compat on Win&lt;/th&gt;
+    &lt;th&gt; ARM-only App Support &lt;/th&gt;
+    &lt;th&gt; Development &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; 
+    &lt;a href="https://www.genymotion.com"&gt; GenyMotion &lt;/a&gt;
+    &lt;a href="#footnote1"&gt;[1]&lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt; Limited &lt;/td&gt;
+    &lt;td&gt; Windows, macOS, Linux &lt;/td&gt;
+    &lt;td&gt; Partial &lt;/td&gt;
+    &lt;td&gt; Limited &lt;/td&gt;
+    &lt;td&gt; Active &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; 
+    &lt;a href="https://www.bluestacks.com"&gt; BlueStacks &lt;/a&gt;
+    &lt;a href="#footnote2"&gt;[2]&lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt; Yes &lt;/td&gt;
+    &lt;td&gt; Windows, macOS &lt;/td&gt;
+    &lt;td&gt; No &lt;/td&gt;
+    &lt;td&gt; Yes &lt;/td&gt;
+    &lt;td&gt; Active &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; 
+    &lt;a href="https://www.ldplayer.net"&gt; LDPlayer &lt;/a&gt;
+    &lt;a href="#footnote3"&gt;[3]&lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt; Yes &lt;/td&gt;
+    &lt;td&gt; Windows &lt;/td&gt;
+    &lt;td&gt; No &lt;/td&gt;
+    &lt;td&gt; Yes &lt;/td&gt;
+    &lt;td&gt; Active &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; 
+    &lt;a href="https://www.linzhuotech.com/index.php/home/index/xdroid.html"&gt; xDroid &lt;/a&gt;
+    &lt;a href="#footnote1"&gt;[9]&lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt; Limited &lt;/td&gt;
+    &lt;td&gt; Linux &lt;/td&gt;
+    &lt;td&gt; NA &lt;/td&gt;
+    &lt;td&gt; Limited &lt;/td&gt;
+    &lt;td&gt; Active &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; 
+    &lt;a href="https://mumu.163.com"&gt; MuMu App Player &lt;/a&gt;
+    &lt;a href="#footnote5"&gt;[5]&lt;/a&gt;
+    &lt;/td&gt;
+    &lt;td&gt; Yes &lt;/td&gt;
+    &lt;td&gt; macOS (M chip …&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 12 Sep 2018 23:41:58 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2018-09-12:/en/blog/android-emulators/</guid><category>Software</category><category>software</category><category>Android</category><category>emulation</category><category>emulator</category><category>AnBox</category><category>VirtualBox</category><category>xDroid</category></item><item><title>Make Traffic Follow Through Proxies Using ProxyChains</title><link>https://www.legendu.net/en/blog/proxychains-tips/</link><description>&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;h3 id="ubuntu"&gt;Ubuntu&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wajig install proxychains4
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id="mac"&gt;Mac&lt;/h3&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;brew install proxychains-ng
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Notice that the proxychains-ng installed using Homebrew on Mac does not work well right now (as of 2019-03-07).
+An alternative way is to use proxychains via Docker on Mac.
+The Docker image
+&lt;a href="https://cloud.docker.com/repository/docker/dclong/jupyterhub-ds"&gt;dclong/jupyterhub-ds&lt;/a&gt;
+has proxychains (NOT proxychains-ng) installed.&lt;/p&gt;
+&lt;h2 id="syntax"&gt;Syntax&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;proxychains4 …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 30 Jun 2017 14:34:01 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-06-30:/en/blog/proxychains-tips/</guid><category>Software</category><category>Software</category><category>ProxyChains</category><category>network</category><category>web</category><category>proxy</category></item><item><title>SSH Tunnel</title><link>https://www.legendu.net/en/blog/ssh-tunnel/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The StackOverflow discussion 
+    &lt;a href="https://unix.stackexchange.com/questions/115897/whats-ssh-port-forwarding-and-whats-the-difference-between-ssh-local-and-remot#:~:text=Introduction,port%20on%20the%20remote%20side.&amp;amp;text=remote%3A%20%2DR%20Specifies%20that%20the,port%20on%20the%20local%20side."&gt;What's ssh port forwarding and what's the difference between ssh local and remote port forwarding [duplicate]&lt;/a&gt;
+    has a good visual comparison/explanation of the difference 
+    between the &lt;code&gt;ssh -L&lt;/code&gt; (&lt;code&gt;-L&lt;/code&gt; stands for local) and &lt;code&gt;ssh -R&lt;/code&gt; (&lt;code&gt;-R&lt;/code&gt; stands for remote).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/pahaz/sshtunnel"&gt;sshtunnel&lt;/a&gt;
+    is a Python implementation of SSH …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 07 Sep 2018 21:32:57 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2018-09-07:/en/blog/ssh-tunnel/</guid><category>Software</category><category>software</category><category>SSH tunnel</category><category>socks proxy</category><category>reverse</category><category>SSH</category></item><item><title>Working with Spreadsheet in Python</title><link>https://www.legendu.net/en/blog/working-with-spreadsheet-with-python/</link><description>&lt;p&gt;It is suggested that you avoid using Excel files (or other spreadsheet tools) for storing data.
+Parquet file is currently the best format for storing table-like data.
+If you do want to interact and manipulate your data using Excel (or other spreadsheet tools),
+dump your data into CSV files
+and …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 09 May 2015 08:43:45 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2015-05-09:/en/blog/working-with-spreadsheet-with-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>Spreadsheet</category><category>Excel</category><category>pandas</category><category>xlsxwriter</category></item><item><title>Summary on Random Number Generators</title><link>https://www.legendu.net/en/blog/summary-random-number-generators/</link><description>&lt;p&gt;&lt;img src="http://www.legendu.net/media/rng/random-number-generator.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="xoshiro"&gt;&lt;a href="https://prng.di.unimi.it/"&gt;Xoshiro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Xoshiro is a family of fast, space-efficient and high quality PRNGs.
+It is considered the state-of-the-art (SOTA) family of non-cryptographic pseudo random number generators (PRNGs).
+The Rust crate
+&lt;a href="https://crates.io/crates/rand_xoshiro"&gt;rand_xoshiro&lt;/a&gt;
+(which is part of the popular Rust crate &lt;a href="https://crates.io/crates/rand"&gt;rand&lt;/a&gt;)
+has implementations of 
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256Plus.html"&gt;Xoshiro256Plus&lt;/a&gt;
+and
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256PlusPlus.html"&gt;Xoshiro256PlusPlus&lt;/a&gt;
+.
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256PlusPlus.html"&gt;Xoshiro256PlusPlus&lt;/a&gt;
+is a very good …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 27 Jul 2012 21:14:07 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-27:/en/blog/summary-random-number-generators/</guid><category>AI</category><category>WELL</category><category>RNG</category><category>statistics</category><category>SFMT</category><category>dimension</category><category>MT</category><category>PCG</category><category>Java</category><category>Python</category></item><item><title>Thread Safe Random Number Generator</title><link>https://www.legendu.net/en/blog/thread-safe-random-number-generator/</link><description>&lt;p&gt;In pratice,
+the approach of separate RNGs with different seeds for threads/processes
+is widely used 
+(even though theoretically those RNGs might have overlaping sequences, 
+which is undesirable).
+For more discussions on this approach,
+please refer to
+&lt;a href="https://rust-random.github.io/book/guide-parallel.html"&gt;The Rust Rand Book - Parallel RNGs&lt;/a&gt;
+and
+&lt;a href="https://www.legendu.net/en/blog/seed-many-rngs-in-rust/"&gt;Seed Many RNGs in Rust&lt;/a&gt;
+.
+The …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 08 Jul 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-08:/en/blog/thread-safe-random-number-generator/</guid><category>Computer Science</category><category>C++</category><category>RNG</category><category>programming</category><category>thread</category><category>distribution</category><category>HPC</category><category>fun problems</category><category>MT</category><category>Concurrency</category></item><item><title>Operate Remote Servers Using SSH</title><link>https://www.legendu.net/en/blog/ssh-tips/</link><description>&lt;h2 id="general-tips-and-traps"&gt;General Tips and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The permissions of the directory &lt;code&gt;~/.ssh&lt;/code&gt; and its subcontents
+    on &lt;strong&gt;both the local machine and the remote server&lt;/strong&gt; must be properly set 
+    in order for SSH login via public key to work.
+    A good pratice is to set the permission of &lt;code&gt;~/.ssh&lt;/code&gt; to &lt;code&gt;700&lt;/code&gt; (on both …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 22 Oct 2013 11:03:15 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-10-22:/en/blog/ssh-tips/</guid><category>Software</category><category>tips</category><category>SSH</category><category>software</category><category>remote</category><category>Linux</category><category>ControlMaster</category><category>ControlPersist</category><category>ProxyCommand</category><category>ControlPath</category></item><item><title>Manage Docker Images and Containers</title><link>https://www.legendu.net/en/blog/docker-image-and-container-management/</link><description>&lt;ol&gt;
+&lt;li&gt;It is suggested that you use &lt;a href="https://osquery.io/"&gt;osquery&lt;/a&gt;
+    or &lt;a href="https://github.com/legendu-net/dockeree"&gt;dockeree&lt;/a&gt;
+    to query Docker images, containers, etc.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="remove-containers"&gt;Remove Containers&lt;/h2&gt;
+&lt;p&gt;Note that running containers will NOT be removed by default.
+This is what users want generally speaking. 
+You can use the option &lt;code&gt;-f&lt;/code&gt; to force removing running containers,
+but use it with caution …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 15 Mar 2017 10:29:33 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-03-15:/en/blog/docker-image-and-container-management/</guid><category>Software</category><category>software</category><category>Docker</category><category>Docker image</category><category>container</category><category>management</category><category>remove</category></item><item><title>IPython Is the Best Shell</title><link>https://www.legendu.net/en/blog/ipython-is-the-best-shell/</link><description>&lt;h2 id="ipython-is-the-best-shell"&gt;IPython is the Best Shell!&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Use IPython as much as possible. &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IPython has virtues of both shell and Python. &lt;/li&gt;
+&lt;li&gt;You should avoid using shell scripts for complicate tasks any way.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you do want to use a Unix/Linux shell,
+    I'd suggest you stick to Bash 
+    unless Linux distributions start …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 24 May 2015 13:00:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2015-05-24:/en/blog/ipython-is-the-best-shell/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>tips</category><category>IPython</category><category>Shell</category></item><item><title>Python Alternatives to Shell</title><link>https://www.legendu.net/en/blog/shell-alternatives/</link><description>&lt;h2 id="python-equivalent-of-shell-commands"&gt;Python Equivalent of Shell Commands&lt;/h2&gt;
+&lt;table style="width:100%"&gt;
+  &lt;tr&gt;
+    &lt;th&gt; Shell Command &lt;/th&gt;
+    &lt;th&gt; Alternative &lt;/th&gt;
+    &lt;th&gt; Python &lt;/th&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td rowspan="1"&gt; which git &lt;/td&gt;
+    &lt;td bgcolor="#348017"&gt; shutil.which("git") &lt;/td&gt;
+    &lt;td&gt; &lt;a href="https://docs.python.org/3/library/shutil.html#shutil.which"&gt; shutil &lt;/a&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td rowspan="4"&gt; mkdir -p /path/to/file &lt;/td&gt;
+    &lt;td bgcolor="#348017"&gt; Path("path/to/some/file").mkdir(exist_ok=True) &lt;/td&gt;
+    &lt;td&gt; &lt;a href="https://docs.python.org/3/library/pathlib.html#pathlib.Path.mkdir"&gt; pathlib &lt;/a&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; os.makedirs("/path/to/file", exist_ok=True) &lt;/td&gt;
+    &lt;td&gt; &lt;a href="https://docs.python.org/3/library/os.html#os.makedirs"&gt; os &lt;/a&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; !mkdir -p /path/to/file &lt;/td&gt;
+    &lt;td&gt; &lt;a href="https://ipython.readthedocs.io/en/stable/overview.html#enhanced-interactive-python-shell"&gt; IPython &lt;/a&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt; mkdir -p /path/to/file &lt;/td&gt;
+    &lt;td&gt; &lt;a href="https://xon.sh/"&gt; xonsh &lt;/a&gt; &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td rowspan="4"&gt; cp …&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 03 Jan 2019 16:17:10 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-01-03:/en/blog/shell-alternatives/</guid><category>Computer Science</category><category>programming</category><category>IPython</category><category>shell</category><category>bash</category><category>xonsh</category><category>plumbum</category><category>Python</category><category>shell alternatives</category></item><item><title>Docker in WSL 2</title><link>https://www.legendu.net/en/blog/docker-in-WSL2/</link><description>&lt;h2 id="tips-and-traps"&gt;Tips and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Docker on WSL 2 works great.
+    However,
+    the performance of IO is extremely bad if it access the Windows filesystem.
+    For more discussions,
+    please refer to
+    &lt;a href="https://www.legendu.net/en/blog/wsl-2-filesystem/"&gt;WSL 2 Filesystem&lt;/a&gt;
+    .&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Docker containers launched from a WSL (e.g., Ubuntu) shell will continue to run 
+    after the WSL shell …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 10 Aug 2017 09:05:45 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-08-10:/en/blog/docker-in-WSL2/</guid><category>Software</category><category>software</category><category>Docker</category><category>WSL</category><category>WSL 2</category><category>Windows</category><category>Bash</category><category>BashOnWindows</category><category>Bash on Windows</category></item><item><title>Make Linux Run Faster</title><link>https://www.legendu.net/en/blog/make-your-computer-run-faster/</link><description>&lt;h2 id="benchmark-tools-for-linux"&gt;Benchmark Tools for Linux&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/phoronix-test-suite/phoronix-test-suite/"&gt;phoronix-test-suite&lt;/a&gt;
+is currently the best benchmark tool for Linux.
+You can use it to figure out the bottleneck of performance of your Linux machine.
+Please refer to
+&lt;a href="https://www.legendu.net/misc/blog/benchmark-your-linux-machine-using-phoronix-test-suite"&gt;Benchmark Your Linux Machine Using phoronix-test-suite&lt;/a&gt;
+for more discussions.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://github.com/iovisor/bcc"&gt;BCC&lt;/a&gt;
+is a toolkit for creating efficient kernel tracing and …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 08 Jun 2013 08:54:21 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-06-08:/en/blog/make-your-computer-run-faster/</guid><category>OS</category><category>RAM</category><category>speedup</category><category>SSD</category><category>software</category><category>optimization</category><category>hardware</category><category>Linux</category><category>fast</category><category>performance</category></item><item><title>Map Keys in Linux</title><link>https://www.legendu.net/en/blog/map-keys-in-linux/</link><description>&lt;p&gt;Note: For Vim users, it is appealing to make the &lt;code&gt;Caps Lock&lt;/code&gt; function like &lt;code&gt;Escape&lt;/code&gt;.
+It is suggested that you make &lt;code&gt;Caps Lock&lt;/code&gt; an additonal &lt;code&gt;Escape&lt;/code&gt;
+rather than swap them.
+This avoid inconsistent key mapping issues when you work remotely via VNC, NoMachine, etc.&lt;/p&gt;
+&lt;h2 id="desktop-environment"&gt;Desktop Environment&lt;/h2&gt;
+&lt;p&gt;Some desktop environment (e …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 19 Jun 2015 10:30:15 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2015-06-19:/en/blog/map-keys-in-linux/</guid><category>OS</category><category>Linux</category><category>keyboard</category><category>mapping</category><category>swap</category><category>setxkbmap</category><category>Cinnamon</category><category>GNOME</category><category>keys</category><category>Caps Lock</category><category>Escape</category></item><item><title>Compress and Decompressing Archives in Linux</title><link>https://www.legendu.net/en/blog/compress-and-decompress-in-linux/</link><description>&lt;h2 id="tips-and-traps"&gt;Tips and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Always test integrity of the compressed file
+    before you throw away the original archives.
+    I've seen a case before that a large zip file generated in Windows
+    cannot be unzipped correctly in Linux.
+    Not sure what happend though. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Zstd is currently the best compression/decompression tool.
+    It …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 19 May 2012 23:12:07 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-05-19:/en/blog/compress-and-decompress-in-linux/</guid><category>OS</category><category>Linux</category><category>decompress</category><category>compress</category><category>archive</category><category>split</category><category>multiple</category><category>zip</category><category>tar</category><category>gz</category><category>bz2</category><category>dtrx</category><category>rar</category><category>7zip</category><category>zstd</category></item><item><title>Schedule Task Using Cron in Linux</title><link>https://www.legendu.net/en/blog/schedule-task-using-crontab-in-linux/</link><description>&lt;p&gt;Note: Cron is great for simple scheduling requests. 
+For complicated scheduling with many dependencies 
+you probably want to go with 
+&lt;a href="http://www.legendu.net/misc/blog/apache-airflow-tips"&gt;AirFlow&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id="installation"&gt;Installation&lt;/h2&gt;
+&lt;p&gt;Cron is usually installed by default.
+It not (e.g., if you are using a Docker image),
+you can install it using the following command (on Ubuntu).&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wajig …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 27 Nov 2012 11:28:08 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-27:/en/blog/schedule-task-using-crontab-in-linux/</guid><category>OS</category><category>task</category><category>crontab</category><category>schedule</category><category>linux</category><category>scheduling</category><category>AirFlow</category></item><item><title>Change Shell in Mac</title><link>https://www.legendu.net/en/blog/change-shell-in-mac/</link><description>&lt;p&gt;You can check the current shell in use by running the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;echo&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;$SHELL&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However,
+notice that &lt;code&gt;echo $SHELL&lt;/code&gt; does not report the right shell sometimes.
+A more robust way is to use &lt;code&gt;echo $0&lt;/code&gt;.&lt;/p&gt;
+&lt;p&gt;The default shell can be changed using thee comamnd &lt;code&gt;chsh&lt;/code&gt;.
+For example, 
+thee following …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 02 Apr 2018 14:46:43 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2018-04-02:/en/blog/change-shell-in-mac/</guid><category>OS</category><category>macOS</category><category>shell</category><category>Hyper</category><category>Bash</category><category>zsh</category></item><item><title>Install GNU Utils Using Homebrew</title><link>https://www.legendu.net/en/blog/install-gnu-utils-using-homebrew/</link><description>&lt;p&gt;Installing GNU tools is a way to try to get Linux command experience in macOS. 
+However, 
+not every Linux command has an identical-experience version in macOS.
+**
+It is suggested that you use a Linux virtual machine 
+if you really want to have Linux experience in macOS.
+**
+Notice that some hardwares …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 22 Jun 2017 13:26:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-06-22:/en/blog/install-gnu-utils-using-homebrew/</guid><category>OS</category><category>macOS</category><category>Homebrew</category><category>GNU</category></item><item><title>Things to Do After Installing Linux</title><link>https://www.legendu.net/en/blog/things-to-do-after-installing-linux/</link><description>&lt;p&gt;Note: The tips here are for Debian-based Linux distributions 
+(Debian, Ubuntu, LinuxMint, Pop!_OS, AntiX, etc.).&lt;/p&gt;
+&lt;h2 id="debian-specific"&gt;Debian Specific&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you installed Debian without a desktop environment, 
+    and wants to install a customized desktop environment now,
+    make sure to install a DE manager (e.g., gdm, lightdm, etc.) as well.
+    without …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 04 May 2016 20:59:32 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-05-04:/en/blog/things-to-do-after-installing-linux/</guid><category>OS</category><category>Linux</category><category>OS</category><category>installation</category></item><item><title>Permission Issues when Installing Softwares in Linux</title><link>https://www.legendu.net/en/blog/install-software-linux/</link><description>&lt;p&gt;Sometime when you install softwares in Linux, 
+you get an error message saying that you do not have permission while you used sudo or the root account. 
+This probably means that you do not have full access to some installation files.
+An easy way to solve this problem is to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 30 Apr 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-04-30:/en/blog/install-software-linux/</guid><category>OS</category><category>Linux</category><category>softwares</category><category>permission</category><category>issue</category><category>chmod</category></item><item><title>Tips on Installing Debian Series of Linux Distributions</title><link>https://www.legendu.net/en/blog/tips-for-installing-debian/</link><description>&lt;h2 id="before-installation"&gt;Before Installation&lt;/h2&gt;
+&lt;h3 id="debian-specific"&gt;Debian Specific&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;You'd better not install back ported Debian images, 
+    as it might cause issues with other software (e.g., VirtualBox).
+    It is suggested that you use Debian test.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="other-debian-based-linux-distributions"&gt;Other Debian-based Linux Distributions&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Download the right ISO image of the Linux distribution 
+    that you want to install.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 11 Mar 2013 01:05:59 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-03-11:/en/blog/tips-for-installing-debian/</guid><category>OS</category><category>install</category><category>Linux</category><category>software</category><category>Debian</category></item><item><title>Ways to Make a Bootable Flash Drive in Linux</title><link>https://www.legendu.net/en/blog/ways-to-make-a-bootable-flash-drive/</link><description>&lt;h2 id="use-ventoy"&gt;Use &lt;a href="https://github.com/ventoy/Ventoy"&gt;Ventoy&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://github.com/ventoy/Ventoy"&gt;Ventoy&lt;/a&gt;
+is the best graphical tool for making bootable flash drives currently.&lt;/p&gt;
+&lt;h2 id="use-the-command-dd-or-cat"&gt;Use the Command &lt;code&gt;dd&lt;/code&gt; or &lt;code&gt;cat&lt;/code&gt;&lt;/h2&gt;
+&lt;p&gt;You can use &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;dd&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_to_linux_image&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;of&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nv"&gt;path_to_device&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;bs&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;4&lt;/span&gt;&lt;span class="nv"&gt;M&lt;/span&gt;&lt;span class="c1"&gt;; sync&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;or&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cat path_to_linux_image &amp;gt; path_to_device
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;to write a hybird Linux image into a flash drive.
+Note that you 
+&lt;span style="color:red"&gt;
+must …&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 19 Jul 2013 10:33:38 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-07-19:/en/blog/ways-to-make-a-bootable-flash-drive/</guid><category>OS</category><category>bootable</category><category>flash drive</category><category>hybird</category><category>USB</category><category>Hardware</category><category>Linux</category></item><item><title>Convert PDF to EPS</title><link>https://www.legendu.net/en/blog/convert-pdf-to-eps/</link><description>&lt;p&gt;There are tons of tools for converting PDF pictures to EPS pictures in Linux. 
+The &lt;code&gt;pdf2ps&lt;/code&gt; command is a good one.
+It produces EPS pictures without losing much resolution. 
+The general purpose tools &lt;code&gt;convert&lt;/code&gt; 
+(from the &lt;code&gt;ImageMagick&lt;/code&gt; package) does not produce as good quality EPS figures.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 21 Nov 2012 16:30:01 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-21:/en/blog/convert-pdf-to-eps/</guid><category>Software</category><category>Image</category><category>eps</category><category>Linux</category><category>PDF</category><category>software</category><category>Graphics</category></item><item><title>Regular Expression Equivalent</title><link>https://www.legendu.net/en/blog/regex-equivalence/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The order of precedence of operators in POSIX extended regular expression is as follows.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Collation-related bracket symbols &lt;code&gt;[==]&lt;/code&gt;, &lt;code&gt;[::]&lt;/code&gt;, &lt;code&gt;[..]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Escaped characters &lt;code&gt;\&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Character set (bracket expression) &lt;code&gt;[]&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Grouping &lt;code&gt;()&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Single-character-ERE duplication &lt;code&gt;*&lt;/code&gt;, &lt;code&gt;+&lt;/code&gt;, &lt;code&gt;?&lt;/code&gt;, &lt;code&gt;{m,n}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Concatenation&lt;/li&gt;
+&lt;li&gt;Anchoring &lt;code&gt;^&lt;/code&gt;, &lt;code&gt;$&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Alternation &lt;code&gt;|&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Some regular expression patterns are defined using a single leading backslash, 
+    e.g., &lt;code&gt;\s&lt;/code&gt;, &lt;code&gt;\b&lt;/code&gt;, etc.
+    However, 
+    since special …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 30 Oct 2013 12:29:42 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-10-30:/en/blog/regex-equivalence/</guid><category>Computer Science</category><category>tips</category><category>regex</category><category>equivalent</category><category>regular expression</category><category>regexp</category><category>Python</category><category>R</category><category>CRAN</category><category>Perl</category><category>SAS</category><category>grep</category><category>egrep</category></item><item><title>Fonts for Linux</title><link>https://www.legendu.net/en/blog/fonts-for-linux/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ttf-arphic-uming&lt;/code&gt;, &lt;code&gt;ttf-wqy-microhei&lt;/code&gt;, &lt;code&gt;ttf-wqy-zenhei&lt;/code&gt;, &lt;code&gt;xfonts-wqy&lt;/code&gt; and &lt;code&gt;ttf-opensymbol&lt;/code&gt; 
+    are some packages related to Chinese fonts.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you have Adobe Reader installed on your computer, 
+    you can use Adobe Chinese fonts for free.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To check Chinese fonts installed on your computer,
+    you can use the command &lt;code&gt;fc-list :lang=zh-cn | sort&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;To install extra …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 13 Apr 2013 00:07:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-04-13:/en/blog/fonts-for-linux/</guid><category>OS</category><category>fonts</category><category>LaTeX</category><category>Chinese</category><category>Linux</category><category>Tex Live</category><category>TexLive</category><category>nerd fonts</category></item><item><title>Search for Files in Command-line Using grep</title><link>https://www.legendu.net/en/blog/grep-tips/</link><description>&lt;p&gt;The article 
+&lt;a href="http://www.librebyte.net/en/gnulinux/14-practical-examples-of-the-grep-command/"&gt;14 Practical examples of the grep command&lt;/a&gt;
+has some good examples on how to use the &lt;code&gt;grep&lt;/code&gt; command.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The Perl style (option &lt;code&gt;-P&lt;/code&gt;) regular expression is more powerful 
+    than the basic (default) and extended (option &lt;code&gt;-E&lt;/code&gt;) regular expression. 
+    It is suggested that you use the perl style as …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 22 Oct 2013 14:53:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-10-22:/en/blog/grep-tips/</guid><category>OS</category><category>tips</category><category>grep</category><category>egrep</category></item><item><title>Synchronize Files Using Dropbox</title><link>https://www.legendu.net/en/blog/dropbox-tips/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Dropbox won't sync files that you don't have read permissions.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better not merge an old Dropbox folder while installing/configuring Dropbox.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;You'd better not store symbolic links in the Dropbox folder,
+    because the symbolic links will be replaced by the real files/folders 
+    when synchronized to other computers.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 22 Oct 2013 13:36:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-10-22:/en/blog/dropbox-tips/</guid><category>Software</category><category>tips</category><category>Dropbox</category><category>synchronizaion</category><category>backup</category><category>cloud</category><category>sync</category></item><item><title>Comparision of Linux Emulation Solutions on Windows</title><link>https://www.legendu.net/en/blog/comparision-of-linux-emulation-solutions-on-windows/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Virtual machine based on Virtualbox, etc. is an overkill, 
+    generally speaking.
+    It provides complete functionalities 
+    but is more CPU and memory hangry.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;WSL 2 is the currently the best solution comes with Windows 10+.
+    It is essentially a virtual machine but based on Hyper-V.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Cygwin, MobaXterm, etc. are outdated 
+    as …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 13 Jun 2014 22:21:09 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-06-13:/en/blog/comparision-of-linux-emulation-solutions-on-windows/</guid><category>Software</category><category>Virtual Machine</category><category>Cygwin</category><category>MobaXterm</category><category>VirtualBox</category><category>Linux Emulation</category></item><item><title>Count Number of Fields in Each Line</title><link>https://www.legendu.net/en/blog/count-number-of-fields-in-each-line/</link><description>&lt;p&gt;Sometimes,
+a structured text file might be malformatted.
+A simple way to verify it is to count the number of fields in each line.&lt;/p&gt;
+&lt;h2 id="using-awk"&gt;Using awk&lt;/h2&gt;
+&lt;p&gt;You can count the number of fields in each line 
+using the following awk command.
+Unfortunately, 
+awk does not take escaped characters into consideration …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 13 Jun 2016 23:08:03 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-13:/en/blog/count-number-of-fields-in-each-line/</guid><category>Computer Science</category><category>programming</category><category>data manipulation</category><category>R</category><category>awk</category><category>number</category><category>field</category><category>text file</category></item><item><title>Resolve the DNS Contamination Issue in Firefox</title><link>https://www.legendu.net/en/blog/resolve-the-dns-contamination-issue-in-firefox/</link><description>&lt;p&gt;The local DNS you use in China is probably contaminated
+and popular sites like Google, Facebook, etc. are not interpreted correctly.
+So if you are in China and use Firefox with Proxy,
+make sure to set &lt;code&gt;network.proxy.socks_remote_dns&lt;/code&gt; to be true (follow steps below).&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open an empty tab in …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 11 Sep 2018 01:11:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2018-09-11:/en/blog/resolve-the-dns-contamination-issue-in-firefox/</guid><category>Software</category><category>software</category><category>Firefox</category><category>proxy</category><category>DNS contamination</category><category>socks</category></item><item><title>Convert a Socks Proxy to a HTTP Proxy</title><link>https://www.legendu.net/en/blog/socks-proxy-to-http-proxy/</link><description>&lt;p&gt;There are multiple tools available 
+to convert a Socks proxy to a HTTP/HTTPS proxy. 
+The work by convertting HTTP requests into socks requests 
+and send them to the socks proxy. 
+Be aware that this might not be necessary 
+as many tools accepting HTTP/HTTPS proxies 
+also accept socks proxies …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 08 Sep 2018 18:57:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2018-09-08:/en/blog/socks-proxy-to-http-proxy/</guid><category>Internet</category><category>network</category><category>socks proxy</category><category>http proxy</category><category>polipo</category></item><item><title>Quickly Create a Scala Project Using Gradle in Intellij IDEA</title><link>https://www.legendu.net/en/blog/scala-with-gradle-in-intellij/</link><description>&lt;h2 id="easy-way"&gt;Easy Way&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Create a directory (e.g., &lt;code&gt;demo_proj&lt;/code&gt;) for your project.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run &lt;code&gt;gradle init --type scala-library&lt;/code&gt; in terminal in the above directory.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Import the directory as a Gradle project in IntelliJ IDEA.
+    Alternatively,
+    you can add &lt;code&gt;apply plugin: 'idea'&lt;/code&gt; into &lt;code&gt;build.gradle&lt;/code&gt;
+    and then run the command &lt;code&gt;./gradlew openIdea&lt;/code&gt; to …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 26 Jan 2019 18:11:29 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-01-26:/en/blog/scala-with-gradle-in-intellij/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Gradle</category><category>IntelliJ IDEA</category><category>JVM</category></item><item><title>Create a Temporary File in Linux</title><link>https://www.legendu.net/en/blog/create-temporary-file-linux/</link><description>&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;mktemp&lt;/code&gt; is preferred to &lt;code&gt;tempfile&lt;/code&gt;.&lt;/li&gt;
+&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 23 Dec 2013 01:00:32 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-12-23:/en/blog/create-temporary-file-linux/</guid><category>OS</category><category>OS</category><category>operating system</category><category>Linux</category><category>temporary</category><category>file</category><category>temp</category></item><item><title>Install Python Packages Behind Firewall</title><link>https://www.legendu.net/en/blog/install-python-behind-firewall/</link><description>&lt;p&gt;It is recommended that you use &lt;code&gt;pip&lt;/code&gt; to install Python packages.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you don't already know the proxy in use (in your company),
+    read the post &lt;a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/"&gt;Find out Proxy in Use&lt;/a&gt;
+    to figure it out.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set proxy environment variables.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;
+&lt;span class="k"&gt;set&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="nl"&gt;https&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="k"&gt;user …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 09 Jul 2014 02:23:14 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-07-09:/en/blog/install-python-behind-firewall/</guid><category>Computer Science</category><category>Python</category><category>programming</category><category>Windows</category><category>proxy</category><category>install package</category></item><item><title>Synchronization and Backup Solutions</title><link>https://www.legendu.net/en/blog/synchronization-and-backup-solutions/</link><description>&lt;h2 id="tips-and-traps"&gt;Tips and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Almost all sychronization tools have problems with symbolic links.
+    Most of them just ignore symbolic links.
+    This makes sense as following symbolic links can causes serious disk problems.
+    If not followed then symbolic links are likely broken on other device.
+    The simple suggestion is do not place …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 04 Mar 2014 22:11:05 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-03-04:/en/blog/synchronization-and-backup-solutions/</guid><category>Software</category><category>software</category><category>synchronization</category><category>backup</category><category>Baidu Yun</category><category>Dropbox</category><category>TeamDrive</category><category>Syncthing</category></item><item><title>Missing Grub Menu of Windows Operating System</title><link>https://www.legendu.net/en/blog/missing-grub-windows/</link><description>&lt;p&gt;I came across this problem after I installed both Debian and Windows 7 system on my laptop.
+After searching online, I found a solution to this problem. 
+1. Open /etc/default/grub as root user and make sure the following line is somewhere in the file and uncommented:&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    GRUB_DISABLE_OS_PROBER=false …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 03 May 2012 19:10:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-05-03:/en/blog/missing-grub-windows/</guid><category>OS</category><category>Windows</category><category>Linux</category><category>OS</category><category>Debian</category></item><item><title>Windows Operating System</title><link>https://www.legendu.net/en/blog/tips-windows/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/windows/windows.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="tips-and-traps"&gt;Tips and Traps&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can download a Windows 10 Virtual Machine at 
+    &lt;a href="https://developer.microsoft.com/en-us/windows/downloads/virtual-machines/"&gt;Get a Windows 10 development environment&lt;/a&gt; 
+    !&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href="https://github.com/microsoft/winget-cli"&gt;winget&lt;/a&gt;
+    is the official Windows Package Manager CLI
+    and
+    &lt;a href="https://chocolatey.org/"&gt;Chocolatey&lt;/a&gt; 
+    is a cool community-driven software management tool for Windows.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When a file is being synchronized by Dropbox,
+    it might be unaccessible temporarily …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 30 Sep 2012 19:30:05 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-09-30:/en/blog/tips-windows/</guid><category>OS</category><category>tips</category><category>anti-virus</category><category>Windows</category><category>Dropbox</category><category>OS</category></item><item><title>Map Keys in macOS</title><link>https://www.legendu.net/en/blog/map-keys-in-macos/</link><description>&lt;p&gt;Update: As of MacOS Sierra 10.12.1,
+the remapping of &lt;code&gt;Caps Lock&lt;/code&gt; to &lt;code&gt;Escape&lt;/code&gt; can be done natively in the Keyboard System Preferences pane.
+Follow the steps below to remap Caps Lock to Escape (without relying on 3rd party software).&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Open System Preferences and click on &lt;code&gt;Keyboard&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;Click on …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 26 Jun 2016 07:30:03 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-26:/en/blog/map-keys-in-macos/</guid><category>OS</category><category>Mac</category><category>Apple</category><category>macOS</category><category>mapping</category><category>keys</category><category>Seil</category></item><item><title>Map Keys in Windows</title><link>https://www.legendu.net/en/blog/map-keys-in-windows/</link><description>&lt;p&gt;**
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+**&lt;/p&gt;
+&lt;p&gt;If you are a heavy Vim user and you have work on Windows, 
+it is suggested that you Swap the Caps Lock key with the Escape key.
+The swaped key mapping …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 01 Sep 2015 22:17:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2015-09-01:/en/blog/map-keys-in-windows/</guid><category>OS</category><category>Windows</category><category>keys</category><category>mapping</category><category>swap</category><category>Caps Lock</category><category>Escape</category><category>SharpKeys</category></item><item><title>Resizing Hard Disk of Guest Machine in Virtualbox</title><link>https://www.legendu.net/en/blog/resizing-hard-disk-of-guest-machine-in-virtualbox/</link><description>&lt;p&gt;Suppose you have virtual hard disk in VirtualBox called &lt;code&gt;xp.vdi&lt;/code&gt;, 
+you can resize it (megabytes) using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;VBoxManage modifyhd xp.vdi --resize 40960
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The command currently doesn't support vmdk virtual disk. 
+So if you have a virtual disk called &lt;code&gt;xp.vmdk&lt;/code&gt;,
+you have to first convert it …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 20 Jul 2013 10:57:11 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-07-20:/en/blog/resizing-hard-disk-of-guest-machine-in-virtualbox/</guid><category>Software</category><category>partition</category><category>gparted</category><category>virtualbox</category><category>software</category><category>vmdk</category><category>resize</category><category>resizing</category></item><item><title>TeXstudio, Bravo!</title><link>https://www.legendu.net/en/blog/texstudio-bravo/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/bravo/bravo.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I have heard about 
+&lt;a href="https://github.com/texstudio-org/texstudio"&gt;TeXstudio&lt;/a&gt;
+for a long time. 
+I tried it today on a Debian virtual machine. 
+It works like a charm. 
+I like the preview function a lot. 
+Using inline preview, you can see compiled result while you are typing. 
+It works even with user-defined commands. 
+This is …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 06 Jun 2012 14:47:52 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-06:/en/blog/texstudio-bravo/</guid><category>Software</category><category>LyX</category><category>Tex</category><category>LaTeX</category><category>IDE</category><category>software</category><category>WYSIWYG</category><category>TeXstudio</category></item><item><title>Install Python Packages Using pip</title><link>https://www.legendu.net/en/blog/install-python-packages/</link><description>&lt;h2 id="pypi-statistics"&gt;PyPi Statistics&lt;/h2&gt;
+&lt;p&gt;You can check download statistics of Python Packages on PYPI at https://pypistats.org/.
+This is especially helpful if you want to choose from multiple packages.&lt;/p&gt;
+&lt;h2 id="prefer-pip"&gt;Prefer &lt;a href="https://pip.pypa.io/en/stable/reference/"&gt;pip&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://pip.pypa.io/en/stable/reference/"&gt;pip&lt;/a&gt;
+is preferred over OS tools
+(e.g., &lt;code&gt;apt-get&lt;/code&gt;, &lt;code&gt;yum&lt;/code&gt;, &lt;code&gt;wajig&lt;/code&gt;, &lt;code&gt;aptitude&lt;/code&gt;, etc.) for managing Python packages.
+If you are …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 05 Jun 2017 08:26:34 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-06-05:/en/blog/install-python-packages/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>package</category><category>module</category><category>install</category><category>pip</category><category>conda</category></item><item><title>Ways to Download Files Using Selenium Webdrive</title><link>https://www.legendu.net/en/blog/ways-to-download-files-using-selenium-webdrive/</link><description>&lt;p&gt;Selenium WebDrive cannot have no control of system Dialog, 
+so you have to avoid the Dialog when downloading files using WebDrive.&lt;/p&gt;
+&lt;p&gt;The first way is to enable automatical download in the browser
+that you use with Seleniu WebDrive. 
+So when click a file link, 
+the file is automatically downloaded to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 16 Aug 2013 14:25:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-08-16:/en/blog/ways-to-download-files-using-selenium-webdrive/</guid><category>Software</category><category>Web</category><category>WebDrive</category><category>automation</category><category>Selenium</category><category>software</category></item><item><title>Collections and Iterators in C++</title><link>https://www.legendu.net/en/blog/collections-and-iterators-in-cpp/</link><description>&lt;h2 id="collections"&gt;Collections&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Prefer &lt;code&gt;std::deque&lt;/code&gt; to &lt;code&gt;std::vector&lt;/code&gt; when the size of the collection is unknow. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Suppose set &lt;code&gt;A&lt;/code&gt; and &lt;code&gt;B&lt;/code&gt; are two set with the same type
+    and set &lt;code&gt;C&lt;/code&gt; is another set with the same value type but a different comparison function,
+    then it is still valid to insert …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 12 Oct 2012 10:45:08 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-12:/en/blog/collections-and-iterators-in-cpp/</guid><category>Computer Science</category><category>C++</category><category>cpp</category><category>programming</category><category>list</category><category>set</category><category>map</category><category>iterator</category><category>collection</category><category>C/C++</category><category>vector</category></item><item><title>Special Characters to Avoid in Strings</title><link>https://www.legendu.net/en/blog/special-characters-to-avoid/</link><description>&lt;p&gt;This articles talks about special characters to avoid in various places. 
+You might not encounter issues most of the time when violating rules stated below,
+however, 
+you never know when things will break.
+It is more for a good-practice suggestion.&lt;/p&gt;
+&lt;h2 id="string-for-shell"&gt;String for Shell&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;When you pass parameters from one program …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 03 Jul 2017 21:56:32 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-07-03:/en/blog/special-characters-to-avoid/</guid><category>Computer Science</category><category>programming</category><category>special characters</category><category>avoid</category><category>password</category><category>file name</category><category>Shell</category><category>char</category><category>special</category><category>character</category></item><item><title>Union RDDs in Spark</title><link>https://www.legendu.net/en/blog/union-RDDs-in-spark/</link><description>&lt;p&gt;No deduplication is done (to be efficient) when unioning RDDs/DataFrames in Spark 2.1.0+.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Union 2 RDDs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;df1&lt;/span&gt;.&lt;span class="nv"&gt;union&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;df2&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;old&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fashioned&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;RDD&lt;/span&gt;
+&lt;span class="nv"&gt;rdd1&lt;/span&gt;.&lt;span class="nv"&gt;union&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;&lt;span class="nv"&gt;rdd_2&lt;/span&gt;&lt;span class="ss"&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Union multiple RDDs.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nv"&gt;df&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;spark&lt;/span&gt;.&lt;span class="nv"&gt;union&lt;/span&gt;&lt;span class="ss"&gt;(&lt;/span&gt;[&lt;span class="nv"&gt;df1&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;df2&lt;/span&gt;,&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;df3&lt;/span&gt;]&lt;span class="ss"&gt;)&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;spark&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;is&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;SparkSession&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;object&lt;/span&gt;
+&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;or&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;for&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;old&lt;/span&gt;&lt;span class="o"&gt;-&lt;/span&gt;&lt;span class="nv"&gt;fashioned&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;RDD&lt;/span&gt;
+&lt;span class="nv"&gt;rdd …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 03 Jun 2017 23:49:38 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-06-03:/en/blog/union-RDDs-in-spark/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Spark</category><category>RDD</category><category>union</category></item><item><title>Java Interfaces for Python</title><link>https://www.legendu.net/en/blog/java-interfaces-for-python/</link><description>&lt;p&gt;JPype, py4j and PyJNIus are all good options for Java interface for Python.
+Jpype is easy to use and widely adopted.
+PyJNIus is an even easier solution compred to JPype.
+py4j is more complicated to use compared to JPype and PyJNIus,
+however,
+it has a better performance, generally speaking.&lt;/p&gt;
+&lt;h2 id="jpype"&gt;JPype …&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 25 Jan 2019 20:15:13 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-01-25:/en/blog/java-interfaces-for-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>Java</category><category>interface</category><category>PyJNIus</category><category>jpype</category><category>py4j</category></item><item><title>Make Your Linux Server Securer</title><link>https://www.legendu.net/en/blog/make-your-linux-server-securer/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Define host access rules in &lt;code&gt;/etc/hosts.allow&lt;/code&gt; and &lt;code&gt;/etc/hosts.deny&lt;/code&gt;. 
+    Usually I only allow login to my private server from my home and work ip. 
+    If I have to login into my private server from some other network, 
+    I login to a computer at my workplace, 
+    login into …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 16 Apr 2013 11:02:36 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-04-16:/en/blog/make-your-linux-server-securer/</guid><category>OS</category><category>security</category><category>Linux</category><category>server</category></item><item><title>Make Your Life Easier with Portable Applications</title><link>https://www.legendu.net/en/blog/portable-apps/</link><description>&lt;p&gt;Using portable applications is a good way to make your digital life easier. 
+They do not eat up your disk quickly nor do they mess up the registry of your Windows OS.
+You can always copy these applications from one computer to another and use it out of box.
+Or …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 23 Dec 2012 00:04:26 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-12-23:/en/blog/portable-apps/</guid><category>Software</category><category>application</category><category>Chinese</category><category>software</category><category>portable</category><category>apps</category><category>CygwinPortable</category><category>Portable Python</category></item><item><title>Block JavaScript in Browsers Using NoScript</title><link>https://www.legendu.net/en/blog/noscript-tips/</link><description>&lt;p&gt;**
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+**&lt;/p&gt;
+&lt;p&gt;To enable NoScript synchronization via Firefox Sync go to about:config (type this in URL bar) 
+and change noscript.sync.enabled to true.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 22 Jun 2015 14:08:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2015-06-22:/en/blog/noscript-tips/</guid><category>Software</category><category>software</category><category>tips</category><category>Firefox</category><category>synchronization</category><category>NoScript</category></item><item><title>Useful Plugins for Eclipse</title><link>https://www.legendu.net/en/blog/useful-plugins-for-eclipse/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/eclipse/cdt.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="terminal-plug-in"&gt;Terminal Plug-in&lt;/h2&gt;
+&lt;p&gt;"Terminal Plug-in" is a fully-working command-line terminal for Eclipse.&lt;/p&gt;
+&lt;h2 id="easyshell"&gt;EasyShell&lt;/h2&gt;
+&lt;p&gt;"EasyShell" allows to open a shell window or file manager from the popup menu 
+in the navigation tree or editor view.&lt;/p&gt;
+&lt;h2 id="vrapper"&gt;Vrapper&lt;/h2&gt;
+&lt;p&gt;Vrapper provides Vim-like scheme for Eclispe.
+You can edit code similar as what you do in …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 22 Sep 2012 13:41:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-09-22:/en/blog/useful-plugins-for-eclipse/</guid><category>Software</category><category>Vim</category><category>Eclipse</category><category>shell</category><category>C/C++</category><category>IDE</category><category>software</category><category>plugins</category><category>addons</category></item><item><title>Install Docker</title><link>https://www.legendu.net/en/blog/docker-installation/</link><description>&lt;h2 id="install-docker-on-debian-series-of-linux-distributions"&gt;Install Docker on Debian Series of Linux Distributions&lt;/h2&gt;
+&lt;p&gt;You can install Docker on Debian series of Linux distributions
+(Debian, Ubuntu, Linux Mint, etc.) 
+using the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;update
+sudo&lt;span class="w"&gt; &lt;/span&gt;apt-get&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;docker.io
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Configure your docker following instructions in the section 
+&lt;a href="http://www.legendu.net/en/blog/docker-installation/#configure-docker"&gt;Configure Docker&lt;/a&gt;
+.&lt;/p&gt;
+&lt;h2 id="install-the-latest-version-of-docker-on-debian-series-of-linux-distributions"&gt;Install the Latest Version of …&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 09 Jun 2017 13:13:36 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-06-09:/en/blog/docker-installation/</guid><category>Software</category><category>software</category><category>Docker</category><category>installation</category><category>Ubuntu</category><category>latest</category><category>docker-ce</category><category>install Docker</category></item><item><title>Transfer Files over Network in Linux</title><link>https://www.legendu.net/en/blog/transfer-files-over-network-in-linux/</link><description>&lt;h2 id="comparison-of-network-drives-remote-file-system"&gt;Comparison of Network Drives (Remote File System)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;NFS is very fast but not secure and it is for Unix/Linux only. 
+    It is a good choice for local network sharing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Samba is fast, secure and cross-platform. 
+    it is good for general purpose sharing and popular in companies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSHFS is slow …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 02 Mar 2014 17:16:03 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-03-02:/en/blog/transfer-files-over-network-in-linux/</guid><category>Internet</category><category>internet</category><category>Linux</category><category>network</category><category>web</category><category>transfer</category><category>file system</category><category>nfs</category><category>SSH</category></item><item><title>Concurrency and Parallel Computing in Python</title><link>https://www.legendu.net/en/blog/python-concurrency-parallel-computing/</link><description>&lt;p&gt;The GIL is controversial because it prevents multithreaded CPython programs 
+from taking full advantage of multiprocessor systems in certain situations. 
+Note that potentially blocking or long-running operations, 
+such as I/O, image processing, and NumPy number crunching, happen outside the GIL. 
+Therefore it is only in multithreaded programs that spend …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 16 Nov 2016 12:09:38 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-11-16:/en/blog/python-concurrency-parallel-computing/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>parallel computing</category><category>multithreading</category><category>multiprocess</category><category>HPC</category><category>high performance computing</category></item><item><title>Jupyter Notebook Support in Bitbucket</title><link>https://www.legendu.net/en/blog/jupyter-notebook-support-in-bitbucket/</link><description>&lt;p&gt;GitHub has built-in support for Jupyter Notebooks. 
+Bitbucket supports Jupyter Notebooks via a fileview addon. 
+It works on both publick and private notebooks.
+Follow the steps below to install the addon.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Click on your avatar in the lower left corner on your homepage of Bitbucket.&lt;/p&gt;
+&lt;p&gt;&lt;img alt="Bitbucket Menu" src="https://user-images.githubusercontent.com/824507/78822713-64b42300-7990-11ea-9879-cd8cf97cdbbd.png"&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Select the option &lt;code&gt;App marketplace …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 08 Dec 2017 12:00:14 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-12-08:/en/blog/jupyter-notebook-support-in-bitbucket/</guid><category>Software</category><category>programming</category><category>Bitbucket</category><category>Jupyter Notebook</category><category>JupyterLab</category><category>software</category><category>GitHub</category></item><item><title>Boolean Values in C++</title><link>https://www.legendu.net/en/blog/boolean-values-in-cpp/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Boolean expressions are evaluated from left to right (the same in Java),
+    so it is totally OK to write code like &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="k"&gt;size&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;[&lt;/span&gt;&lt;span class="n"&gt;a&lt;/span&gt;&lt;span class="o"&gt;]&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="err"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="p"&gt;...&lt;/span&gt;
+&lt;span class="err"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;where &lt;code&gt;x&lt;/code&gt; is a vector.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There is no &lt;code&gt;&amp;amp;&amp;amp;=&lt;/code&gt; and &lt;code&gt;||=&lt;/code&gt; operators in C++,
+    instead you can use &lt;code&gt;&amp;amp;=&lt;/code&gt; and &lt;code&gt;|=&lt;/code&gt;.
+    Though &lt;code&gt;&amp;amp;=&lt;/code&gt; and &lt;code&gt;|=&lt;/code&gt; are not specially for …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 07 Oct 2012 21:56:02 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-07:/en/blog/boolean-values-in-cpp/</guid><category>Computer Science</category><category>boolean</category><category>C++</category><category>programming</category><category>cpp</category></item><item><title>Advanced Use of "head" and "tail"</title><link>https://www.legendu.net/en/blog/advanced-use-head-tail/</link><description>&lt;p&gt;It is suggested that you &lt;strong&gt;use Python instead of Shell&lt;/strong&gt; to manipulate text files!!&lt;/p&gt;
+&lt;p&gt;Besides passing an unsigned integer as parameter to the option &lt;code&gt;-n&lt;/code&gt;, 
+you can also pass a signed integer to it.
+When a signed integer is passed to &lt;code&gt;-n&lt;/code&gt;, 
+it means from/to (inclusive/exclusive similar to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 06 Jun 2016 18:22:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-06:/en/blog/advanced-use-head-tail/</guid><category>OS</category><category>Linux</category><category>shell</category><category>command line</category><category>head</category><category>tail</category><category>sed</category><category>awk</category><category>rows</category><category>lines</category><category>text manipulation</category></item><item><title>Configure Debian Apt Source List</title><link>https://www.legendu.net/en/blog/configure-debian-sources/</link><description>&lt;p&gt;&lt;a href="http://debgen.simplylinux.ch/"&gt;Debian Apt Sources List Generator&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Personally, I prefer stable with backports.
+Testing is also good but still update might introduce critial bugs sometimes.
+It is not easy to maitainly a stable and update to date balance.
+You can certainly use multi-sources,
+i.e., use stable, testing, sid and experimental at …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 06 Dec 2014 14:39:03 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-12-06:/en/blog/configure-debian-sources/</guid><category>OS</category><category>operating system</category><category>OS</category><category>Linux</category><category>Debian</category><category>apt-get</category><category>apt</category><category>source list</category></item><item><title>Configure SSH to Use a Proxy Server</title><link>https://www.legendu.net/en/blog/configure-ssh-to-use-a-proxy-server/</link><description>&lt;p&gt;Suppose you have a production server that you want to visit via SSH,
+however,
+it is not accessible directly.
+Instead,
+you have to visit it from a bastion/proxy server.
+You can configure SSH to use the bastion/proxy server when visiting the production server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;Host &amp;lt;production_server&amp;gt;
+ProxyCommand ssh &amp;lt;proxy_server …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 06 Aug 2017 14:37:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-08-06:/en/blog/configure-ssh-to-use-a-proxy-server/</guid><category>OS</category><category>Linux</category><category>SSH</category><category>proxy server</category></item><item><title>Print Rows from a Text File</title><link>https://www.legendu.net/en/blog/print-rows-from-a-text-file/</link><description>&lt;p&gt;It is suggested that you &lt;strong&gt;use Python instead of Shell&lt;/strong&gt; to manipulate text files!&lt;/p&gt;
+&lt;p&gt;Please refer to 
+&lt;a href="http://www.legendu.net/en/blog/advanced-use-head-tail/"&gt;Advanced Use of "head" and "tail"&lt;/a&gt;
+on how to use &lt;code&gt;head&lt;/code&gt; and &lt;code&gt;tail&lt;/code&gt; for printing rows from a text file.
+These 2 commands are convenient when you want to take head/tail rows …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 06 Feb 2017 14:36:40 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-02-06:/en/blog/print-rows-from-a-text-file/</guid><category>OS</category><category>Linux</category><category>shell</category><category>command line</category><category>head</category><category>tail</category><category>sed</category><category>awk</category><category>rows</category><category>lines</category><category>text manipulation</category></item><item><title>Parallel Computing Using Multithreading</title><link>https://www.legendu.net/en/blog/parallel-computing-using-multithreading/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Not all jobs are suitable for parallel computing. 
+    The more comminication that threads has to make, 
+    the more dependent the jobs are and the less efficient the parallel computing is. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Generally speaking, 
+    commercial softwares (Mathematica, MATLAB and Revolution R, etc.) 
+    have very good support on parallel computing. &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="python"&gt;Python&lt;/h2&gt;
+&lt;p&gt;Please refer …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 26 Jun 2012 11:14:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-26:/en/blog/parallel-computing-using-multithreading/</guid><category>Computer Science</category><category>Mathematica</category><category>lock</category><category>programming</category><category>C/C++</category><category>cpp</category><category>thread</category><category>Java</category><category>HPC</category><category>parallel</category><category>R</category><category>concurrency</category><category>mutex</category><category>high performance computing</category></item><item><title>Copy SSH Public Key Using "ssh-copy-id"</title><link>https://www.legendu.net/en/blog/ssh-copy-id/</link><description>&lt;p&gt;You can use the following command to copy your SSH public key to a Linux server.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ssh-copy-id&lt;span class="w"&gt; &lt;/span&gt;-i&lt;span class="w"&gt; &lt;/span&gt;~/.ssh/id_rsa.pub&lt;span class="w"&gt; &lt;/span&gt;host_machine
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However, 
+if a Linux server runs the SSH deamon on a non default port (default is 22), 
+you have to specify the port with option &lt;code&gt;-p port&lt;/code&gt;. 
+In …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 29 Jun 2012 22:25:13 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-29:/en/blog/ssh-copy-id/</guid><category>OS</category><category>Linux</category><category>SSH</category><category>server</category><category>remote</category><category>port</category><category>ssh-copy-id</category></item><item><title>Read CPU Temperature in Linux</title><link>https://www.legendu.net/en/blog/linux-read-cpu-temperature/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/hot.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;First you have to install package "lm-sensors". &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wajig&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;lm-sensors
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To detect the cpu temperature, type the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;modprobe&lt;span class="w"&gt; &lt;/span&gt;coretemp
+sensors
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For more instructions on this top, 
+see &lt;a href="http://www.cyberciti.biz/faq/howto-linux-get-sensors-information/"&gt;nixCraft&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 17 May 2012 11:24:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-05-17:/en/blog/linux-read-cpu-temperature/</guid><category>OS</category><category>modprobe</category><category>sensors</category><category>CPU</category><category>Linux</category><category>temperature</category></item><item><title>Speedup Docker Pulling and Pushing</title><link>https://www.legendu.net/en/blog/speedup-docker-pulling-and-pushing/</link><description>&lt;p&gt;Pulling/pushing Docker images is extremely slow in China. 
+There are a few ways to speed up docker pulling/pushing in China.&lt;/p&gt;
+&lt;h2 id="using-the-official-china-mirror"&gt;Using the Official China Mirror&lt;/h2&gt;
+&lt;p&gt;Now the best way is to use the offical China mirror.
+Please refer to 
+&lt;a href="https://www.docker-cn.com/registry-mirror"&gt;Docker 中国官方镜像加速 …&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 29 Mar 2017 01:23:50 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-03-29:/en/blog/speedup-docker-pulling-and-pushing/</guid><category>Software</category><category>software</category><category>Docker</category><category>speedup</category><category>performance</category><category>DaoCloud</category></item><item><title>Good Ways to Do Scientific Computing</title><link>https://www.legendu.net/en/blog/good-ways-scientific-computing/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Break down the work into smaller modules and develop pipelines (consists of module) for the work.
+  Be sure to save (important) intermediate results so that you can resume failed modules withouting reruning succeeded ones.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Manage your project in GitHub and use issues to manage tasks to do and their priorities …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 15 Jun 2012 19:07:49 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-15:/en/blog/good-ways-scientific-computing/</guid><category>Research</category><category>Research</category><category>scientific computing</category></item><item><title>Compare Two Directories on Linux</title><link>https://www.legendu.net/en/blog/compare-two-directories-on-linux/</link><description>&lt;h2 id="on-the-same-machine"&gt;On the Same Machine&lt;/h2&gt;
+&lt;p&gt;If the two directories are on the same machine, 
+you can use either &lt;code&gt;colordiff&lt;/code&gt; (preferred over &lt;code&gt;diff&lt;/code&gt;) or &lt;code&gt;git diff&lt;/code&gt;
+to find the differences between them. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;colordiff&lt;span class="w"&gt; &lt;/span&gt;-qr&lt;span class="w"&gt; &lt;/span&gt;dir_1&lt;span class="w"&gt; &lt;/span&gt;dir_2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;git&lt;span class="w"&gt; &lt;/span&gt;diff&lt;span class="w"&gt; &lt;/span&gt;--no-index&lt;span class="w"&gt; &lt;/span&gt;dir_1&lt;span class="w"&gt; &lt;/span&gt;dir_2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="on-different-machines"&gt;On Different Machines&lt;/h2&gt;
+&lt;p&gt;It is a little bit tricky when the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 10 Mar 2014 19:13:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-03-10:/en/blog/compare-two-directories-on-linux/</guid><category>OS</category><category>difference</category><category>directory</category><category>folder</category><category>Linux</category><category>md5sum</category><category>md5deep</category><category>diff</category><category>ssh</category></item><item><title>Advanced Use of "ls" in Linux</title><link>https://www.legendu.net/en/blog/list-files-without-tilde-linux/</link><description>&lt;h2 id="list-files-sorted-by-time"&gt;List Files Sorted by Time&lt;/h2&gt;
+&lt;p&gt;You can list files sorted by time (newest first) using the &lt;code&gt;-t&lt;/code&gt; option.
+Notice that the &lt;code&gt;-t&lt;/code&gt; option is also support by &lt;code&gt;hdfs dfs -ls&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;ls -lht
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="ignore-files"&gt;Ignore Files&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You have to either enclose the pattern in quotes or escape the wildcard in patterns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Equivalent …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 29 Jul 2012 09:29:01 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-29:/en/blog/list-files-without-tilde-linux/</guid><category>OS</category><category>Linux</category><category>ls</category><category>shell</category></item><item><title>Proxy for `sudo`</title><link>https://www.legendu.net/en/blog/proxy-for-sudo/</link><description>&lt;p&gt;You can setup proxy in a terminal by export environment variables &lt;code&gt;http_proxy&lt;/code&gt; and `https_proxy'.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However,
+you might find the exported environment variables are not visible to &lt;code&gt;sudo&lt;/code&gt;.
+This can be resovled by simplying adding the &lt;code&gt;-E&lt;/code&gt; (preserve environment) option to &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 07 Apr 2017 23:42:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-04-07:/en/blog/proxy-for-sudo/</guid><category>Internet</category><category>Network</category><category>proxy</category><category>environment variable</category><category>sudo</category></item><item><title>How Long Does It Take to Observe a Sequence?</title><link>https://www.legendu.net/en/blog/how-long-observe-pattern/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/pattern/coin.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;There are many interesting while at the same time very tricky problems in
+statistics. One famous question is that how many steps (expected) does
+it take to observe a given sequence (e.g. THTH, TTHH), if we flip a
+balanced coin?&lt;/p&gt;
+&lt;p&gt;This problem can be solved using (delay) renewal theory …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 04 May 2010 02:30:19 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2010-05-04:/en/blog/how-long-observe-pattern/</guid><category>Fun Problems</category><category>Mathematica</category><category>pattern</category><category>Markov chain</category><category>statistics</category><category>sequence</category><category>coin</category><category>stochastic</category><category>martingale</category><category>fun problems</category></item><item><title>Select Columns from Structured Text Files</title><link>https://www.legendu.net/en/blog/select-columns-from-structured-text-files/</link><description>&lt;h2 id="python-pandas"&gt;Python pandas&lt;/h2&gt;
+&lt;p&gt;My first choice is pandas in Python. 
+However, 
+below are some tools for quick and dirty solutions.&lt;/p&gt;
+&lt;h2 id="q"&gt;&lt;a href="https://github.com/harelba/q"&gt;q&lt;/a&gt;&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;q&lt;span class="w"&gt; &lt;/span&gt;-t&lt;span class="w"&gt; &lt;/span&gt;-H&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;select c1, c3 from file.txt&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="cut"&gt;cut&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;cut&lt;span class="w"&gt; &lt;/span&gt;-d&lt;span class="se"&gt;\t&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;-f1,3&lt;span class="w"&gt; &lt;/span&gt;file.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="awk"&gt;awk&lt;/h2&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;awk&lt;span class="w"&gt; &lt;/span&gt;-F&lt;span class="s1"&gt;&amp;#39;\t&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;{print $1 &amp;quot;\t&amp;quot; $3}&amp;#39;&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;file.tsv&lt;span class="w"&gt; &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Note: neither &lt;code&gt;cut …&lt;/code&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 01 Jun 2016 16:15:21 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-01:/en/blog/select-columns-from-structured-text-files/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>pandas</category><category>SQL</category><category>awk</category><category>cut</category><category>text file</category><category>data manipulation</category><category>column</category><category>field</category></item><item><title>Sample Lines from a File Using Command Line</title><link>https://www.legendu.net/en/blog/sample-lines-from-a-file-using-command-line/</link><description>&lt;p&gt;NOTE: the article talks about sampling "lines" rather than "records". 
+If a records can occupy multiple lines, 
+e.g., if any field contains a new line (&lt;code&gt;\n&lt;/code&gt;),
+the following tutorial does not work 
+and you have to fall back to more powerful tools such as Python or R.&lt;/p&gt;
+&lt;p&gt;Let's say …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 28 Jun 2016 10:52:36 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-28:/en/blog/sample-lines-from-a-file-using-command-line/</guid><category>OS</category><category>Linux</category><category>shell</category><category>command line</category><category>sample</category><category>shuffle</category><category>shuf</category><category>q</category><category>text</category><category>SQL</category></item><item><title>Account Management in Linux</title><link>https://www.legendu.net/en/blog/account-management-in-linux/</link><description>&lt;p&gt;**
+Things on this page are
+fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+**&lt;/p&gt;
+&lt;h2 id="create-a-user"&gt;Create a User&lt;/h2&gt;
+&lt;p&gt;Both &lt;code&gt;adduser&lt;/code&gt; and &lt;code&gt;useradd&lt;/code&gt; can be used to create a new user. 
+&lt;code&gt;adduser&lt;/code&gt; is interactive while &lt;code&gt;useradd&lt;/code&gt; is non-interactive.
+It is suggested that you use &lt;code&gt;useradd&lt;/code&gt; in batch …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 22 Jun 2017 13:30:05 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-06-22:/en/blog/account-management-in-linux/</guid><category>OS</category><category>Linux</category><category>account management</category><category>group managment</category><category>adduser</category><category>useradd</category><category>gpasswd</category><category>getent</category></item><item><title>Get Group Names on Linux/Unix</title><link>https://www.legendu.net/en/blog/get-group-names-on-linux-unix/</link><description>&lt;h2 id="linux"&gt;Linux&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get information of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;getent&lt;span class="w"&gt; &lt;/span&gt;group&lt;span class="w"&gt; &lt;/span&gt;staff
+staff:x:20:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Get group ID of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;getent&lt;span class="w"&gt; &lt;/span&gt;group&lt;span class="w"&gt; &lt;/span&gt;staff&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;cut&lt;span class="w"&gt; &lt;/span&gt;-d:&lt;span class="w"&gt; &lt;/span&gt;-f3
+&lt;span class="m"&gt;20&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="mac"&gt;Mac&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Get information of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;dscl&lt;span class="w"&gt; &lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;-read&lt;span class="w"&gt; &lt;/span&gt;/Groups/staff
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Get group ID of the &lt;code&gt;staff&lt;/code&gt; group.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;$&lt;span class="w"&gt; &lt;/span&gt;dscl&lt;span class="w"&gt; &lt;/span&gt;.&lt;span class="w"&gt; &lt;/span&gt;-read&lt;span class="w"&gt; &lt;/span&gt;/Groups/staff&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;awk …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 22 Aug 2017 12:37:19 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-08-22:/en/blog/get-group-names-on-linux-unix/</guid><category>OS</category><category>Linux</category><category>Mac OSX</category><category>group</category><category>python</category><category>getent</category><category>dscl</category></item><item><title>List Running Jupyter Notebook Servers</title><link>https://www.legendu.net/en/blog/list-running-jupyter-notebook-servers/</link><description>&lt;p&gt;You can list running Jupyter Notebook servers using the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;jupyter notebook list
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It works well most of the time. 
+However, 
+if the servers are launched using the root account (e.g., in a Docker container), 
+you might encounter issues. 
+In this case,
+a better alternative is to list …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 22 Aug 2017 12:21:29 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-08-22:/en/blog/list-running-jupyter-notebook-servers/</guid><category>Software</category><category>software</category><category>notebook</category><category>Jupyter Notebook</category><category>JupyterLab</category><category>Python</category><category>root</category><category>running servers</category><category>list</category></item><item><title>Run JAR Applications</title><link>https://www.legendu.net/en/blog/run-jar-applications/</link><description>&lt;p&gt;If there is only 1 class with a main method
+or if there is a Main-Class defined for the JAR,
+you can use the following command to run the application.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;java -jar app.jar
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you there are multiple classes with main methods in the JAR, 
+you can execute any …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 22 Aug 2017 12:17:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-08-22:/en/blog/run-jar-applications/</guid><category>Computer Science</category><category>programming</category><category>Java</category><category>JAR</category><category>main</category></item><item><title>Install Java 8 on Ubuntu 14.04</title><link>https://www.legendu.net/en/blog/install-java-8-on-ubuntu-14.04/</link><description>&lt;p&gt;You can install open JDK 8 on Ubuntu 14.04 using the following commands.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo add-apt-repository ppa:openjdk-r/ppa
+wajig update
+wajig install openjdk-8-jdk
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;For more please refer to 
+&lt;a href="https://askubuntu.com/questions/464755/how-to-install-openjdk-8-on-14-04-lts"&gt;https://askubuntu.com/questions/464755/how-to-install-openjdk-8-on-14-04-lts&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 26 Aug 2017 09:24:18 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-08-26:/en/blog/install-java-8-on-ubuntu-14.04/</guid><category>OS</category><category>Linux</category><category>Java</category><category>open JDK 8</category><category>Java 8</category><category>Ubuntu 14.04</category></item><item><title>Add Users to a Group in Linux</title><link>https://www.legendu.net/en/blog/add-a-user-to-the-sudo-group-on-linux/</link><description>&lt;p&gt;There are several ways to add users to a group in Linux. 
+The following uses the &lt;code&gt;sudo&lt;/code&gt; group as illustration.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;gpasswd&lt;/code&gt;, &lt;code&gt;usermod&lt;/code&gt; and &lt;code&gt;adduser&lt;/code&gt; can all be used to add a user to a given group.
+    However, it is suggested that you use &lt;code&gt;gpasswd&lt;/code&gt; as it is more portable and …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 10 Jun 2016 19:05:41 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-06-10:/en/blog/add-a-user-to-the-sudo-group-on-linux/</guid><category>OS</category><category>Linux</category><category>sudo</category><category>user</category><category>groups</category><category>gpasswd</category><category>usermod</category></item><item><title>Tips for AWK</title><link>https://www.legendu.net/en/blog/awk-tips/</link><description>&lt;p&gt;&lt;a href="http://www.grymoire.com/Unix/Awk.html"&gt;AWK Tutorial&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;For small structured text files, 
+    it is suggested that you use the &lt;a href="http://harelba.github.io/q/"&gt;q&lt;/a&gt;
+    command to manipulate it.&lt;/p&gt;
+&lt;p&gt;For complicated logic, 
+it is suggested that you use a scripting language (e.g., Python) instead. 
+I personally discourage using of &lt;code&gt;awk&lt;/code&gt; 
+unless you have a large file (that q cannot …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 19 Oct 2013 10:22:17 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-10-19:/en/blog/awk-tips/</guid><category>Software</category><category>tips</category><category>awk</category><category>text manipulation</category></item><item><title>Selectively Disable Vimperator on Webpages</title><link>https://www.legendu.net/en/blog/selectively-disable-vimperator/</link><description>&lt;p&gt;You can press &lt;code&gt;shift + esc&lt;/code&gt; to disable Vimperator on pages and &lt;code&gt;insert&lt;/code&gt; to enable it again. 
+This is not good solution as often times you wan to disable Vimperator on a few pages 
+but still have it enabled on other pages. 
+You can achieve this by configurating the &lt;code&gt;~/.vimperatorrc&lt;/code&gt; file …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 04 Mar 2017 13:28:47 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2017-03-04:/en/blog/selectively-disable-vimperator/</guid><category>Software</category><category>software</category><category>Vimperator</category><category>Vim</category><category>Firefox</category><category>browser</category></item><item><title>Using Bash in Docker</title><link>https://www.legendu.net/en/blog/Using-Bash-in-Docker/</link><description>&lt;p&gt;If the docker container was started using &lt;code&gt;/bin/bash&lt;/code&gt; 
+(you can check using &lt;code&gt;docker ps&lt;/code&gt;) command you can access it using &lt;code&gt;attach&lt;/code&gt;. &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker&lt;span class="w"&gt; &lt;/span&gt;attach&lt;span class="w"&gt; &lt;/span&gt;container_name_or_id
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If the docker container was started but not with &lt;code&gt;/bin/bash&lt;/code&gt;,
+you have to create a bash instance inside the container using &lt;code&gt;exec&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;docker&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nb"&gt;exec …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 14 Dec 2016 13:54:14 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-12-14:/en/blog/Using-Bash-in-Docker/</guid><category>Software</category><category>software</category><category>docker</category><category>bash</category><category>shell</category></item><item><title>Start RStudio Server After Upgrading</title><link>https://www.legendu.net/en/blog/start-rstudio-server-after-upgrading/</link><description>&lt;p&gt;It is quite often that the RStudio server cannot be start after upgrading. 
+This is due to running R session in the background. 
+A simple solution is to just restart the host machine. 
+However, it is very risky to start servers (especially remote shared ones).
+An alternative way is to …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 10 Dec 2016 02:09:11 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-12-10:/en/blog/start-rstudio-server-after-upgrading/</guid><category>Software</category><category>software</category><category>IDE</category><category>RStudio</category></item><item><title>Cygwin Portable</title><link>https://www.legendu.net/en/blog/cygwin-portable/</link><description>&lt;p&gt;**
+Things on this page are fragmentary and immature notes/thoughts of the author. 
+Please read with your own judgement!
+**&lt;/p&gt;
+&lt;h2 id="cygwin-portable"&gt;Cygwin Portable&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The portable versions has some problems&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Vim, edit mode, backspace doesn't work sometimes (identation related)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Cygwin portable scroll doesn't work after Vim is opened and then closed. 
+but if …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 16 Aug 2016 00:06:34 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-08-16:/en/blog/cygwin-portable/</guid><category>Software</category><category>Linux</category><category>Windows</category><category>virtualization</category><category>software</category><category>Cygwin</category><category>portable</category></item><item><title>An IO Bug in R</title><link>https://www.legendu.net/en/blog/input-bug-r/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/bug.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I encountered an input/output bug in R in Linux system. 
+The symptom is that input and output are not displayed in the terminal 
+and the warning message 
+"An unusual circumstance has arisen in the nesting of readline input. 
+Please report using bug.report()" is shown. 
+I found that though …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 15 Aug 2012 21:22:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-08-15:/en/blog/input-bug-r/</guid><category>Computer Science</category><category>warning</category><category>IO</category><category>programming</category><category>R</category><category>bug</category></item><item><title>A Bug in Mathematica</title><link>https://www.legendu.net/en/blog/bug-in-mathematica/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/bug.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Mathematica is a very intelligent and powerful math software. 
+I use it in my study and research a lot. 
+Mathematica's ability to take derivative and to calculate 
+limit is obvious powerful–way much beyond many mathematician's ability. 
+Mathematica's ability to calculate integral is also powerful. 
+There are many integrals than …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 15 Dec 2011 21:22:23 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2011-12-15:/en/blog/bug-in-mathematica/</guid><category>Computer Science</category><category>Mathematica</category><category>programming</category><category>bug</category></item><item><title>Some Terminologies in Business Investment</title><link>https://www.legendu.net/en/blog/some-terminology-in-credit-portifolio-risk-management/</link><description>&lt;h2 id="stock-ticker"&gt;Stock Ticker&lt;/h2&gt;
+&lt;p&gt;A stock ticker is a report of the price for certain securities, 
+updated continuously throughout the trading session by the various stock exchanges. 
+A "tick" is any change in price, 
+whether that movement is up or down. 
+A stock ticker automatically displays these ticks, 
+along with other relevant …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 13 Jun 2013 22:26:26 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-06-13:/en/blog/some-terminology-in-credit-portifolio-risk-management/</guid><category>Career</category><category>terminology</category><category>business</category><category>Work</category><category>investment</category><category>credit risk</category><category>finance</category><category>bank</category></item><item><title>First 10-digit Prime in Consecutive Digits of Euler Constant?</title><link>https://www.legendu.net/en/blog/first-prime/</link><description>&lt;p&gt;One day my friend Ru He asked me a question.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;What is the first 10-digit prime found in consecutive digits of e? &lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;This is an easy problem with the help of Mathematica.
+The following is the Mathematica code I wrote to solve this question. 
+It actually solves the general problem …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 13 May 2010 00:12:11 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2010-05-13:/en/blog/first-prime/</guid><category>Fun Problems</category><category>Mathematica</category><category>Google</category><category>Euler constant</category><category>interview</category><category>math</category><category>fun problems</category></item><item><title>Set Line Space in LaTeX</title><link>https://www.legendu.net/en/blog/set-line-space-in-latex/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The &lt;code&gt;parskip&lt;/code&gt; command makes a skip between paragraphs. 
+The length of skip can be set using the command &lt;code&gt;\setlength&lt;/code&gt;, e.g.,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;\setlength{\parskip}{15pt plus 1pt minus 1pt}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The command &lt;code&gt;\itemsep&lt;/code&gt; sets the space between items in lists, e.g.,&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;\&lt;span class="nv"&gt;begin&lt;/span&gt;{&lt;span class="nv"&gt;itemize&lt;/span&gt;}
+\&lt;span class="nv"&gt;itemsep&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;.&lt;span class="mi"&gt;8&lt;/span&gt;&lt;span class="nv"&gt;cm&lt;/span&gt;
+\&lt;span class="nv"&gt;item&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;
+\&lt;span class="k"&gt;end&lt;/span&gt;{&lt;span class="nv"&gt;itemize&lt;/span&gt;}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 13 Nov 2012 00:05:22 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-13:/en/blog/set-line-space-in-latex/</guid><category>Computer Science</category><category>LaTeX</category><category>programming</category><category>line</category><category>spacing</category><category>space</category></item><item><title>Scientific References</title><link>https://www.legendu.net/en/blog/scientfic-reference/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;JabRef&lt;/code&gt; is an open-source cross-plotform software for managing scientific references.
+&lt;code&gt;Mendeley&lt;/code&gt; is a good cost-free cross-platform software for managing scientific references.
+It introduces the concept of social research.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you use bibtex in your LaTeX code, 
+you have to compile your code using &lt;code&gt;pdflatex/latex&lt;/code&gt;, &lt;code&gt;bibtex&lt;/code&gt;, &lt;code&gt;pdflatex/latex&lt;/code&gt; and &lt;code&gt;pdflatex …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 13 Nov 2012 00:05:06 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-13:/en/blog/scientfic-reference/</guid><category>Software</category><category>LaTeX</category><category>reference</category><category>research</category><category>Bibtex</category><category>software</category></item><item><title>LaTeX for Chinese</title><link>https://www.legendu.net/en/blog/latex-for-chinese/</link><description>&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;xetex&lt;/code&gt; is the state-of-art way for dealing with Chinese type setting.
+You can install &lt;code&gt;xetex&lt;/code&gt; on Debian series of Linux distributions (Debian, Ubuntu, Linux Mint, etc.)
+using the following command. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wajig&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;texlive-xetex&lt;span class="w"&gt; &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can use command &lt;code&gt;xelatex&lt;/code&gt; to compile. 
+The utf-8 format is preferred. &lt;/p&gt;
+&lt;p&gt;There are 2 good ways …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 13 Nov 2012 00:04:39 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-13:/en/blog/latex-for-chinese/</guid><category>Computer Science</category><category>LaTeX</category><category>Chinese</category><category>programming</category><category>Tex Live</category><category>XeTex</category><category>Linux</category><category>fonts</category><category>markup</category></item><item><title>LaTeX Commands for Compiling</title><link>https://www.legendu.net/en/blog/latex-commands/</link><description>&lt;ol&gt;
+&lt;li&gt;LaTeX&lt;ul&gt;
+&lt;li&gt;If your LaTeX code contains only EPS figures, you can use the &lt;code&gt;latex&lt;/code&gt; command (also OK to use &lt;code&gt;pdflatex&lt;/code&gt;) to compile your code.   &lt;/li&gt;
+&lt;li&gt;If you use bibtex, you have to compile your code using commands &lt;code&gt;latex&lt;/code&gt;, &lt;code&gt;bibtex&lt;/code&gt;, &lt;code&gt;latex&lt;/code&gt; and &lt;code&gt;latex&lt;/code&gt; in sequence.&lt;/li&gt;
+&lt;li&gt;If you use the &lt;code&gt;psfrag&lt;/code&gt; package to …&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 13 Nov 2012 00:03:31 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-13:/en/blog/latex-commands/</guid><category>Computer Science</category><category>compile</category><category>LaTeX</category><category>programming</category></item><item><title>Graphics in LaTeX</title><link>https://www.legendu.net/en/blog/graphics-in-latex/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Generally PDF figures are preferred for LaTeX code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There are many useful commands in Linux for converting between different types of figures, e.g., &lt;code&gt;convert&lt;/code&gt;, &lt;code&gt;pdf2ps&lt;/code&gt;, etc. So it does not matter much which types of figures you produce. You can always convert them into other format when needed.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 13 Nov 2012 00:02:34 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-13:/en/blog/graphics-in-latex/</guid><category>Computer Science</category><category>image</category><category>vector</category><category>LaTeX</category><category>graphics</category><category>programming</category></item><item><title>Convert LaTeX to Word</title><link>https://www.legendu.net/en/blog/convert-latex-to-word/</link><description>&lt;p&gt;&lt;code&gt;pandoc&lt;/code&gt; is a general purpose tool for converting between different type of documents, 
+however, 
+it is not good at converting LaTeX code to word.
+&lt;code&gt;tex4ht&lt;/code&gt; is a better tool for converting LaTeX code to word. 
+The following are instructions to use &lt;code&gt;tex4ht&lt;/code&gt; to convert LaTeX to word.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Compile your LaTeX …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 13 Nov 2012 00:02:08 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-13:/en/blog/convert-latex-to-word/</guid><category>Software</category><category>html</category><category>LaTeX</category><category>Office</category><category>software</category><category>Word</category></item><item><title>Check Whether an Email Address Is Valid in Java</title><link>https://www.legendu.net/en/blog/valid-email-address-java/</link><description>&lt;p&gt;See the following code.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s"&gt;&amp;quot;test@test.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;Pattern&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;Pattern&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;.+@.+\\.[a-z]+&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;Matcher&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;p&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;matcher&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="kt"&gt;boolean&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;matchFound&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="n"&gt;m&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;matches&lt;/span&gt;&lt;span class="p"&gt;();&lt;/span&gt;
+&lt;span class="k"&gt;if&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;matchFound&lt;/span&gt;&lt;span class="p"&gt;){&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;out&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;EMAIL OK&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;span class="k"&gt;else&lt;/span&gt;&lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="w"&gt;    &lt;/span&gt;&lt;span class="n"&gt;System&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;out&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="na"&gt;println&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;EMAIL ERROR&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 12 May 2012 23:58:54 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-05-12:/en/blog/valid-email-address-java/</guid><category>Computer Science</category><category>pattern</category><category>match</category><category>Java</category><category>programming</category><category>email address</category></item><item><title>Test Internet Speed</title><link>https://www.legendu.net/en/blog/test-internet-speed/</link><description>&lt;p&gt;&lt;a href="http://www.speedtest.net/"&gt;SpeedTest - OOKLA&lt;/a&gt; can help you test the speed of your internet connection. 
+Mobile apps and a command-line tool are also available. 
+&lt;a href="https://www.howtoforge.com/tutorial/check-internet-speed-with-speedtest-cli-on-ubuntu/"&gt;This page&lt;/a&gt;
+explains how to use the command-line tool to test the speed of your internet connection.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 09 Mar 2016 22:55:29 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2016-03-09:/en/blog/test-internet-speed/</guid><category>Internet</category><category>internet</category><category>speed</category><category>web</category><category>app</category><category>test</category></item><item><title>Useful Packages and Commands for LaTex</title><link>https://www.legendu.net/en/blog/useful-packages-for-latex/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/latex/latex.gif" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="math-packages"&gt;Math Packages&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;\usepackage{amssymb} &lt;ul&gt;
+&lt;li&gt;popular math fonts&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;\usepackage{dsfont} &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;\mathds&lt;/code&gt; font&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;\usepackage{bm} % bold math symbols&lt;ul&gt;
+&lt;li&gt;bold math symbols&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;\usepackage{amsmath} &lt;ul&gt;
+&lt;li&gt;math formulas.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;\usepackage{amsthm} &lt;ul&gt;
+&lt;li&gt;theorem environments&lt;/li&gt;
+&lt;li&gt;proof enviroment&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="list-packages"&gt;List Packages&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;\usepackage{enumerate} &lt;ul&gt;
+&lt;li&gt;universal list&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="graphics-packages"&gt;Graphics Packages&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;\usepackage{ifpdf} &lt;ul&gt;
+&lt;li&gt;allow including figures without extensions and select the right type of …&lt;/li&gt;&lt;/ul&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 29 Jul 2012 11:37:43 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-29:/en/blog/useful-packages-for-latex/</guid><category>Computer Science</category><category>color</category><category>programming</category><category>list</category><category>Latex</category><category>package</category><category>bibliography</category><category>enumerate</category><category>formula</category><category>math</category><category>graphics</category></item><item><title>Probability to Lose All Money</title><link>https://www.legendu.net/en/blog/probability-lose-all-money/</link><description>&lt;p&gt;&lt;img src="http://www.legendu.net/media/object/money-1.jpeg"
+width="240" height="200" align="right" /&gt;&lt;/p&gt;
+&lt;p&gt;A few days ago I found someone asking an interview questions on &lt;a href="http://www.mitbbs.com/"&gt;mitbbs&lt;/a&gt;.
+The question is as follows. 
+A gambler plays a fair game and bet 1 dollar each time. 
+If he lose all his money, 
+the game stops. 
+Suppose he has 10 dollars and is only allowed to play …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 22 Jul 2012 03:56:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-22:/en/blog/probability-lose-all-money/</guid><category>Fun Problems</category><category>cache</category><category>C++</category><category>simulation</category><category>statistics</category><category>map</category><category>probability</category><category>recursive</category><category>condition</category><category>fun problems</category><category>hash table</category><category>money</category><category>lose</category></item><item><title>The Power of Generating Functions</title><link>https://www.legendu.net/en/blog/generating-functions/</link><description>&lt;p&gt;Generating functions is a very powerful way to find closed 
+formula for sequences defined iteratively.
+I was so bored during the final week, 
+so I went on internet for fun. 
+Finally I found someone from Sydney University was asking for help on this question:&lt;/p&gt;
+&lt;p&gt;(a) If Ln=Ln-1+Ln-2 for …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 22 May 2010 02:20:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2010-05-22:/en/blog/generating-functions/</guid><category>Fun Problems</category><category>series</category><category>statistics</category><category>sequence</category><category>math</category><category>fun problems</category><category>generating function</category></item><item><title>Working with Class in C++</title><link>https://www.legendu.net/en/blog/working-with-class-in-cpp/</link><description>&lt;p&gt;Illustrative examples for the following discussions can be found 
+&lt;a href="https://github.com/dclong/cearn/tree/master/class"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is suggested that you also provide a default constructor 
+if you ever provide a user-defined constructor when writing a C++ class.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;If you want to allow deleting a derived class from a pointer of the base class,
+you have …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 05 Oct 2012 10:56:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-05:/en/blog/working-with-class-in-cpp/</guid><category>Computer Science</category><category>C++</category><category>destructor</category><category>programming</category><category>inheritance</category><category>override</category><category>class</category><category>hidding</category><category>constructor</category></item><item><title>Find Out Proxy in Use</title><link>https://www.legendu.net/en/blog/find-out-proxy-in-use/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Using a Web Service.  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;a href="http://wpad/wpad.dat"&gt;http://wpad/wpad.dat&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Figure the proxy out from the contents it returns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the command &lt;code&gt;netstat&lt;/code&gt;.
+This is a universal way and is especially helpful 
+when &lt;a href="http://wpad/wpad.dat"&gt;http://wpad/wpad.dat&lt;/a&gt; is not available. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Inspect the output of &lt;code&gt;netstat -an | egrep "EST|Proto"&lt;/code&gt; ("EST" is …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 27 May 2014 21:31:02 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-05-27:/en/blog/find-out-proxy-in-use/</guid><category>Internet</category><category>web</category><category>internet</category><category>proxy</category></item><item><title>Generating YYYYMM Formatted Dates Using Python</title><link>https://www.legendu.net/en/blog/generating-yyyymm-formatted-dates-using-python/</link><description>&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;monthdelta&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;md&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;dt&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt; &lt;span class="k"&gt;as&lt;/span&gt; &lt;span class="nn"&gt;math&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;quarter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;math&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;ceil&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="mf"&gt;3.0&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+&lt;span class="c1"&gt;#end def&lt;/span&gt;
+
+&lt;span class="n"&gt;d0&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;date&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;today&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="n"&gt;dates&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d0&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;md&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;monthdelta&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;i&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="nb"&gt;range&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;20&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt;
+&lt;span class="n"&gt;yyyymms&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;year&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;month&lt;/span&gt; &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;d&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;dates&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;yymms …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 17 May 2015 17:05:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2015-05-17:/en/blog/generating-yyyymm-formatted-dates-using-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>credit risk</category><category>risk capital</category><category>stress testing</category><category>YYYYMM</category><category>YYYYQQ</category></item><item><title>Don't Do Statistics If You Don't Really Undestand It</title><link>https://www.legendu.net/en/blog/statistics-traps/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/statistics/lie.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lies, damned lies, and statistics.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As a statistician I'm very glad to see 
+that statistics is being widely used in many areas.
+However, 
+time after time I found that it is really dangerous 
+for people who don't really understand statistics to use it.
+As we all know that there are …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 10 Apr 2015 07:50:16 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2015-04-10:/en/blog/statistics-traps/</guid><category>AI</category><category>statistics</category><category>independence</category><category>linear model</category><category>linear regression</category><category>hypothesis test</category><category>Ljung-Box test</category></item><item><title>Input and Output in C++</title><link>https://www.legendu.net/en/blog/input-and-output-in-cpp/</link><description>&lt;p&gt;Check the &lt;code&gt;io&lt;/code&gt; directory on the page &lt;a href="https://bitbucket.org/dclong/cpp-learn/src"&gt;https://bitbucket.org/dclong/cpp-learn/src&lt;/a&gt;
+for some illustrative examples for the following discussions. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;You can format output of numbers using functions 
+&lt;code&gt;std::setpresicion&lt;/code&gt; and &lt;code&gt;std::setw&lt;/code&gt; in the &lt;imanip&gt; header.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;When you read data from a file into an array or write data …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 24 Oct 2012 22:22:41 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-24:/en/blog/input-and-output-in-cpp/</guid><category>Computer Science</category><category>C/C++</category><category>IO</category><category>C++</category><category>programming</category></item><item><title>Common Mistakes in C++ Code and Ways to Debug</title><link>https://www.legendu.net/en/blog/cpp-common-mistakes-and-debug/</link><description>&lt;h2 id="debugging"&gt;Debugging&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;gdb is a excellent command tool for debugging C/C++ code. &lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="syntax-mistakes"&gt;Syntax Mistakes&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Missing "}". 
+When this happens, 
+you usually get lots of error message when you compile your code. 
+And these error messages are often hard to understand and seems not related to your code. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Missing template arguments. 
+This …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 13 Oct 2012 10:53:45 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-13:/en/blog/cpp-common-mistakes-and-debug/</guid><category>Computer Science</category><category>debug</category><category>C++</category><category>mistake</category><category>programming</category><category>trap</category><category>bug</category><category>error</category></item><item><title>Differences Between Vector and ArrayList in Java</title><link>https://www.legendu.net/en/blog/vector-arraylist-difference-java/</link><description>&lt;p&gt;A good summay is &lt;a href="http://javarevisited.blogspot.com/2011/09/difference-vector-vs-arraylist-in-java.html"&gt;here&lt;/a&gt;.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 13 May 2012 10:50:05 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-05-13:/en/blog/vector-arraylist-difference-java/</guid><category>Computer Science</category><category>synchronization</category><category>thread</category><category>Java</category><category>programming</category><category>vector</category><category>ArrayList</category><category>data structure</category></item><item><title>Power Settings in Linux with GNOME Desktop</title><link>https://www.legendu.net/en/blog/linux-gnome-power-settings/</link><description>&lt;p&gt;Full control of the power settings in Linux with Gnome Desktop can be done through 
+&lt;strong&gt;dconf-editor&lt;/strong&gt; at org-&amp;gt;gnome-&amp;gt;settings-daemon-&amp;gt;plugins-&amp;gt;power.
+The default way to determine low battery, critical low battery and to carray out 
+critical low action is by counting left battery time. 
+You can change the way …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 03 Jun 2012 10:17:32 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-03:/en/blog/linux-gnome-power-settings/</guid><category>OS</category><category>configuration</category><category>battery</category><category>power</category><category>Linux</category><category>GNOME</category></item><item><title>Estimation of False Discovery Rate using Sequential Permutation Pvalues</title><link>https://www.legendu.net/en/blog/sequential-permutation-test/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/r/r.png" height="200" width="240" align="right"/&gt;
+I wrote a paper on sequential permutation test with Tim Bancroft and Dan Nettleton. 
+The paper "T. Bancroft, C. Du and D. Nettleton (2012). 
+Estimation of False Discovery Rate Using Sequential Permutation P­Values." 
+has been accepted by Biometrics. To illustrate ideas in the paper and make sequential 
+permutation test …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 03 Jun 2012 10:17:03 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-03:/en/blog/sequential-permutation-test/</guid><category>Research</category><category>research</category><category>sequential permutation test</category><category>biostatistics</category><category>Acute Lymphocyctic Leukemia</category><category>package</category><category>marker</category><category>dclong.spt</category><category>R</category><category>barley</category><category>false discovery rate</category><category>FDR</category></item><item><title>Dual Monitor for Linux Desktop</title><link>https://www.legendu.net/en/blog/dual-monitor-for-linux-desktop/</link><description>&lt;ol&gt;
+&lt;li&gt;Type &lt;code&gt;xrandr&lt;/code&gt; or &lt;code&gt;xrandr -q&lt;/code&gt; in terminal to dispaly information of all available output device.
+Then you can use the following commands to set dual display.&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;xrandr --output VGA1 --auto 
+xrandr --output VGA1 --same-as LVDS1 --auto
+xrandr --output VGA1 --mode 1024x800
+xrandr --output VGA1 --off
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;where &lt;code&gt;VGA1&lt;/code&gt; and &lt;code&gt;LVDS1&lt;/code&gt; should …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 20 Mar 2013 10:59:38 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-03-20:/en/blog/dual-monitor-for-linux-desktop/</guid><category>OS</category><category>DE</category><category>Linux</category><category>monitor</category><category>dual</category></item><item><title>String in Java</title><link>https://www.legendu.net/en/blog/string-in-java/</link><description>&lt;h2 id="string"&gt;String&lt;/h2&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 20 Dec 2012 10:58:20 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-12-20:/en/blog/string-in-java/</guid><category>Computer Science</category><category>Java</category><category>programming</category><category>string</category><category>character</category></item><item><title>Which One Is the Best Strategy?</title><link>https://www.legendu.net/en/blog/best-strategy/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/pattern/coin.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Another interesting problem I met in statistic is: 
+suppose we flip a coin which has probability 0.7 to be head again and again 
+and two people choose two different sequences of length 3 (e.g. THH). 
+The people whose sequence appears first wins. 
+If you're allowed to choose first …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 20 May 2010 10:54:32 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2010-05-20:/en/blog/best-strategy/</guid><category>Fun Problems</category><category>pattern</category><category>Markov chain</category><category>statistics</category><category>sequence</category><category>coin</category><category>stochastic</category><category>martingale</category><category>fun problems</category><category>MATLAB</category><category>best strategy</category></item><item><title>Performance Tips for C++</title><link>https://www.legendu.net/en/blog/performance-tips-for-cpp/</link><description>&lt;h2 id="performance"&gt;Performance&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If there is some block of useless code, 
+the compile is smart enough to ignore it and thus speed up the program.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the option &lt;code&gt;-O2&lt;/code&gt; to generate optimized code when you are ready to publish your code.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Define variables only when needed to avoid the overhead of creating …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 20 Oct 2012 10:36:42 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-20:/en/blog/performance-tips-for-cpp/</guid><category>Computer Science</category><category>tips</category><category>performance</category><category>C++</category><category>programming</category></item><item><title>Lambda Function in C++11</title><link>https://www.legendu.net/en/blog/lambda-function-in-cpp11/</link><description>&lt;h2 id="lambda-function"&gt;Lambda Function&lt;/h2&gt;
+&lt;p&gt;Check [here[(https://github.com/dclong/cearn/tree/master/lambda) 
+for illustrative examples for the following discussions. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;When capture variables, 
+you can define new variables in the &lt;code&gt;[]&lt;/code&gt; of a lambda expression.
+For example, 
+if a lambda function need the sum of two double variable &lt;code&gt;x&lt;/code&gt; and &lt;code&gt;y&lt;/code&gt;, 
+you …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 20 Oct 2012 10:35:46 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-20:/en/blog/lambda-function-in-cpp11/</guid><category>Computer Science</category><category>C++</category><category>lambda</category><category>programming</category></item><item><title>Rescue Linux from GUI Freezing</title><link>https://www.legendu.net/en/blog/rescue-linux-from-gui-freezing/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/computer/computer.gif" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;The kernel of Linux is usually very stable, 
+but the existing free desktop environments are craps. 
+Amongs these desktop environments I tried 
+(Gnome, Xfce, LXDE and so on), none is even close to the desktop environments in Windows and Mac.
+I do not require desktop environments in Linux to be …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 20 Sep 2012 10:30:22 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-09-20:/en/blog/rescue-linux-from-gui-freezing/</guid><category>OS</category><category>GUI</category><category>DE</category><category>Dropbox</category><category>X</category><category>Linux</category><category>SSH</category><category>desktop environment</category></item><item><title>Initializing Variables in C++</title><link>https://www.legendu.net/en/blog/initializing-varialbes-in-cpp/</link><description>&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;{}&lt;/code&gt; is more powerful than &lt;code&gt;()&lt;/code&gt; and thus is preferred over &lt;code&gt;()&lt;/code&gt;. 
+You should use always use &lt;code&gt;{}&lt;/code&gt; except for a few cases where &lt;code&gt;()&lt;/code&gt; is necessary.
+For example, 
+if you want to create a vector of length 1000, 
+you have to use &lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;vector&amp;lt;int&amp;gt;(1000);
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;instead of &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    vector&amp;lt;int&amp;gt; {1000};
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;which create a vector …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 19 Oct 2012 13:45:33 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-19:/en/blog/initializing-varialbes-in-cpp/</guid><category>Computer Science</category><category>initialization</category><category>C++</category><category>programming</category></item><item><title>Install the GSL Library</title><link>https://www.legendu.net/en/blog/install-gsl-library/</link><description>&lt;p&gt;GSL is an advance C/C++ library that is widely used. 
+To install GSL, 
+you can download the source file and 
+following instruction in the included README and INSTALL document. 
+For Unix/Linux users, 
+the GSL library is often availabe in the repository. 
+For example, you can use the following …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 19 Sep 2012 13:41:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-09-19:/en/blog/install-gsl-library/</guid><category>Computer Science</category><category>Debian</category><category>C/C++</category><category>Linux</category><category>programming</category><category>GSL</category></item><item><title>The Sum and Product Puzzle</title><link>https://www.legendu.net/en/blog/the-sum-and-product-puzzle/</link><description>&lt;p&gt;I talked about an interesting problem &lt;a href="http://www.legendu.net/en/blog/sun-bin-pang-juan/"&gt;in this post&lt;/a&gt;.
+I had onsite-inteviews from Wolfram at the end of April this year,
+and I decided to talk how to solve the problem using Mathematica.
+I did some research and realized that the problem is a well-known one
+which is called the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 04 Jul 2013 23:47:19 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-07-04:/en/blog/the-sum-and-product-puzzle/</guid><category>Fun Problems</category><category>puzzle</category><category>Mathematica</category><category>math</category><category>Work</category><category>fun problems</category><category>sum</category><category>product</category></item><item><title>Adjust Screen Brightness for Linux Desktops</title><link>https://www.legendu.net/en/blog/adjust-screen-brightness-for-linux-desktops/</link><description>&lt;p&gt;For many computers and laptops installed with Linux desktops, 
+you can use shortcuts (usually Fn + Brightness_keys) to adjust screen brightness.
+This does not work for some laptops. 
+Another way to adjust screen brightness is to use the following command.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;    sudo setpci -s 00:02.0 F4.B=brightness_value
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The value …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 03 Mar 2013 19:57:46 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-03-03:/en/blog/adjust-screen-brightness-for-linux-desktops/</guid><category>OS</category><category>screen</category><category>Linux</category><category>brightness</category></item><item><title>A Secure Way to Use Vino in Debian</title><link>https://www.legendu.net/en/blog/a-secure-way-to-use-vino-in-debian/</link><description>&lt;p&gt;VNC on Linux is not secure. 
+Most implementations of VNC servers for Linux allows password only up to 8 characters. 
+Such a VNC server is very vulnerable to brute-force attack. 
+This article discuss a secure way to use VNC.
+The VNC (vino) server is started only when needed,
+thus reduce …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 03 Sep 2013 19:41:59 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-09-03:/en/blog/a-secure-way-to-use-vino-in-debian/</guid><category>OS</category><category>vino</category><category>Linux</category><category>vnc</category><category>network</category></item><item><title>Add an Entry into the Right-click Menu in Windows</title><link>https://www.legendu.net/en/blog/add-an-entry-into-the-right-click-menu-in-windows/</link><description>&lt;p&gt;To add an entry into the right-click menu in Windows, 
+edit the registry following the steps below.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open the registry.
+You can search for &lt;code&gt;regedit&lt;/code&gt; in Windows Start menu and run it.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Navigate to the key
+&lt;code&gt;HKEY_CLASSES_ROOT\Directory\Background\shell&lt;/code&gt;
+in the registry.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create another key with any name (e …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 03 Dec 2014 19:30:50 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-12-03:/en/blog/add-an-entry-into-the-right-click-menu-in-windows/</guid><category>OS</category><category>Windows</category><category>right-click menu</category><category>registry</category><category>regedit</category></item><item><title>Lvalue Reference and Rvalue Reference</title><link>https://www.legendu.net/en/blog/lvalue-rvalue-reference/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/cpp/left-right.jpg" height="180" width="200" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="difference-betwen-lvalue-and-rvalue-reference"&gt;Difference betwen Lvalue and Rvalue Reference&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Lvalue and Rvalue are terrible names. 
+They are due to historical reasonal but people stuck with these names.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;A lvalue reference has a name while a rvalue reference has no name, in other words, 
+a lvalue reference is persistent while a rvalue reference is …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 15 Aug 2012 02:17:12 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-08-15:/en/blog/lvalue-rvalue-reference/</guid><category>Computer Science</category><category>C/C++</category><category>reference</category><category>programming</category></item><item><title>Interact with System Clipboard in Vim</title><link>https://www.legendu.net/en/blog/interact-between-different-vim-sessions/</link><description>&lt;p&gt;The following are ways for a Vim session 
+to interact (copy/cut, paste) with other Vim sessions or other applications.&lt;/p&gt;
+&lt;h2 id="use-x-windows-clipboard-directly"&gt;Use X Windows Clipboard Directly&lt;/h2&gt;
+&lt;p&gt;If you prefer to use X windows clipboard as the default buffer for Vim,
+put &lt;code&gt;set clipboard=unnamedplus&lt;/code&gt; in your &lt;code&gt;.vimrc&lt;/code&gt; file.
+This obviously makes …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 26 Nov 2012 10:35:12 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-26:/en/blog/interact-between-different-vim-sessions/</guid><category>Software</category><category>Vim</category><category>software</category><category>Linux</category><category>clipboard</category><category>copy</category><category>paste</category></item><item><title>Stick Breaking Problems</title><link>https://www.legendu.net/en/blog/stick-breaking-problems/</link><description>&lt;p&gt;The following is a popular brain teaser problem about probability.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Randomly select two points on a unit stick to break it into 3 pieces,
+what is the probability that the 3 pieces can form a triangle?&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;The critical thing here is how are the two points selected. 
+The most popular …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 16 Jul 2014 19:47:59 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-07-16:/en/blog/stick-breaking-problems/</guid><category>Fun Problems</category><category>fun problems</category><category>stick breaking</category><category>probability</category><category>statistics</category><category>triangle</category><category>Dirichlet distribution</category><category>graph</category><category>plot</category><category>visualization</category><category>R</category></item><item><title>Copy Arrays in Java</title><link>https://www.legendu.net/en/blog/copy-array-java/</link><description>&lt;p&gt;There are several different ways to copy arrays of object (primitive types) in Java. 
+However, 
+the fastest way seems to be &lt;code&gt;System.arraycopy&lt;/code&gt;. 
+This methed is implemented using native code and only performs a shallow copy. 
+Acutally most methods for copying arrays in Java perform shallow copy.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;int arr1[] = {0 …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 19 Jun 2012 13:48:18 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-19:/en/blog/copy-array-java/</guid><category>Computer Science</category><category>array</category><category>copy</category><category>Java</category><category>programming</category></item><item><title>Type Cast in Java</title><link>https://www.legendu.net/en/blog/type-cast-in-java/</link><description>&lt;ol&gt;
+&lt;li&gt;You cannot cast between integer and boolean values. 
+However it is trivia to convert data between integer and boolean. 
+For example,
+&lt;code&gt;int i = b ? 1 : 0;&lt;/code&gt; convert a boolean value &lt;code&gt;b&lt;/code&gt; into an integer value &lt;code&gt;i&lt;/code&gt;, 
+and &lt;code&gt;boolean b = i != 0&lt;/code&gt; convert an integer value &lt;code&gt;i&lt;/code&gt; into a boolean value …&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 02 Nov 2012 10:50:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-11-02:/en/blog/type-cast-in-java/</guid><category>Computer Science</category><category>type cast</category><category>programming</category><category>Java</category></item><item><title>String in Different Programming Languages</title><link>https://www.legendu.net/en/blog/summary-string-popular-programming-language/</link><description>&lt;p&gt;A string is essentially a sequence of characters. 
+This is how string is implemented in many programming languages (string in Java is different).
+For this reason, you can operate string like an array in some programming languages.
+This post is a shallow summary on strings in different programming languages.
+For …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 14 Jun 2012 16:34:30 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-14:/en/blog/summary-string-popular-programming-language/</guid><category>Computer Science</category><category>Python</category><category>programming</category><category>Java</category><category>string</category><category>bash</category><category>Ruby</category><category>R</category></item><item><title>What are the Two Integers?</title><link>https://www.legendu.net/en/blog/find-the-two-indivisible-numbers/</link><description>&lt;p&gt;I met a friend majored in math on a bus home today. 
+He held a piece of paper with a question 
+(probably an interview question since he is trying to find a job recently).
+He asked the question to me and I found it to be an interesting one. &lt;/p&gt;
+&lt;p&gt;A …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 08 Feb 2013 11:41:48 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-02-08:/en/blog/find-the-two-indivisible-numbers/</guid><category>Fun Problems</category><category>puzzle</category><category>fun problems</category><category>number</category></item><item><title>Probability to Get a Complete Deck of Cards?</title><link>https://www.legendu.net/en/blog/chance-complete-decks-poker/</link><description>&lt;p&gt;&lt;img src="http://www.legendu.net/media/poker/poker.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Suppose a poker games requires 4 decks of poker.
+After the game, the cards are put back into the 4 decks randomly.
+Now there is another game which requires only 1 deck of poker,
+so we want to open some decks of the poker and find a complete set of …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 17 Jul 2012 17:54:37 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-17:/en/blog/chance-complete-decks-poker/</guid><category>Fun Problems</category><category>statistics</category><category>recursion</category><category>probability</category><category>Mathematica</category><category>fun problems</category><category>poker</category></item><item><title>Chance to Take One's Own Seat?</title><link>https://www.legendu.net/en/blog/chance-take-own-seat/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/seat/seat.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;There are &lt;span class="math"&gt;\(N\)&lt;/span&gt; seats on a plane.
+Suppose the first passengers is drunk and he takes a seat randomly.
+For each of the other passengers, if his/her seat is not taken by other people,
+then he/she sits on his/her own seat, otherwise he/she takes a seat …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 10 Jul 2012 13:13:46 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-10:/en/blog/chance-take-own-seat/</guid><category>Fun Problems</category><category>statistics</category><category>recursion</category><category>probability</category><category>fun problems</category><category>seat</category></item><item><title>Sun Bin PK Pang Juan</title><link>https://www.legendu.net/en/blog/sun-bin-pang-juan/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/pk/pk.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Dating back to the time when I was a sophomore, 
+I read a very interesting problem from "Waming", 
+which is a magazine of math department of USTC (University of Science and Technology of China).&lt;/p&gt;
+&lt;p&gt;One day Guigu Zi (a famous ancient Chinese sophist, 
+the teacher of Sun Bin and Pang …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 06 May 2010 10:57:40 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2010-05-06:/en/blog/sun-bin-pang-juan/</guid><category>Fun Problems</category><category>puzzle</category><category>Mathematica</category><category>fun problems</category><category>math</category><category>number</category><category>sum</category><category>product</category></item><item><title>Basketball Player</title><link>https://www.legendu.net/en/blog/basketball-player/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/basketball-player/basketball.jpg" 
+height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Suppose a basketball player make &lt;span class="math"&gt;\(N\)&lt;/span&gt; shots,
+and we know that in the first &lt;span class="math"&gt;\(n(\le N)\)&lt;/span&gt; shots he sinked &lt;span class="math"&gt;\(m(\le n)\)&lt;/span&gt; shots.
+If from the &lt;span class="math"&gt;\((n+1)^{th}\)&lt;/span&gt; shot, 
+his ratio of sink a shot is his accumulative ratio before the shot,
+e.g., suppose he sinked 40 …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sat, 28 Jul 2012 21:56:16 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-28:/en/blog/basketball-player/</guid><category>Fun Problems</category><category>statistics</category><category>condition</category><category>probability</category><category>fun problems</category><category>basket ball player</category></item><item><title>Some Useful Properties of Modified Bessel Functions of the First Kind</title><link>https://www.legendu.net/en/blog/bessel-first-property/</link><description>&lt;p&gt;I have to deal with Modified Bessel functions of the first kind frequently in my research. 
+Here I list some useful properties of them for future reference. 
+    &lt;/p&gt;
+&lt;div class="math"&gt;$$I_0'(x) = I_1(x)$$&lt;/div&gt;
+&lt;div class="math"&gt;$$I_1'(x) = \frac{I_0(x)+I_2(x)}{2} $$&lt;/div&gt;
+&lt;div class="math"&gt;$$\frac{I_1(x)}{I_0(x)}\uparrow \Leftrightarrow I_0(x)(I_0(x …&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 28 May 2012 21:55:16 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-05-28:/en/blog/bessel-first-property/</guid><category>Research</category><category>derivative</category><category>monotone</category><category>Research</category><category>Mathematica</category><category>positive</category><category>Bessel functions</category></item><item><title>Automated Phone Bill Using Ruby Program</title><link>https://www.legendu.net/en/blog/automated-verizon-bill-using-ruby/</link><description>&lt;p&gt;I have decided to try different programming languages. 
+I learn Python a month ago. 
+I would like to say that Python is great scripting language. 
+The only thing I do not like so far is inconsistent about methods and functions.
+It is annoying to remember whether a call should be …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 18 Jun 2012 08:17:18 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-18:/en/blog/automated-verizon-bill-using-ruby/</guid><category>Computer Science</category><category>Python</category><category>programming</category><category>Verizon</category><category>Ruby</category><category>email</category><category>phone</category></item><item><title>How Many People Stay in the Same Position?</title><link>https://www.legendu.net/en/blog/same-position-permutation/</link><description>&lt;p&gt;&lt;img src="http://www.legendu.net/media/people/same.jpg" width="240" height="200" align="right"&gt;&lt;/p&gt;
+&lt;p&gt;There are 100 seats on a plane.
+If each of the 100 passengers randomly take a seat,
+how many people will have his/her own seat on average?&lt;/p&gt;
+&lt;p&gt;There is a classic way to solve this problem, 
+which is to decompose a (complicated) random variable into a sum of simple …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 17 Jul 2012 15:16:03 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-17:/en/blog/same-position-permutation/</guid><category>Fun Problems</category><category>same position</category><category>statistics</category><category>probability</category><category>linear recursion</category><category>fun problems</category><category>conditional expectation</category><category>permutation</category></item><item><title>Calculate Covariance Between Multinomial Categories by Hand</title><link>https://www.legendu.net/en/blog/calculate-covariance-between-multinomial-categories-by-hand/</link><description>&lt;p&gt;Let &lt;span class="math"&gt;\((X_1, \ldots, X_k)\sim\text{Multinomial}(n, p_1, \ldots, p_k)\)&lt;/span&gt;. 
+I'll show how to calculate &lt;span class="math"&gt;\(Cov(X_i, X_j), i\ne j\)&lt;/span&gt;. 
+The main purpose of doing this is to illustrate the little trick 
+of reducing complexity of problems by decomposing a complicated random variable 
+into simple ones. &lt;/p&gt;
+&lt;p&gt;Let &lt;span class="math"&gt;\((Y_ …&lt;/span&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 17 Nov 2013 15:14:27 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-11-17:/en/blog/calculate-covariance-between-multinomial-categories-by-hand/</guid><category>Fun Problems</category><category>fun problem</category><category>statistics</category><category>probability</category><category>multinomial</category><category>covariance</category></item><item><title>Creative Use of Keepassx -- Odd Skills?</title><link>https://www.legendu.net/en/blog/creative-use-of-keepassx-odd-skills/</link><description>&lt;p&gt;&lt;img src="http://www.legendu.net/media/logo/keepassx.jpeg"
+width="200" height="160" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I had to schedule an event on Doodle.
+I wanted to fill in all possible regular meeting times 
+(starting at 8:00 am with 30 minutes interval).
+I am such a lazy guy who never want to repeat the same thing for more than 3 times.
+Typing all these time …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 30 Sep 2013 22:15:37 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-09-30:/en/blog/creative-use-of-keepassx-odd-skills/</guid><category>Fun Problems</category><category>skills</category><category>Linux</category><category>software</category><category>fun problems</category></item><item><title>Inverse of a Special Class of Matrices with High Dimensions</title><link>https://www.legendu.net/en/blog/inverse-of-matrix/</link><description>&lt;p&gt;&lt;img src="http://www.legendu.net/media/math/matrix-inverse.png"
+width="200" height="160" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;One day, my officemate Tieming asked me about a problem that she met in her research. 
+Suppose &lt;span class="math"&gt;\(\boldsymbol{B}\)&lt;/span&gt; is a symmetric matrix of huge dimension 
+and &lt;span class="math"&gt;\(\boldsymbol{D}\)&lt;/span&gt; is a diagonal matrix with nonnegative diagonal elements. 
+The inverse of &lt;span class="math"&gt;\(\boldsymbol{B}\)&lt;/span&gt; is already known, 
+how can we calculate the …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 30 May 2010 22:12:02 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2010-05-30:/en/blog/inverse-of-matrix/</guid><category>Fun Problems</category><category>inverse</category><category>fun problems</category><category>matrix</category><category>math</category><category>statistics</category><category>R</category><category>high dimension</category></item><item><title>Which One Is the Best Strategy? (continued)</title><link>https://www.legendu.net/en/blog/best-strategy-2/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/pattern/coin.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Suppose we flip a coin which has probability 0.7 to be head again 
+and again and two people choose two different sequences of length 3 (e.g., THH). 
+The people whose sequence appears first wins. 
+If you are allowed to choose first, which sequence will you choose?&lt;/p&gt;
+&lt;p&gt;I discussed …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 30 Jul 2012 15:13:01 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-30:/en/blog/best-strategy-2/</guid><category>Fun Problems</category><category>Mathematica</category><category>pattern</category><category>Markov chain</category><category>statistics</category><category>probability</category><category>sequence</category><category>coin</category><category>fun problems</category></item><item><title>Expected Gain of Tossing a Dice</title><link>https://www.legendu.net/en/blog/dice-expected-gain/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/dice/dice.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Suppose you toss a symmetric dice. 
+You are allowed to quit the game and
+get money which equals the total points you get at any time if 6 has never
+showed up. Whenever 6 shows up, the game is over and you get nothing. For
+example, if the first three …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 30 Jul 2012 09:37:39 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-30:/en/blog/dice-expected-gain/</guid><category>Fun Problems</category><category>Mathematica</category><category>recursion</category><category>statistics</category><category>probability</category><category>Markov chain</category><category>fun problems</category></item><item><title>Randomly Select an Integer?!</title><link>https://www.legendu.net/en/blog/integer-probability-measure/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/number/numbers.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;I found this "probability" problem when I read a person's blog. &lt;/p&gt;
+&lt;p&gt;What's probability that two randomly chosen nature numbers are relatively prime?&lt;/p&gt;
+&lt;p&gt;It is claimed that there is a very elegant solution for this problem. 
+This problem reminds me another one. 
+Some people asked for an example of a 0-probability …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 29 Aug 2012 17:23:24 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-08-29:/en/blog/integer-probability-measure/</guid><category>Fun Problems</category><category>random</category><category>statistics</category><category>nature number</category><category>probability</category><category>relatively prime</category><category>fun problems</category></item><item><title>Fix Microphone Problem of Skype in Debian</title><link>https://www.legendu.net/en/blog/fix-skype-microphone-problem-in-debian/</link><description>&lt;p&gt;Install Pulseaudio if you only have ALSA. 
+ALSA alone does NOT work with skype whatever people 
+on the #Debian channel might think and tell you.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get install pulseaudio
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Install pulseaudio volume control&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo apt-get install pavucontrol
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Run Skype.&lt;/p&gt;
+&lt;p&gt;Go to the Sound devices sections. 
+Click on the Open PulseAudio …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 21 Aug 2013 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-08-21:/en/blog/fix-skype-microphone-problem-in-debian/</guid><category>Software</category><category>audio</category><category>Software</category><category>Linux</category></item><item><title>Culture of My Summer Intern Team</title><link>https://www.legendu.net/en/blog/team-culture-of-Credit-portfolio-risk-analysis/</link><description>&lt;p&gt;I work as a student intern in the Credit Portfolio Risk Analysis group 
+in a bank this summer.
+One Friday afternoon,
+Jimmy, the manager of my manager, 
+asked me to his office and talked about our team cultures.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Ownership &lt;br&gt;
+Whenever you have a project, 
+you are the ownner. 
+Be proud …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Thu, 01 Aug 2013 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2013-08-01:/en/blog/team-culture-of-Credit-portfolio-risk-analysis/</guid><category>Career</category><category>work</category><category>office</category><category>team culture</category></item><item><title>Java Programming Style</title><link>https://www.legendu.net/en/blog/java-programming-style/</link><description>&lt;h2 id="good-writing-style"&gt;Good Writing Style&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;It is recommend to always use &lt;code&gt;{}&lt;/code&gt; if even there is only one statement inside it. 
+The reason is that you never know whether you are going to add more statements into it or not. 
+And it will make the code more readable.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Feel free to declare the …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 03 Dec 2012 00:00:00 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-12-03:/en/blog/java-programming-style/</guid><category>Computer Science</category><category>style</category><category>Java</category><category>programming</category></item><item><title>Pointers in C++</title><link>https://www.legendu.net/en/blog/pointers-in-cpp/</link><description>&lt;h2 id="pointers"&gt;Pointers&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;No pointer, no polymorphism.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C/C++ is notorious for raw pointers. 
+While pointers can boost up the speed of programs, 
+it invites a trillion chances for making mistakes. 
+You should avoid using raw pointers, 
+instead, 
+consider using &lt;code&gt;unique_ptr&lt;/code&gt;, &lt;code&gt;shared_ptr&lt;/code&gt; and &lt;code&gt;weak_ptr&lt;/code&gt;.
+They are almost as efficient as raw pointers …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 21 Oct 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-21:/en/blog/pointers-in-cpp/</guid><category>Computer Science</category><category>C++</category><category>programming</category><category>pointer</category></item><item><title>Write Portable C++ Code</title><link>https://www.legendu.net/en/blog/write-portable-cpp-code/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Addresses on 64 and 32 OS are different, 
+so you have to be careful when your program have to deal with address. 
+For example, 
+if you take the difference of two pointers/iterators, 
+you should type &lt;code&gt;std::ptrdiff_t&lt;/code&gt; (which is essentially a singed integer type). 
+Using an arbitrary integer type …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 21 Oct 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-10-21:/en/blog/write-portable-cpp-code/</guid><category>Computer Science</category><category>C++</category><category>programming</category><category>portable</category></item><item><title>Automated Verizon Phone Bill (Continued)</title><link>https://www.legendu.net/en/blog/automated-verizon-phone-bill-continued/</link><description>&lt;p&gt;I have switched to the "Share Everything" plan of Verizon two weeks ago,
+and I got a little complex bill this month due to people leaving and joining my family plan. 
+My ruby program for parsing phone bill still works well. 
+It is actually surprising smarter than I thought on …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 05 Sep 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-09-05:/en/blog/automated-verizon-phone-bill-continued/</guid><category>Computer Science</category><category>phone</category><category>verizon</category><category>Ruby</category><category>programming</category></item><item><title>String in C++11</title><link>https://www.legendu.net/en/blog/cpp-auto-string/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;auto s = "abcd"&lt;/code&gt; creats &lt;code&gt;const char *&lt;/code&gt; not string, so use &lt;code&gt;auto&lt;/code&gt; with caution. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Since a string in C++ is an array of chars, 
+you can operate it like an array. 
+For example, you can use range-based for loop and so on.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;It is recommended that you use &lt;code&gt;std::string&lt;/code&gt; in …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 20 Aug 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-08-20:/en/blog/cpp-auto-string/</guid><category>Computer Science</category><category>auto</category><category>iteration</category><category>programming</category><category>C/C++</category><category>string</category><category>loop</category><category>char</category></item><item><title>Make Eclipse Support C++11</title><link>https://www.legendu.net/en/blog/eclipse-cpp11/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/eclipse/cdt.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Make a new C++ project&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Default options for everything&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Once created, right-click the project and go to "Properties"&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C/C++ Build -&amp;gt; Settings -&amp;gt; Tool Settings -&amp;gt; GCC C++ Compiler -&amp;gt; Miscellaneous -&amp;gt; Other Flags. 
+Put -std=c++0x at the end. &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;C++ General -&amp;gt; Paths and Symbols -&amp;gt; Symbols -&amp;gt; GNU C++. 
+Click "Add..." and paste &lt;code&gt;__GXX_EXPERIMENTAL_CXX0X__ …&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Mon, 20 Aug 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-08-20:/en/blog/eclipse-cpp11/</guid><category>Software</category><category>C/C++</category><category>software</category><category>eclipse</category></item><item><title>How Many Balls Do We Need?</title><link>https://www.legendu.net/en/blog/how-many-balls-do-we-need/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/ball-box/ball-in-box.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;If we randomly put balls into &lt;span class="math"&gt;\(m(\ge1)\)&lt;/span&gt; boxes until &lt;span class="math"&gt;\(n(\le m)\)&lt;/span&gt; of them are occupied,
+what is the expectation of the number of balls needed?&lt;/p&gt;
+&lt;p&gt;See my neat solution &lt;a href="http://dclong.github.io/media/ball-box/balls.pdf"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left …&lt;/script&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 10 Jul 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-10:/en/blog/how-many-balls-do-we-need/</guid><category>Fun Problems</category><category>statistics</category><category>probability</category><category>fun problems</category></item><item><title>Number of Records?</title><link>https://www.legendu.net/en/blog/number-of-records/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/records/break-record.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;Suppose there are &lt;span class="math"&gt;\(n\)&lt;/span&gt; distinct numbers &lt;span class="math"&gt;\(x_1,\ldots, x_n\)&lt;/span&gt;,
+ and &lt;span class="math"&gt;\(y_1, \ldots, y_n\)&lt;/span&gt; is a random permutations of them.
+ If &lt;span class="math"&gt;\(\exists k\)&lt;/span&gt; such that &lt;span class="math"&gt;\(y_k&amp;lt;y_i, \forall 1\le i&amp;lt;k\)&lt;/span&gt;,
+ then we say that &lt;span class="math"&gt;\(y_k\)&lt;/span&gt; is a record 
+ (we always count &lt;span class="math"&gt;\(y_1\)&lt;/span&gt; as a record).
+ What is the expected …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Tue, 10 Jul 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-10:/en/blog/number-of-records/</guid><category>Fun Problems</category><category>statistics</category><category>records</category><category>probability</category><category>permutation</category><category>fun problems</category></item><item><title>How Many Empty Boxes?</title><link>https://www.legendu.net/en/blog/how-many-empty-boxes/</link><description>&lt;p&gt;&lt;img src="http://dclong.github.io/media/ball-box/empty-box.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;p&gt;If we randomly put &lt;span class="math"&gt;\(n(\ge1)\)&lt;/span&gt; balls into &lt;span class="math"&gt;\(m(\ge1)\)&lt;/span&gt; boxes, 
+what is the expectation of the number of empty boxes?&lt;/p&gt;
+&lt;p&gt;See my neat answer &lt;a href="http://dclong.github.io/media/ball-box/empty-box.pdf"&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em …&lt;/script&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Sun, 08 Jul 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-07-08:/en/blog/how-many-empty-boxes/</guid><category>Fun Problems</category><category>expectation</category><category>ball</category><category>box</category><category>probability</category><category>fun problems</category><category>statistic</category></item><item><title>Define Operator in R</title><link>https://www.legendu.net/en/blog/overload-operator-r/</link><description>&lt;p&gt;One thing I do not like R is that operations on String in R 
+are not as convenient as in other programming langauges such as Java, Python and Ruby. 
+In these 3 programming languages, 
+you can simply use &lt;code&gt;+&lt;/code&gt; to concatenate strings while in R you have to use the function …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Fri, 08 Jun 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-06-08:/en/blog/overload-operator-r/</guid><category>Computer Science</category><category>R</category><category>operator</category><category>overloading</category><category>override</category><category>programming</category></item><item><title>Abuse of Vector in R</title><link>https://www.legendu.net/en/blog/abuse-vector-r/</link><description>&lt;p&gt;R is a language that is friendly to vector operation, 
+so vector is an important data structure in R. 
+A single data (of basic types, e.g., numeric or character) is essentially a
+vector of length 1. A matrix or an array in R is essentially a vector. 
+R make …&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 16 May 2012 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2012-05-16:/en/blog/abuse-vector-r/</guid><category>Computer Science</category><category>programming</category><category>matrix</category><category>data sturcture</category><category>data</category><category>vector</category><category>R</category></item><item><title>Tips for VB/VB.net</title><link>https://www.legendu.net/en/blog/tips-vb.net/</link><description>&lt;h2 id="about-string-functions"&gt;About String Functions&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;The uniform random variables generated by VB is pretty good.
+At least it's acceptable according to the test in R.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;String functions that return a string can be used with a dollar sign at the end, 
+which is a faster version of the corresponding function.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;The function …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Chuanlong Du</dc:creator><pubDate>Wed, 31 Aug 2011 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2011-08-31:/en/blog/tips-vb.net/</guid><category>Computer Science</category><category>tips</category><category>VB/VB.net</category><category>programming</category><category>string</category></item></channel></rss>

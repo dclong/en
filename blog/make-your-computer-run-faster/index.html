@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Make Linux Run Faster</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Make Linux Run Faster</h1>
+      <p class="meta"><time datetime="2013-06-08T08:54:21-07:00" pubdate>Jun 08, 2013</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="benchmark-tools-for-linux">Benchmark Tools for Linux</h2>
+<p><a href="https://github.com/phoronix-test-suite/phoronix-test-suite/">phoronix-test-suite</a>
+is currently the best benchmark tool for Linux.
+You can use it to figure out the bottleneck of performance of your Linux machine.
+Please refer to
+<a href="https://www.legendu.net/misc/blog/benchmark-your-linux-machine-using-phoronix-test-suite">Benchmark Your Linux Machine Using phoronix-test-suite</a>
+for more discussions.</p>
+<p><a href="https://github.com/iovisor/bcc">BCC</a>
+is a toolkit for creating efficient kernel tracing and manipulation programs
+leveraging extended Berkeley Packet Filters (eBPF).</p>
+<h2 id="upgrading-hardware">Upgrading Hardware</h2>
+<ol>
+<li>
+<p>Get larger RAM for your computer.</p>
+</li>
+<li>
+<p>Get a SSD disk.</p>
+</li>
+<li>
+<p>Get a good graphics card (if you have workstation).</p>
+</li>
+</ol>
+<h2 id="configuration">Configuration</h2>
+<ol>
+<li>
+<p>Configure GRUB to fix PCIe BUS errors if any. 
+    Please refer to
+    <a href="https://www.legendu.net/misc/blog/pcie-bus-error:-severity=Corrected,-type=Physical-Layer/">Pcie Bus Error: Severity=Corrected, Type=Physical Layer</a>
+    for detailed discussions
+    .
+    Notice that you might have to do this 
+    every time you upgrade your Linux kernel.</p>
+</li>
+<li>
+<p>Reduce GRUB timeout to a smaller value.
+    Please refer to
+    <a href="https://www.legendu.net/misc/blog/reduce-grub-timeout">Reduce GRUB Timeout</a>
+    for detailed discussions
+    .</p>
+</li>
+<li>
+<p>Configure <code>vm.swapness</code> to be a proper value (10 or even less),
+    if your Linux system has a large swap partition.
+    For more details,
+    please refer to
+    <a href="https://help.ubuntu.com/community/SwapFaq">SwapFaq</a>
+    .</p>
+</li>
+<li>
+<p>Choose a fast mirror.
+    If you are using Ubuntu, 
+    a fast mirror will be automatically decided based on your location. 
+    However, 
+    if you are using other Linux distribution (e.g., Linux Mint),
+    you might have to choose a fast mirror manually.</p>
+</li>
+<li>
+<p>Use the <code>noatime</code> option for filesystems. 
+    Add the <code>noatime</code> option into your fstab for all non-swap partitions.
+    This is 
+    <span style="color:red">
+    NOT recommended
+    </span>
+    unless you really want to squeeze the performance of Linux machine.</p>
+</li>
+<li>
+<p>Remove non-necessary autostart applications
+    and configure a delay to must-have autostart applications.
+    Please refer to
+    <a href="https://www.legendu.net/misc/blog/manage-autostart-apps">Manage Autostart Applications</a>
+    for detailed discussions.</p>
+</li>
+<li>
+<p>Disable non-needed systemd services.
+    Please refer to
+    <a href="https://www.legendu.net/misc/blog/manage-systemd-services-units">Manage systemd Services and Units</a>
+    for detailed discussions.</p>
+</li>
+<li>
+<p>If you use the GNOME desktop environment,
+    configuare "Gnome Shell Search" to disable unnecessary applications.
+    <img alt="gnome-shell-search-config" src="https://user-images.githubusercontent.com/824507/170840843-f085a295-4071-4ee8-929f-62d1e57c67f6.png"></p>
+</li>
+</ol>
+<h2 id="software-based-optimization">Software-based Optimization</h2>
+<h3 id="linux-distribution-and-kernels">Linux Distribution and Kernels</h3>
+<ol>
+<li>
+<p>Use a light-weighted Linux distribution. 
+    For example,
+    antiX Linux is a light-weighted debian-based Linux operating system.</p>
+</li>
+<li>
+<p>Use a light-weighted desktop environment, e.g., Xfce or LXQt.
+    When used with Ubuntu, 
+    they correspond to Xubuntu and Lubuntu
+    which are both good choices for non-powerful computers.</p>
+</li>
+<li>
+<p>Keep your Linux distribution up to date.
+    Generally speaking,
+    it is a good idea to use the latest LTS or stable versions.</p>
+</li>
+<li>
+<p>Remove old kernels.</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>purge<span class="w"> </span>linux-image-&lt;verson&gt;
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="lightweight-alternatives">Lightweight Alternatives</h3>
+<ol>
+<li>
+<p>Use dash instead of bash which makes boot faster.</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>install<span class="w"> </span>dash
+wajig<span class="w"> </span>reconfigure<span class="w"> </span>dash
+</code></pre></div>
+
+</li>
+<li>
+<p>Use Evince instead of Okular which is resource hungry<br>
+    and has lots of KDE dependencies.</p>
+</li>
+</ol>
+<h3 id="package-and-disk-cleanup">Package and Disk Cleanup</h3>
+<ol>
+<li>
+<p>Identify orphan packages and remove them.</p>
+<div class="highlight"><pre><span></span><code>sudo deborphan | xargs wajig remove --purge
+</code></pre></div>
+
+</li>
+<li>
+<p>Clean up packages.</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>autoremove<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>wajig<span class="w"> </span>autoclean
+</code></pre></div>
+
+</li>
+<li>
+<p>Clean up disk using <code>localepurge</code>.</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>install<span class="w"> </span>localepurge
+localpurge
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li><a href="https://www.legendu.net/misc/blog/packagekitd-uses-too-much-cpu-or-disk-io/">PackageKitD Uses Too Much CPU or Disk IO</a></li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-06-08T08:54:21-07:00" pubdate>Jun 08, 2013</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/ram.html">RAM</a>
+    <a class="category" href="https://www.legendu.net/en/tag/speedup.html">speedup</a>
+    <a class="category" href="https://www.legendu.net/en/tag/ssd.html">SSD</a>
+    <a class="category" href="https://www.legendu.net/en/tag/software.html">software</a>
+    <a class="category" href="https://www.legendu.net/en/tag/optimization.html">optimization</a>
+    <a class="category" href="https://www.legendu.net/en/tag/hardware.html">hardware</a>
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/fast.html">fast</a>
+    <a class="category" href="https://www.legendu.net/en/tag/performance.html">performance</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/make-your-computer-run-faster/';
+          var disqus_url = 'https://www.legendu.net/en/blog/make-your-computer-run-faster/';
+          var disqus_title = 'Make Linux Run Faster';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

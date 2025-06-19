@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Advanced Use of "ls" in Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Advanced Use of "ls" in Linux</h1>
+      <p class="meta"><time datetime="2012-07-29T09:29:01-07:00" pubdate>Jul 29, 2012</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="list-files-sorted-by-time">List Files Sorted by Time</h2>
+<p>You can list files sorted by time (newest first) using the <code>-t</code> option.
+Notice that the <code>-t</code> option is also support by <code>hdfs dfs -ls</code>.</p>
+<div class="highlight"><pre><span></span><code>ls -lht
+</code></pre></div>
+
+<h2 id="ignore-files">Ignore Files</h2>
+<ol>
+<li>
+<p>You have to either enclose the pattern in quotes or escape the wildcard in patterns.</p>
+</li>
+<li>
+<p>Equivalent commands to ignore JSON files.</p>
+<div class="highlight"><pre><span></span><code>ls --ignore=*.json
+ls -I*.json
+ls -I \*.json
+ls -I &#39;*.json&#39; # quote needed due to the space!
+find . ! -iname &#39;*.json&#39;
+</code></pre></div>
+
+</li>
+<li>
+<p>Ignore multiple patterns.</p>
+<div class="highlight"><pre><span></span><code><span class="n">ls</span><span class="w"> </span><span class="o">-</span><span class="n">I</span><span class="w"> </span><span class="s1">&#39;*.txt&#39;</span><span class="w"> </span><span class="o">-</span><span class="n">I</span><span class="w"> </span><span class="s1">&#39;*.pdf&#39;</span>
+<span class="n">find</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="o">-</span><span class="n">iname</span><span class="w"> </span><span class="s1">&#39;*.json&#39;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="o">-</span><span class="n">iname</span><span class="w"> </span><span class="s1">&#39;*.pdf&#39;</span>
+<span class="n">find</span><span class="w"> </span><span class="o">.</span><span class="w"> </span><span class="o">-</span><span class="n">type</span><span class="w"> </span><span class="n">f</span><span class="w"> </span><span class="o">-</span><span class="n">name</span><span class="w"> </span><span class="s2">&quot;*.txt&quot;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="o">-</span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;./Movies/*&quot;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="o">-</span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;./Downloads/*&quot;</span><span class="w"> </span><span class="o">!</span><span class="w"> </span><span class="o">-</span><span class="n">path</span><span class="w"> </span><span class="s2">&quot;./Music/*&quot;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Ignore backup files (whose names end with <code>~</code>).</p>
+<div class="highlight"><pre><span></span><code>ls -B
+</code></pre></div>
+
+<p>Or you can use</p>
+<div class="highlight"><pre><span></span><code>ls --ignore=*~
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="list-contents-of-a-directory-with-the-directory-name-prefixed">List Contents of a Directory with the Directory Name Prefixed</h2>
+<p>When you list the contents of a directory (e.g., <code>raw</code>) using the following command.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>raw
+</code></pre></div>
+
+<p>the directory name <code>raw</code> is not prefixed to the returned/printed contents.
+You can of course concatenate the directory name <code>raw</code> to each of its subdirectory/subfile manually,
+however,
+a more convenient way is to use the the following command.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>raw/*
+</code></pre></div>
+
+<h2 id="list-only-subdirectories">List Only Subdirectories</h2>
+<p>You can use the following command to list directories only in the current directory.</p>
+<div class="highlight"><pre><span></span><code>ls<span class="w"> </span>-d<span class="w"> </span>./*
+</code></pre></div>
+
+<h2 id="list-hidden-files-and-directories">List Hidden Files and Directories</h2>
+<div class="highlight"><pre><span></span><code>ls -d .*
+</code></pre></div></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2012-07-29T09:29:01-07:00" pubdate>Jul 29, 2012</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/ls.html">ls</a>
+    <a class="category" href="https://www.legendu.net/en/tag/shell.html">shell</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/list-files-without-tilde-linux/';
+          var disqus_url = 'https://www.legendu.net/en/blog/list-files-without-tilde-linux/';
+          var disqus_title = 'Advanced Use of "ls" in Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

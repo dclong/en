@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips on the find command in Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips on the find command in Linux</h1>
+      <p class="meta"><time datetime="2014-09-06T09:43:30-07:00" pubdate>Sep 06, 2014</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="better-alternatives-to-find">Better Alternatives to <code>find</code></h2>
+<p>There are some better alternatives to find.
+The Python module <code>pathlib</code> is the most suitable one for relatively complex jobs.
+<code>fd</code>, <code>ripgrep</code>, <code>fselect</code> and <code>osquery</code> 
+are other alternatives.</p>
+<table class="comparison-table">
+    <thead>
+        <tr>
+            <th></th>
+            <th>
+                <a href="https://man7.org/linux/man-pages/man1/find.1.html">find</a>
+            </th>
+            <th>
+                <a href="https://man7.org/linux/man-pages/man1/find.1.html">fd</a>
+            </th>
+            <th>
+                <a href="https://github.com/jhspetersson/fselect">fselect</a>
+            </th>
+            <th>
+                <a href="https://github.com/jhspetersson/fselect">osquery</a>
+            </th>
+            <th>
+                <a href="https://github.com/BurntSushi/ripgrep ">ripgrep (rg)</a> 
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th scope="row"><strong>Primary Use Case</strong></th>
+            <td><strong>File metadata search & execution</strong> (scripting)</td>
+            <td><strong>Interactive file name search</strong> (developer productivity)</td>
+            <td><strong>SQL-based file attribute search</strong> (data analysis)</td>
+            <td><strong>System instrumentation & security</strong> (fleet management)</td>
+            <td><strong>File content search</strong> (code searching)</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Usability/Syntax</strong></th>
+            <td><strong>Low</strong>. Powerful but arcane, non-intuitive syntax.</td>
+            <td><strong>Very High</strong>. Simple, ergonomic, sensible defaults.</td>
+            <td><strong>High</strong>. SQL-like syntax is very readable for complex queries.</td>
+            <td><strong>Low</strong>. Requires knowledge of SQL and specific OS schemas.</td>
+            <td><strong>Very High</strong>. Simple, <code>grep</code>-like, sensible defaults.</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Performance</strong></th>
+            <td><strong>Fair</strong>. Single-threaded by default. Slow in codebases.</td>
+            <td><strong>Excellent</strong>. Parallel, ignores gitignored/hidden files by default.</td>
+            <td><strong>Very Good</strong>. Optimized for its complex query execution.</td>
+            <td><strong>Good</strong>. Optimized for low-overhead daemon, not raw traversal speed.</td>
+            <td><strong>Exceptional</strong>. The gold standard for file content search speed.</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Implementation</strong></th>
+            <td><strong>C</strong>. Universally available, part of <code>findutils</code>.</td>
+            <td><strong>Rust</strong>. Single static binary, needs installation.</td>
+            <td><strong>Rust</strong>. Single static binary, needs installation.</td>
+            <td><strong>C++</strong>. Cross-platform framework, needs installation.</td>
+            <td><strong>Rust</strong>. Single static binary, needs installation.</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Key Strength</strong></th>
+            <td><strong>Ubiquity & <code>-exec</code></strong>. The POSIX standard, powerful actions.</td>
+            <td><strong>Speed & Ergonomics</strong>. The perfect interactive <code>find</code> replacement.</td>
+            <td><strong>Expressive Query Language</strong>. Unmatched for complex attribute filters.</td>
+            <td><strong>Holistic System View</strong>. Queries files alongside processes, users, etc.</td>
+            <td><strong>Raw Speed for Content Search</strong>. The fastest tool for finding text in files.</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Key Weakness</strong></th>
+            <td><strong>Clunky syntax & poor defaults</strong>. Not user-friendly.</td>
+            <td><strong>Less powerful expressions</strong> than <code>find</code> for edge cases.</td>
+            <td><strong>Niche use case</strong>. Overkill for simple searches.</td>
+            <td><strong>Massive overkill</strong> for just finding files. Steep learning curve.</td>
+            <td><strong>Not a file finder</strong>. Only lists files as a secondary function (<code>-l</code>).</td>
+        </tr>
+        <tr>
+            <th scope="row"><strong>Best For...</strong></th>
+            <td>Shell scripts, system administration, guaranteed portability.</td>
+            <td>Developers, daily interactive use, searching in git repos.</td>
+            <td>Data analysts, sysadmins running complex filesystem audits.</td>
+            <td>Security engineers, SREs, IT compliance teams.</td>
+            <td>Developers, searching for code, log analysis.</td>
+        </tr>
+    </tbody>
+</table>
+
+<h2 id="example-usages">Example Usages</h2>
+<h3 id="search-files-by-name">Search Files By Name</h3>
+<ol>
+<li>
+<p>Find all files with the extension ".out" in the current directory and its subdirectory, 
+    and then make them executable.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-iname<span class="w"> </span>*.out<span class="w"> </span>-exec<span class="w"> </span>chmod<span class="w"> </span>+x<span class="w"> </span><span class="s1">&#39;{}&#39;</span><span class="w"> </span><span class="se">\;</span>
+<span class="c1"># or you can use </span>
+find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-iname<span class="w"> </span>*.out<span class="w"> </span>-print0<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span>chmod<span class="w"> </span>+x
+</code></pre></div>
+
+</li>
+<li>
+<p>Find files whose names contain "conflicted" and remove them.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-iname<span class="w"> </span><span class="s1">&#39;*conflicted*&#39;</span><span class="w"> </span>-print0<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>-0<span class="w"> </span>rm
+</code></pre></div>
+
+</li>
+<li>
+<p>Find Python scripts in the current directory recursively
+    but ignore those under directories with the name <code>.ipynb_checkpoints</code>.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-iname<span class="w"> </span><span class="s1">&#39;*.py&#39;</span><span class="w"> </span>-not<span class="w"> </span>-path<span class="w"> </span><span class="s1">&#39;*/.ipynb_checkpoints/*&#39;</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="search-files-by-size">Search Files by Size</h3>
+<ol>
+<li>
+<p>Find files with 0 size and delete them.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/path/to/files<span class="w"> </span>-size<span class="w"> </span><span class="m">0</span><span class="w"> </span>-ok<span class="w"> </span>-exec<span class="w"> </span>rm<span class="w"> </span><span class="o">{}</span><span class="w"> </span><span class="se">\;</span>
+<span class="c1"># or you can use</span>
+find<span class="w"> </span>/path/to/files<span class="w"> </span>-size<span class="w"> </span><span class="m">0</span><span class="w"> </span>-ok<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>rm
+</code></pre></div>
+
+</li>
+<li>
+<p>Find empty directories. </p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/<span class="w"> </span>-type<span class="w"> </span>d<span class="w"> </span>-empty
+</code></pre></div>
+
+</li>
+<li>
+<p>Find files greater than 1G.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-xdev<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-size<span class="w"> </span>+1G
+</code></pre></div>
+
+</li>
+<li>
+<p>First find files and then pass them to other commands is a very useful trick.
+    For example, 
+    you can use the following command to find all R scripts containing the word <code>paste</code>.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-iname<span class="w"> </span><span class="s1">&#39;*.r&#39;</span><span class="w"> </span><span class="p">|</span><span class="w"> </span>grep<span class="w"> </span>--color<span class="o">=</span>auto<span class="w"> </span>paste
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="search-files-by-time">Search Files by Time</h3>
+<ol>
+<li>
+<p>Find files created with in 60 minutes.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-cmin<span class="w"> </span><span class="m">60</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Find files more than 30 days ago</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-ctime<span class="w"> </span>+30
+</code></pre></div>
+
+</li>
+<li>
+<p>Find file less than 30 days ago.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-ctime<span class="w"> </span>-30
+</code></pre></div>
+
+</li>
+<li>
+<p>Find files that are exactly 30 days ago.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-ctime<span class="w"> </span><span class="m">30</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Find all files modified on the June 7, 2007 in the current directory.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-newermt<span class="w"> </span><span class="m">2007</span>-06-07<span class="w"> </span>!<span class="w"> </span>-newermt<span class="w"> </span><span class="m">2007</span>-06-08
+</code></pre></div>
+
+</li>
+<li>
+<p>Find all files accessed on the Sep 29, 2008 in the current directory.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-newerat<span class="w"> </span><span class="m">2008</span>-09-29<span class="w"> </span>!<span class="w"> </span>-newerat<span class="w"> </span><span class="m">2008</span>-09-30
+</code></pre></div>
+
+</li>
+<li>
+<p>Find files which had their permission changed on the same day.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-newerct<span class="w"> </span><span class="m">2008</span>-09-29<span class="w"> </span>!<span class="w"> </span>-newerct<span class="w"> </span><span class="m">2008</span>-09-30
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="search-files-by-type">Search Files by Type</h3>
+<ol>
+<li>
+<p>Find broken symbolic links.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-xtype<span class="w"> </span>l
+<span class="c1"># or</span>
+find<span class="w"> </span>-L<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>l
+</code></pre></div>
+
+</li>
+<li>
+<p>Find executable files in current directory </p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w">  </span>-maxdepth<span class="w"> </span><span class="m">1</span><span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span>-executable
+</code></pre></div>
+
+</li>
+<li>
+<p>Check file type of all files under the current directory.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>.<span class="w"> </span>-type<span class="w"> </span>f<span class="w"> </span><span class="p">|</span><span class="w"> </span>xargs<span class="w"> </span>file
+</code></pre></div>
+
+</li>
+</ol>
+<h3 id="search-files-by-user-permission">Search Files by User Permission</h3>
+<ol>
+<li>
+<p>Find files that belong to a user but writable by its group or other people.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/path/to/file<span class="w"> </span>-user<span class="w"> </span>user1<span class="w"> </span>-perm<span class="w"> </span>/022
+</code></pre></div>
+
+<ul>
+<li><code>-perm mode</code>: File's permission bits are exactly mode (octal or symbolic).</li>
+<li><code>-perm -mode</code>: All  of  the  permission bits mode are set for the file. </li>
+<li><code>-perm /mode</code>: Any of the permission bits mode are set for the file. </li>
+</ul>
+</li>
+<li>
+<p>The following command finds all files that readable or writable by the group or (readable or writable) by others.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/path/to/file<span class="w"> </span>-user<span class="w"> </span>user1<span class="w"> </span>-perm<span class="w"> </span>/066
+</code></pre></div>
+
+</li>
+<li>
+<p>The following command find all files that readable and writable by the group and (readable and writable) by others.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/path/to/file<span class="w"> </span>-user<span class="w"> </span>user1<span class="w"> </span>-perm<span class="w"> </span>-066
+</code></pre></div>
+
+</li>
+<li>
+<p>The following command find all files that readable or writable by the group and (readable or writable) by others.</p>
+<div class="highlight"><pre><span></span><code>find<span class="w"> </span>/path/to/file<span class="w"> </span>-user<span class="w"> </span>user1<span class="w"> </span>-perm<span class="w"> </span>/060<span class="w"> </span>-perm<span class="w"> </span>/006
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://www.cyberciti.biz/faq/find-command-exclude-ignore-files/">Find command Exclude or Ignore Files (e.g. Ignore All Hidden .dot Files )</a></p>
+</li>
+<li>
+<p><a href="https://linuxconfig.org/how-to-explicitly-exclude-directory-from-find-command-s-search">How to Exclude Directories from the Find Command Search in Linux</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2014-09-06T09:43:30-07:00" pubdate>Sep 06, 2014</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/find.html">find</a>
+    <a class="category" href="https://www.legendu.net/en/tag/tips.html">tips</a>
+    <a class="category" href="https://www.legendu.net/en/tag/search.html">search</a>
+    <a class="category" href="https://www.legendu.net/en/tag/locate.html">locate</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/find-tips/';
+          var disqus_url = 'https://www.legendu.net/en/blog/find-tips/';
+          var disqus_title = 'Tips on the find command in Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

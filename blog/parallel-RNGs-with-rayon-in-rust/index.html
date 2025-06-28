@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Parallel RNGs With Rayon in Rust</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Parallel RNGs With Rayon in Rust</h1>
+      <p class="meta"><time datetime="2023-07-05T08:42:27-07:00" pubdate>Jul 05, 2023</time></p>
+</header>
+
+  <div class="entry-content"><p><a href="https://rust-random.github.io/book/guide-parallel.html">The Rust Rand Book - Parallel RNGs</a>
+has a very good summary about parallel RNGs.
+It also gives code examples using the rayon library.
+However,
+a few things to notice.</p>
+<ol>
+<li>
+<p><a href="https://docs.rs/rand/latest/rand/rngs/struct.ThreadRng.html">rand::ThreadRng</a>
+    (obtained by calling <a href="https://docs.rs/rand/latest/rand/fn.thread_rng.html">rand::thread_rng</a>)
+    is often used in code examples of parallel RNGs
+    as it uses thread-local storage and is seeded automatically (lazily and uniquely) on each thread. </p>
+<div class="highlight"><pre><span></span><code><span class="k">use</span><span class="w"> </span><span class="n">rand</span>::<span class="n">Rng</span><span class="p">;</span>
+<span class="k">use</span><span class="w"> </span><span class="n">rayon</span>::<span class="n">prelude</span>::<span class="o">*</span><span class="p">;</span>
+
+<span class="kd">let</span><span class="w"> </span><span class="n">a</span>: <span class="nb">Vec</span><span class="o">&lt;</span><span class="n">_</span><span class="o">&gt;</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="k">i32</span><span class="o">..</span><span class="mi">1_000_000</span><span class="p">)</span>
+<span class="w">    </span><span class="p">.</span><span class="n">into_par_iter</span><span class="p">()</span>
+<span class="w">    </span><span class="p">.</span><span class="n">map_init</span><span class="p">(</span>
+<span class="w">        </span><span class="o">||</span><span class="w"> </span><span class="n">rand</span>::<span class="n">thread_rng</span><span class="p">(),</span><span class="w">  </span><span class="c1">// get the thread-local RNG</span>
+<span class="w">        </span><span class="o">|</span><span class="n">rng</span><span class="p">,</span><span class="w"> </span><span class="n">x</span><span class="o">|</span><span class="w"> </span><span class="k">if</span><span class="w"> </span><span class="n">rng</span><span class="p">.</span><span class="n">gen</span><span class="p">()</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// randomly negate items</span>
+<span class="w">            </span><span class="o">-</span><span class="n">x</span>
+<span class="w">        </span><span class="p">}</span><span class="w"> </span><span class="k">else</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="n">x</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">    </span><span class="p">).</span><span class="n">collect</span><span class="p">();</span>
+</code></pre></div>
+
+<p>While <a href="https://docs.rs/rand/latest/rand/rngs/struct.ThreadRng.html">rand::ThreadRng</a>
+is convenient to use as parallel RNGs,
+it is based on
+<a href="https://docs.rs/rand/latest/rand/rngs/struct.StdRng.html">StdRng</a>
+(currently, ChaCha block cipher with 12 rounds)
+which might be too slow for statistical simulations.
+If that's the case,
+you can use a faster RNG (e.g., SmallRng) with thread-local storage as parallel RNGs.
+Please refer to 
+<a href="https://www.legendu.net/misc/blog/parallel-RNGs-with-rayon-in-rust/#customized-rngs-with-thread-local-storage">Customized RNGs with Thread-local Storage</a>
+for details.</p>
+</li>
+<li>
+<p><a href="https://docs.rs/rayon/latest/rayon/iter/trait.ParallelIterator.html#method.map_init">rayon::iter::ParallelIterator::map_init</a>
+    allows you do some initializing work before running each job.
+    Note that the <code>init</code> closure passed to <code>map_init</code> is called once per rayon job
+    NOT per rayon worker thead.
+    A rayon worker thread typically executes many jobs. 
+    If you need to ensure some intializing work per rayon worker thread
+    (e.g., if you want to use the same RNG for jobs executed by the same worker thread),
+    you have to leverage thread-local storage in the <code>init</code> closure.
+    For more discussions,
+    please refer to
+    <a href="https://www.legendu.net/misc/blog/thread-local-storage-for-rayon">Thread-Local Storage for Rayon</a> 
+    .</p>
+</li>
+<li>
+<p><a href="https://docs.rs/rayon/latest/rayon/iter/trait.IndexedParallelIterator.html#method.with_min_len">rayon::iter::ParallelIterator::with_min_len</a>
+    can be used to set the minimum number of items processed per job.
+    When necessary,
+    its parameter can be tuned to improve performance.</p>
+</li>
+</ol>
+<h2 id="customized-rngs-with-thread-local-storage">Customized RNGs with Thread-local Storage</h2>
+<p>Please refer to
+<a href="https://www.legendu.net/misc/blog/thread-local-storage-for-rayon">Thread-Local Storage for Rayon</a> 
+for detailed discussions.</p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://rust-random.github.io/book/guide-parallel.html">The Rust Rand Book - Parallel RNGs</a></p>
+</li>
+<li>
+<p><a href="https://www.reddit.com/r/rust/comments/ya5m3r/what_is_the_best_practice_for_initializing/">What is the best practice for initializing variables for use in parallelized rayon iterators?</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2023-07-05T08:42:27-07:00" pubdate>Jul 05, 2023</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="https://www.legendu.net/en/tag/rust.html">Rust</a>
+    <a class="category" href="https://www.legendu.net/en/tag/parallel.html">parallel</a>
+    <a class="category" href="https://www.legendu.net/en/tag/concurrency.html">concurrency</a>
+    <a class="category" href="https://www.legendu.net/en/tag/thread.html">thread</a>
+    <a class="category" href="https://www.legendu.net/en/tag/multi-thread.html">multi-thread</a>
+    <a class="category" href="https://www.legendu.net/en/tag/rng.html">RNG</a>
+    <a class="category" href="https://www.legendu.net/en/tag/prng.html">PRNG</a>
+    <a class="category" href="https://www.legendu.net/en/tag/random-number-generator.html">random number generator</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/parallel-RNGs-with-rayon-in-rust/';
+          var disqus_url = 'https://www.legendu.net/en/blog/parallel-RNGs-with-rayon-in-rust/';
+          var disqus_title = 'Parallel RNGs With Rayon in Rust';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

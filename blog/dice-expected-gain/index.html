@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Expected Gain of Tossing a Dice</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Expected Gain of Tossing a Dice</h1>
+      <p class="meta"><time datetime="2012-07-30T09:37:39-07:00" pubdate>Jul 30, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/dice/dice.png" height="200" width="240" align="right"/></p>
+<p>Suppose you toss a symmetric dice. 
+You are allowed to quit the game and
+get money which equals the total points you get at any time if 6 has never
+showed up. Whenever 6 shows up, the game is over and you get nothing. For
+example, if the first three tosses turn out to be 2, 3 and 5 you can quit the
+game immediately and gain 10 dollars or you can choose to continue the game.
+What is the expected gains of this game?</p>
+<p>First we have to decide how to play the game, i.e. when to quit the game.
+Suppose <span class="math">\(T\)</span> is the total points we get now.
+If we choose to continue the game, the distribution of our profit is presented in <a href="http://dclong.github.io/media/dice/tables.pdf">Table 1</a>.
+So our net profit is <span class="math">\(\frac{15-T}{6}\)</span> if we choose to continue the game,
+which suggests us quit the game when <span class="math">\(T\ge15\)</span>.
+Let's use <span class="math">\(W\)</span> to denote the final gain in this game,
+then <span class="math">\(W\)</span> can be either 0 or some element in <span class="math">\(A\equiv\{15, 16, 17, 18, 19\}\)</span>.
+To find the expected gains,
+we have to find the distribution of <span class="math">\(W\)</span>,
+i.e. we have to find <span class="math">\(P(W=i)\)</span>, <span class="math">\(i\in A\)</span>.
+There're at least two ways to do this.
+One of them is to use the powerful tool Markov Chain and the other is to use recursion formula.</p>
+<h2 id="method-i-markov-chain">Method I: Markov Chain</h2>
+<p>Let's use <span class="math">\(\{X_n\}\)</span>, <span class="math">\(n\in \mathbb{N}\)</span> to stand for the total points we get at step <span class="math">\(n\)</span>.
+Let <span class="math">\(X_0=0\)</span>; <span class="math">\(X_k=s\)</span> (just a symbol to avoid confusion with the other states of <span class="math">\(\{X_n\}\)</span>) for <span class="math">\(k\ge n\)</span> if the tossing result turns out to 6 at step <span class="math">\(n\)</span>;
+<span class="math">\(X_k=t\)</span> for <span class="math">\(k\ge n\)</span> if <span class="math">\(X_n=t\in A\)</span>.
+It's easy to check that <span class="math">\(\{X_n\}\)</span> is a Markov Chain and its limiting distribution is what we are interested in.
+The transition probability matrix of <span class="math">\(\{X_n\}\)</span> is given in <a href="http://dclong.github.io/media/dice/tables.pdf">Table 1</a>.
+The probabilities that <span class="math">\(W=i\)</span> where <span class="math">\(i\in A\)</span>,
+are the probabilities that <span class="math">\(X_n\)</span> ends in the corresponding states,
+i.e. <span class="math">\(lim_n P(X_n=i)\)</span>, <span class="math">\(i\in A\)</span>.
+To find these limiting probabilities, we need to find the limit of <span class="math">\(P^n\)</span> (actually we only care about the limit property of the second row of the transition matrix since <span class="math">\(X_0=0\)</span>).
+With the help of R, we can easily find these probabilities which are given below:</p>
+<div class="highlight"><pre><span></span><code>&gt; probs.pos
+15         16         17         18         19
+0.13128076 0.10092009 0.07407628 0.04813533 0.02337223
+</code></pre></div>
+
+<p>So the average gain of this game is</p>
+<div class="highlight"><pre><span></span><code>&gt; probs.pos%*%15:19
+[,1]
+[1,] 6.153738
+</code></pre></div>
+
+<h2 id="method-ii-recursion-formula">Method II: Recursion Formula</h2>
+<p>Let <span class="math">\(\{X_n\}\)</span>, <span class="math">\(n\in \mathbb{N}\)</span> and <span class="math">\(A\)</span> be the same as in Method I.
+Let <span class="math">\(E_{t,n}\)</span> be the event that <span class="math">\(X_n=t, X_{n-1}&lt;t\)</span> 
+and <span class="math">\(P_{t,n}\equiv P(E_{t,n})\)</span>,
+then <span class="math">\(P_{t,n}\)</span> stands for the probability that we first achieve total points <span class="math">\(t\)</span> at step <span class="math">\(n\)</span>.
+Specially for <span class="math">\(t\in A\)</span>, <span class="math">\(P_{t,n}\)</span> stand for the probability that the game ends with total points at step <span class="math">\(n\)</span>.
+Let <span class="math">\(P_t\equiv \sum_{n\ge0} P_{t,n}\)</span>, then <span class="math">\(P_t\)</span>, <span class="math">\(t\in A\)</span> are what we're interested in.
+Conditioning <span class="math">\(E_{t,n}\)</span> on the value <span class="math">\(X_{n-1}\)</span> takes, we have the following recursion formula
+</p>
+<div class="math">$$
+P_{t,n}=\frac{1}{6}P_{t-1,n-1}+\frac{1}{6}P_{t-2,n-1} +\frac{1}{6}P_{t-3,n-1}\\
+    +\frac{1}{6}P_{t-4,n-1} +\frac{1}{6}P_{t-5,n-1},\text{ for } 0&lt;t\le 15,\ n\ge1.  
+$$</div>
+<p>Because the game is over when <span class="math">\(t\ge15\)</span>,
+we have different formulas for <span class="math">\(t&gt;15\)</span> and <span class="math">\(n\ge1\)</span></p>
+<div class="math">$$
+P_{16,n}=\frac{1}{6}P_{14,n-1}+\frac{1}{6}P_{13,n-1}+\frac{1}{6}P_{12,n-1}+\frac{1}{6}P_{11,n-1},
+$$</div>
+<div class="math">$$ P_{17,n}=\frac{1}{6}P_{14,n-1}+\frac{1}{6}P_{13,n-1}+\frac{1}{6}P_{12,n-1}, $$</div>
+<div class="math">$$ P_{18,n}=\frac{1}{6}P_{14,n-1}+\frac{1}{6}P_{13,n-1},$$</div>
+<div class="math">$$ P_{19,n}=\frac{1}{6}P_{14,n-1}.  $$</div>
+<p>It's obvious that <span class="math">\(P_{t,0}=0\)</span> for <span class="math">\(t&gt;0\)</span>.
+Sum the above formulas over <span class="math">\(n\)</span> from 1 to <span class="math">\(\infty\)</span> we have
+</p>
+<div class="math">$$
+P_{t}=\frac{1}{6}P_{t-1}+\frac{1}{6}P_{t-2}+\frac{1}{6}P_{t-3}
++\frac{1}{6}P_{t-4}+\frac{1}{6}P_{t-5},\text{ for } 0&lt;t\le 15,
+$$</div>
+<div class="math">$$ P_{16}=\frac{1}{6}P_{14}+\frac{1}{6}P_{13}+\frac{1}{6}P_{12}+\frac{1}{6}P_{11}, $$</div>
+<div class="math">$$P_{17}=\frac{1}{6}P_{14}+\frac{1}{6}P_{13}+\frac{1}{6}P_{12},$$</div>
+<div class="math">$$P_{18}=\frac{1}{6}P_{14}+\frac{1}{6}P_{13},$$</div>
+<div class="math">$$P_{19}=\frac{1}{6}P_{14}.$$</div>
+<p>To solve this system, we have to ascertain the initial values.
+It's not hard to find values for <span class="math">\(P_0,\ldots,P_4\)</span>, however,
+we can make things even easier by extending the recursion formula forward to term
+<span class="math">\(P_{-4}\)</span>.
+Under this extension, the initial conditions for this system are as follows</p>
+<div class="math">$$ P_{-4}=P_{-3}=P_{-2}=P_{-1}=0 \text{ and } P_0=1.  $$</div>
+<p>Now we can find values for <span class="math">\(P_t\)</span>, <span class="math">\(t\in A\)</span> easily.
+One way is to use method of generating functions to find the general term for <span class="math">\(P_t\)</span> when <span class="math">\(t\le15\)</span> and then calculate <span class="math">\(P_t\)</span> for <span class="math">\(t\in A\)</span>.
+Another easier way and more practical way is use computer to find these values directly based on these formulas given above.
+The implementation in Mathmatica and the corresponding result are as follows. 
+Notice that their is a built-in function called <code>LinearRecurrence</code> in Mathematica which 
+does a similar job to the function <code>LinearRecursion</code> here. </p>
+<div class="highlight"><pre><span></span><code><span class="nl">LinearRecursion</span><span class="p">:</span><span class="err">:</span><span class="n">SmallOrder</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;The order of the linear recursive equation must be at least 2.&quot;</span><span class="p">;</span>
+<span class="nl">LinearRecursion</span><span class="p">:</span><span class="err">:</span><span class="n">NotMatch</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ss">&quot;The length of argument &#39;coef&#39; doesn&#39;t match the length of &#39;initial&#39;.&quot;</span><span class="p">;</span>
+<span class="n">LinearRecursion</span><span class="o">[</span><span class="n">n_, ini_, coef_: Null, start_: 1, irev_: False, crev_: False</span><span class="o">]</span><span class="w"> </span><span class="err">:</span><span class="o">=</span>
+<span class="k">Module</span><span class="o">[</span><span class="n">{nmax, result, i, coefficient, order, index, initials},</span>
+<span class="n">    order = Length[ini</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">If</span><span class="o">[</span><span class="n">order &lt; 2, Message[LinearRecursion::SmallOrder</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">Return</span><span class="err">[]]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">If</span><span class="o">[</span><span class="n">coef === Null,</span>
+<span class="n">        coefficient = Table[1, {order}</span><span class="o">]</span><span class="p">,</span>
+<span class="w">        </span><span class="k">If</span><span class="o">[</span><span class="n">Length[coef</span><span class="o">]</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="k">order</span><span class="p">,</span>
+<span class="w">            </span><span class="n">Message</span><span class="o">[</span><span class="n">LinearRecursion::NotMatch</span><span class="o">]</span><span class="p">;</span><span class="w"> </span><span class="k">Return</span><span class="err">[]</span><span class="p">,</span>
+<span class="w">            </span><span class="n">coefficient</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span>
+<span class="w">        </span><span class="err">]</span>
+<span class="w">    </span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">If</span><span class="o">[</span><span class="n">irev, initials = Reverse[ini</span><span class="o">]</span><span class="p">,</span><span class="w"> </span><span class="n">initials</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">ini</span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">If</span><span class="o">[</span><span class="n">crev, coefficient = Reverse[coefficient</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">index</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">n</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="k">start</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="mi">1</span><span class="p">;</span>
+<span class="w">    </span><span class="n">nmax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">Max</span><span class="o">[</span><span class="n">index</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">If</span><span class="o">[</span><span class="n">nmax &lt;= order, Return[initials[[index</span><span class="o">]</span><span class="err">]]]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">result</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nc">Table</span><span class="o">[</span><span class="n">0, {nmax}</span><span class="o">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">result</span><span class="o">[</span><span class="n">[Table[i, {i, 1, order}</span><span class="o">]</span><span class="err">]]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">initials</span><span class="p">;</span>
+<span class="w">    </span><span class="k">For</span><span class="o">[</span><span class="n">i = order + 1, i &lt;= nmax, i++,</span>
+<span class="n">        result[[i</span><span class="o">]</span><span class="err">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">result</span><span class="o">[</span><span class="n">[Table[j, {j, i - order, i - 1}</span><span class="o">]</span><span class="err">]]</span><span class="p">.</span><span class="n">coefficient</span>
+<span class="w">    </span><span class="err">]</span><span class="p">;</span>
+<span class="w">    </span><span class="k">result</span><span class="o">[</span><span class="n">[index</span><span class="o">]</span><span class="err">]</span>
+<span class="err">]</span>
+
+<span class="ow">In</span><span class="o">[</span><span class="n">142</span><span class="o">]</span><span class="err">:</span><span class="o">=</span>
+<span class="n">ini</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="err">}</span><span class="p">;</span>
+<span class="n">coef</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="w"> </span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="err">}</span><span class="p">;</span>
+<span class="n">c1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="o">[</span><span class="n">[1</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="n">c2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="o">[</span><span class="n">[2</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="n">c3</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="o">[</span><span class="n">[3</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="n">c4</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="o">[</span><span class="n">[4</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="n">c5</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">coef</span><span class="o">[</span><span class="n">[5</span><span class="o">]</span><span class="err">]</span><span class="p">;</span>
+<span class="n">p11</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LinearRecursion</span><span class="o">[</span><span class="n">11, ini, coef, -4</span><span class="o">]</span><span class="p">;</span>
+<span class="n">p12</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LinearRecursion</span><span class="o">[</span><span class="n">12, ini, coef, -4</span><span class="o">]</span><span class="p">;</span>
+<span class="n">p13</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LinearRecursion</span><span class="o">[</span><span class="n">13, ini, coef, -4</span><span class="o">]</span><span class="p">;</span>
+<span class="n">p14</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LinearRecursion</span><span class="o">[</span><span class="n">14, ini, coef, -4</span><span class="o">]</span><span class="p">;</span>
+<span class="n">p15</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">LinearRecursion</span><span class="o">[</span><span class="n">15, ini, coef, -4</span><span class="o">]</span><span class="p">;</span>
+<span class="n">p16</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c5</span><span class="w"> </span><span class="n">p11</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c4</span><span class="w"> </span><span class="n">p12</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="n">p13</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c2</span><span class="w"> </span><span class="n">p14</span><span class="p">;</span>
+<span class="n">p17</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c5</span><span class="w"> </span><span class="n">p12</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c4</span><span class="w"> </span><span class="n">p13</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c3</span><span class="w"> </span><span class="n">p14</span><span class="p">;</span>
+<span class="n">p18</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c5</span><span class="w"> </span><span class="n">p13</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">c4</span><span class="w"> </span><span class="n">p14</span><span class="p">;</span>
+<span class="n">p19</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">c5</span><span class="w"> </span><span class="n">p14</span><span class="p">;</span>
+<span class="n">probs</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="err">{</span><span class="n">p15</span><span class="p">,</span><span class="w"> </span><span class="n">p16</span><span class="p">,</span><span class="w"> </span><span class="n">p17</span><span class="p">,</span><span class="w"> </span><span class="n">p18</span><span class="p">,</span><span class="w"> </span><span class="n">p19</span><span class="err">}</span><span class="p">;</span>
+<span class="n">gain</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">probs</span><span class="p">.</span><span class="nc">Table</span><span class="o">[</span><span class="n">i, {i, 15, 19}</span><span class="o">]</span>
+
+<span class="k">Out</span><span class="o">[</span><span class="n">159</span><span class="o">]=</span>
+<span class="mi">2893395172951</span><span class="o">/</span><span class="mi">470184984576</span>
+</code></pre></div>
+
+<p>The implementation in R and the corresponding result are as below. </p>
+<div class="highlight"><pre><span></span><code><span class="err">#</span><span class="s1">&#39; @param n is the subscript of the array to be calculated</span>
+<span class="s1">#&#39;</span><span class="w"> </span><span class="nv">@param</span><span class="w"> </span><span class="n">ini</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">initial</span><span class="w"> </span><span class="k">values</span><span class="w"> </span><span class="n">vector</span><span class="w"> </span><span class="n">starting</span><span class="w"> </span><span class="k">from</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">first</span><span class="w"> </span><span class="n">term</span>
+<span class="err">#&#39;</span><span class="w"> </span><span class="nv">@param</span><span class="w">  </span><span class="n">coef</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">coefficients</span><span class="w"> </span><span class="n">vector</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">linear</span><span class="w"> </span><span class="n">recursion</span><span class="w"> </span><span class="n">equation</span>
+<span class="n">fibo</span><span class="o">=</span><span class="k">function</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">ini</span><span class="p">,</span><span class="n">coef</span><span class="o">=</span><span class="n">rep</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">length</span><span class="p">(</span><span class="n">ini</span><span class="p">)),</span><span class="k">start</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">irev</span><span class="o">=</span><span class="k">FALSE</span><span class="p">,</span><span class="n">crev</span><span class="o">=</span><span class="k">FALSE</span><span class="p">)</span><span class="err">{</span>
+<span class="w">    </span><span class="k">order</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">ini</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="k">order</span><span class="o">&lt;</span><span class="mi">2</span><span class="p">)</span>
+<span class="w">    </span><span class="n">stop</span><span class="p">(</span><span class="ss">&quot;the order of the difference equation must be at least 2.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">length</span><span class="p">(</span><span class="n">coef</span><span class="p">)</span><span class="o">!=</span><span class="k">order</span><span class="p">)</span>
+<span class="w">    </span><span class="n">stop</span><span class="p">(</span><span class="ss">&quot;the lengths of the coefficents vector and the initial</span>
+<span class="ss">    values vector must be the same.&quot;</span><span class="p">)</span>
+<span class="w">    </span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="o">-</span><span class="k">start</span><span class="o">+</span><span class="mi">1</span>
+<span class="w">    </span><span class="n">nmax</span><span class="o">=</span><span class="nf">max</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">nmax</span><span class="o">&lt;=</span><span class="k">order</span><span class="p">)</span>
+<span class="w">    </span><span class="k">return</span><span class="p">(</span><span class="n">ini</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">irev</span><span class="p">)</span>
+<span class="w">    </span><span class="n">ini</span><span class="o">=</span><span class="n">rev</span><span class="p">(</span><span class="n">ini</span><span class="p">)</span>
+<span class="w">    </span><span class="k">if</span><span class="p">(</span><span class="n">crev</span><span class="p">)</span>
+<span class="w">    </span><span class="n">coef</span><span class="o">=</span><span class="n">rev</span><span class="p">(</span><span class="n">coef</span><span class="p">)</span>
+<span class="w">    </span><span class="k">result</span><span class="o">=</span><span class="n">rep</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nmax</span><span class="p">)</span>
+<span class="w">    </span><span class="k">result</span><span class="o">[</span><span class="n">1:order</span><span class="o">]=</span><span class="n">ini</span>
+<span class="w">    </span><span class="k">for</span><span class="p">(</span><span class="n">i</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="p">(</span><span class="k">order</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="err">:</span><span class="n">nmax</span><span class="p">)</span>
+<span class="w">    </span><span class="k">result</span><span class="o">[</span><span class="n">i</span><span class="o">]=</span><span class="k">result</span><span class="o">[</span><span class="n">(i-order):(i-1)</span><span class="o">]%*%</span><span class="n">coef</span>
+<span class="w">    </span><span class="k">return</span><span class="p">(</span><span class="k">result</span><span class="o">[</span><span class="n">n</span><span class="o">]</span><span class="p">)</span>
+<span class="err">}</span>
+
+<span class="n">ini</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">coef</span><span class="o">=</span><span class="n">rep</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="mi">6</span><span class="p">,</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">c1</span><span class="o">=</span><span class="n">coef</span><span class="o">[</span><span class="n">1</span><span class="o">]</span>
+<span class="n">c2</span><span class="o">=</span><span class="n">coef</span><span class="o">[</span><span class="n">2</span><span class="o">]</span>
+<span class="n">c3</span><span class="o">=</span><span class="n">coef</span><span class="o">[</span><span class="n">3</span><span class="o">]</span>
+<span class="n">c4</span><span class="o">=</span><span class="n">coef</span><span class="o">[</span><span class="n">4</span><span class="o">]</span>
+<span class="n">c5</span><span class="o">=</span><span class="n">coef</span><span class="o">[</span><span class="n">5</span><span class="o">]</span>
+<span class="n">p11</span><span class="o">=</span><span class="n">fibo</span><span class="p">(</span><span class="mi">11</span><span class="p">,</span><span class="n">ini</span><span class="p">,</span><span class="n">coef</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">p12</span><span class="o">=</span><span class="n">fibo</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="n">ini</span><span class="p">,</span><span class="n">coef</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">p13</span><span class="o">=</span><span class="n">fibo</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="n">ini</span><span class="p">,</span><span class="n">coef</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">p14</span><span class="o">=</span><span class="n">fibo</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="n">ini</span><span class="p">,</span><span class="n">coef</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">p15</span><span class="o">=</span><span class="n">fibo</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span><span class="n">ini</span><span class="p">,</span><span class="n">coef</span><span class="p">,</span><span class="o">-</span><span class="mi">4</span><span class="p">)</span>
+<span class="n">p16</span><span class="o">=</span><span class="n">c5</span><span class="o">*</span><span class="n">p11</span><span class="o">+</span><span class="n">c4</span><span class="o">*</span><span class="n">p12</span><span class="o">+</span><span class="n">c3</span><span class="o">*</span><span class="n">p13</span><span class="o">+</span><span class="n">c2</span><span class="o">*</span><span class="n">p14</span>
+<span class="n">p17</span><span class="o">=</span><span class="n">c5</span><span class="o">*</span><span class="n">p12</span><span class="o">+</span><span class="n">c4</span><span class="o">*</span><span class="n">p13</span><span class="o">+</span><span class="n">c3</span><span class="o">*</span><span class="n">p14</span>
+<span class="n">p18</span><span class="o">=</span><span class="n">c5</span><span class="o">*</span><span class="n">p13</span><span class="o">+</span><span class="n">c4</span><span class="o">*</span><span class="n">p14</span>
+<span class="n">p19</span><span class="o">=</span><span class="n">c5</span><span class="o">*</span><span class="n">p14</span>
+<span class="n">probs</span><span class="o">=</span><span class="n">c</span><span class="p">(</span><span class="n">p15</span><span class="p">,</span><span class="n">p16</span><span class="p">,</span><span class="n">p17</span><span class="p">,</span><span class="n">p18</span><span class="p">,</span><span class="n">p19</span><span class="p">)</span>
+<span class="n">gain</span><span class="o">=</span><span class="n">probs</span><span class="o">%*%</span><span class="mi">15</span><span class="err">:</span><span class="mi">19</span>
+<span class="o">&gt;</span><span class="w"> </span><span class="n">gain</span>
+<span class="o">[</span><span class="n">,1</span><span class="o">]</span>
+<span class="o">[</span><span class="n">1,</span><span class="o">]</span><span class="w"> </span><span class="mf">6.153738</span>
+</code></pre></div>
+
+<p>We can easily generalize this problem by assume the dice to be a nonsymmetric one with <span class="math">\(f\)</span> faces having arbitrary points on it.
+Both of the two above methods can apply to the generalized problem,
+however the second method is simpler for this kind of problems.</p>
+<script type="text/javascript">if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width < 768) ? "left" : align;
+        indent = (screen.width < 768) ? "0em" : indent;
+        linebreak = (screen.width < 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js','color.js','mhchem.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+</script></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2012-07-30T09:37:39-07:00" pubdate>Jul 30, 2012</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/mathematica.html">Mathematica</a>
+    <a class="category" href="https://www.legendu.net/en/tag/recursion.html">recursion</a>
+    <a class="category" href="https://www.legendu.net/en/tag/statistics.html">statistics</a>
+    <a class="category" href="https://www.legendu.net/en/tag/probability.html">probability</a>
+    <a class="category" href="https://www.legendu.net/en/tag/markov-chain.html">Markov chain</a>
+    <a class="category" href="https://www.legendu.net/en/tag/fun-problems.html">fun problems</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/dice-expected-gain/';
+          var disqus_url = 'https://www.legendu.net/en/blog/dice-expected-gain/';
+          var disqus_title = 'Expected Gain of Tossing a Dice';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

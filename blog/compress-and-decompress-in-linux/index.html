@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Compress and Decompressing Archives in Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Compress and Decompressing Archives in Linux</h1>
+      <p class="meta"><time datetime="2012-05-19T23:12:07-07:00" pubdate>May 19, 2012</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>Always test integrity of the compressed file
+    before you throw away the original archives.
+    I've seen a case before that a large zip file generated in Windows
+    cannot be unzipped correctly in Linux.
+    Not sure what happend though. </p>
+</li>
+<li>
+<p>Zstd is currently the best compression/decompression tool.
+    It supports different levels of compression.
+    For a similar compression ratio,
+    it is generally much faster than other compression tools.</p>
+</li>
+</ol>
+<h2 id="tarzstd">tar.zstd</h2>
+<ol>
+<li>
+<p>Extract archive.</p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-I<span class="w"> </span>zstd<span class="w"> </span>-xvf<span class="w"> </span>archive.tar.zst
+</code></pre></div>
+
+</li>
+<li>
+<p>Create an archive. </p>
+<div class="highlight"><pre><span></span><code><span class="c1"># max compression</span>
+tar<span class="w"> </span>cf<span class="w"> </span>-<span class="w"> </span>Dropbox/<span class="w"> </span><span class="p">|</span><span class="w"> </span>zstd<span class="w"> </span>-19<span class="w"> </span>-T0<span class="w"> </span>&gt;<span class="w"> </span>Dropbox.tar.zstd
+<span class="c1"># good balance bewteen compression ratio and speed</span>
+tar<span class="w"> </span>cf<span class="w"> </span>-<span class="w"> </span>Dropbox/<span class="w"> </span><span class="p">|</span><span class="w"> </span>zstd<span class="w"> </span>-9<span class="w"> </span>-T0<span class="w"> </span>&gt;<span class="w"> </span>Dropbox.tar.zstd
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="targz-or-tgz">tar.gz or tgz</h2>
+<ol>
+<li>
+<p>List the content of an archive.</p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-ztvf<span class="w"> </span>archive_name.tag.gz
+</code></pre></div>
+
+</li>
+<li>
+<p>Extract the content of an archive to the current directory.</p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-zxvf<span class="w"> </span>archive_name.tag.gz
+</code></pre></div>
+
+</li>
+<li>
+<p>Extract the content of an archive to a directory named "exdir".</p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-zxvf<span class="w"> </span>archive_name.tag.gz<span class="w"> </span>-C<span class="w"> </span>exdir
+</code></pre></div>
+
+</li>
+<li>
+<p>Create an archive.</p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-zcvf<span class="w"> </span>archive_name.tar.gz<span class="w"> </span>/path/to/file_or_dir
+</code></pre></div>
+
+</li>
+<li>
+<p>Create an archive with some files excluded.</p>
+<div class="highlight"><pre><span></span><code>tar<span class="w"> </span>-zcvf<span class="w"> </span>archive_name.tar.gz<span class="w"> </span>--exclude<span class="o">=</span><span class="s1">&#39;abc&#39;</span><span class="w"> </span>--exclude<span class="o">=</span><span class="s1">&#39;xyz&#39;</span><span class="w"> </span>/path/to/file_or_dir
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="gz">gz</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># decompress</span>
+gunzip<span class="w"> </span>-c<span class="w"> </span>archive_name.gz<span class="w"> </span>&gt;<span class="w"> </span>decompressed_file_name
+<span class="c1"># or</span>
+gzip<span class="w"> </span>-cd<span class="w"> </span>archive_name.gz<span class="w"> </span>&gt;<span class="w"> </span>decompressed_file_name
+<span class="c1"># or</span>
+zcat<span class="w"> </span>archive_name.gz<span class="w"> </span>&gt;<span class="w"> </span>decompressed_file_name
+</code></pre></div>
+
+<p>Notice that you have to use the <code>-c</code> option,
+otherwise,
+the original compressed file is removed.</p>
+<h2 id="tarbz2">tar.bz2</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># list the archive contents</span>
+tar<span class="w"> </span>-jtvf<span class="w"> </span>archive_name.tar.bz2
+<span class="c1"># extract the archive contents to the current directory</span>
+tar<span class="w"> </span>-jxvf<span class="w"> </span>archive_name.tar.bz2
+<span class="c1"># extract the archive contents to a directory named &quot;exdir&quot;</span>
+tar<span class="w"> </span>-jxvf<span class="w"> </span>archive_name.tar.bz2<span class="w"> </span>-C<span class="w"> </span>exdir
+</code></pre></div>
+
+<h2 id="zip">zip</h2>
+<ol>
+<li>
+<p>List the content of an archive.</p>
+<div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>-l<span class="w"> </span>archive_name.zip
+</code></pre></div>
+
+</li>
+<li>
+<p>Test the integrity of an archive.</p>
+<div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>-t<span class="w"> </span>archive_name.zip
+</code></pre></div>
+
+</li>
+<li>
+<p>Extract the archive contents into the current directory.</p>
+<div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>archive_name.zip
+</code></pre></div>
+
+</li>
+<li>
+<p>Extract the archive contents into the directory "exdir".</p>
+<div class="highlight"><pre><span></span><code>unzip<span class="w"> </span>archive_name.zip<span class="w"> </span>-d<span class="w"> </span>exdir
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a zip archive. </p>
+<div class="highlight"><pre><span></span><code>zip<span class="w"> </span>-r<span class="w"> </span>archive_name.zip<span class="w"> </span>.
+</code></pre></div>
+
+</li>
+<li>
+<p>Create a zip archive with some files excluded.</p>
+<div class="highlight"><pre><span></span><code>zip<span class="w"> </span>-r<span class="w"> </span>-x<span class="w"> </span><span class="s2">&quot;Nothanks.jpg&quot;</span><span class="w"> </span>archive.zip<span class="w"> </span>images/
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="rar">rar</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># list the archive contents</span>
+unrar<span class="w"> </span>l<span class="w"> </span>file_name
+<span class="c1"># test integrity of the archive</span>
+unrar<span class="w"> </span>t<span class="w"> </span>file_name
+<span class="c1"># extract the archive with full names</span>
+unrar<span class="w"> </span>x<span class="w"> </span>file_name
+</code></pre></div>
+
+<h2 id="jar">Jar</h2>
+<div class="highlight"><pre><span></span><code># extract the archive
+jar xf jar-file [archived-file(s)]
+</code></pre></div>
+
+<h2 id="7zip">7zip</h2>
+<div class="highlight"><pre><span></span><code><span class="c1"># list the archive contents</span>
+7za<span class="w"> </span>l<span class="w"> </span>file_name
+<span class="c1"># test the archive contents</span>
+7za<span class="w"> </span>t<span class="w"> </span>file_name
+<span class="c1"># extract the archive contents with full names</span>
+7za<span class="w"> </span>x<span class="w"> </span>file_name
+<span class="c1"># extract a file/folder from the archive</span>
+7za<span class="w"> </span>x<span class="w"> </span>archive_name<span class="w"> </span>path_to_file_to_be_extracted
+</code></pre></div>
+
+<p>If the compressed archive is splitted into several smaller files,
+just replace <code>file_name</code> in the above commands
+with the name of the first file of the compressed archive.</p>
+<p>For <code>rar</code> and <code>7za</code>,
+I'm not sure whether there are options for creating a new directory
+to uncompress the archive into.
+However, you can always first create an empty directory,
+move the archive into it and then uncompress it.</p>
+<h2 id="multiple-archives">Multiple Archives</h2>
+<p>The archive related commands (e.g., <code>tar</code>, <code>zip</code>, <code>unzip</code>, etc.) in Linux
+does not support decompressing from multiple archives
+or compressing files into multiple archives directly.
+To extract content from multiple archives,
+you need to first concatenate them into a single one.
+For example,
+you can use the following command to unzip archives
+<code>BigDataLite-3.0.zip.001</code>, <code>BigDataLite-3.0.zip.002</code>, <code>BigDataLite-3.0.zip.003</code>,
+<code>BigDataLite-3.0.zip.004</code>, <code>BigDataLite-3.0.zip.005</code> and <code>BigDataLite-3.0.zip.006</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># concatenate zipped archives into a single one</span>
+cat<span class="w"> </span>BigDataLite-3.0.zip.00?<span class="w"> </span>&gt;<span class="w"> </span>BigDataLite-3.0.zip
+<span class="c1"># unzip the combined archive</span>
+unzip<span class="w"> </span>BigDataLite-3.0.zip
+</code></pre></div>
+
+<p>To compress files into multiple archives,
+you have to first compress them into a single archive
+using one of the commands introduced before
+and then split the single archive into multiple ones
+using the command <code>split</code>.
+For example,
+the following command split the archive <code>WinTPC_1.tar.gz</code>
+into smaller ones named <code>WinTPC_1.tar.gz_part??</code> with size around 2.7G.</p>
+<div class="highlight"><pre><span></span><code>split<span class="w"> </span>-b<span class="w"> </span>2700M<span class="w"> </span>-d<span class="w"> </span>WinTPC_1.tar.gz<span class="w"> </span>WinTPC_1.tar.gz_part
+</code></pre></div>
+
+<p>An alternative way (and better in my opinion)
+is to specify the number of archives (with about equal size) to split into.</p>
+<div class="highlight"><pre><span></span><code>split<span class="w"> </span>-n<span class="w"> </span><span class="m">5</span><span class="w"> </span>-d<span class="w"> </span>xp_2.tar.gz<span class="w"> </span>xp_2.tar.gz_part
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://indico.cern.ch/event/695984/contributions/2872933/attachments/1590457/2516802/ZSTD_and_ZLIB_Updates_-_January_20186.pdf">Compression Update: ZSTD &amp; ZLIB</a></p>
+</li>
+<li>
+<p><a href="https://linuxreviews.org/Comparison_of_Compression_Algorithms">Comparison of Compression Algorithms</a></p>
+</li>
+<li>
+<p><a href="https://www.tecmint.com/18-tar-command-examples-in-linux/">18 Tar Command Examples in Linux</a></p>
+</li>
+<li>
+<p><a href="https://www.cyberciti.biz/faq/exclude-certain-files-when-creating-a-tarball-using-tar-command/">Exclude Certain Files When Creating A Tarball Using Tar Command</a></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/tar/manual/html_node/exclude.html">6.4 Excluding Some Files</a></p>
+</li>
+<li>
+<p><a href="https://osxdaily.com/2013/04/30/how-to-exclude-files-from-a-zip-archive/">How to Exclude Files from a Zip Archive</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2012-05-19T23:12:07-07:00" pubdate>May 19, 2012</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/decompress.html">decompress</a>
+    <a class="category" href="https://www.legendu.net/en/tag/compress.html">compress</a>
+    <a class="category" href="https://www.legendu.net/en/tag/archive.html">archive</a>
+    <a class="category" href="https://www.legendu.net/en/tag/split.html">split</a>
+    <a class="category" href="https://www.legendu.net/en/tag/multiple.html">multiple</a>
+    <a class="category" href="https://www.legendu.net/en/tag/zip.html">zip</a>
+    <a class="category" href="https://www.legendu.net/en/tag/tar.html">tar</a>
+    <a class="category" href="https://www.legendu.net/en/tag/gz.html">gz</a>
+    <a class="category" href="https://www.legendu.net/en/tag/bz2.html">bz2</a>
+    <a class="category" href="https://www.legendu.net/en/tag/dtrx.html">dtrx</a>
+    <a class="category" href="https://www.legendu.net/en/tag/rar.html">rar</a>
+    <a class="category" href="https://www.legendu.net/en/tag/7zip.html">7zip</a>
+    <a class="category" href="https://www.legendu.net/en/tag/zstd.html">zstd</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/compress-and-decompress-in-linux/';
+          var disqus_url = 'https://www.legendu.net/en/blog/compress-and-decompress-in-linux/';
+          var disqus_title = 'Compress and Decompressing Archives in Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

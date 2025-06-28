@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>My Docker Images</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">My Docker Images</h1>
+      <p class="meta"><time datetime="2018-10-18T09:10:17-07:00" pubdate>Oct 18, 2018</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="recommended-docker-images">Recommended Docker Images and Tags</h2>
+
+<p>Most of my Docker images have different variants 
+(corresponding to tags <code>latest</code>, <code>next</code>, etc) 
+for different use cases.
+And each tag might have histocial versions 
+with the pattern <code>mmddhh</code> 
+(<code>mm</code>, <code>dd</code> and <code>hh</code> stand for the month, day and hour) 
+for fallback if a tag is broken.
+Please refer to the following tag table for more details.</p>
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0pky"> Tag </th>
+    <th class="tg-0pky"> Base Image OS </th>
+    <th class="tg-0lax"> Comment </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax"> latest </td>
+    <td class="tg-0lax"> 
+        Ubuntu LTS (or newer if necessary and well tested) 
+    </td>
+    <td class="tg-0lax"> 
+        The most recent stable version of the Docker image. 
+        <span style="color:green">
+            The latest tag is what most users should use.
+        </span>
+        <br>
+        It cares more about user friendliness than Docker image size, load speed and even security.
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"> next </td>
+    <td class="tg-0lax"> 
+        Ubuntu LTS (or newer if necessary and well tested) 
+    </td>
+    <td class="tg-0lax">
+        The most recent testing version of the Docker image.
+        <br>
+        New features/tools will be added into the next tag 
+        before entering other tags.
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"> 23.04 </td>
+    <td class="tg-0lax"> 
+        Ubuntu 23.04
+    </td>
+    <td class="tg-0lax">
+        For any of the following situations: <br>
+        1. a specific Ubuntu/kernel version is required <br>
+        2. trying out newer Ubuntu versions than LTS
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"> mmddhh </td>
+    <td class="tg-0lax"> 
+        Histoical versions corresponding to the latest tag.
+    </td>
+    <td class="tg-0lax"> 
+        Fallback tags (for latest) if the latest tag is broken.
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"> next_mmddhh </td>
+    <td class="tg-0lax"> 
+        Histoical versions corresponding to the next tag.
+    </td>
+    <td class="tg-0lax"> 
+        Fallback tags (for next) if the next tag is broken.
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<table class="tg">
+<thead>
+  <tr>
+    <th class="tg-0lax"> Docker Image </th>
+    <th class="tg-0pky"> Comment </th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td class="tg-0lax"><a href="https://github.com/legendu-net/docker-vscode-server" target="_blank" rel="noopener noreferrer">dclong/vscode-server</a></td>
+    <td class="tg-0lax">Cloud IDE <a href="https://github.com/coder/code-server" target="_blank" rel="noopener noreferrer">code-server</a> (based on VSCode)</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><a href="https://github.com/legendu-net/docker-jupyterhub-ds" target="_blank" rel="noopener noreferrer">dclong/jupyterhub-ds</a></td>
+    <td class="tg-0lax">Traditional ML</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><a href="https://github.com/legendu-net/docker-jupyterhub-pytorch" target="_blank" rel="noopener noreferrer">dclong/jupyterhub-pytorch</a></td>
+    <td class="tg-0lax">Deep Learning</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><a href="https://github.com/legendu-net/docker-python-portable" target="_blank" rel="noopener noreferrer">dclong/python-portable</a></td>
+    <td class="tg-0lax">Build portable Python using <a href="https://github.com/indygreg/python-build-standalone" target="_blank" rel="noopener noreferrer">python-build-standalone</a></td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><a href="https://github.com/legendu-net/docker-jupyterhub-sagemath" target="_blank" rel="noopener noreferrer">dclong/jupyterhub-sagemath</a></td>
+    <td class="tg-0lax">Math / Calculus</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">
+        <a href="https://hub.docker.com/layers/dclong/jupyterhub-ds/blog_071520/images/sha256-f6f9f15d18a856786c37a370157e81c9e0acbc80050656858be9330c6213b5fe?context=repo" target="_blank" rel="noopener noreferrer">dclong/jupyterhub-ds:blog_071520</a>
+    </td>
+    <td class="tg-0lax">
+        For publishing <a href="https://github.com/legendu-net/blog" target="_blank" rel="noopener noreferrer">legendu.net/blog</a>
+        using CICD. 
+    </td>
+  </tr>
+  <tr>
+    <td class="tg-0lax"><a href="https://github.com/legendu-net/docker-gitpod" target="_blank" rel="noopener noreferrer">dclong/gitpod</a></td>
+    <td class="tg-0lax">Editing other GitHub repos using GitPod</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">
+        <a href="https://github.com/legendu-net/docker-jupyterhub-kotlin" target="_blank" rel="noopener noreferrer">dclong/jupyterhub-kotlin</a> <br>
+        <a href="https://github.com/legendu-net/docker-jupyterhub-ganymede" target="_blank" rel="noopener noreferrer">dclong/jupyterhub-ganymede</a>
+    </td>
+    <td class="tg-0lax">JVM languages</td>
+  </tr>
+  <tr>
+    <td class="tg-0lax">
+        <a href="https://github.com/legendu-net/docker-rustpython" target="_blank" rel="noopener noreferrer">dclong/rustpython</a>
+    </td>
+    <td class="tg-0lax">
+        RustPython
+    </td>
+  </tr>
+</tbody>
+</table>
+
+<h2 id="usage">Usage</h2>
+<h3 id="install-docker">Install Docker</h3>
+<p>Please refer to
+<a href="http://www.legendu.net/en/blog/docker-installation/">Install Docker</a>
+for instructions on how to install and configure Docker.</p>
+<h3 id="pull-the-docker-image">Pull the Docker Image</h3>
+<p>Taking <code>dclong/jupyterhub-ds</code> as an example,
+you can pull it using the command below.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>dclong/jupyterhub-ds
+</code></pre></div>
+
+<p>For people in mainland of China,
+please refer to the post
+<a href="http://www.legendu.net/en/blog/speedup-docker-pulling-and-pushing/">Speedup Docker Pulling and Pushing</a>
+on ways to speed up pushing/pulling of Docker images.
+If you don't bother,
+then just use the command below.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>pull<span class="w"> </span>registry.docker-cn.com/dclong/jupyterhub-ds
+</code></pre></div>
+
+<h3 id="start-a-container-using-ldc">Start a Container using <code>ldc</code></h3>
+<p>The recommended way to start containers for Docker images <code>dclong/*</code>
+is to use the <code>ldc</code> command which comes with 
+<a href="https://github.com/legendu-net/icon">icon</a>
+.</p>
+<h3 id="start-a-container-manually">Start a Container Manually</h3>
+<p>Below are explanation of some environment variable passed by the option <code>-e</code> to the Docker command.
+Keep the default if you don't know what are the best to use.
+<code>DOCKER_PASSWORD</code> is probably the only one you want to and should change.</p>
+<ul>
+<li><code>DOCKER_USER</code>: The user to be created (dynamically) in the Docker container.
+    The shell command <code>id -un</code> gets the name of the current user (on the host),
+    so the option <code>-e DOCKER_USER=$(id -un)</code> instructs the script <code>/scripts/sys/init.sh</code>
+    to create a user in the Docker container whose name is the same as the current user on the host.
+    <font color="red">
+    WARNING: the shell script <code>/scripts/sys/init.sh</code> cannot create a user named <code>root</code> 
+    as it already exists in the Docker container.
+    If you start a Docker container using <code>root</code>, 
+    make sure to pass a different user name to the envrionment variable <code>DOCKER_USER</code>,
+    e.g., <code>-e DOCKER_USER=dclong</code>.
+    </font>
+    For more discussion, 
+    please refer to <a href="https://github.com/dclong/docker-jupyterhub/issues/3">this issue</a>.</li>
+<li><code>DOCKER_USER_ID</code>: The ID of the user to be created in the Docker container.
+    The shell command <code>id -u</code> gets the user ID of the current user (on the host),
+    so the option <code>-e DOCKER_USER_ID=$(id -u)</code> instructs the script <code>/scripts/sys/init.sh</code>
+    to create a user in the Docker container whose user ID is the same as the user ID of the current user on the host.
+    This means that the user in the Docker container is essentailly the current user on the host,
+    which helps resolve file permissions between the Docker container and the host.
+    This option is similar to the option <code>--user</code> of the command <code>docker run</code>,
+    and you want to keep it unchanged, generally speaking.</li>
+<li><code>DOCKER_PASSWORD</code>: The password of the user to be created in the Docker container.
+    The shell command <code>id -un</code> get the name of the current user (on the host),
+    so the option <code>-e DOCKER_PASSWORD=$(id -un)</code> instructs the script <code>/scripts/sys/init.sh</code>
+    to create a user in the Docker container whose password is the name of the current user on the host.
+    <font color="red">
+    WARNING: You'd better change the default value for security reasons.
+    Of course, users can always change it later using the command <code>passwd</code> inside the Docker container.
+    </font></li>
+<li><code>DOCKER_GROUP_ID</code>: The group ID of the user to be created in the Docker container.
+    The shell command <code>id -g</code> gets the group ID of the current user (on the host),
+    so the option <code>-e DOCKER_GROUP_ID=$(id -g)</code> instructs the script <code>/scripts/sys/init.sh</code>
+    to create a user in the Docker container whose group ID is the same as the group ID of the current user on the host.
+    You want to keep this option unchanged, generally speaking.</li>
+<li><code>DOCKER_ADMIN_USER</code>: This environment variable applies to Docker images <code>dclong/jupyterhub*</code> only. 
+    It specifies the admin user of the JupyterHub server.
+    It should be the same as <code>DOCKER_USER</code> generally speaking.</li>
+<li><code>USER_MEM_LIMIT</code>: This environment variable applies to Docker images <code>dclong/jupyterhub*</code> only.
+    It limits the memory that each user can use.
+    Note: this optional is not in effect currently.</li>
+</ul>
+<p>The root directory of JupyterLab/Jupyter notebooks is <code>/workdir</code> in the container.
+You can mount directory on the host to it as you wish.
+Below are illustration using the Docker image <code>dclong/jupyterhub-ds</code>.</p>
+<p>The following command starts a container 
+and mounts the current working directory and <code>/home</code> on the host machine 
+to <code>/workdir</code> and <code>/home_host</code> in the container respectively.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--init<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--platform<span class="w"> </span>linux/amd64<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--hostname<span class="w"> </span>jupyterhub-ds<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--log-opt<span class="w"> </span>max-size<span class="o">=</span>50m<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span><span class="m">5006</span>:5006<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_USER</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-un<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_USER_ID</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-u<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_PASSWORD</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-un<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_GROUP_ID</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-g<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_ADMIN_USER</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-un<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workdir<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span>dirname<span class="w"> </span><span class="nv">$HOME</span><span class="sb">`</span>:/home_host<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>dclong/jupyterhub-ds<span class="w"> </span>/scripts/sys/init.sh
+</code></pre></div>
+
+<p>The following command (only works on Linux) does the same as the above one 
+except that it limits the use of CPU and memory.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span>run<span class="w"> </span>-d<span class="w"> </span>--init<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--platform<span class="w"> </span>linux/amd64<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--name<span class="w"> </span>jupyterhub-ds<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--log-opt<span class="w"> </span>max-size<span class="o">=</span>50m<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--memory<span class="o">=</span><span class="k">$(($(</span>head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>/proc/meminfo<span class="w"> </span><span class="p">|</span><span class="w"> </span>awk<span class="w"> </span><span class="s1">&#39;{print $2}&#39;</span><span class="k">)</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="m">4</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="m">5</span><span class="k">))</span>k<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--cpus<span class="o">=</span><span class="k">$((</span><span class="sb">`</span>nproc<span class="sb">`</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="m">1</span><span class="k">))</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span><span class="m">8000</span>:8000<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-p<span class="w"> </span><span class="m">5006</span>:5006<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_USER</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-un<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_USER_ID</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-u<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_PASSWORD</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-un<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_GROUP_ID</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-g<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-e<span class="w"> </span><span class="nv">DOCKER_ADMIN_USER</span><span class="o">=</span><span class="sb">`</span>id<span class="w"> </span>-un<span class="sb">`</span><span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span><span class="nb">pwd</span><span class="sb">`</span>:/workdir<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>-v<span class="w"> </span><span class="sb">`</span>dirname<span class="w"> </span><span class="nv">$HOME</span><span class="sb">`</span>:/home_host<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>dclong/jupyterhub-ds<span class="w"> </span>/scripts/sys/init.sh
+</code></pre></div>
+
+<h2 id="add-a-new-user-inside-a-docker-container">Add a New User Inside a Docker Container</h2>
+<p>You can of course use the well know commands <code>useradd</code>, <code>adduser</code>, etc. to achive it.
+To make things easier for you,
+there are some shell scripts in the directory <code>/scripts/sys/</code> to create usres for you.</p>
+<ul>
+<li><code>/scripts/sys/create_user.sh</code>: Create a new user. It's the base script for creating users.</li>
+<li><code>/scripts/sys/create_user_group.sh</code>: Create a new user with the given (existing) group.</li>
+<li><code>/scripts/sys/create_user_nogroup.sh</code>: Create a new user with group name <code>nogroup</code>.</li>
+<li><code>/scripts/sys/create_user_docker.sh</code>: Create a new user with group name <code>docker</code>.</li>
+</ul>
+<p>You can use the option <code>-h</code> to print help doc for these commands.</p>
+<div class="highlight"><pre><span></span><code>/scripts/sys/create_user_nogroup.sh<span class="w"> </span>-h
+Create<span class="w"> </span>a<span class="w"> </span>new<span class="w"> </span>user<span class="w"> </span>with<span class="w"> </span>the<span class="w"> </span>group<span class="w"> </span>name<span class="w"> </span><span class="s2">&quot;nogroup&quot;</span>.
+Syntax:<span class="w"> </span>create_user_nogroup<span class="w"> </span>user<span class="w"> </span>user_id<span class="w"> </span><span class="o">[</span>password<span class="o">]</span>
+Arguments:
+user:<span class="w"> </span>user<span class="w"> </span>name
+user_id:<span class="w"> </span>user<span class="w"> </span>id
+password:<span class="w"> </span>Optional<span class="w"> </span>password<span class="w"> </span>of<span class="w"> </span>the<span class="w"> </span>user.<span class="w"> </span>If<span class="w"> </span>not<span class="w"> </span>provided,<span class="w"> </span><span class="k">then</span><span class="w"> </span>the<span class="w"> </span>user<span class="w"> </span>name<span class="w"> </span>is<span class="w"> </span>used<span class="w"> </span>as<span class="w"> </span>the<span class="w"> </span>password.
+</code></pre></div>
+
+<p>Now suppose you want to create a new user <code>dclong</code> with user ID <code>2000</code> and group name <code>nogroup</code>,
+you can use the following command.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>/scripts/sys/create_user_nogroup.sh<span class="w"> </span>dclong<span class="w"> </span><span class="m">2000</span>
+</code></pre></div>
+
+<p>Since we didn't specify a password for the user,
+the default password (same as the user name) is used.</p>
+<h2 id="use-the-jupyterhub-server">Use the JupyterHub Server</h2>
+<ol>
+<li>
+<p>Open your browser and and visit <code>your_host_ip:8000</code>
+    where <code>your_host_ip</code> is the URL/ip address of your server.</p>
+</li>
+<li>
+<p>Login to the JupyterHub server 
+    using your user name (by default your user name on the host machine)
+    and password (by default your user name on the host machine). </p>
+</li>
+<li>
+<p>It is strongly suggested (for security reasons) that you change your password (using the command <code>passwd</code>)
+    in the container.</p>
+</li>
+<li>
+<p>Enjoy JupyterLab notebook!</p>
+</li>
+</ol>
+<h2 id="get-information-of-running-jupyterlab-servers">Get Information of Running Jupyter/Lab Servers</h2>
+<p>If you are using the Jupyter/Lab server instead of JupyterHub,
+you will be asked for a token at login.
+If you have started the Docker container in interactive mode (option <code>-i</code> instead of <code>-d</code>),
+the token for login is printed to the console.
+Otherwise,
+the tokens (and more information about the servers) can be found 
+by running the following command outside the Docker container.</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>jupyterlab<span class="w"> </span>/scripts/list_jupyter.py
+</code></pre></div>
+
+<p>The above command tries to be smart in the sense that 
+it first figures out the user that started the JupyterLab server 
+and then query running Jupyter/Lab servers of that user.
+An equivalently but more specifically command 
+(if the Docker is launched by the current user in the host)
+is as below</p>
+<div class="highlight"><pre><span></span><code>docker<span class="w"> </span><span class="nb">exec</span><span class="w"> </span>-u<span class="w"> </span><span class="k">$(</span>id<span class="w"> </span>-un<span class="k">)</span><span class="w"> </span>jupyterlab<span class="w"> </span>/scripts/sys/list_jupyter.py
+</code></pre></div>
+
+<p>If you are inside the Docker container, 
+then run the following command to get the tokens (and more information about the servers).</p>
+<div class="highlight"><pre><span></span><code>/scripts/list_jupyter.py
+</code></pre></div>
+
+<p>Or equivalently if the Jupyter/Lab server is launched by the current user,</p>
+<div class="highlight"><pre><span></span><code>/scripts/sys/list_jupyter.py
+</code></pre></div>
+
+<p>To sum up, 
+most of time you can rely on <code>/scripts/list_jupyter.py</code>
+to find the tokens of the running Jupyter/Lab servers,
+no matter you are root or the user that launches the Docker/JupyterLab server,
+and no matter you are inside the Docker container or not.
+Yet another way to get information of the running JupyterLab server 
+is to check the log. 
+Please refer to the section 
+<a href="http://www.legendu.net/en/blog/my-docker-images/#debug-docker-containers">Debug Docker Containers</a>
+for more information.</p>
+<h2 id="add-a-new-user-for-jupyterhub">Add a New User for JupyterHub</h2>
+<p>By default,
+any user in a Docker container of <code>dclong/jupyterhub-*</code> can visit the JupyterHub server.
+So if you want to grant access to a new user,
+just create an account for him in the Docker container.
+Please refer to 
+<a href="https://www.legendu.net/en/blog/my-docker-images/#add-a-new-user-inside-a-docker-container">Add a New User Inside a Docker Container</a>
+on how to create a new user inside a Docker container.</p>
+<h2 id="easy-install-of-other-kernels">Easy Install of Other Kernels</h2>
+<p>Install and configure PySpark for use with the Python kernel.</p>
+<div class="highlight"><pre><span></span><code>icon<span class="w"> </span>spark<span class="w"> </span>-ic<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>icon<span class="w"> </span>pyspark<span class="w"> </span>-ic
+</code></pre></div>
+
+<p>Install the evcxr Rust kernel.</p>
+<div class="highlight"><pre><span></span><code>icon<span class="w"> </span>evcxr<span class="w"> </span>-ic
+</code></pre></div>
+
+<p>Install the Almond Scala kernel.</p>
+<div class="highlight"><pre><span></span><code>icon<span class="w"> </span>almond<span class="w"> </span>-ic
+</code></pre></div>
+
+<p>Install the ITypeScript kernel.</p>
+<div class="highlight"><pre><span></span><code>icon<span class="w"> </span>its<span class="w"> </span>-ic
+</code></pre></div>
+
+<p>Many other software/tools can be easily install by 
+<a href="https://github.com/legendu-net/icon">icon</a>
+.</p>
+<h2 id="debug-docker-containers">Debug Docker Containers</h2>
+<p>You can change the option <code>docker run -d ...</code> to <code>docker run -it ...</code> 
+to show logs of processes in the Docker container which helps debugging. 
+If you have already started a Docker container using <code>docker run -d ...</code>,
+you can use the command 
+<a href="https://docs.docker.com/engine/reference/commandline/logs/">docker logs</a>
+to get the log of the container
+(which contains logs of all processes in it).</p>
+<h2 id="use-spark-in-jupyterlab-notebooks">Use Spark in JupyterLab Notebooks</h2>
+<ul>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/spark-almond-jupyterlab/">Use Spark with the Almond Scala Kernel in JupyterLab</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/use-spark-with-the-beakerx-scala-kernel/">Use Spark With the BeakerX Scala Kernel</a></p>
+</li>
+</ul>
+<p>It is suggested that you use the Almond Scala kernel. 
+I will gradually drop support of the BeakerX Scala kernel in my Docker images. </p>
+<h2 id="pyspark-pyspark-and-findspark">PySpark - pyspark and findspark</h2>
+<p>To use PySpark in a container of the Docker image
+<a href="https://github.com/dclong/docker-jupyterhub-ds">dclong/jupyterhub-ds</a>
+you need to install Spark and the Python package <code>pyspark</code> first,
+which can be achieved using the following command.</p>
+<div class="highlight"><pre><span></span><code>icon<span class="w"> </span>spark<span class="w"> </span>-ic<span class="w"> </span>--loc<span class="w"> </span>/opt/<span class="w">  </span>
+icon<span class="w"> </span>pyspark<span class="w"> </span>-ic
+</code></pre></div>
+
+<p>Follow the steps below to use PySpark after it is installed.</p>
+<ol>
+<li>
+<p>Open a JupyterLab notebook with the Python kernel from the launcher.</p>
+</li>
+<li>
+<p>Find and initialize PySpark.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">findspark</span>
+<span class="c1"># A symbolic link of the Spark Home is made to /opt/spark for convenience</span>
+<span class="n">findspark</span><span class="o">.</span><span class="n">init</span><span class="p">(</span><span class="s2">&quot;/opt/spark&quot;</span><span class="p">)</span>
+
+<span class="kn">from</span> <span class="nn">pyspark.sql</span> <span class="kn">import</span> <span class="n">SparkSession</span>
+<span class="n">spark</span> <span class="o">=</span> <span class="n">SparkSession</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">appName</span><span class="p">(</span><span class="s1">&#39;PySpark Example&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">enableHiveSupport</span><span class="p">()</span><span class="o">.</span><span class="n">getOrCreate</span><span class="p">()</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Use Spark as usual.</p>
+<div class="highlight"><pre><span></span><code><span class="n">df1</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">table</span><span class="p">(</span><span class="s2">&quot;some_hive_table&quot;</span><span class="p">)</span>
+<span class="n">df2</span> <span class="o">=</span> <span class="n">spark</span><span class="o">.</span><span class="n">sql</span><span class="p">(</span><span class="s2">&quot;select * from some_table&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="remote-connection-to-desktop-in-the-container">Remote Connection to Desktop in the Container</h2>
+<p>If you are running a Docker container with a desktop environment (<code>dclong/lubuntu*</code> or <code>dclong/xubuntu*</code>),
+you can connect to the desktop environment in the Docker container using NoMachine.</p>
+<ol>
+<li>Download the NoMachine client from <a href="https://www.nomachine.com/download">https://www.nomachine.com/download</a>.</li>
+<li>Install the NoMachine client on your computer.</li>
+<li>Create a new connection from your computer 
+    to the desktop environment in the Docker image using the NX protocol and port 4000.
+    You will be asked for a user name and password.
+    By default,
+    the user name used to start the Docker container on the host machine 
+    is used as both the user name and password in the Docker container.</li>
+</ol>
+<h2 id="list-of-images-and-detailed-information">List of Images and Detailed Information</h2>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/base/">dclong/base</a>  </p>
+<blockquote>
+<p>OS: Ubuntu LTS
+Time Zone: US Pacific Time<br>
+Desktop Environment: None<br>
+Remote Desktop: None  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/samba/">dclong/samba</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/nfs/">dclong/nfs</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/nodejs/">dclong/nodejs</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/typescript/">dclong/typescript</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jdk/">dclong/jdk</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/python-portable/">dclong/python-portable</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/python/">dclong/python</a>  </p>
+<blockquote>
+<p>Python 3.12.x  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/python-jdk/">dclong/python-jdk</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/mlflow/">dclong/mlflow</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/dryscrape/">dclong/dryscrape</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/python-nodejs/">dclong/python-nodejs</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterlab">dclong/jupyterlab</a>  </p>
+<blockquote>
+<p>JupyterLab: latest stable version</p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub/">dclong/jupyterhub</a>  </p>
+<blockquote>
+<p>JupyterHub: latest stable version</p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-ts/">dclong/jupyterhub-ts</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-julia/">dclong/jupyterhub-julia</a>  </p>
+<blockquote>
+<p>Julia stable.</p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-cuda/">dclong/jupyterhub-cuda</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/jupyterhub-pytorch/">dclong/jupyterhub-pytorch</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-jdk/">dclong/jupyterhub-jdk</a>  </p>
+<blockquote>
+<p>OpenJDK: 11<br>
+Maven: 3.6.x  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-more/">dclong/jupyterhub-more</a>  </p>
+<blockquote>
+<p>Go<br>
+Rust<br>
+JavaScript/ TypeScript  </p>
+</blockquote>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/vscode-server/">dclong/vscode-server</a>  </p>
+<blockquote>
+<p><a href="https://github.com/cdr/code-server">code-server</a>: latest stable version</p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/jupyterhub-ds/">dclong/jupyterhub-ds</a>  </p>
+<blockquote>
+<p>Python packages:<br>
+    - loguru pysnooper<br>
+    - numpy scipy pandas pyarrow<br>
+    - scikit-learn lightgbm<br>
+    - graphviz matplotlib bokeh holoviews[recommended] hvplot<br>
+    - tabulate<br>
+    - JPype1 sqlparse<br>
+    - requests[socks] lxml notifiers<br>
+    - dsutil  </p>
+</blockquote>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/gitpod/">dclong/gitpod</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/rust/">dclong/rust</a>  </p>
+<ul>
+<li><a href="https://hub.docker.com/r/dclong/rustpython/">dclong/rustpython</a>  </li>
+</ul>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/ubuntu_cn/">dclong/ubuntu_cn</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu/">dclong/lubuntu</a>  </p>
+<ul>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu-pyside2/">dclong/lubuntu-pyside2</a>  </p>
+</li>
+<li>
+<p><a href="https://hub.docker.com/r/dclong/lubuntu-jdk/">dclong/lubuntu-jdk</a>  </p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="build-my-docker-images">Build my Docker Images</h2>
+<p>My Docker images are auto built leveraging GitHub Actions workflow 
+in the GitHub repository 
+<a href="https://github.com/dclong/docker_image_builder">docker_image_builder</a>
+.</p>
+<h2 id="tips-for-maintaining-docker-images-for-my-own-reference">Tips for Maintaining Docker Images (for My own Reference)</h2>
+<ol>
+<li>
+<p>Do NOT update the <code>latest</code> tag 
+    until you have fully tested the corresponding <code>next</code> tag.</p>
+</li>
+<li>
+<p>Do NOT add new features or tools unless you really need them.</p>
+</li>
+<li>
+<p>It generally a good idea to restrict versions of non-stable packages to be a specific (working) version 
+    or a range of versions that is unlike to break.</p>
+</li>
+<li>
+<p>If you REALLY have to update some Bash script a Docker image,
+    do not update it in the GitHub repository directly 
+    and build the Docker image to test whether it works.
+    Instead,
+    make a copy of the Bash script outside the Docker container, 
+    update it, 
+    and mount it into the container to test whether it work.
+    If the updated Bash script work as you expected,
+    then go ahead to update it in the GitHub repository.</p>
+</li>
+</ol>
+<h2 id="on-failure-of-github-actions-workflow-for-building-docker-images">On Failure of GitHub Actions Workflow for Building Docker Images</h2>
+<ol>
+<li>If the Docker image buidling workflow fails due to network issues,
+    it might not work to rerun failed pipelines in GitHub Actions
+    (as the network issue is like due to probalematic network nodes
+    and retrying failed pipelines sending jobs to the same nodes).
+    In such situtions,
+    it is better to trigger a new run of the workflow.</li>
+</ol>
+<h2 id="known-issues">Known Issues</h2>
+<ol>
+<li>
+<p>NeoVim fails to work 
+    if a Docker image (with NeoVim installed) is run on <strong>Mac with the M1 chip</strong>
+    even if you pass the option <code>--platform linux/amd64</code> to <code>docker run</code>.
+    A possible fix is to manually uninstall NeoVim using the following command</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>purge<span class="w"> </span>neovim
+</code></pre></div>
+
+<p>and then install Vim instead.</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>install<span class="w"> </span>vim
+</code></pre></div>
+
+</li>
+<li>
+<p>The command <code>wajig</code> fails to cache password 
+    if a Docker image (with <code>wajig</code> installed) is run on <strong>Mac with the M1 chip</strong>
+    even if you pass the option <code>--platform linux/amd64</code> to <code>docker run</code>.
+    Fortunately, 
+    this is not a big issue.</p>
+</li>
+<li>
+<p>There is an issue with the <code>dclong/xubuntu*</code> Docker images due to Xfce on Ubuntu 18.04.
+    It is suggested that you use the corresponding <code>dclong/lubuntu*</code> Docker images instead (which are based on LXQt)
+    if a desktop environment is needed.</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2018-10-18T09:10:17-07:00" pubdate>Oct 18, 2018</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/software.html">software</a>
+    <a class="category" href="https://www.legendu.net/en/tag/docker.html">Docker</a>
+    <a class="category" href="https://www.legendu.net/en/tag/docker-image.html">Docker image</a>
+    <a class="category" href="https://www.legendu.net/en/tag/ubuntu.html">Ubuntu</a>
+    <a class="category" href="https://www.legendu.net/en/tag/jupyterlab.html">JupyterLab</a>
+    <a class="category" href="https://www.legendu.net/en/tag/lubuntu.html">Lubuntu</a>
+    <a class="category" href="https://www.legendu.net/en/tag/dclong.html">dclong</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/my-docker-images/';
+          var disqus_url = 'https://www.legendu.net/en/blog/my-docker-images/';
+          var disqus_title = 'My Docker Images';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

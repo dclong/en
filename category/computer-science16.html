@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Computer Science category</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/python-concurrency-parallel-computing/">Concurrency and Parallel Computing in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2016-11-16T12:09:38-08:00" pubdate>Nov 16, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p>The GIL is controversial because it prevents multithreaded CPython programs 
+from taking full advantage of multiprocessor systems in certain situations. 
+Note that potentially blocking or long-running operations, 
+such as I/O, image processing, and NumPy number crunching, happen outside the GIL. 
+Therefore it is only in multithreaded programs that spend …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/python-concurrency-parallel-computing/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/relative-import-in-python/">Relative Import in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-12T10:08:43-07:00" pubdate>Apr 12, 2020</time></p>
+</header>
+
+  <div class="entry-content"><p>**
+Things on this page are fragmentary and immature notes/thoughts of the author.
+Please read with your own judgement!
+**</p>
+<ol>
+<li>
+<p>Call the package outside it</p>
+</li>
+<li>
+<p>Add <code>..</code> into <code>sys.path</code>.</p>
+<p>:::python
+import sys
+sys.path.append("..")</p>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<p><a href="https://stackoverflow.com/questions/30669474/beyond-top-level-package-error-in-relative-import">beyond top level package error in relative import</a></p>
+<p><a href="https://stackoverflow.com/questions/72852/how-to-do-relative-imports-in-python">How to do relative imports in Python …</a></p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/relative-import-in-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/boolean-values-in-cpp/">Boolean Values in C++</a>
+      </h1>
+      <p class="meta"><time datetime="2012-10-07T21:56:02-07:00" pubdate>Oct 07, 2012</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>Boolean expressions are evaluated from left to right (the same in Java),
+    so it is totally OK to write code like </p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;</span><span class="w"> </span><span class="n">x</span><span class="p">.</span><span class="k">size</span><span class="p">()</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">x</span><span class="o">[</span><span class="n">a</span><span class="o">]</span><span class="p">)</span><span class="err">{</span>
+<span class="w">    </span><span class="p">...</span>
+<span class="err">}</span>
+</code></pre></div>
+
+<p>where <code>x</code> is a vector.</p>
+</li>
+<li>
+<p>There is no <code>&amp;&amp;=</code> and <code>||=</code> operators in C++,
+    instead you can use <code>&amp;=</code> and <code>|=</code>.
+    Though <code>&amp;=</code> and <code>|=</code> are not specially for …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/boolean-values-in-cpp/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/python-requests-dockerhub/">Deleting Docker Image Tags on DockerHub using the Python Module requests</a>
+      </h1>
+      <p class="meta"><time datetime="2020-04-06T18:24:23-07:00" pubdate>Apr 06, 2020</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tips">Tips<a class="anchor-link" href="#Tips">&#182;</a></h2><ol>
+<li>You can use <a href="https://curl.trillworks.com/">Convert curl syntax to Python, Node.js, PHP, R</a>
+ or <a href="https://github.com/NickCarneiro/curlconverter/">curlconverter</a>
+ to convert CURL commands to Python requests code.</li>
+</ol>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Get-All-Tags-of-a-Docker-Image">Get All Tags of a Docker Image<a class="anchor-link" href="#Get-All-Tags-of-a-Docker-Image">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/python-requests-dockerhub/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/parallel-computing-using-multithreading/">Parallel Computing Using Multithreading</a>
+      </h1>
+      <p class="meta"><time datetime="2012-06-26T11:14:47-07:00" pubdate>Jun 26, 2012</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>Not all jobs are suitable for parallel computing. 
+    The more comminication that threads has to make, 
+    the more dependent the jobs are and the less efficient the parallel computing is. </p>
+</li>
+<li>
+<p>Generally speaking, 
+    commercial softwares (Mathematica, MATLAB and Revolution R, etc.) 
+    have very good support on parallel computing. </p>
+</li>
+</ol>
+<h2 id="python">Python</h2>
+<p>Please refer …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/parallel-computing-using-multithreading/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/construct-pandas-dataframe-python/">Construct pandas DataFrames in Python</a>
+      </h1>
+      <p class="meta"><time datetime="2019-11-07T00:00:00-08:00" pubdate>Nov 07, 2019</time></p>
+</header>
+
+  <div class="entry-content"><div class="cell border-box-sizing code_cell rendered">
+<div class="input"></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/construct-pandas-dataframe-python/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="https://www.legendu.net/en/category/computer-science17.html">&larr; Older</a>
+
+      <a class="next" href="https://www.legendu.net/en/category/computer-science15.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/expose-local-services-to-public-using-ngrok/">Expose Local Services to Public Using ngrok</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/working-with-spreadsheet-with-python/">Working with Spreadsheet in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/the-right-way-to-export-PATH-in-shell/">The Right Way to Export PATH in Shell</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/parallel-RNGs-with-rayon-in-rust/">Parallel RNGs With Rayon in Rust</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

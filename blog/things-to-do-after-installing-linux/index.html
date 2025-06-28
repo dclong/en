@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Things to Do After Installing Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Things to Do After Installing Linux</h1>
+      <p class="meta"><time datetime="2016-05-04T20:59:32-07:00" pubdate>May 04, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p>Note: The tips here are for Debian-based Linux distributions 
+(Debian, Ubuntu, LinuxMint, Pop!_OS, AntiX, etc.).</p>
+<h2 id="debian-specific">Debian Specific</h2>
+<ol>
+<li>
+<p>If you installed Debian without a desktop environment, 
+    and wants to install a customized desktop environment now,
+    make sure to install a DE manager (e.g., gdm, lightdm, etc.) as well.
+    without a login/DE manager, 
+    Linux won't boot into DE automatically.
+    Of course, 
+    you can still manually start X using <code>startx</code>.</p>
+</li>
+<li>
+<p>Edit the APT (advance package tool) configuration file <code>/etc/apt/sources.list</code>. 
+    By default, 
+    Debian uses the installing media as a repository after installation.
+    However, 
+    the media is usually removed and thus unavailable after installation.
+    So, 
+    you probably want to delete or comment out the repository using the installing media.
+    Also, 
+    if you did not use a network mirror duing installation, 
+    you have to add a debian repository into the APT configuration file manually.
+    For example, 
+    you can add the following lines into the APT configuration file.</p>
+<div class="highlight"><pre><span></span><code><span class="k">deb</span><span class="w"> </span><span class="s">http://ftp.us.debian.org/debian/</span><span class="w"> </span><span class="kp">wheezy</span><span class="w"> </span><span class="kp">main</span><span class="w"> </span><span class="kp">contrib</span><span class="w"> </span><span class="kp">non-free</span>
+<span class="k">deb</span><span class="w"> </span><span class="s">http://ftp.us.debian.org/debian/</span><span class="w"> </span><span class="kp">wheezy</span><span class="w"> </span><span class="kp">main</span><span class="w"> </span><span class="kp">contrib</span><span class="w"> </span><span class="kp">non-free</span>
+</code></pre></div>
+
+<p>It is suggested that you include <code>contrib</code> and <code>non-free</code> in the repository.
+This ensures that you can also use many non-open source but cost-free softwares.  </p>
+</li>
+<li>
+<p>Install the <code>sudo</code> package and configure it.
+    You have to switch to root to install packages.
+    To switch to root, 
+    type in <code>su</code> (super user) in the terminal. 
+    You will be asked for the password of root.
+    After authentication, 
+    you are in root user. 
+    Notice that the prompt character is <code>#</code> (instead of <code>$</code>) for the root user. 
+    You can type <code>apt-get install sudo</code> in the terminal (as root) to install the package <code>sudo</code>.
+    After installation of <code>sudo</code>,
+    you have to add your user name to the <code>sudo</code> group. 
+    To do this, 
+    run the following command as root.</p>
+<div class="highlight"><pre><span></span><code>adduser your_user_name sudo
+</code></pre></div>
+
+<p>However, 
+this will not take effect immediately. 
+To notify the change (of group permission) to the system, 
+you can run the following command as root.</p>
+<div class="highlight"><pre><span></span><code>newgrp sudo
+</code></pre></div>
+
+<p>If this does not work, 
+you can manually log out and then log in
+and the change of group permissions will take effect.
+Now you are in the <code>sudo</code> group, 
+you can use <code>sudo</code> (instead of the root user) to run commands
+that need root permission.
+You can now exit the root terminal (by running <code>exit</code>) 
+if you are still in the root terminal.</p>
+</li>
+<li>
+<p>If the wireless network is not working,
+    refer to 
+    <a href="https://www.legendu.net/misc/blog/wirelss-for-debian">Wireless for Debian</a>
+    for possible solutions.</p>
+</li>
+</ol>
+<h2 id="lmde-specific">LMDE Specific</h2>
+<ol>
+<li>By default, LMDE installs 486 on 32 bit computers.
+    If your computer has more than 1 cores/processors, 
+    you can upgrade to 686-pae manually by running the following command in terminal
+    and then reboot your computer.<div class="highlight"><pre><span></span><code>wajig install linux-image-3.0.0-1-686-pae
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="other-debian-based-linux-distributions">Other Debian-based Linux Distributions</h2>
+<ol>
+<li>
+<p>Tune settings to make your Linux machine run faster.
+    For more discussions, 
+    please refer to
+    <a href="https://www.legendu.net/en/blog/make-your-computer-run-faster/">Make Linux Run Faster</a>
+    .</p>
+</li>
+<li>
+<p>Install a good alternative package manager.
+    <code>apt-get</code> is a very good package manager for Debian series Linux distributions,
+    however, <code>wajig</code> is much superior choice.</p>
+<div class="highlight"><pre><span></span><code>sudo<span class="w"> </span>apt-get<span class="w"> </span>install<span class="w"> </span>wajig
+</code></pre></div>
+
+</li>
+<li>
+<p>Upgrade the system.</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>wajig<span class="w"> </span>upgrade
+</code></pre></div>
+
+</li>
+<li>
+<p>Swap the <code>Caps Lock</code> key with the <code>Escape</code> key.
+    Please refer to
+    <a href="http://www.legendu.net/en/blog/map-keys-in-linux/">Map Keys in Linux</a>
+    for detailed discussions.</p>
+</li>
+<li>
+<p>Install must-have software (using <code>wajig</code>).</p>
+<ul>
+<li>aria2, uGet</li>
+<li>Chrome, Firefox </li>
+<li>Sogou Pinyin</li>
+<li>Transimission</li>
+<li>Dropbox, Baidu Netdisk</li>
+</ul>
+<p>This list might not be the best for everyone. 
+For a general list of useful software/tools for Linux, 
+please check the post <a href="http://www.legendu.net/misc/blog/useful-tools-linux/">Useful Tools in Linux</a>.</p>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-05-04T20:59:32-07:00" pubdate>May 04, 2016</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/os.html">OS</a>
+    <a class="category" href="https://www.legendu.net/en/tag/installation.html">installation</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/things-to-do-after-installing-linux/';
+          var disqus_url = 'https://www.legendu.net/en/blog/things-to-do-after-installing-linux/';
+          var disqus_title = 'Things to Do After Installing Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

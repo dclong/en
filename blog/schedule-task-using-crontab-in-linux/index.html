@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Schedule Task Using Cron in Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Schedule Task Using Cron in Linux</h1>
+      <p class="meta"><time datetime="2012-11-27T11:28:08-08:00" pubdate>Nov 27, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p>Note: Cron is great for simple scheduling requests. 
+For complicated scheduling with many dependencies 
+you probably want to go with 
+<a href="http://www.legendu.net/misc/blog/apache-airflow-tips">AirFlow</a>
+.</p>
+<h2 id="installation">Installation</h2>
+<p>Cron is usually installed by default.
+It not (e.g., if you are using a Docker image),
+you can install it using the following command (on Ubuntu).</p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>update<span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span>wajig<span class="w"> </span>install<span class="w"> </span>cron
+</code></pre></div>
+
+<h2 id="alternative-to-cron">Alternative to Cron</h2>
+<ol>
+<li>
+<p>AirFow is a more rigorous job scheduling system. </p>
+</li>
+<li>
+<p>When cron is not available,
+    a simple alternative is to 
+    write a simple Python script to run a task at certain times.</p>
+</li>
+</ol>
+<h2 id="tips-and-traps">Tips and Traps</h2>
+<ol>
+<li>
+<p>There are 6 fields that you need to fill for a task to be schedule: 
+    <code>m</code>, <code>h</code>, <code>dom</code>, <code>mon</code>, <code>dow</code> and <code>command</code>,
+    which stand for the minute, the hour, the day of month, the month, the day of week 
+    (of the scheduled time), 
+    and the command to run, respectively.
+    The graph below shows possible values for each field.</p>
+<div class="highlight"><pre><span></span><code><span class="err">┌──────────</span><span class="w"> </span><span class="n">minute</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">59</span><span class="p">)</span>
+<span class="err">│</span><span class="w"> </span><span class="err">┌────────</span><span class="w"> </span><span class="n">hour</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">23</span><span class="p">)</span>
+<span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">┌──────</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">31</span><span class="p">)</span>
+<span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">┌────</span><span class="w"> </span><span class="n">month</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">12</span><span class="p">)</span>
+<span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">┌──</span><span class="w"> </span><span class="n">day</span><span class="w"> </span><span class="n">of</span><span class="w"> </span><span class="n">week</span><span class="w"> </span><span class="p">(</span><span class="mi">0</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">6</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Sunday</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Saturday</span><span class="p">,</span><span class="w"> </span><span class="ow">or</span>
+<span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w"> </span><span class="err">│</span><span class="w">                </span><span class="mi">1</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="mi">7</span><span class="w"> </span><span class="o">=&gt;</span><span class="w"> </span><span class="n">Monday</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">Sunday</span><span class="p">)</span>
+<span class="err">↓</span><span class="w"> </span><span class="err">↓</span><span class="w"> </span><span class="err">↓</span><span class="w"> </span><span class="err">↓</span><span class="w"> </span><span class="err">↓</span>
+<span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">command</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">executed</span>
+</code></pre></div>
+
+<p>Notice that abbreviations of days (MON, TUE, etc.) can be used for the field <code>dow</code>.
+For example <code>SUN,MON,THU</code> for (day of week) 
+will exectute the command on Sundays, Mondays on Thursdays.
+<a href="https://crontab.guru/">Crontab Guru</a>
+is a quick and simple editor for cron schedule expressions.</p>
+</li>
+<li>
+<p>The information of scheuled tasks are saved in the file <code>/etc/crontab</code>. 
+    It contains scheduled tasks of all users.
+    Though you can schedule tasks by editing the file directly,
+    you'd better not.
+    It is suggested that you use the command <code>crontab -e</code> to schedule tasks.
+    If you just want to add crontab tasks,
+    an alternative way is to save the information of tasks in a file (e.g. <code>task.txt</code>),
+    and then run the command <code>crontab task.txt</code> to import it.
+    To list all scheduled tasks, 
+    run the command <code>crontab -l</code>.
+    To remove a sheduled task,
+    use the command <code>crontab -r</code>.</p>
+</li>
+<li>
+<p>As long as you use the <code>crontab</code> commands to edit the file <code>/etc/crontab</code>,
+    you do NOT have to restart <code>cron</code>.
+    <code>cron</code> will automatically reload tasks that were changed.
+    The log of cron jobs can be found at 
+    <code>/var/log/syslog</code> (Ubuntu) or <code>/var/log/cron</code> (CentOS).
+    If you do not have read permission to cron log files, 
+    you'd better redict the output and error messages of a cron job 
+    to a log file which you have read access.</p>
+</li>
+<li>
+<p>If your cron job consists of multiple shell commands,
+    it is best to put those commands into a shell script 
+    and call the shell script when you schedule your cron job. 
+    This has multiple benefits. </p>
+<ul>
+<li>Avoid careless mistakes caused by concatenating multiples commands using <code>&amp;&amp;</code>, <code>||</code> or <code>;</code>. </li>
+<li>Have better control and logging of each command.</li>
+<li>Easier to update the job (if you do not have to update the schedule) 
+    as you can update the shell script without touching <code>crontab</code>.</li>
+</ul>
+</li>
+<li>
+<p>You can schedule a frequently run task using crontab 
+    and then reduce the running frequency of the application in your scripts.
+    Below is such an example in Bash shell.</p>
+<div class="highlight"><pre><span></span><code><span class="k">if</span><span class="w"> </span>[[<span class="w"> </span>$<span class="ss">(</span><span class="nv">date</span><span class="w"> </span><span class="o">+%</span><span class="nv">H</span><span class="ss">)</span><span class="w"> </span><span class="o">=~</span><span class="w"> </span><span class="o">^</span><span class="ss">(</span><span class="mi">10</span><span class="o">|</span><span class="mi">12</span><span class="o">|</span><span class="mi">14</span><span class="o">|</span><span class="mi">16</span><span class="o">|</span><span class="mi">18</span><span class="ss">)</span>$<span class="w"> </span>]]<span class="c1">; then</span>
+<span class="w">    </span>...
+<span class="nv">fi</span>
+</code></pre></div>
+
+<p>This trick is useful to avoid editing crontab tasks frequently
+as you can control (or more precisely, reduce) the frequency of the task 
+in your script directly.</p>
+</li>
+</ol>
+<h2 id="cron-job-examples">Cron Job Examples</h2>
+<ol>
+<li>
+<p>Run the command <code>duplicity.lbp</code> at 03:00 every Thursday. </p>
+<div class="highlight"><pre><span></span><code><span class="mf">0</span><span class="w">   </span><span class="mf">3</span><span class="w">   </span><span class="o">*</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="mf">5</span><span class="w">     </span><span class="n">duplicity</span><span class="mf">.</span><span class="n">lbp</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Run the command <code>rsnapshot daily</code> daily at 22:00. </p>
+<div class="highlight"><pre><span></span><code><span class="mf">0</span><span class="w">   </span><span class="mf">22</span><span class="w">  </span><span class="o">*</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="n">rsnapshot</span><span class="w"> </span><span class="n">daily</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Run the command <code>rsnapshot daily</code> hourly at the 5th minutes,
+    and redict standard output and error messages to <code>/home/dclong/cron.log</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="mf">5</span><span class="w">   </span><span class="o">*</span><span class="w">   </span><span class="o">*</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dclong</span><span class="o">/</span><span class="n">schedule</span><span class="mf">.</span><span class="n">sh</span><span class="w"> </span><span class="o">&gt;&gt;</span><span class="w"> </span><span class="o">/</span><span class="n">home</span><span class="o">/</span><span class="n">dclong</span><span class="o">/</span><span class="n">cron</span><span class="mf">.</span><span class="nb">log</span><span class="w"> </span><span class="mf">2</span><span class="o">&gt;</span><span class="w"> </span><span class="err">&amp;</span><span class="mf">1</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Run a command at 22:00 on the 1st day of every month. </p>
+<div class="highlight"><pre><span></span><code><span class="mf">0</span><span class="w">   </span><span class="mf">22</span><span class="w">  </span><span class="mf">1</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="n">command_to_run</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>There is no intrinsic way to run commands weekly using cron. 
+    One way to approximate that is to run a command multiple times per month.
+    For example, 
+    the setup below runs a command at 22:00 on the 1st and 15th day of every month
+    (biweekly approximately)
+    .</p>
+<div class="highlight"><pre><span></span><code><span class="mf">0</span><span class="w">   </span><span class="mf">22</span><span class="w">  </span><span class="mf">1</span><span class="p">,</span><span class="mf">15</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="o">*</span><span class="w">     </span><span class="n">command_to_run</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="start-a-crontab-service-on-ubuntu">Start a Crontab Service on Ubuntu</h2>
+<div class="highlight"><pre><span></span><code># start cron service
+sudo service cron start
+# check status of the cron service 
+service cron status
+# stop the cron service
+service cron stop
+</code></pre></div>
+
+<h2 id="check-crontab-logs">Check Crontab Logs</h2>
+<p>You can use the following command to check crontab logs on Ubuntu.</p>
+<div class="highlight"><pre><span></span><code><span class="n">sudo</span><span class="w"> </span><span class="n">cat</span><span class="w"> </span><span class="o">/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="n">syslog</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="n">grep</span><span class="w"> </span><span class="n">cron</span>
+</code></pre></div>
+
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://crontab.guru/">crontab guru</a></p>
+</li>
+<li>
+<p><a href="https://www.systutorials.com/how-to-run-a-cron-job-every-two-weeks-months-days/">How to Run a cron Job Every Two Weeks / Months / Days</a></p>
+</li>
+<li>
+<p>https://stackoverflow.com/questions/18919151/crontab-day-of-the-week-syntax</p>
+</li>
+<li>
+<p>https://askubuntu.com/questions/56683/where-is-the-cron-crontab-log</p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2012-11-27T11:28:08-08:00" pubdate>Nov 27, 2012</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/task.html">task</a>
+    <a class="category" href="https://www.legendu.net/en/tag/crontab.html">crontab</a>
+    <a class="category" href="https://www.legendu.net/en/tag/schedule.html">schedule</a>
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/scheduling.html">scheduling</a>
+    <a class="category" href="https://www.legendu.net/en/tag/airflow.html">AirFlow</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/schedule-task-using-crontab-in-linux/';
+          var disqus_url = 'https://www.legendu.net/en/blog/schedule-task-using-crontab-in-linux/';
+          var disqus_title = 'Schedule Task Using Cron in Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

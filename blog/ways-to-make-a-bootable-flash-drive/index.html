@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ways to Make a Bootable Flash Drive in Linux</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Ways to Make a Bootable Flash Drive in Linux</h1>
+      <p class="meta"><time datetime="2013-07-19T10:33:38-07:00" pubdate>Jul 19, 2013</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="use-ventoy">Use <a href="https://github.com/ventoy/Ventoy">Ventoy</a></h2>
+<p><a href="https://github.com/ventoy/Ventoy">Ventoy</a>
+is the best graphical tool for making bootable flash drives currently.</p>
+<h2 id="use-the-command-dd-or-cat">Use the Command <code>dd</code> or <code>cat</code></h2>
+<p>You can use </p>
+<div class="highlight"><pre><span></span><code><span class="nv">dd</span><span class="w"> </span><span class="k">if</span><span class="o">=</span><span class="nv">path_to_linux_image</span><span class="w"> </span><span class="nv">of</span><span class="o">=</span><span class="nv">path_to_device</span><span class="w"> </span><span class="nv">bs</span><span class="o">=</span><span class="mi">4</span><span class="nv">M</span><span class="c1">; sync</span>
+</code></pre></div>
+
+<p>or</p>
+<div class="highlight"><pre><span></span><code>cat path_to_linux_image &gt; path_to_device
+</code></pre></div>
+
+<p>to write a hybird Linux image into a flash drive.
+Note that you 
+<span style="color:red">
+must use the whole device 
+</span>
+(e.g., <code>/dev/sdb</code>) 
+not just a partition (e.g., <code>/dev/sdb1</code>)
+on the device.
+For a non-hybrid Linux image, 
+you can make it hybid using the following command 
+if it uses isolinux/syslinux technology.</p>
+<div class="highlight"><pre><span></span><code>isohybird path_to_linux_image
+</code></pre></div>
+
+<p><span style="color:red">
+Be very careful when you run the above 2 commands
+(<code>dd</code> and <code>cat</code>)
+</span>
+,
+as they will erase the whole target device you specify.
+Accidentally providing a wrong device will make you lose all data on it!</p>
+<h2 id="use-the-command-zcat">Use the Command zcat</h2>
+<p>This is an even more manual way,
+which is not recommended.</p>
+<ol>
+<li>`zcat boot.img.gz &gt; /dev/sdX</li>
+<li>Mount the USB stick and copy a iso image to it.</li>
+<li>Umount the USB stick.</li>
+</ol>
+<h2 id="use-the-gui-tool-unetbootin">Use the GUI Tool <a href="http://unetbootin.sourceforge.net/">UNetbootin</a></h2>
+<ol>
+<li>
+<p><a href="https://github.com/ventoy/Ventoy">Ventoy</a>
+    is a much better tool than
+    <a href="http://unetbootin.sourceforge.net/">UNetbootin</a>
+    now.
+    Please use 
+    <a href="https://github.com/ventoy/Ventoy">Ventoy</a>
+    instead.</p>
+</li>
+<li>
+<p>If you create a boot flash drive for Ubuntu in Windows using UNetbootin or other softwares, 
+    then you'd better format the flash drive as <code>FAT</code> instead of <code>FAT32</code>. 
+    Otherwise, 
+    you might get the error information: "BOOTMGR is missing".</p>
+</li>
+</ol>
+<h2 id="use-the-universal-online-booting-tool-netbootme">Use the Universal Online Booting Tool <a href="http://www.netboot.me/">netboot.me</a></h2>
+<p>Note that you must have an ethernet connection in order to use 
+<a href="http://www.netboot.me/">netboot.me</a>.
+netboot.me is a fantastic tool for general purposes,
+but it has problems on some old computers.</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-07-19T10:33:38-07:00" pubdate>Jul 19, 2013</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/bootable.html">bootable</a>
+    <a class="category" href="https://www.legendu.net/en/tag/flash-drive.html">flash drive</a>
+    <a class="category" href="https://www.legendu.net/en/tag/hybird.html">hybird</a>
+    <a class="category" href="https://www.legendu.net/en/tag/usb.html">USB</a>
+    <a class="category" href="https://www.legendu.net/en/tag/hardware.html">Hardware</a>
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/ways-to-make-a-bootable-flash-drive/';
+          var disqus_url = 'https://www.legendu.net/en/blog/ways-to-make-a-bootable-flash-drive/';
+          var disqus_title = 'Ways to Make a Bootable Flash Drive in Linux';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

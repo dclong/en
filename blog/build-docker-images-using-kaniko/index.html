@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Build Docker Images Using Kaniko</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Build Docker Images Using Kaniko</h1>
+      <p class="meta"><time datetime="2021-07-20T17:09:59-07:00" pubdate>Jul 20, 2021</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>Kaniko works differently from Docker. 
+    It runs inside a Docker container and detect and extract new layers to build Docker images. 
+    Since Kaniko manipulates the filesystem (layers) inside the Docker container,
+    it can have unexpected side effect if not used carefully. 
+    For this reason,
+    the developer team suggests users to use Kaniko only via official Docker images.
+    The official Docker image
+    <code>gcr.io/kaniko-project/executor</code> 
+    limits itself to run the command <code>/kaniko/executor</code> only
+    so that users won't screw up things accidentally.
+    The official Docker image
+    <code>gcr.io/kaniko-project/executor:debug</code>
+    adds a shell (<code>/busybox/sh</code>) in addition to to the command <code>/kaniko/executor</code>.
+    However,
+    <code>/busybox/sh</code> in <code>gcr.io/kaniko-project/executor:debug</code>
+    is minimal and limited too.
+    For example,
+    the <code>cd</code> command is not provided 
+    and users can work in the directory <code>/workspace</code> only.
+    Even if some users have tried customizing their own Kaniko Docker images 
+    and reported successful experiences,
+    it is NOT guranteed that customized Kaniko Docker images will always work.
+    Any additional tool (besides <code>/kaniko/executor</code> and <code>/busybox/sh</code>) 
+    might fail to work due to changed filesystems (layers) during the building of a Docker image,
+    and even worse, might intervent the building of Docker images.</p>
+</li>
+<li>
+<p>Even if you use an official Kaniko Docker image, 
+    it doesn't mean that it will always work 
+    even if your Docker image can be built successfull using Docker.
+    Various issues can make the image building fail to work.</p>
+<p>i. If your Docker image intervent with critial Kaniko filesystem/layers,
+    it might fail to work.
+    For example, 
+    <code>/workspace</code> is the work directory of Kaniko.
+    If you Docker image create a directory <code>/workspace</code> 
+    or make it a symbolic link to another directory,
+    Kaniko might fail to build your Docker image.</p>
+<ol>
+<li>Network issues.</li>
+</ol>
+</li>
+<li>
+<p>It might be helpful to keep a Kaniko pod running 
+    for testing, debugging and possibly for building multiple Docker images (even if this is not a good idea).
+    You couldn't do this with the Docker image 
+    <code>gcr.io/kaniko-project/executor</code>,
+    however, 
+    it is doable with the Docker image
+    <code>gcr.io/kaniko-project/executor:debug</code>.
+    Basically,
+    you have to define a Kubernetes command (entrypoint in Docker) 
+    which runs forever for the container.
+    A simple shell command that runs forever is <code>tail -f /dev/null</code>,
+    so you can define the command as 
+    <code>["tail", "-f", "/dev/null"]</code>
+    .
+    The above command implicity invokes <code>/busybox/sh</code>.
+    If you'd like to invoke <code>/busybox/sh</code> directly,
+    make sure to use
+    <code>["/busybox/sh", "-c", "tail -f /dev/null"]</code>
+    instead of
+    <code>["/busybox/sh", "-c", "tail", "-f", "/dev/null"]</code>
+    as the latter one won't work with Kubernetes
+    even if <code>docker run --entrypoint /busybox/sh gcr.io/kaniko-project/executor:debug -c tail -f /dev/null</code> runs OK locally.</p>
+</li>
+<li>
+<p>The credential file <code>config.json</code> for authentication 
+    should be mounted to <code>/kaniko/.docker/config.json</code> 
+    when running an official Kaniko Docker image.
+    Some users customize their own Kaniko Docker images,
+    in which situations, 
+    the credential file <code>config.json</code> might need to be mounted/placed at <code>$HOME/.docker/config.json</code>,
+    where <code>$HOME</code> is the home directory of the user that is used to run <code>/kaniko/executor</code>.
+    In most situations, 
+    customized Kaniko Docker images use the root user 
+    whose home directory is <code>/root</code>.
+    However, 
+    be aware that the directory <code>/root</code> might not survive during the building of Docker images 
+    and thus can make authentication to fail.</p>
+</li>
+<li>
+<p>It is suggested that you always pass the option <code>--log-timestamp</code> 
+    when building Docker images using <code>/kaniko/executor</code>.
+    It adds timestamps into logs 
+    which is useful for debugging and measuring performancing of pulling, pushing and building.</p>
+</li>
+<li>
+<p>The option <code>--cleanup</code> (of <code>/kaniko/executor</code>) cleans up the filesystem/layers
+    after building a Docker image 
+    so that you can use the same Kaniko Docker container to build multiple Docker images.
+    However,
+    Kaniko won't recover the filesystem/layers if it fails to build or push a Docker image
+    even if the option <code>--cleanup</code> is specified.
+    It is suggested that you build <strong>only 1 image in a Kaniko pod/container</strong>.
+    When you need to build another Docker image, 
+    start a new Kaniko pod/container.</p>
+</li>
+<li>
+<p>Always, specify <code>--push-try</code> (e.g., <code>--push-retry=2</code>)
+    and <code>--image-fs-extract-retry</code> when Kaniko &gt; 1.6.0 is released.</p>
+</li>
+</ol>
+<h2 id="kaniko-build-contexts">Kaniko Build Contexts</h2>
+<ol>
+<li>Kaniko supports varying context locations.
+    Specifically, 
+    Git repositories are supported as context locations.
+    For more details, 
+    please refer to
+    <a href="https://github.com/GoogleContainerTools/kaniko#kaniko-build-contexts">Kaniko Build Contexts</a>
+    .
+    However, 
+    private Git repositories might not work at this time (Sep 2021).
+    Please refer to the issue
+    <a href="https://github.com/GoogleContainerTools/kaniko/issues/719">build context in private gitlab repository #719</a>
+    for more discussions.</li>
+</ol>
+<h2 id="connection-reset-by-peer">Connection Reset by Peer</h2>
+<p><code>--image-fs-extract-retry=2</code> (need a version &gt; 1.6.0)</p>
+<p><code>--push-retry=2</code></p>
+<p>What seems to help is the following annotations for the registry Nginx Ingress (taken from the Gitlab Helm chart):</p>
+<div class="highlight"><pre><span></span><code><span class="kc">n</span><span class="err">gi</span><span class="kc">n</span><span class="err">x.i</span><span class="kc">n</span><span class="err">gress.kuber</span><span class="kc">netes</span><span class="err">.io/proxy</span><span class="mi">-</span><span class="err">body</span><span class="mi">-</span><span class="err">size</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;0&quot;</span>
+<span class="kc">n</span><span class="err">gi</span><span class="kc">n</span><span class="err">x.i</span><span class="kc">n</span><span class="err">gress.kuber</span><span class="kc">netes</span><span class="err">.io/proxy</span><span class="mi">-</span><span class="err">read</span><span class="mi">-</span><span class="kc">t</span><span class="err">imeou</span><span class="kc">t</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;900&quot;</span>
+<span class="kc">n</span><span class="err">gi</span><span class="kc">n</span><span class="err">x.i</span><span class="kc">n</span><span class="err">gress.kuber</span><span class="kc">netes</span><span class="err">.io/proxy</span><span class="mi">-</span><span class="err">reques</span><span class="kc">t</span><span class="mi">-</span><span class="err">bu</span><span class="kc">ffer</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span>
+<span class="kc">n</span><span class="err">gi</span><span class="kc">n</span><span class="err">x.i</span><span class="kc">n</span><span class="err">gress.kuber</span><span class="kc">netes</span><span class="err">.io/proxy</span><span class="mi">-</span><span class="err">bu</span><span class="kc">ffer</span><span class="err">i</span><span class="kc">n</span><span class="err">g</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;off&quot;</span>
+</code></pre></div>
+
+<p><a href="https://github.com/GoogleContainerTools/kaniko/issues/797">Connection reset by peer #797</a></p>
+<p><a href="https://github.com/GoogleContainerTools/kaniko/issues/1377">error building image: error building stage connection reset by peer #1377</a></p>
+<p><a href="https://github.com/GoogleContainerTools/kaniko/issues/1627">Improve retry logic for downloading base image - Implement a --pull-retry flag #1627</a></p>
+<p><a href="https://github.com/GoogleContainerTools/kaniko/issues/1717">failed to get filesystem from image: connection reset by peer #1717</a></p>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p><a href="https://cloud.google.com/blog/products/containers-kubernetes/introducing-kaniko-build-container-images-in-kubernetes-and-google-container-builder-even-without-root-access">Introducing kaniko: Build container images in Kubernetes and Google Container Builder without privileges</a></p>
+</li>
+<li>
+<p><a href="https://github.com/GoogleContainerTools/kaniko/blob/master/deploy/Dockerfile">Official Kaniko Dockerfile</a></p>
+</li>
+<li>
+<p><a href="https://blog.alexellis.io/quick-look-at-google-kaniko/">A quick look at Google's Kaniko project</a></p>
+</li>
+<li>
+<p><a href="https://docs.gitlab.com/ee/ci/docker/using_kaniko.html">Use kaniko to build Docker images</a></p>
+</li>
+<li>
+<p><a href="https://developers.redhat.com/blog/2019/08/14/best-practices-for-running-buildah-in-a-container">Best practices for running Buildah in a container</a></p>
+</li>
+<li>
+<p><a href="https://insujang.github.io/2020-11-09/building-container-image-inside-container-using-buildah/">Building Container Image inside Container using Buildah</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Benjamin Du</span>
+  </span>
+<time datetime="2021-07-20T17:09:59-07:00" pubdate>Jul 20, 2021</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/computer-science.html">Computer Science</a>
+    <a class="category" href="https://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="https://www.legendu.net/en/tag/kaniko.html">Kaniko</a>
+    <a class="category" href="https://www.legendu.net/en/tag/docker.html">Docker</a>
+    <a class="category" href="https://www.legendu.net/en/tag/build.html">build</a>
+    <a class="category" href="https://www.legendu.net/en/tag/image.html">image</a>
+    <a class="category" href="https://www.legendu.net/en/tag/buildah.html">buildah</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/build-docker-images-using-kaniko/';
+          var disqus_url = 'https://www.legendu.net/en/blog/build-docker-images-using-kaniko/';
+          var disqus_title = 'Build Docker Images Using Kaniko';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

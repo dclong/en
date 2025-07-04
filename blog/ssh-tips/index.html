@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Operate Remote Servers Using SSH</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Operate Remote Servers Using SSH</h1>
+      <p class="meta"><time datetime="2013-10-22T11:03:15-07:00" pubdate>Oct 22, 2013</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="general-tips-and-traps">General Tips and Traps</h2>
+<ol>
+<li>
+<p>The permissions of the directory <code>~/.ssh</code> and its subcontents
+    on <strong>both the local machine and the remote server</strong> must be properly set 
+    in order for SSH login via public key to work.
+    A good pratice is to set the permission of <code>~/.ssh</code> to <code>700</code> (on both the local machine and the rmeote server)
+    and set permissions of files under <code>~/.ssh</code> to  <code>600</code>.</p>
+</li>
+<li>
+<p>SSH automatically maintains and checks a database containing identification 
+    for all hosts it has ever been used with. 
+    Host keys are stored in <code>~/.ssh/known_hosts</code> in the user's home directory. 
+    Additionally, 
+    the file <code>/etc/ssh/ssh_known_hosts</code> is automatically checked for known hosts. 
+    Any new hosts are automatically added to the user's file. 
+    If a host's identification ever changes, 
+    SSH warns about this and disables password authentication 
+    to prevent server spoofing or man-in-the-middle attacks, 
+    which could otherwise be used to circumvent the encryption. 
+    The option <code>-o StrictHostKeyChecking=no</code> can be used to turn off strict host key checking
+    (on both new host keys and changed host keys).</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">StrictHostKeyChecking</span><span class="o">=</span>no<span class="w"> </span>your_server
+</code></pre></div>
+
+<p>You can also turn of strickt host key checking permanently by adding the following line into <code>~/.ssh/config</code>.</p>
+<div class="highlight"><pre><span></span><code>StrictHostKeyChecking no
+</code></pre></div>
+
+<p>This is helpful for automation when you are in a safe environment (e.g., private VPN). 
+However, 
+be aware of the risk and avoid using it in public environment.
+For more details, 
+please refer to
+<a href="https://linux.die.net/man/1/ssh">ssh(1) - Linux man page</a>
+and
+<a href="http://bencane.com/2013/07/22/ssh-disable-host-checking-for-scripts-automation/">SSH: Disable Host Checking for Scripts &amp; Automation</a>.</p>
+</li>
+<li>
+<p>You can use the option <code>-o ProxyCommand='ssh proxy_server -W %h:%p'</code> 
+    to SSH into a machine via a proxy server.
+    Below is an illustration.
+    For more details,
+    please refer to
+    <a href="https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts">SSH Proxies and Jump Hosts</a>.</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>-o<span class="w"> </span><span class="nv">ProxyCommand</span><span class="o">=</span><span class="s1">&#39;ssh proxy_server -W %h:%p&#39;</span><span class="w"> </span>target_server
+</code></pre></div>
+
+</li>
+<li>
+<p>When using <code>sshfs</code> and <code>fuse</code>, 
+    make sure to add your user account into the <code>fuse</code> group.</p>
+<div class="highlight"><pre><span></span><code>gpasswd<span class="w"> </span>-a<span class="w"> </span><span class="sb">`</span>id<span class="w"> </span>-un<span class="sb">`</span><span class="w"> </span>fuse
+newgrp<span class="w"> </span>fuse
+</code></pre></div>
+
+</li>
+<li>
+<p>It is suggested that you do not set any password for your SSH keys. 
+    First, setting passwords for SSH keys defeats the purpose of using SSH keys.
+    Seconds, 
+    settings passwords for SSH keys might causes problems to other applicatons 
+    (e.g., keyring management, cron jobs, duplicity, etc.) rely on SSH.</p>
+</li>
+<li>
+<p>You can use SSH to run commands on a remote server in non-interactive mode.
+    For example, 
+    the following command logs into a server named <code>vm1.example.com</code> using SSH 
+    and then use <code>rsync</code> to synchronize the directory <code>/workdir/</code> on the server <code>vm2.example.com</code>
+    to the directory <code>/workdir/</code> on the server <code>vm1.example.com</code> (which is the local machine of <code>rsync</code>).</p>
+<div class="highlight"><pre><span></span><code>ssh<span class="w"> </span>vm1.example.com<span class="w"> </span>rsync<span class="w"> </span>-avh<span class="w"> </span>--info<span class="o">=</span>progress2<span class="w"> </span>--delete<span class="w"> </span>vm2.example.com:/workdir/<span class="w"> </span>/workdir/<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>&gt;<span class="w"> </span>backup.log<span class="w"> </span><span class="m">2</span>&gt;<span class="w"> </span>backup.err
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="multiplexing-controlmaster">Multiplexing / ControlMaster</h2>
+<ol>
+<li>
+<p>The <code>ControlMaster auto</code> option can be used to allow SSH reuse an existing connection.
+    The <code>ControlPersist yes</code> option goes one step further to persist a connection once it's established.
+    This means that there will essentially be one long-term SSH connection to each host. 
+    Those 2 options together is a very good way to avoid frequently SSH logins 
+    especially when you have to rely on bastion servers to login (e.g., in an Enterprise environment).
+    Notice that you must also specify a <code>ControlPath</code> 
+    if you use <code>ControlMaster</code>.
+    For more discussions, 
+    please refer to
+    <a href="https://www.cyberciti.biz/faq/linux-unix-reuse-openssh-connection/">How To Reuse SSH Connection To Speed Up Remote Login Process Using Multiplexing</a>
+    .</p>
+<div class="highlight"><pre><span></span><code>Host *
+# ControlMaster: persist connections for reuse
+    ControlPath ~/.ssh/control/%r@%h:%p
+    ControlMaster auto
+    ControlPersist yes
+#
+    SendEnv LANG LC_*
+    HashKnownHosts yes
+    GSSAPIAuthentication yes
+    GSSAPIDelegateCredentials no
+# make connection alive
+    ServerAliveInterval 10
+    ServerAliveCountMax 3
+</code></pre></div>
+
+</li>
+<li>
+<p>There are some potential drawbacks with <code>ControlMaster</code> turned on though. 
+    It is mainly due to limited bandwidth.
+    This is, generally speaking, not really an issue 
+    unless you transfer huge amount of data over SSH.
+    For more discussions,
+    please refer to
+    <a href="https://www.anchor.com.au/blog/2010/02/ssh-controlmaster-the-good-the-bad-the-ugly/">SSH ControlMaster: The Good, The Bad, The Ugly</a>
+    .</p>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<p><a href="https://www.cyberciti.biz/faq/linux-unix-reuse-openssh-connection/">How To Reuse SSH Connection To Speed Up Remote Login Process Using Multiplexing</a></p>
+<p><a href="https://www.anchor.com.au/blog/2010/02/ssh-controlmaster-the-good-the-bad-the-ugly/">SSH ControlMaster: The Good, The Bad, The Ugly</a></p>
+<p>https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts</p>
+<p>https://www.cyberciti.biz/faq/linux-unix-ssh-proxycommand-passing-through-one-host-gateway-server/</p>
+<p>https://stackoverflow.com/questions/22635613/what-is-the-difference-between-ssh-proxycommand-w-nc-exec-nc</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-10-22T11:03:15-07:00" pubdate>Oct 22, 2013</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/tips.html">tips</a>
+    <a class="category" href="https://www.legendu.net/en/tag/ssh.html">SSH</a>
+    <a class="category" href="https://www.legendu.net/en/tag/software.html">software</a>
+    <a class="category" href="https://www.legendu.net/en/tag/remote.html">remote</a>
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/controlmaster.html">ControlMaster</a>
+    <a class="category" href="https://www.legendu.net/en/tag/controlpersist.html">ControlPersist</a>
+    <a class="category" href="https://www.legendu.net/en/tag/proxycommand.html">ProxyCommand</a>
+    <a class="category" href="https://www.legendu.net/en/tag/controlpath.html">ControlPath</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/ssh-tips/';
+          var disqus_url = 'https://www.legendu.net/en/blog/ssh-tips/';
+          var disqus_title = 'Operate Remote Servers Using SSH';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Tips for AWK</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Tips for AWK</h1>
+      <p class="meta"><time datetime="2013-10-19T10:22:17-07:00" pubdate>Oct 19, 2013</time></p>
+</header>
+
+  <div class="entry-content"><p><a href="http://www.grymoire.com/Unix/Awk.html">AWK Tutorial</a></p>
+<ol>
+<li>
+<p>For small structured text files, 
+    it is suggested that you use the <a href="http://harelba.github.io/q/">q</a>
+    command to manipulate it.</p>
+<p>For complicated logic, 
+it is suggested that you use a scripting language (e.g., Python) instead. 
+I personally discourage using of <code>awk</code> 
+unless you have a large file (that q cannot handle) 
+and the operations you want do are simple.</p>
+</li>
+<li>
+<p>Basic syntax of <code>awk</code></p>
+<div class="highlight"><pre><span></span><code><span class="n">awk</span> <span class="s">&#39;BEGIN {start_action} {action} END {stop_action}&#39;</span> <span class="n">file_name</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Whether to user single or double quote depends on
+    whether you use column variables in the expression.
+    This is consistent with shell variable substitution.</p>
+</li>
+<li>
+<p><code>awk</code> ignorecase when working on files make unnecessary redundant output
+    very annoying, not sure why</p>
+</li>
+<li>
+<p><code>awk</code> does not recognize escaped characters in CSV formatted. 
+    Make sure that the file <code>awk</code> works on is in simple format.</p>
+</li>
+</ol>
+<h2 id="field-delimiter">Field Delimiter</h2>
+<ol>
+<li>
+<p>The delimiter must be quoted. 
+    For example, 
+    if the field delimiter is tab,
+    you must use <code>awk -F'\t'</code> rather than <code>awk -F\t</code>.</p>
+</li>
+<li>
+<p>The filed delimiter of AWK supports can be a regular expression.</p>
+<div class="highlight"><pre><span></span><code>awk -F&#39;[/=]&#39; &#39;{print $3 &quot;\t&quot; $5 &quot;\t&quot; $8}&#39; file_name
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="columnfield-filteringmanipulation">Column/Field Filtering/Manipulation</h2>
+<ol>
+<li>
+<p>Select 1st and 3rd column (seprated by tab)</p>
+<div class="highlight"><pre><span></span><code>awk &#39;{print $1 &quot;\t&quot; $3}&#39; file_name
+</code></pre></div>
+
+</li>
+<li>
+<p>Sum of the 5th filed.</p>
+<div class="highlight"><pre><span></span><code><span class="n">awk</span> <span class="s">&#39;BEGIN {s=0} {s=s+$5} END {print s}&#39;</span> <span class="n">file_name</span>
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="rows-filteringmanipulation">Rows Filtering/Manipulation</h2>
+<ol>
+<li>
+<p>Print rows of the file with the first field greater than 3.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">awk</span><span class="w"> </span><span class="s1">&#39;{ if($1 &gt; 3) print }&#39;</span><span class="w"> </span><span class="nv">file_name</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Print Docker image IDs that has no repositories names.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">docker</span><span class="w"> </span><span class="nv">images</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">awk</span><span class="w"> </span><span class="s1">&#39;{ if ($1 == &quot;&lt;none&gt;&quot;) print $3 }&#39;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Print Docker image IDs whose name contains <code>che</code> using regular expression match.</p>
+<div class="highlight"><pre><span></span><code><span class="nv">docker</span><span class="w"> </span><span class="nv">images</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nv">awk</span><span class="w"> </span><span class="s1">&#39;{if ($1 ~ &quot;che&quot;) print $3}&#39;</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>Print rows with 2 fileds.</p>
+<div class="highlight"><pre><span></span><code>awk &#39;NF == 2&#39; file_name
+</code></pre></div>
+
+<p>Or more verbosally (and more portable)</p>
+<div class="highlight"><pre><span></span><code>awk &#39;NF == 2 {print} {}&#39; file_name
+</code></pre></div>
+
+</li>
+<li>
+<p>Count the number of fields in each line.</p>
+<div class="highlight"><pre><span></span><code>awk &#39;{print NF}&#39; file_name
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="references">References</h2>
+<p>https://stackoverflow.com/questions/15386632/awk-4th-column-everything-matching-wildcard-before-the</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2013-10-19T10:22:17-07:00" pubdate>Oct 19, 2013</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/tips.html">tips</a>
+    <a class="category" href="https://www.legendu.net/en/tag/awk.html">awk</a>
+    <a class="category" href="https://www.legendu.net/en/tag/text-manipulation.html">text manipulation</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/awk-tips/';
+          var disqus_url = 'https://www.legendu.net/en/blog/awk-tips/';
+          var disqus_title = 'Tips for AWK';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>IPython Is the Best Shell</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">IPython Is the Best Shell</h1>
+      <p class="meta"><time datetime="2015-05-24T13:00:31-07:00" pubdate>May 24, 2015</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="ipython-is-the-best-shell">IPython is the Best Shell!</h2>
+<ol>
+<li>
+<p>Use IPython as much as possible. </p>
+<ul>
+<li>IPython has virtues of both shell and Python. </li>
+<li>You should avoid using shell scripts for complicate tasks any way.</li>
+</ul>
+</li>
+<li>
+<p>If you do want to use a Unix/Linux shell,
+    I'd suggest you stick to Bash 
+    unless Linux distributions start switching to zsh 
+    for a few reasons.</p>
+<ul>
+<li>Linux environment is more popular than a macOS environemnt
+    both for production and dev (due to Docker).</li>
+<li>Most Linux distributions are still using Bash as the default shell.</li>
+<li>It's easier to switch from zsh to bash on macOS
+    than to install and configure zsh on Linux machines 
+    especially in a production environment.</li>
+</ul>
+</li>
+</ol>
+<h2 id="profile-of-ipython">Profile of IPython</h2>
+<ol>
+<li>
+<p>IPython leverages SQLite3 for configuration.
+    SQLite3 is notorious for the database locking issues on network fileystesm (NFS, SAMBA, etc).
+    This means that you might encounter issues running IPython
+    if the configuration file of IPython is stored on a network filesystem.
+    You should avoid storing IPython configuration files on network filesystems!!
+    To avoid such kind of issues,
+    you can store IPython configuration files on the local disk or in memory.
+    For example,
+    the following command stores IPython historical commands 
+    to the file <code>/tmp/ipython_host.sqlite</code> (on the local disk).</p>
+<div class="highlight"><pre><span></span><code>ipython --HistoryManager.hist_file=/tmp/ipython_hist.sqlite
+</code></pre></div>
+
+<p>And the following command stores IPython historical commands in memory.</p>
+<div class="highlight"><pre><span></span><code>ipython --HistoryManager.hist_file=:memory:
+</code></pre></div>
+
+<p>Notice that in JupyterLab this is done 
+with the option <code>c.HistoryManager.hist_file</code>.</p>
+</li>
+<li>
+<p>You can the below command to generate (default) IPython configuration files.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># generate an IPython configuration dir</span>
+ipython<span class="w"> </span>profile<span class="w"> </span>create<span class="w"> </span><span class="o">[</span>profilename<span class="o">]</span>
+<span class="c1"># generate an IPython configuration dir in the specified location</span>
+ipython<span class="w"> </span>profile<span class="w"> </span>create<span class="w"> </span><span class="o">[</span>profilename<span class="o">]</span><span class="w"> </span>--profile-dir<span class="w"> </span>~/.ipython
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="start-ipython">Start IPython</h2>
+<ol>
+<li>
+<p>It is suggested that you run IPython using the comamnd <code>/path/to/python -m IPython</code>
+    unless you are sure that <code>ipython</code> pointing to the right Python version.
+    Even if <code>ipython</code> points to the right Python version,
+    you might encounter ModuleNotFouneError (saying "cannot import IPython")
+    due to library path (<code>~/.local/lib/python3.7/site-packages</code>) confliction. 
+    If this every happens
+    and assuming that IPython is installed with the right permission 
+    (you cannot import it if you do not have read permission), 
+    run IPython <code>/path/to/python -m IPython</code> might resolve the issue.</p>
+</li>
+<li>
+<p>According to <a href="https://ipython.readthedocs.io/en/stable/development/config.html#configuration-file-location">Configuration file location</a>,
+    the configuration directory of a IPython session is determined in the following order.</p>
+<ul>
+<li>
+<p>Use the directory specified by the option <code>--ipython-dir</code> if any.</p>
+<div class="highlight"><pre><span></span><code>ipython<span class="w"> </span>--ipython-dir<span class="w"> </span>/path/to/ipython/profile/directory
+</code></pre></div>
+
+</li>
+<li>
+<p>Use the directory return by <code>IPython.paths.get_ipython_dir()</code>,
+    which is determined in the order below. </p>
+<ul>
+<li>Use the directory specified by the environment variable <code>IPYTHONDIR</code>.</li>
+<li>Default to <code>~/.ipython</code>.</li>
+</ul>
+</li>
+</ul>
+<p>If you want to define the environment variable <code>IPYTHONDIR</code> manually,
+it is better to export it as <code>$HOME/.ipython/</code> rather than leave it blank
+(which causes IPython to use the current directory as the configuration directory in rare buggy situations).</p>
+</li>
+</ol>
+<h2 id="help-doc">Help Doc</h2>
+<ol>
+<li>
+<p>A prefixing/suffixing question mark (<code>?</code>) shows the help doc of an object in IPython.
+    Two prefixing/suffixing questions marks (<code>??</code>) shows even more information. 
+    This is called dynamic object retrospection.</p>
+</li>
+<li>
+<p>You can use <code>?%alias_or_magic</code> to check the definition of an alias or line magic.
+    Notice that <code>%</code> is required for aliases. 
+    The suffixing <code>?</code> doesn't work in this case.</p>
+</li>
+<li>
+<p>Wild cards can be used to match methods in dynamic object retrospection!</p>
+<div class="highlight"><pre><span></span><code>os.*dir*<span class="o">?</span>
+<span class="o">?</span>os.*dir*
+</code></pre></div>
+
+</li>
+</ol>
+<h2 id="shell">Shell</h2>
+<ol>
+<li>
+<p>It is well known that 
+    <code>echo $?</code> prints the exit code of the last command in shell.
+    Notice that this does NOT work as expected in IPython shell!!</p>
+</li>
+<li>
+<p>If you run a shell command, 
+    it is suggested that you always prefix it with <code>!</code> 
+    (even though it is not required sometimes),
+    the reason is that pipe will fail to work without the prefixing <code>!</code>.</p>
+</li>
+<li>
+<p>Both shell commands prefixed with <code>!</code> (e.g., <code>!ls</code>) and line magics (e.g., <code>%ls</code>) 
+    can be mixed with Python code in IPython!!
+    This makes things very convenient sometimes.</p>
+</li>
+<li>
+<p>Python variables can used in a shell command. 
+    For example, 
+    if there is a Python variable named <code>pkg</code> which refers to a local package file,
+    then you can use <code>!cp $pkg ~</code> to copy it to the home directory. 
+    Another even more general approach is to use the curly braces
+    which accepts an arbitrary Python expresion.
+    Still, 
+    let's assume that <code>pkg</code> is a Python variable which refers to a local package file 
+    but it is a relative path w.r.t. <code>/tmp</code>.
+    You can copy it to the home directory using the following command.</p>
+<div class="highlight"><pre><span></span><code>!cp<span class="w"> </span><span class="o">{</span>Path<span class="o">(</span><span class="s2">&quot;tmp&quot;</span><span class="o">)</span><span class="w"> </span>/<span class="w"> </span>pkg<span class="o">}</span><span class="w"> </span>~
+</code></pre></div>
+
+<p>And also, 
+Python variables can be accessed in the first line 
+of a <code>%%bash</code> or <code>%%script</code> cell, 
+and so can be passed as command line parameters to the script. 
+For example, with bash you can do this:</p>
+<div class="highlight"><pre><span></span><code>%%bash<span class="w"> </span>-s<span class="w"> </span><span class="s2">&quot;</span><span class="nv">$myPythonVar</span><span class="s2">&quot;</span><span class="w"> </span><span class="s2">&quot;</span><span class="nv">$myOtherVar</span><span class="s2">&quot;</span>
+<span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;This bash script knows about </span><span class="nv">$1</span><span class="s2"> and </span><span class="nv">$2</span><span class="s2">&quot;</span>
+</code></pre></div>
+
+<p>Shell environment variables can also be used in a shell command in IPython.
+However, 
+you must use double dollar signs (instead of a single dollar sign) for shell variables.</p>
+<div class="highlight"><pre><span></span><code><span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">echo</span> <span class="err">$$</span><span class="n">HOME</span> <span class="p">{</span><span class="n">x</span><span class="p">}</span>
+</code></pre></div>
+
+</li>
+<li>
+<p>When you use the prefix <code>!</code> to run a shell command,
+    background jobs by suffixing <code>&amp;</code> is not supported!
+    However, 
+    there are a few simple ways to run background shell jobs 
+    (or to be more accurately, run jobs in parallel).
+    The first way to run background shell jobs is via the module <code>subprocess</code>. 
+    For example, 
+    the below code use start a separate process to zip each subdirectory 
+    in the current directory.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">subprocess</span> <span class="k">as</span> <span class="nn">sp</span>
+
+<span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">Path</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">iterdir</span><span class="p">():</span>
+    <span class="k">if</span> <span class="n">path</span><span class="o">.</span><span class="n">is_dir</span><span class="p">():</span>
+        <span class="n">sp</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;zip -r </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">path</span><span class="o">.</span><span class="n">with_suffix</span><span class="p">(</span><span class="s1">&#39;.zip&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2"> &amp;&quot;</span><span class="p">,</span> <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</code></pre></div>
+
+<p>The second way is to use the Python moduel <code>multiprocessing</code>. </p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+
+<span class="k">def</span> <span class="nf">job</span><span class="p">(</span><span class="n">arg</span><span class="p">):</span>
+    <span class="o">...</span>
+
+<span class="n">Pool</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">job</span><span class="p">,</span> <span class="p">[</span><span class="n">v1</span><span class="p">,</span> <span class="n">v2</span><span class="p">,</span> <span class="n">v3</span><span class="p">])</span>
+</code></pre></div>
+
+<p>The last (not recommend) way is to use the cell magic <code>%%script</code> with the option <code>--bg</code>.</p>
+</li>
+<li>
+<p>Make sure to use <code>\</code> instead of <code>/</code> for paths when you work in Windows.
+    For more discussions,
+    please refer to
+    <a href="http://www.legendu.net/misc/blog/.-is-not-recognized-as-an-internal-or-external-command">"." Is Not Recognized as An Internal or External Command</a>
+    .</p>
+</li>
+</ol>
+<h2 id="magics">Magics</h2>
+<ol>
+<li>
+<p><code>%lsmagic</code> lists all magic commands.</p>
+</li>
+<li>
+<p>The magic command <code>%rehashx</code> automatically create aliases for the contents of your <code>$PATH</code>.
+    After running <code>%rehashx</code>,
+    most system commands can be used directly.</p>
+</li>
+<li>
+<p><code>%edit</code> is very useful for editing the definition of Python objects (functions, classes, etc.).</p>
+</li>
+<li>
+<p><code>%notebook</code> exports the current IPython history to a notebook file. 
+    For example, 
+    to export the history to <code>foo.ipynb</code> do <code>%notebook foo.ipynb</code>.</p>
+</li>
+<li>
+<p><code>%env</code> shows and set environment variables.
+    Of course, 
+    you can also use <code>os.environ</code> to help management environment variables.
+    However, 
+    be aware that environment varaibles set by either <code>%env</code> or <code>os.environ</code> 
+    are active in the current session only
+    and are not visible to other shell/Python processes spawned using <code>subprocess</code>.
+    For more details, 
+    please refer to <a href="https://ipython.readthedocs.io/en/stable/interactive/shell.html#environment-variables">Environment variables</a>.</p>
+</li>
+<li>
+<p><code>%run</code> runs a Python script or a Jupyter/Lab notebook 
+    and brings its content into the current namespace.
+    This is different from importing a module!
+    It is equivalent to "source in code" in other languages (such as R and Shell).</p>
+</li>
+<li>
+<p><code>%load</code> inserts the content of a text file into the current cell.
+    The <code>%load</code> statement itself is commented out after loading the content of the text file.</p>
+</li>
+<li>
+<p><code>%%writefile</code> writes the content of the current cell to an external file.
+    <code>%pycat</code> is the opposite. 
+    It shows the content of an external file. 
+    The difference between <code>%pycat</code> and <code>!cat</code> is that <code>%pycat</code> highlight the output so that is easy to read and understand.
+    You can think of <code>%pycat some_file</code> as equivalent of <code>!cat some_file | highlight -O ansi</code>.</p>
+</li>
+<li>
+<p>Magics for profiling code in IPython and Jupyter/Lab notebooks are also available.
+    Please refer to
+    <a href="http://www.legendu.net/misc/blog/python-profile-notebook/">Python Profiler for JupyterLab Notebooks</a>
+    for more discussions.</p>
+</li>
+<li>
+<p><code>%autoreload</code> always reload modules before running a function.
+    This is extremely helpful if you update your own modules/scripts 
+    while using them in IPython or Jupyter/Lab notebook.</p>
+</li>
+<li>
+<p>You can enable auto call (calling without using parentheses) of Python functions/method 
+    using the alias <code>%autocall</code>.
+    However, 
+    this is not a good idea generally speaking.</p>
+</li>
+</ol>
+<h2 id="misc">Misc</h2>
+<ol>
+<li>
+<p>IPython accepts only script with the file extension <code>.ipy</code>.</p>
+</li>
+<li>
+<p>If you parsing arguments in an IPython script, 
+    you have to prepend <code>--</code> to you arguments passed to the IPython scripts,
+    otherwise,
+    the arguments are passed to the <code>ipython</code> command instead of your script.
+    For more information,
+    please check <a href="https://stackoverflow.com/questions/22631845/how-to-pass-command-line-arguments-to-ipython">this discussion on Stack Overflow</a>.</p>
+</li>
+<li>
+<p>IPython automatically beautify outputs.</p>
+</li>
+</ol>
+<h2 id="references">References</h2>
+<ul>
+<li>
+<p>http://www.legendu.net/misc/blog/set-environment-varibles-in-ipython/</p>
+</li>
+<li>
+<p>http://www.legendu.net/misc/blog/disable-jedi-in-ipython/</p>
+</li>
+<li>
+<p>http://www.legendu.net/en/blog/shell-alternatives/</p>
+</li>
+<li>
+<p><a href="https://ep2019.europython.eu/media/conference/slides/cBeHNyZ-wait-ipython-can-do-that.pdf">Wait, IPython Can Do That?!</a></p>
+</li>
+<li>
+<p><a href="https://www.dataquest.io/blog/jupyter-notebook-tips-tricks-shortcuts/">​​​​28 Jupyter Notebook Tips, Tricks, and Shortcuts</a></p>
+</li>
+<li>
+<p><a href="https://www.youtube.com/watch?v=VQBZ2MqWBZI">IPython and Jupyter in Depth: High productivity, interactive Python - PyCon 2017</a></p>
+</li>
+<li>
+<p><a href="https://ipython.readthedocs.io/en/stable/index.html">IPython Documentation</a></p>
+</li>
+<li>
+<p><a href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">IPython Magics</a></p>
+</li>
+<li>
+<p><a href="https://ipython.readthedocs.io/en/stable/config/intro.html">Introduction to IPython configuration</a></p>
+</li>
+<li>
+<p>https://stackoverflow.com/questions/19579546/can-i-access-python-variables-within-a-bash-or-script-ipython-notebook-c</p>
+</li>
+<li>
+<p>https://ipython.org/ipython-doc/3/interactive/shell.html</p>
+</li>
+<li>
+<p>https://ipython.readthedocs.io/en/stable/interactive/magics.html</p>
+</li>
+<li>
+<p>https://github.com/ipython/ipython/wiki/Cookbook:-Storing-aliases</p>
+</li>
+<li>
+<p><a href="https://stackoverflow.com/questions/19579546/can-i-access-python-variables-within-a-bash-or-script-ipython-notebook-c">Can I access python variables within a <code>%%bash</code> or <code>%%script</code> ipython notebook cell?</a></p>
+</li>
+<li>
+<p><a href="https://github.com/ipython/ipython/issues/6527">system commands: python variables don't get evaluated when environment variables are also used</a></p>
+</li>
+<li>
+<p><a href="http://www.legendu.net/misc/blog/.-is-not-recognized-as-an-internal-or-external-command">"." Is Not Recognized as An Internal or External Command</a></p>
+</li>
+</ul></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2015-05-24T13:00:31-07:00" pubdate>May 24, 2015</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="https://www.legendu.net/en/tag/python.html">Python</a>
+    <a class="category" href="https://www.legendu.net/en/tag/tips.html">tips</a>
+    <a class="category" href="https://www.legendu.net/en/tag/ipython.html">IPython</a>
+    <a class="category" href="https://www.legendu.net/en/tag/shell.html">Shell</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/ipython-is-the-best-shell/';
+          var disqus_url = 'https://www.legendu.net/en/blog/ipython-is-the-best-shell/';
+          var disqus_title = 'IPython Is the Best Shell';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

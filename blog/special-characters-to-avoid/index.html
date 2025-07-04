@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Special Characters to Avoid in Strings</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Special Characters to Avoid in Strings</h1>
+      <p class="meta"><time datetime="2017-07-03T21:56:32-07:00" pubdate>Jul 03, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p>This articles talks about special characters to avoid in various places. 
+You might not encounter issues most of the time when violating rules stated below,
+however, 
+you never know when things will break.
+It is more for a good-practice suggestion.</p>
+<h2 id="string-for-shell">String for Shell</h2>
+<ol>
+<li>When you pass parameters from one program to another one,
+    do not make assumptions on how shell is handled.
+    For this reasons,
+    you might want to avoid <code>`something</code> and <code>$(something)</code> in parameters 
+    passed to another program which might be part of a shell command.</li>
+</ol>
+<h2 id="file-names">File Names</h2>
+<ol>
+<li>
+<p>Avoid the following special characters in file names.</p>
+<ul>
+<li>spaces (<code></code>) <br>
+    Spaces in paths might cause issues in Shell
+    as paths have to be quoted in double/single strings.
+    However,
+    some Shell commands/applications might not handle this well.</li>
+<li>dollar signs (<code>$</code>)<br>
+    The dollar sign (<code>$</code>) has special meanings in various places (e.g., in Shell).</li>
+<li>double quotes (<code>"</code>)<br>
+    A double quotes sign might need escape.</li>
+<li>single quotes (<code>'</code>)<br>
+    A single quotes sign might need escape.</li>
+<li>tilde (<code>~</code>)<br>
+    The tilde sign (<code>~</code>) has special meanings (e.g., the name of some buffer files starts with tilde) in various places.</li>
+<li>dash/minus (<code>-</code>) <br>
+    Dash is OK but underscore (<code>_</code>) as an alternative is more readable.</li>
+<li>backtick (<code>`</code>) 
+    Backticks have special meanings in various places.</li>
+<li>shell command (<code>$()</code>) <br>
+    Self explained.</li>
+<li>semicolon (<code>;</code>) 
+    Semicolon indicating the end of a shell command. 
+    It might cause issues when used carelessly in shell commands.
+    This also applies when your application take a string of delimited paths,
+    in which case you want to avoid using semicolon (<code>;</code>) as the delimiter.
+    Comma (<code>,</code>) is a better alternative in this case.</li>
+</ul>
+</li>
+<li>
+<p>When you programmally get the path of a file, 
+    it is best to convert it to its absolute representation.</p>
+</li>
+</ol>
+<h2 id="password">Password</h2>
+<ol>
+<li>Avoid the following special characters in passwords.<ul>
+<li>space (<code></code>)<br>
+    Some applications does not allow spaces in passwords.</li>
+<li>dollar signs (<code>$</code>) <br>
+    Dollar signs (<code>$</code>) have special meanings in various places.</li>
+<li>double quotes (<code>"</code>) 
+    A double quote sign (<code>"</code>) might need to be escaped in code.</li>
+<li>single quotes (<code>'</code>) <br>
+    A single quote sign (<code>'</code>) might need to be escaped in code.</li>
+<li>backtick (<code>`</code>) 
+    Backticks have special meanings in various places.</li>
+<li>shell command (<code>$()</code>)<br>
+    Self explained.</li>
+</ul>
+</li>
+</ol></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2017-07-03T21:56:32-07:00" pubdate>Jul 03, 2017</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/programming.html">programming</a>
+    <a class="category" href="https://www.legendu.net/en/tag/special-characters.html">special characters</a>
+    <a class="category" href="https://www.legendu.net/en/tag/avoid.html">avoid</a>
+    <a class="category" href="https://www.legendu.net/en/tag/password.html">password</a>
+    <a class="category" href="https://www.legendu.net/en/tag/file-name.html">file name</a>
+    <a class="category" href="https://www.legendu.net/en/tag/shell.html">Shell</a>
+    <a class="category" href="https://www.legendu.net/en/tag/char.html">char</a>
+    <a class="category" href="https://www.legendu.net/en/tag/special.html">special</a>
+    <a class="category" href="https://www.legendu.net/en/tag/character.html">character</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/special-characters-to-avoid/';
+          var disqus_url = 'https://www.legendu.net/en/blog/special-characters-to-avoid/';
+          var disqus_title = 'Special Characters to Avoid in Strings';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

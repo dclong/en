@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/print-rows-from-a-text-file/">Print Rows from a Text File</a>
+      </h1>
+      <p class="meta"><time datetime="2017-02-06T14:36:40-08:00" pubdate>Feb 06, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p>It is suggested that you <strong>use Python instead of Shell</strong> to manipulate text files!</p>
+<p>Please refer to 
+<a href="http://www.legendu.net/en/blog/advanced-use-head-tail/">Advanced Use of "head" and "tail"</a>
+on how to use <code>head</code> and <code>tail</code> for printing rows from a text file.
+These 2 commands are convenient when you want to take head/tail rows …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/print-rows-from-a-text-file/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/use-wget-behind-proxy/">Use wget with Proxy</a>
+      </h1>
+      <p class="meta"><time datetime="2014-07-06T14:31:55-07:00" pubdate>Jul 06, 2014</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>If you don't already know the proxy in use (in your company),
+    read the post <a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/">Find out Proxy in Use</a>
+    to figure it out.</p>
+</li>
+<li>
+<p>Put the following lines into your wget configuration file,
+    which is usually <code>~/.wget</code>.</p>
+<div class="highlight"><pre><span></span><code><span class="n">use_proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">on</span>
+<span class="n">http_proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="nl">username</span><span class="p">:</span><span class="n">password</span><span class="nv">@proxy_ip</span><span class="err">:</span><span class="n">port</span>
+<span class="n">https_proxy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nl">http</span><span class="p">:</span><span class="o">//</span><span class="nl">username</span><span class="p">:</span><span class="n">password</span><span class="nv">@proxy_ip …</span></code></pre></div></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/use-wget-behind-proxy/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/parallel-computing-using-multithreading/">Parallel Computing Using Multithreading</a>
+      </h1>
+      <p class="meta"><time datetime="2012-06-26T11:14:47-07:00" pubdate>Jun 26, 2012</time></p>
+</header>
+
+  <div class="entry-content"><ol>
+<li>
+<p>Not all jobs are suitable for parallel computing. 
+    The more comminication that threads has to make, 
+    the more dependent the jobs are and the less efficient the parallel computing is. </p>
+</li>
+<li>
+<p>Generally speaking, 
+    commercial softwares (Mathematica, MATLAB and Revolution R, etc.) 
+    have very good support on parallel computing. </p>
+</li>
+</ol>
+<h2 id="python">Python</h2>
+<p>Please refer …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/parallel-computing-using-multithreading/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/ssh-copy-id/">Copy SSH Public Key Using "ssh-copy-id"</a>
+      </h1>
+      <p class="meta"><time datetime="2012-06-29T22:25:13-07:00" pubdate>Jun 29, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p>You can use the following command to copy your SSH public key to a Linux server.</p>
+<div class="highlight"><pre><span></span><code>ssh-copy-id<span class="w"> </span>-i<span class="w"> </span>~/.ssh/id_rsa.pub<span class="w"> </span>host_machine
+</code></pre></div>
+
+<p>However, 
+if a Linux server runs the SSH deamon on a non default port (default is 22), 
+you have to specify the port with option <code>-p port</code>. 
+In …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/ssh-copy-id/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/linux-read-cpu-temperature/">Read CPU Temperature in Linux</a>
+      </h1>
+      <p class="meta"><time datetime="2012-05-17T11:24:31-07:00" pubdate>May 17, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p><img src="http://dclong.github.io/media/computer/hot.jpg" height="200" width="240" align="right"/></p>
+<p>First you have to install package "lm-sensors". </p>
+<div class="highlight"><pre><span></span><code>wajig<span class="w"> </span>install<span class="w"> </span>lm-sensors
+</code></pre></div>
+
+<p>To detect the cpu temperature, type the following command.</p>
+<div class="highlight"><pre><span></span><code>modprobe<span class="w"> </span>coretemp
+sensors
+</code></pre></div>
+
+<p>For more instructions on this top, 
+see <a href="http://www.cyberciti.biz/faq/howto-linux-get-sensors-information/">nixCraft</a>.</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/linux-read-cpu-temperature/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/trust-a-jupyterlab-notebook/">Trust a JupyterLab Notebook</a>
+      </h1>
+      <p class="meta"><time datetime="2019-12-29T20:14:09-08:00" pubdate>Dec 29, 2019</time></p>
+</header>
+
+  <div class="entry-content"><p>By default, 
+IPython (kernel of Jupyter/Lab notebook) disables executation of untrusted code without explicit user input.
+If you have notebook whose output containings JavaScript (e.g., JS-based visualiation)
+and code wasn't run by you (e.g., the notebook is shared by someone else),
+the JS-based output won't be shown …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/trust-a-jupyterlab-notebook/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="https://www.legendu.net/en/index27.html">&larr; Older</a>
+
+      <a class="next" href="https://www.legendu.net/en/index25.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

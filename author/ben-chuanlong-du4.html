@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Ben Chuanlong Du's Blog - Articles by Ben Chuanlong Du</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div class="blog-index">
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/schedule-task-using-crontab-in-linux/">Schedule Task Using Cron in Linux</a>
+      </h1>
+      <p class="meta"><time datetime="2012-11-27T11:28:08-08:00" pubdate>Nov 27, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p>Note: Cron is great for simple scheduling requests. 
+For complicated scheduling with many dependencies 
+you probably want to go with 
+<a href="http://www.legendu.net/misc/blog/apache-airflow-tips">AirFlow</a>
+.</p>
+<h2 id="installation">Installation</h2>
+<p>Cron is usually installed by default.
+It not (e.g., if you are using a Docker image),
+you can install it using the following command (on Ubuntu).</p>
+<div class="highlight"><pre><span></span><code>wajig …</code></pre></div></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/schedule-task-using-crontab-in-linux/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/change-shell-in-mac/">Change Shell in Mac</a>
+      </h1>
+      <p class="meta"><time datetime="2018-04-02T14:46:43-07:00" pubdate>Apr 02, 2018</time></p>
+</header>
+
+  <div class="entry-content"><p>You can check the current shell in use by running the following command.</p>
+<div class="highlight"><pre><span></span><code><span class="nb">echo</span><span class="w"> </span><span class="nv">$SHELL</span>
+</code></pre></div>
+
+<p>However,
+notice that <code>echo $SHELL</code> does not report the right shell sometimes.
+A more robust way is to use <code>echo $0</code>.</p>
+<p>The default shell can be changed using thee comamnd <code>chsh</code>.
+For example, 
+thee following …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/change-shell-in-mac/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/install-gnu-utils-using-homebrew/">Install GNU Utils Using Homebrew</a>
+      </h1>
+      <p class="meta"><time datetime="2017-06-22T13:26:28-07:00" pubdate>Jun 22, 2017</time></p>
+</header>
+
+  <div class="entry-content"><p>Installing GNU tools is a way to try to get Linux command experience in macOS. 
+However, 
+not every Linux command has an identical-experience version in macOS.
+**
+It is suggested that you use a Linux virtual machine 
+if you really want to have Linux experience in macOS.
+**
+Notice that some hardwares …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/install-gnu-utils-using-homebrew/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/things-to-do-after-installing-linux/">Things to Do After Installing Linux</a>
+      </h1>
+      <p class="meta"><time datetime="2016-05-04T20:59:32-07:00" pubdate>May 04, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p>Note: The tips here are for Debian-based Linux distributions 
+(Debian, Ubuntu, LinuxMint, Pop!_OS, AntiX, etc.).</p>
+<h2 id="debian-specific">Debian Specific</h2>
+<ol>
+<li>
+<p>If you installed Debian without a desktop environment, 
+    and wants to install a customized desktop environment now,
+    make sure to install a DE manager (e.g., gdm, lightdm, etc.) as well.
+    without …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/things-to-do-after-installing-linux/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/install-software-linux/">Permission Issues when Installing Softwares in Linux</a>
+      </h1>
+      <p class="meta"><time datetime="2012-04-30T00:00:00-07:00" pubdate>Apr 30, 2012</time></p>
+</header>
+
+  <div class="entry-content"><p>Sometime when you install softwares in Linux, 
+you get an error message saying that you do not have permission while you used sudo or the root account. 
+This probably means that you do not have full access to some installation files.
+An easy way to solve this problem is to …</p></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/install-software-linux/">Read On &crarr;</a>
+  </footer>
+  		</article>
+  		<article>
+<header>
+      <h1 class="entry-title">
+        <a href="https://www.legendu.net/en/blog/tips-for-installing-debian/">Tips on Installing Debian Series of Linux Distributions</a>
+      </h1>
+      <p class="meta"><time datetime="2013-03-11T01:05:59-07:00" pubdate>Mar 11, 2013</time></p>
+</header>
+
+  <div class="entry-content"><h2 id="before-installation">Before Installation</h2>
+<h3 id="debian-specific">Debian Specific</h3>
+<ol>
+<li>You'd better not install back ported Debian images, 
+    as it might cause issues with other software (e.g., VirtualBox).
+    It is suggested that you use Debian test.</li>
+</ol>
+<h3 id="other-debian-based-linux-distributions">Other Debian-based Linux Distributions</h3>
+<ol>
+<li>
+<p>Download the right ISO image of the Linux distribution 
+    that you want to install.</p>
+</li>
+<li>
+<p>Create …</p></li></ol></div>
+  <footer>
+    <a rel="full-article" href="https://www.legendu.net/en/blog/tips-for-installing-debian/">Read On &crarr;</a>
+  </footer>
+  		</article>
+<div class="pagination">
+    <a class="prev" href="https://www.legendu.net/en/author/ben-chuanlong-du5.html">&larr; Older</a>
+
+      <a class="next" href="https://www.legendu.net/en/author/ben-chuanlong-du3.html">Newer &rarr;</a>
+  <br />
+</div></div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/editing-PDF-files/">Editing PDF Files</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/android-emulators/">Android Emulators</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

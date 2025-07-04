@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - Internet</title><link href="https://www.legendu.net/en/" rel="alternate"></link><link href="https://www.legendu.net/en/feeds/internet.atom.xml" rel="self"></link><id>https://www.legendu.net/en/</id><updated>2021-09-26T21:54:00-07:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Convert a Socks Proxy to a HTTP Proxy</title><link href="https://www.legendu.net/en/blog/socks-proxy-to-http-proxy/" rel="alternate"></link><published>2018-09-08T18:57:48-07:00</published><updated>2021-09-26T21:54:00-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2018-09-08:/en/blog/socks-proxy-to-http-proxy/</id><summary type="html">&lt;p&gt;There are multiple tools available 
+to convert a Socks proxy to a HTTP/HTTPS proxy. 
+The work by convertting HTTP requests into socks requests 
+and send them to the socks proxy. 
+Be aware that this might not be necessary 
+as many tools accepting HTTP/HTTPS proxies 
+also accept socks proxies …&lt;/p&gt;</summary><content type="html">&lt;p&gt;There are multiple tools available 
+to convert a Socks proxy to a HTTP/HTTPS proxy. 
+The work by convertting HTTP requests into socks requests 
+and send them to the socks proxy. 
+Be aware that this might not be necessary 
+as many tools accepting HTTP/HTTPS proxies 
+also accept socks proxies. 
+In that case,
+you can direct your socks proxy
+(e.g., &lt;code&gt;socks5://localhost:1080&lt;/code&gt;)
+to those tools.
+If you do need to convert a socks proxy to a HTTP/HTTPS proxy
+for tools that accept HTTP/HTTPS proxies only,
+read the below.&lt;/p&gt;
+&lt;h2 id="polipo"&gt;Polipo&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install Polipo.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;wajig&lt;span class="w"&gt; &lt;/span&gt;search&lt;span class="w"&gt; &lt;/span&gt;polipo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a HTTP proxy listening on 8123
+    (assuming you have a Socks proxy &lt;code&gt;localhost:1080&lt;/code&gt;). &lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;polipo&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;socksParentProxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;localhost:1080
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="http-proxy-to-socks"&gt;&lt;a href="https://www.npmjs.com/package/http-proxy-to-socks"&gt;http-proxy-to-socks&lt;/a&gt;&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Install http-proxy-to-socks.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;npm&lt;span class="w"&gt; &lt;/span&gt;install&lt;span class="w"&gt; &lt;/span&gt;-g&lt;span class="w"&gt; &lt;/span&gt;http-proxy-to-socks
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Create a HTTP proxy listening on 8080
+    (assuming you have a Socks proxy &lt;code&gt;localhost:1080&lt;/code&gt;).
+    Please make sure your socks service is available at the corresponding port.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;hpts&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;127&lt;/span&gt;.0.0.1:1080&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;8080&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;https://www.codevoila.com/post/16/convert-socks-proxy-to-http-proxy-using-polipo&lt;/p&gt;</content><category term="Internet"></category><category term="network"></category><category term="socks proxy"></category><category term="http proxy"></category><category term="polipo"></category></entry><entry><title>Transfer Files over Network in Linux</title><link href="https://www.legendu.net/en/blog/transfer-files-over-network-in-linux/" rel="alternate"></link><published>2014-03-02T17:16:03-08:00</published><updated>2020-05-02T17:16:03-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-03-02:/en/blog/transfer-files-over-network-in-linux/</id><summary type="html">&lt;h2 id="comparison-of-network-drives-remote-file-system"&gt;Comparison of Network Drives (Remote File System)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;NFS is very fast but not secure and it is for Unix/Linux only. 
+    It is a good choice for local network sharing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Samba is fast, secure and cross-platform. 
+    it is good for general purpose sharing and popular in companies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSHFS is slow …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;h2 id="comparison-of-network-drives-remote-file-system"&gt;Comparison of Network Drives (Remote File System)&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;NFS is very fast but not secure and it is for Unix/Linux only. 
+    It is a good choice for local network sharing.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Samba is fast, secure and cross-platform. 
+    it is good for general purpose sharing and popular in companies.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;SSHFS is slow but very secure and it is for Unix/Linux only. 
+    It is good for situations where security is critical but performance is not.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;To sum up,
+&lt;strong&gt;Samba is the one you want to use generally speaking&lt;/strong&gt;.
+However,
+if you are on a local network and performance is crtical, 
+go with NFS.&lt;/p&gt;
+&lt;h2 id="comparison-of-file-copying-tools"&gt;Comparison of File-copying Tools&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Generally speaking, 
+    &lt;code&gt;rsync&lt;/code&gt; is the tool you want to use in most situations. 
+    It is definitely preferred over &lt;code&gt;scp&lt;/code&gt; 
+    unless in situations when &lt;code&gt;rsync&lt;/code&gt; is not available (e.g., on Andrioid).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;There are some other file-copying tools such as &lt;code&gt;mbuffer&lt;/code&gt; and &lt;code&gt;netcat&lt;/code&gt;/&lt;code&gt;nc&lt;/code&gt;
+    to help you squeeze the most out of network speed.
+    However,
+    unless you want to transfer huge files over high speed LAN
+    and security is not a concern,
+    you still want to stick with &lt;code&gt;rsync&lt;/code&gt;.
+    The example below is how you can copy files suing &lt;code&gt;mbuffer&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;tar&lt;span class="w"&gt; &lt;/span&gt;zcf&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;bigfile.m4p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;mbuffer&lt;span class="w"&gt; &lt;/span&gt;-s&lt;span class="w"&gt; &lt;/span&gt;1K&lt;span class="w"&gt; &lt;/span&gt;-m&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;512&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;ssh&lt;span class="w"&gt; &lt;/span&gt;otherhost&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;tar zxf -&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;The example below uses &lt;code&gt;tar&lt;/code&gt; and &lt;code&gt;netcat&lt;/code&gt; to copy files.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="c1"&gt;# run this command on the machine with the source files&lt;/span&gt;
+tar&lt;span class="w"&gt; &lt;/span&gt;--numeric-owner&lt;span class="w"&gt; &lt;/span&gt;-cvf&lt;span class="w"&gt; &lt;/span&gt;-&lt;span class="w"&gt; &lt;/span&gt;./&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;netcat&lt;span class="w"&gt; &lt;/span&gt;-l&lt;span class="w"&gt; &lt;/span&gt;-p&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2020&lt;/span&gt;
+&lt;span class="c1"&gt;# run this command on the machine to copy files to&lt;/span&gt;
+netcat&lt;span class="w"&gt; &lt;/span&gt;source_machine_ip&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="m"&gt;2020&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="p"&gt;|&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;tar&lt;span class="w"&gt; &lt;/span&gt;-zxf&lt;span class="w"&gt; &lt;/span&gt;-
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;p&gt;&lt;a href="https://linuxaria.com/article/tar-rsync-netcat-scp"&gt;The best way to move data&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://blog.alanporter.com/2015-04-13/fast-copy/"&gt;tar + netcat = very fast copy&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;https://linuxaria.com/article/tar-rsync-netcat-scp&lt;/p&gt;
+&lt;p&gt;http://moo.nac.uci.edu/~hjm/HOWTO_move_data.html&lt;/p&gt;
+&lt;p&gt;https://unix.stackexchange.com/questions/48399/fast-way-to-copy-a-large-file-on-a-lan&lt;/p&gt;</content><category term="Internet"></category><category term="internet"></category><category term="Linux"></category><category term="network"></category><category term="web"></category><category term="transfer"></category><category term="file system"></category><category term="nfs"></category><category term="SSH"></category></entry><entry><title>Proxy for `sudo`</title><link href="https://www.legendu.net/en/blog/proxy-for-sudo/" rel="alternate"></link><published>2017-04-07T23:42:48-07:00</published><updated>2019-03-07T23:42:48-08:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2017-04-07:/en/blog/proxy-for-sudo/</id><summary type="html">&lt;p&gt;You can setup proxy in a terminal by export environment variables &lt;code&gt;http_proxy&lt;/code&gt; and `https_proxy'.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However,
+you might find the exported environment variables are not visible to &lt;code&gt;sudo&lt;/code&gt;.
+This can be resovled by simplying adding the &lt;code&gt;-E&lt;/code&gt; (preserve environment) option to &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo …&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;</summary><content type="html">&lt;p&gt;You can setup proxy in a terminal by export environment variables &lt;code&gt;http_proxy&lt;/code&gt; and `https_proxy'.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;http_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;span class="nb"&gt;export&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nv"&gt;https_proxy&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;proxy_server:port&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;However,
+you might find the exported environment variables are not visible to &lt;code&gt;sudo&lt;/code&gt;.
+This can be resovled by simplying adding the &lt;code&gt;-E&lt;/code&gt; (preserve environment) option to &lt;code&gt;sudo&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;sudo&lt;span class="w"&gt; &lt;/span&gt;-E&lt;span class="w"&gt; &lt;/span&gt;command_to_run
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id="question"&gt;Question&lt;/h2&gt;
+&lt;p&gt;Can a socks proxy be used as a HTTP/HTTPS proxy directly?&lt;/p&gt;</content><category term="Internet"></category><category term="Network"></category><category term="proxy"></category><category term="environment variable"></category><category term="sudo"></category></entry><entry><title>Test Internet Speed</title><link href="https://www.legendu.net/en/blog/test-internet-speed/" rel="alternate"></link><published>2016-03-09T22:55:29-08:00</published><updated>2016-07-09T22:55:29-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2016-03-09:/en/blog/test-internet-speed/</id><content type="html">&lt;p&gt;&lt;a href="http://www.speedtest.net/"&gt;SpeedTest - OOKLA&lt;/a&gt; can help you test the speed of your internet connection. 
+Mobile apps and a command-line tool are also available. 
+&lt;a href="https://www.howtoforge.com/tutorial/check-internet-speed-with-speedtest-cli-on-ubuntu/"&gt;This page&lt;/a&gt;
+explains how to use the command-line tool to test the speed of your internet connection.&lt;/p&gt;</content><category term="Internet"></category><category term="internet"></category><category term="speed"></category><category term="web"></category><category term="app"></category><category term="test"></category></entry><entry><title>Find Out Proxy in Use</title><link href="https://www.legendu.net/en/blog/find-out-proxy-in-use/" rel="alternate"></link><published>2014-05-27T21:31:02-07:00</published><updated>2015-05-27T21:31:02-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2014-05-27:/en/blog/find-out-proxy-in-use/</id><summary type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Using a Web Service.  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;a href="http://wpad/wpad.dat"&gt;http://wpad/wpad.dat&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Figure the proxy out from the contents it returns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the command &lt;code&gt;netstat&lt;/code&gt;.
+This is a universal way and is especially helpful 
+when &lt;a href="http://wpad/wpad.dat"&gt;http://wpad/wpad.dat&lt;/a&gt; is not available. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Inspect the output of &lt;code&gt;netstat -an | egrep "EST|Proto"&lt;/code&gt; ("EST" is …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Using a Web Service.  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Open &lt;a href="http://wpad/wpad.dat"&gt;http://wpad/wpad.dat&lt;/a&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Figure the proxy out from the contents it returns.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Use the command &lt;code&gt;netstat&lt;/code&gt;.
+This is a universal way and is especially helpful 
+when &lt;a href="http://wpad/wpad.dat"&gt;http://wpad/wpad.dat&lt;/a&gt; is not available. &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Inspect the output of &lt;code&gt;netstat -an | egrep "EST|Proto"&lt;/code&gt; ("EST" is short for "ESTABLISHED") 
+in a Linux-like environment. 
+You can use Cygwin if you are on Windows.
+Note that &lt;code&gt;netstat&lt;/code&gt; comes with Windows not Cygwin. 
+If you cannot use it in Cygwin,
+it is probably due to a misconfigured path environment variable.
+You can of course run the &lt;code&gt;netstat -an&lt;/code&gt; command in the command prompt in Windows
+but you do not have a convenient command like &lt;code&gt;grep&lt;/code&gt;.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Go to a fresh site that you have not recently visited.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the &lt;code&gt;netstat -an | grep "EST"&lt;/code&gt; command again 
+and look for the new connection. 
+It might look like the following.
+In this example, 
+your proxy's IP is 192.168.1.88 and it is listening on port 8080.
+A proxy server typcial listens to the 8080 port.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;TCP 192.168.1.1:1989 192.168.1.88:8080 ESTABLISHED
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The second method only shows the proxy currently in use. 
+If more than one proxy is configured in your environment, 
+and you want to know all of them, 
+you have to repeat the procedure above periodically to get the full list.
+Note that working in a Linux virtual machine on your office laptop with Windows OS
+can possibly help you circumvent the proxy issue.&lt;/p&gt;</content><category term="Internet"></category><category term="web"></category><category term="internet"></category><category term="proxy"></category></entry></feed>

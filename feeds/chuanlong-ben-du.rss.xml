@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Chuanlong (Ben) Du</title><link>https://www.legendu.net/en/</link><description>And let it direct your passion with reason.</description><lastBuildDate>Mon, 06 Apr 2020 14:31:55 -0700</lastBuildDate><item><title>Use wget with Proxy</title><link>https://www.legendu.net/en/blog/use-wget-behind-proxy/</link><description>&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you don't already know the proxy in use (in your company),
+    read the post &lt;a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/"&gt;Find out Proxy in Use&lt;/a&gt;
+    to figure it out.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Put the following lines into your wget configuration file,
+    which is usually &lt;code&gt;~/.wget&lt;/code&gt;.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;code&gt;&lt;span class="n"&gt;use_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="k"&gt;on&lt;/span&gt;
+&lt;span class="n"&gt;http_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nl"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;port&lt;/span&gt;
+&lt;span class="n"&gt;https_proxy&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="w"&gt; &lt;/span&gt;&lt;span class="nl"&gt;http&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="o"&gt;//&lt;/span&gt;&lt;span class="nl"&gt;username&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="n"&gt;password&lt;/span&gt;&lt;span class="nv"&gt;@proxy_ip …&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chuanlong (Ben) Du</dc:creator><pubDate>Sun, 06 Jul 2014 14:31:55 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-07-06:/en/blog/use-wget-behind-proxy/</guid><category>Software</category><category>software</category><category>download</category><category>wget</category><category>proxy</category></item><item><title>Use Git Behind a Proxy</title><link>https://www.legendu.net/en/blog/use-git-behind-a-proxy/</link><description>&lt;p&gt;Here is a good article on &lt;a href="http://www.librebyte.net/en/git/git-behind-a-proxy-or-firewall/"&gt;Git Behind a Proxy or Firewall&lt;/a&gt;.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;If you do not already know the proxy in use (in your office), 
+    read the post &lt;a href="http://www.legendu.net/en/blog/find-out-proxy-in-use/"&gt;Find out Proxy in Use&lt;/a&gt;
+    to figure the proxy (in your office).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run the following commands in terminal or Windows command prompt …&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Chuanlong (Ben) Du</dc:creator><pubDate>Mon, 07 Jul 2014 23:42:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2014-07-07:/en/blog/use-git-behind-a-proxy/</guid><category>Software</category><category>software</category><category>Git</category><category>proxy</category><category>protocol</category></item></channel></rss>

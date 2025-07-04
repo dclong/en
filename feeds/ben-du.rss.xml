@@ -1,0 +1,381 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"><channel><title>Ben Chuanlong Du's Blog - Ben Du</title><link>https://www.legendu.net/en/</link><description>And let it direct your passion with reason.</description><lastBuildDate>Wed, 04 Jun 2025 14:41:27 -0700</lastBuildDate><item><title>Hands on dict in Python</title><link>https://www.legendu.net/en/blog/hands-on-dict-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Starting from Python 3.7, 
+ &lt;code&gt;dict&lt;/code&gt; preserves insertion order 
+ (i.e., &lt;code&gt;dict&lt;/code&gt; is ordered).
+ There is no need to use &lt;code&gt;OrderedDict&lt;/code&gt; any more in Python 3.7+.
+ However,
+ &lt;code&gt;set&lt;/code&gt; in Python is implemented as an unordered hashset
+ and thus is neither ordered nor sorted.
+ A trick to dedup an iterable &lt;code&gt;values&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 19 Apr 2021 17:52:06 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-19:/en/blog/hands-on-dict-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>dict</category><category>data structure</category><category>mapping</category><category>hash table</category><category>dictionary</category></item><item><title>Hands on the Rust Library Serde</title><link>https://www.legendu.net/en/blog/hands-on-the-Rust-library-serde/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Rust crates 
+ &lt;a href="https://crates.io/crates/serde"&gt;serde&lt;/a&gt;
+ and
+ &lt;a href="https://crates.io/crates/ron"&gt;ron&lt;/a&gt;
+ are popular serialization/deserialization libraries.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Dependencies"&gt;Dependencies&lt;a class="anchor-link" href="#Dependencies"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Wed, 21 Apr 2021 11:43:46 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-21:/en/blog/hands-on-the-Rust-library-serde/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Rust</category><category>serde</category><category>serialization</category><category>deserialization</category></item><item><title>Hands on the Python Library pexpect</title><link>https://www.legendu.net/en/blog/hands-on-the-python-library-pexpect/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The command-line tool of some (e.g., network) applications might be slow to authenticate. 
+ If you use pexect to automate such a command-line tool, 
+ it is best to wait for sometime after sending password using &lt;code&gt;child.sendline(passwd)&lt;/code&gt;.
+ If the authentication has ouput on both success and failure,
+ a smart way is to wait for the success or failure message to come out.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Tue, 03 Aug 2021 18:14:35 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-08-03:/en/blog/hands-on-the-python-library-pexpect/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>pexpect</category><category>shell</category><category>command</category><category>terminal</category></item><item><title>Extracting PDF Pages Using the Python Package PyPDF</title><link>https://www.legendu.net/en/blog/python-pdf-pypdf/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ol&gt;
+&lt;li&gt;The Python package PyPDF can be used to extract pages from a PDF file.
+The function &lt;a href="https://github.com/legendu-net/aiutil/blob/dev/aiutil/pdf.py#L8"&gt;aiutil.pdf.extract_pages&lt;/a&gt; 
+is a wrapper over PyPDF
+which makes it even easier to extract pages from a PDF file.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://github.com/Stirling-Tools/Stirling-PDF"&gt;Stirling-PDF&lt;/a&gt; 
+is is a robust, locally hosted web-based PDF manipulation tool using Docker.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sun, 15 Aug 2021 17:23:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-08-15:/en/blog/python-pdf-pypdf/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>PyPDF</category><category>example</category><category>PDF</category><category>extract pages</category><category>aiutil</category><category>extract_pages</category></item><item><title>Manipulate Videos Using MoviePy in Python</title><link>https://www.legendu.net/en/blog/python-moviepy/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Installation"&gt;Installation&lt;a class="anchor-link" href="#Installation"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 06 Apr 2020 14:39:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-04-06:/en/blog/python-moviepy/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>computer vision</category><category>CV</category><category>video</category><category>MoviePy</category><category>clip</category></item><item><title>User-defined Function (UDF) in PySpark</title><link>https://www.legendu.net/en/blog/pyspark-udf/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The easist way to define a UDF in PySpark is to use the &lt;code&gt;@udf&lt;/code&gt; tag,
+ and similarly the easist way to define a Pandas UDF in PySpark is to use the &lt;code&gt;@pandas_udf&lt;/code&gt; tag.
+ Pandas UDFs are preferred to UDFs for server reasons.
+ First, pandas UDFs are typically much faster than UDFs.
+ Second, pandas UDFs are more flexible than UDFs on parameter passing.
+ Both UDFs and pandas UDFs can take multiple columns as parameters.
+ In addition, 
+ pandas UDFs can take a DataFrame as parameter 
+ (when passed to the &lt;code&gt;apply&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 27 Nov 2020 22:55:16 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-11-27:/en/blog/pyspark-udf/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>HPC</category><category>high performance computing</category><category>PySpark</category><category>UDF</category><category>pandas</category><category>pandas_udf</category><category>pandas UDF</category></item><item><title>Column Functions and Operators in Spark</title><link>https://www.legendu.net/en/blog/pyspark-func-operators/</link><description>&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 26 Apr 2021 10:38:08 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-26:/en/blog/pyspark-func-operators/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Spark</category><category>DataFrame</category><category>column</category><category>functions</category><category>operators</category><category>func</category><category>fun</category></item><item><title>Date Functions in Spark</title><link>https://www.legendu.net/en/blog/pyspark-func-date/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;HDFS table might contain invalid data (I'm not clear about the reasons at this time) 
+ with respct to the column types (e.g., Date and Timestamp). 
+ This will cause issues when Spark tries to load the data.
+ For more discussions,
+ please refer to &lt;a href="https://network.informatica.com/thread/85564"&gt;Unrecognized column type:TIMESTAMP_TYP&lt;/a&gt;.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;datetime.datetime&lt;/code&gt; or &lt;code&gt;datetime.date&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Tue, 27 Apr 2021 16:03:37 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-27:/en/blog/pyspark-func-date/</guid><category>Computer Science</category><category>programming</category><category>PySpark</category><category>Spark</category><category>DataFrame</category><category>date</category><category>Spark SQL</category><category>function</category><category>SQL</category></item><item><title>Compare Data Frames Using DataCompy in Python</title><link>https://www.legendu.net/en/blog/compare-two-dataframes-using-datacompy/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Comments"&gt;Comments&lt;a class="anchor-link" href="#Comments"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;a href="https://github.com/datafold/data-diff"&gt;data-diff&lt;/a&gt;
+ is similar tool 
+ which efficiently diff rows across two different databases.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Installation"&gt;Installation&lt;a class="anchor-link" href="#Installation"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sat, 11 Jul 2020 21:25:43 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-07-11:/en/blog/compare-two-dataframes-using-datacompy/</guid><category>Computer Science</category><category>Computer Science</category><category>DataCompy</category><category>data</category><category>comparison</category><category>compare</category><category>big data</category><category>Spark</category><category>Python</category><category>DataFrame</category><category>pandas</category></item><item><title>Hands on the Python module subprocess</title><link>https://www.legendu.net/en/blog/hands-on-the-python-model-subprocess/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="General-Tips"&gt;General Tips&lt;a class="anchor-link" href="#General-Tips"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The method &lt;code&gt;subprocess.run&lt;/code&gt; is preferred over older high-level APIs 
+ (&lt;code&gt;subprocess.call&lt;/code&gt;, &lt;code&gt;subprocess.check_call&lt;/code&gt; and &lt;code&gt;subprocess.check_output&lt;/code&gt;).
+ The method &lt;code&gt;subprocess.Popen&lt;/code&gt; (which powers the high-level APIs) can be used if you need advanced controls.
+ When running a shell command using &lt;code&gt;subprocess.run&lt;/code&gt;,&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Avoid using system shell (i.e., avoid using &lt;code&gt;shell=True&lt;/code&gt;) for 2 reasons.
+ First, avoid shell injection attack.
+ Second, there is no need for you to manually escape special characters in the command.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sat, 26 Oct 2019 10:31:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-26:/en/blog/hands-on-the-python-model-subprocess/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>subprocess</category><category>pexpect</category><category>command</category><category>shell</category></item><item><title>Hands on pathlib.Path</title><link>https://www.legendu.net/en/blog/hands-on-pathlib.path/</link><description>&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 29 Oct 2020 10:33:28 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-29:/en/blog/hands-on-pathlib.path/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>pathlib</category><category>Path</category></item><item><title>Convert Format of Videos Using Using Python</title><link>https://www.legendu.net/en/blog/python-opencv-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Convert-a-Video-to-MP4-Using-python-opencv"&gt;Convert a Video to MP4 Using &lt;code&gt;python-opencv&lt;/code&gt;&lt;a class="anchor-link" href="#Convert-a-Video-to-MP4-Using-python-opencv"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The code below converts a MOV vidoe file to a MP4 vidoe file using OpenCV in Python.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 06 Apr 2020 14:52:30 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-04-06:/en/blog/python-opencv-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>computer vision</category><category>CV</category><category>video</category><category>OpenCV</category><category>mp4</category></item><item><title>Extract Images from Video Using OpenCV in Python</title><link>https://www.legendu.net/en/blog/python-opencv-video-to-image/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Most videoes have a FPS of 24. 
+ Some videos have higher FPS (e.g., 30 or 60) so that they can capture motions better. 
+ A record video on a computer has a FPS of the refresh rate of the monitor, 
+ which is usually 60.
+ You can get the FPS of a video using OpenCV in Python. &lt;/li&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Wed, 25 Mar 2020 17:33:14 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-03-25:/en/blog/python-opencv-video-to-image/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>OpenCV</category><category>computer vision</category><category>CV</category><category>video</category><category>image</category></item><item><title>Get User's Information in Python</title><link>https://www.legendu.net/en/blog/python-user-info/</link><description>&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sat, 31 Oct 2020 12:04:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-31:/en/blog/python-user-info/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>getpass</category><category>user information</category><category>info</category><category>password</category><category>access</category></item><item><title>Encoding and Decoding Base64 String in Python</title><link>https://www.legendu.net/en/blog/encoding-and-decoding-base64-string-in-python/</link><description>&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 29 Jul 2021 19:49:07 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-07-29:/en/blog/encoding-and-decoding-base64-string-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>base64</category><category>string</category><category>encode</category><category>decode</category></item><item><title>The list Collection in Python</title><link>https://www.legendu.net/en/blog/python-list/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;list&lt;/code&gt; is essentially a resizable array of objects in Python.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Almosts all methods of list are in-place.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;list.pop&lt;/code&gt; is inplace and returns the removed element.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;To get unique elements in a list,
+ you can first coerce the list to a set and then convert the set back to a list.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; unique_list = list(set(alist))&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 20 Mar 2020 08:58:50 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-03-20:/en/blog/python-list/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>list</category><category>collection</category></item><item><title>Working with Iterators in Python</title><link>https://www.legendu.net/en/blog/python-iterator/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Iterator-vs-Generator"&gt;Iterator vs Generator&lt;a class="anchor-link" href="#Iterator-vs-Generator"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Generator is a special case of Iterator.
+Generator is easy and convenient to use but at additional cost (memory and speed).
+If you need performance, use plain iterator (with the help of the &lt;code&gt;itertools&lt;/code&gt; module).
+If you need convenience and concise code, use generator.&lt;/p&gt;
+&lt;p&gt;Please refer to &lt;a href="https://data-flair.training/blogs/python-generator-vs-iterator/"&gt;Python Generator vs Iterator&lt;/a&gt;
+for more detailed discussions.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 08 Jan 2021 11:50:03 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-01-08:/en/blog/python-iterator/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>iterator</category><category>itertools</category></item><item><title>Format Date and Time in Python</title><link>https://www.legendu.net/en/blog/python-datetime-format/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Date/Time-Format"&gt;Date/Time Format&lt;a class="anchor-link" href="#Date/Time-Format"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Please refer to &lt;a href="https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes"&gt;https://docs.python.org/3/library/datetime.html#strftime-and-strptime-format-codes&lt;/a&gt;
+for a complete list of formats.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Time-to-String"&gt;Time to String&lt;a class="anchor-link" href="#Time-to-String"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 30 Apr 2021 12:35:25 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-30:/en/blog/python-datetime-format/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>time</category><category>datetime</category><category>date</category><category>format</category></item><item><title>The set Collection in Python</title><link>https://www.legendu.net/en/blog/python-set/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="General-Tips-and-Traps"&gt;General Tips and Traps&lt;a class="anchor-link" href="#General-Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The &lt;a href="https://docs.python.org/3/library/stdtypes.html#set"&gt;set&lt;/a&gt; class is implemented based on hash table 
+ which means that its elements must be &lt;a href="https://docs.python.org/3/glossary.html#term-hashable"&gt;hashable&lt;/a&gt;
+ (has methods &lt;code&gt;__hash__&lt;/code&gt; and &lt;code&gt;__eq__&lt;/code&gt;).
+ The set class implements the mathematical concepts of set 
+ which means that its elements are unordered and does not perserve insertion order of elements.
+ Notice that this is different from the dict class 
+ which is also implemented based on hash table but keeps insertion order of elements!
+ The article &lt;a href="https://www.javaer101.com/en/article/778098.html"&gt;Why don't Python sets preserve insertion order?&lt;/a&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 30 Apr 2021 12:30:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-30:/en/blog/python-set/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>set</category><category>union</category><category>difference</category></item><item><title>Auto Rename eTrade Employee Stock Plan Release Confirmations Using pdftotext</title><link>https://www.legendu.net/en/blog/auto-rename-eTrade-EMPLOYEE-STOCK-PLAN-RELEASE-CONFIRMATION-using-pdftotext/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Install-pdftotext"&gt;Install pdftotext&lt;a class="anchor-link" href="#Install-pdftotext"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 26 Apr 2021 10:01:20 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-26:/en/blog/auto-rename-eTrade-EMPLOYEE-STOCK-PLAN-RELEASE-CONFIRMATION-using-pdftotext/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>PDF</category><category>text</category><category>extract</category><category>pdftotext</category></item><item><title>Persist and Checkpoint DataFrames in Spark</title><link>https://www.legendu.net/en/blog/spark-persist-checkpoint-dataframe/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Persist-vs-Checkpoint"&gt;Persist vs Checkpoint&lt;a class="anchor-link" href="#Persist-vs-Checkpoint"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;&lt;a href="https://github.com/JerryLead/SparkInternals/blob/master/markdown/english/6-CacheAndCheckpoint.md"&gt;Spark Internals - 6-CacheAndCheckpoint.md&lt;/a&gt;
+has a good explanation of persist vs checkpoint.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Persist/Cache in Spark is lazy and doesn't truncate the lineage
+ while checkpoint is eager (by default) and truncates the lineage.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Generally speaking,
+ &lt;code&gt;DataFrame.persist&lt;/code&gt; has a better performance than &lt;code&gt;DataFrame.checkpoint&lt;/code&gt;. 
+ However,
+ &lt;code&gt;DataFrame.checkpoint&lt;/code&gt; is more robust and is preferred in any of the following situations.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sun, 24 Jan 2021 08:52:28 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-01-24:/en/blog/spark-persist-checkpoint-dataframe/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Spark</category><category>DataFrame</category><category>persist</category><category>big data</category><category>cache</category><category>checkpoint</category></item><item><title>Types of Joins of Spark DataFrames</title><link>https://www.legendu.net/en/blog/spark-dataframe-types-joins/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Comments"&gt;Comments&lt;a class="anchor-link" href="#Comments"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;It is suggested that you always pass a list of columns to the parameter &lt;code&gt;on&lt;/code&gt; even if there's only one column for joining.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;None&lt;/code&gt; in a pandas DataFrame is converted to &lt;code&gt;NaN&lt;/code&gt; instead of &lt;code&gt;null&lt;/code&gt;!&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Spark allows using following join types:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;inner&lt;/code&gt; (default)&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;cross&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;outer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;full&lt;/code&gt;, &lt;code&gt;fullouter&lt;/code&gt;, &lt;code&gt;full_outer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;left&lt;/code&gt;, &lt;code&gt;leftouter&lt;/code&gt;, &lt;code&gt;left_outer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;right&lt;/code&gt;, &lt;code&gt;rightouter&lt;/code&gt;, &lt;code&gt;right_outer&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;semi&lt;/code&gt;, &lt;code&gt;leftsemi&lt;/code&gt;, &lt;code&gt;left_semi&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;anti&lt;/code&gt;, &lt;code&gt;leftanti&lt;/code&gt;, &lt;code&gt;left_anti&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 22 Apr 2021 14:57:56 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-22:/en/blog/spark-dataframe-types-joins/</guid><category>Computer Science</category><category>Computer Science</category><category>Spark</category><category>PySpark</category><category>DataFrame</category><category>join</category><category>type</category><category>inner join</category><category>outer join</category><category>left join</category><category>right join</category><category>full join</category><category>big data</category></item><item><title>Regular Expression in Python</title><link>https://www.legendu.net/en/blog/regular-expression-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;&lt;a href="https://regex101.com/"&gt;Online Regular Expression Tester&lt;/a&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;The Python module &lt;code&gt;re&lt;/code&gt; automatically compiles a plain/text pattern
+using &lt;code&gt;re.compile&lt;/code&gt; and caches it,
+so there's not much benefit to compile plain/text patterns by yourself.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Some regular expression patterns are defined using a single leading backslash, 
+ e.g., &lt;code&gt;\s&lt;/code&gt;, &lt;code&gt;\b&lt;/code&gt;, etc.
+ However, 
+ since special characters (e.g., &lt;code&gt;\&lt;/code&gt;) need to be escaped in strings in most programming languages,
+ you will need the string &lt;code&gt;"\\s"&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sun, 18 Apr 2021 13:42:45 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-18:/en/blog/regular-expression-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>regex</category><category>regular expression</category></item><item><title>Hands on the Python Library toml</title><link>https://www.legendu.net/en/blog/hands-on-python-library-toml/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-&amp;amp;-Traps"&gt;Tips &amp;amp; Traps&lt;a class="anchor-link" href="#Tips-&amp;amp;-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Please refer to
+ &lt;a href="https://www.legendu.net/en/blog/parse-toml-file-in-python/"&gt;Parse TOML File in Python&lt;/a&gt;
+ for general tips on parsing TOML in Python.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Installatoion"&gt;Installatoion&lt;a class="anchor-link" href="#Installatoion"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 16 Apr 2021 13:37:09 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-16:/en/blog/hands-on-python-library-toml/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>TOML</category><category>Python</category></item><item><title>Inner Join of Spark DataFrames</title><link>https://www.legendu.net/en/blog/spark-dataframe-inner-join/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;Select only needed columns before joining.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;Rename joining column names to be identical (if different) before joining.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Tue, 13 Apr 2021 10:38:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-13:/en/blog/spark-dataframe-inner-join/</guid><category>Computer Science</category><category>Computer Science</category><category>Spark</category><category>PySpark</category><category>DataFrame</category><category>inner join</category><category>big data</category><category>join</category></item><item><title>Rename Rows and Columns in a pandas DataFrame</title><link>https://www.legendu.net/en/blog/python-pandas-rename/</link><description>&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 05 Apr 2021 13:46:48 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2021-04-05:/en/blog/python-pandas-rename/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>pandas</category><category>DataFrame</category><category>reshape</category><category>drop</category></item><item><title>Hands on the Python Module argparse</title><link>https://www.legendu.net/en/blog/hands-on-the-python-module-argparse/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;argparse&lt;/code&gt; is the best library to use to parse command-line arguments in Python.
+ It is included in Python standard libaries
+ (which menas that you can use it out of the box).&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;It is suggestedd that you &lt;strong&gt;always log a parsed Namespace object&lt;/strong&gt;
+ so that you can check whether it is as expected.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 24 Dec 2020 12:00:55 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-12-24:/en/blog/hands-on-the-python-module-argparse/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>argparse</category><category>cli</category><category>command line</category><category>command-line</category><category>parse</category><category>argument</category></item><item><title>Sample Rows from a Spark DataFrame</title><link>https://www.legendu.net/en/blog/spark-dataframe-sample/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips-and-Traps"&gt;Tips and Traps&lt;a class="anchor-link" href="#Tips-and-Traps"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;TABLESAMPLE&lt;/code&gt; must be immedidately after a table name.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;The &lt;code&gt;WHERE&lt;/code&gt; clause in the following SQL query runs after &lt;code&gt;TABLESAMPLE&lt;/code&gt;.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt; SELECT 
+     *
+ FROM 
+     table_name 
+ TABLESAMPLE (10 PERCENT) 
+ WHERE 
+     id = 1
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;If you want to run a &lt;code&gt;WHERE&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 05 Nov 2020 00:13:37 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-11-05:/en/blog/spark-dataframe-sample/</guid><category>Computer Science</category><category>programming</category><category>PySpark</category><category>DataFrame</category><category>sample</category><category>TABLESAMPLE</category></item><item><title>Union DataFrames in Spark</title><link>https://www.legendu.net/en/blog/spark-dataframe-union/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Comment"&gt;Comment&lt;a class="anchor-link" href="#Comment"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;&lt;code&gt;union&lt;/code&gt; relies on column order rather than column names. 
+ This is the same as in SQL.
+ For columns that the type don't match, 
+ the super type is used.
+ However, 
+ this is really dangerous if you are careful. 
+ It is suggested that you define a function call unionByName to hanle this.&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Fri, 30 Oct 2020 19:44:44 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-30:/en/blog/spark-dataframe-union/</guid><category>Computer Science</category><category>programming</category><category>Scala</category><category>Spark</category><category>DataFrame</category><category>union</category></item><item><title>Work with Long Strings in Python</title><link>https://www.legendu.net/en/blog/work-with-long-strings-in-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;This article discusses different ways to write long strings in Python.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Long-String-in-One-Line"&gt;Long String in One Line&lt;a class="anchor-link" href="#Long-String-in-One-Line"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A long string can be put on the the same line,
+which is ugly of course.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sat, 24 Oct 2020 09:35:31 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-24:/en/blog/work-with-long-strings-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>string</category><category>str</category><category>character</category><category>long</category><category>long strings</category></item><item><title>The eval Function in Python</title><link>https://www.legendu.net/en/blog/the-eval-function-in-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The function &lt;code&gt;eval&lt;/code&gt; takes a single line of code as string,
+evaluates it,
+and returns the value.
+Notice that objects in the evaluated expression 
+must be present in the current scope,
+otherwise, 
+exceptions will be thrown.&lt;/p&gt;
+&lt;p&gt;Even though &lt;code&gt;eval&lt;/code&gt; (together with &lt;code&gt;exec&lt;/code&gt;) might be useful in some situations,
+e.g., when implementing a REPL. 
+It is strongly suggested that you avoid using &lt;code&gt;eval&lt;/code&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Sat, 10 Oct 2020 12:26:47 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-10-10:/en/blog/the-eval-function-in-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>eval</category><category>ast</category></item><item><title>Deleting Docker Image Tags on DockerHub using the Python Module requests</title><link>https://www.legendu.net/en/blog/python-requests-dockerhub/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Tips"&gt;Tips&lt;a class="anchor-link" href="#Tips"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;You can use &lt;a href="https://curl.trillworks.com/"&gt;Convert curl syntax to Python, Node.js, PHP, R&lt;/a&gt;
+ or &lt;a href="https://github.com/NickCarneiro/curlconverter/"&gt;curlconverter&lt;/a&gt;
+ to convert CURL commands to Python requests code.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;h2 id="Get-All-Tags-of-a-Docker-Image"&gt;Get All Tags of a Docker Image&lt;a class="anchor-link" href="#Get-All-Tags-of-a-Docker-Image"&gt;&amp;#182;&lt;/a&gt;&lt;/h2&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Mon, 06 Apr 2020 18:24:23 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2020-04-06:/en/blog/python-requests-dockerhub/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>DockerHub</category><category>Docker Hub</category><category>Docker</category><category>image</category><category>tag</category><category>delete</category><category>requests</category><category>RESTful</category></item><item><title>Construct pandas DataFrames in Python</title><link>https://www.legendu.net/en/blog/construct-pandas-dataframe-python/</link><description>&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Thu, 07 Nov 2019 00:00:00 -0800</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-11-07:/en/blog/construct-pandas-dataframe-python/</guid><category>Computer Science</category><category>programming</category><category>Python</category><category>pandas</category><category>DataFrame</category><category>construct</category></item><item><title>Unpacking Assignment in Python</title><link>https://www.legendu.net/en/blog/unpacking-assignment-in-python/</link><description>&lt;div class="cell border-box-sizing text_cell rendered"&gt;&lt;div class="prompt input_prompt"&gt;
+&lt;/div&gt;&lt;div class="inner_cell"&gt;
+&lt;div class="text_cell_render border-box-sizing rendered_html"&gt;
+&lt;p&gt;The unpacking assignment assigns elements of a tuple/list to variables at once.&lt;/p&gt;
+
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class="cell border-box-sizing code_cell rendered"&gt;
+&lt;div class="input"&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Ben Du</dc:creator><pubDate>Tue, 22 Oct 2019 00:00:00 -0700</pubDate><guid isPermaLink="false">tag:www.legendu.net,2019-10-22:/en/blog/unpacking-assignment-in-python/</guid><category>Computer Science</category><category>Computer Science</category><category>programming</category><category>Python</category><category>unpacking assignment</category><category>unpack</category><category>assignment</category><category>tuple</category><category>list</category></item></channel></rss>

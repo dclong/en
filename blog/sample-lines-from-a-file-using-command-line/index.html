@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Sample Lines from a File Using Command Line</title>
+  <meta name="author" content="Ben Chuanlong Du">
+
+  <link href="https://www.legendu.net/en/atom.xml" type="application/atom+xml" rel="alternate"
+        title="Ben Chuanlong Du's Blog Atom Feed" />
+
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="https://www.legendu.net/en/favicon.png" rel="icon">
+  <link href="https://www.legendu.net/en/theme/css/main_2.css" media="screen, projection"
+        rel="stylesheet" type="text/css">
+  <script src="https://www.legendu.net/en/theme/js/modernizr-2.0.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/ender.js"></script>
+  <script src="https://www.legendu.net/en/theme/js/octopress.js" type="text/javascript"></script>
+
+  <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic"
+        rel="stylesheet" type="text/css">
+  <script data-ad-client="ca-pub-3836424032203369" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+</head>
+
+<body>
+  <header role="banner"><hgroup>
+  <h1><a href="https://www.legendu.net/en/">Ben Chuanlong Du's Blog</a></h1>
+    <h2>And let it direct your passion with reason.</h2>
+</hgroup></header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="https://www.legendu.net/en/atom.xml" rel="subscribe-rss">RSS</a></li>
+</ul>
+
+<form name="search" action="https://www.bing.com/search" method="get" onSubmit="return build_query()">
+  <fieldset role="search">
+      <!--
+    <input type="hidden" name="q" value="site:https://www.legendu.net/en" />
+        -->
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+
+<script type = "text/javascript">
+    function build_query() {
+        var query = document.forms["search"]["q"].value;
+        var prefix = "site:https://www.legendu.net/en "
+        if (!query.startsWith(prefix)) {
+            query = prefix + query;
+            document.forms["search"]["q"].value = query;
+        }
+        return true;
+    }
+</script>
+
+<ul class="main-navigation">
+    <li><a href="https://www.legendu.net">Home</a></li>
+    <li><a href="https://www.legendu.net/en">Blog</a></li>
+    <li><a href="https://www.legendu.net/en/archives.html">Archives</a></li>
+    <li><a href="https://www.legendu.net/pages/about">About</a></li>
+</ul></nav>
+  <div id="main">
+    <div id="content">
+<div>
+  <article class="hentry" role="article">
+<header>
+      <h1 class="entry-title">Sample Lines from a File Using Command Line</h1>
+      <p class="meta"><time datetime="2016-06-28T10:52:36-07:00" pubdate>Jun 28, 2016</time></p>
+</header>
+
+  <div class="entry-content"><p>NOTE: the article talks about sampling "lines" rather than "records". 
+If a records can occupy multiple lines, 
+e.g., if any field contains a new line (<code>\n</code>),
+the following tutorial does not work 
+and you have to fall back to more powerful tools such as Python or R.</p>
+<p>Let's say that you want sample 500 lines (without replacement) from a file.
+This can be done easily using a scraping language such as R or Python. 
+However, if samling lines is all you have to do,
+it is much faster to do it in shell. 
+While there are many command lines tools you can use, 
+the one I found to be elegantest is 'shuf'.
+<code>shuf</code> permuates lines of a file. 
+If you want to sample 500 lines, 
+then you you just have to keep the first 500 shuffled lines.</p>
+<div class="highlight"><pre><span></span><code>shuf<span class="w"> </span>-n<span class="w"> </span><span class="m">500</span><span class="w"> </span>file
+</code></pre></div>
+
+<p>It is a little more work if the file contains a header line
+and you want to keep the header line and sample from the rest lines.</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># keep the header</span>
+head<span class="w"> </span>-n<span class="w"> </span><span class="m">1</span><span class="w"> </span>file<span class="w"> </span>&gt;<span class="w"> </span>sample_500
+<span class="c1"># sample from the rest line and append to sample_500</span>
+tail<span class="w"> </span>-n<span class="w"> </span>+2<span class="w"> </span>file<span class="w"> </span><span class="p">|</span><span class="w"> </span>shuf<span class="w"> </span>-n<span class="w"> </span><span class="m">500</span><span class="w"> </span>&gt;&gt;<span class="w"> </span>sample_500
+</code></pre></div>
+
+<p>There is another tool named <a href="http://harelba.github.io/q/">q</a>
+for performing SQL operations on structured text files. 
+If the text file is structured,
+then task can be done even easier with <code>q</code>.
+Assume the text file is tab delimited and has a header, 
+then you can use the following command to sample 500 lines from it.
+The option <code>-O</code> outputs the header also.</p>
+<div class="highlight"><pre><span></span><code>q<span class="w"> </span>-t<span class="w"> </span>-H<span class="w"> </span>-O<span class="w"> </span><span class="s1">&#39;select * from file order by random() limit 500&#39;</span>
+</code></pre></div>
+
+<p><code>q</code> can be installed with the command below. </p>
+<div class="highlight"><pre><span></span><code>wajig install q-text-as-data
+</code></pre></div>
+
+<p>Even thougt I'm Linux fan, 
+I'm a practical Linux fan 
+not liking some enthusiasium of Linux 
+who broadcasting about solving every probelm using command line.
+If there is a simple and elegant command line tool to get your work done,
+then use it. 
+Otherwise, instead of cooking up a weird, unreadable, anti-human shell command, 
+R or Python is a much better choice.</p></div>
+    <footer>
+<p class="meta">
+  <span class="byline author vcard">
+    Posted by <span class="fn">Ben Chuanlong Du</span>
+  </span>
+<time datetime="2016-06-28T10:52:36-07:00" pubdate>Jun 28, 2016</time>  <span class="categories">
+    <a class="category" href="https://www.legendu.net/en/tag/linux.html">Linux</a>
+    <a class="category" href="https://www.legendu.net/en/tag/shell.html">shell</a>
+    <a class="category" href="https://www.legendu.net/en/tag/command-line.html">command line</a>
+    <a class="category" href="https://www.legendu.net/en/tag/sample.html">sample</a>
+    <a class="category" href="https://www.legendu.net/en/tag/shuffle.html">shuffle</a>
+    <a class="category" href="https://www.legendu.net/en/tag/shuf.html">shuf</a>
+    <a class="category" href="https://www.legendu.net/en/tag/q.html">q</a>
+    <a class="category" href="https://www.legendu.net/en/tag/text.html">text</a>
+    <a class="category" href="https://www.legendu.net/en/tag/sql.html">SQL</a>
+  </span>
+</p>    </footer>
+  </article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript></div>
+  </section>
+</div>
+<aside class="sidebar">
+  <section>
+    <h1>Recent Posts</h1>
+    <ul id="recent_posts">
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/find-tips/">Tips on the find command in Linux</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/hands-on-dict-python/">Hands on dict in Python</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/install-python-in-mac/">Install Python in macOS</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/my-docker-images/">My Docker Images</a>
+      </li>
+      <li class="post">
+          <a href="https://www.legendu.net/en/blog/pdftk-examples/">Use pdftk to Manipulating PDF Files</a>
+      </li>
+    </ul>
+  </section>
+  <section>
+    <h1>Categories</h1>
+    <ul id="recent_posts">
+        <li><a href="https://www.legendu.net/en/category/ai.html">AI</a></li>
+        <li><a href="https://www.legendu.net/en/category/career.html">Career</a></li>
+        <li><a href="https://www.legendu.net/en/category/computer-science.html">Computer Science</a></li>
+        <li><a href="https://www.legendu.net/en/category/fun-problems.html">Fun Problems</a></li>
+        <li><a href="https://www.legendu.net/en/category/internet.html">Internet</a></li>
+        <li><a href="https://www.legendu.net/en/category/os.html">OS</a></li>
+        <li><a href="https://www.legendu.net/en/category/research.html">Research</a></li>
+        <li><a href="https://www.legendu.net/en/category/software.html">Software</a></li>
+    </ul>
+  </section>
+ 
+
+  <section>
+  <h1>Tags</h1>
+  <ul class="tagcloud">
+  </ul>
+  </section>
+
+
+
+  <section>
+    <h1>GitHub Repos</h1>
+    <ul id="gh_repos">
+      <li class="loading">Status updating...</li>
+    </ul>
+      <a href="https://github.com/legendu-net">@legendu-net</a> on GitHub
+    <script type="text/javascript">
+      $.domReady(function(){
+          if (!window.jXHR){
+              var jxhr = document.createElement('script');
+              jxhr.type = 'text/javascript';
+              jxhr.src = 'https://www.legendu.net/en/theme/js/jXHR.js';
+              var s = document.getElementsByTagName('script')[0];
+              s.parentNode.insertBefore(jxhr, s);
+          }
+
+          github.showRepos({
+              user: 'legendu-net',
+              count: 5,
+              skip_forks: true,
+              target: '#gh_repos'
+          });
+      });
+    </script>
+    <script src="https://www.legendu.net/en/theme/js/github.js" type="text/javascript"> </script>
+  </section>
+
+    <section>
+        <h1>Social</h2>
+        <ul>
+            <li><a href="https://www.linkedin.com/in/ben-chuanlong-du-1239b221/" target="_blank">LinkedIn</a></li>
+            <li><a href="https://hub.docker.com/u/dclong" target="_blank">Docker Hub</a></li>
+            <li><a href="https://stackoverflow.com/users/7808204/benjamin-du?tab=profile" target="_blank">Stack Overflow</a></li>
+            <li><a href="https://twitter.com/longendu" target="_blank">Twitter</a></li>
+        <!--
+            <li><a href="https://www.legendu.net/en/" type="application/rss+xml" rel="alternate">RSS</a></li>
+            -->
+        </ul>
+    </section>
+</aside>    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Ben Chuanlong Du -
+  <span class="credit">Powered by <a href="http://getpelican.com">Pelican</a></span>
+</p></footer>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-3STS9BVPF6"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-3STS9BVPF6');
+</script>
+	<script type="text/javascript">
+	  var disqus_shortname = 'dclong';
+          var disqus_identifier = '/blog/sample-lines-from-a-file-using-command-line/';
+          var disqus_url = 'https://www.legendu.net/en/blog/sample-lines-from-a-file-using-command-line/';
+          var disqus_title = 'Sample Lines from a File Using Command Line';
+	  (function() {
+	    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	   })();
+	</script>
+</body>
+</html>

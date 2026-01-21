@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Ben Chuanlong Du's Blog - AI</title><link href="https://www.legendu.net/en/" rel="alternate"></link><link href="https://www.legendu.net/en/feeds/ai.atom.xml" rel="self"></link><id>https://www.legendu.net/en/</id><updated>2023-07-22T22:16:05-07:00</updated><subtitle>And let it direct your passion with reason.</subtitle><entry><title>Summary on Random Number Generators</title><link href="https://www.legendu.net/en/blog/summary-random-number-generators/" rel="alternate"></link><published>2012-07-27T21:14:07-07:00</published><updated>2023-07-22T22:16:05-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2012-07-27:/en/blog/summary-random-number-generators/</id><summary type="html">&lt;p&gt;&lt;img src="http://www.legendu.net/media/rng/random-number-generator.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="xoshiro"&gt;&lt;a href="https://prng.di.unimi.it/"&gt;Xoshiro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Xoshiro is a family of fast, space-efficient and high quality PRNGs.
+It is considered the state-of-the-art (SOTA) family of non-cryptographic pseudo random number generators (PRNGs).
+The Rust crate
+&lt;a href="https://crates.io/crates/rand_xoshiro"&gt;rand_xoshiro&lt;/a&gt;
+(which is part of the popular Rust crate &lt;a href="https://crates.io/crates/rand"&gt;rand&lt;/a&gt;)
+has implementations of 
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256Plus.html"&gt;Xoshiro256Plus&lt;/a&gt;
+and
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256PlusPlus.html"&gt;Xoshiro256PlusPlus&lt;/a&gt;
+.
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256PlusPlus.html"&gt;Xoshiro256PlusPlus&lt;/a&gt;
+is a very good …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://www.legendu.net/media/rng/random-number-generator.png" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;h2 id="xoshiro"&gt;&lt;a href="https://prng.di.unimi.it/"&gt;Xoshiro&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;Xoshiro is a family of fast, space-efficient and high quality PRNGs.
+It is considered the state-of-the-art (SOTA) family of non-cryptographic pseudo random number generators (PRNGs).
+The Rust crate
+&lt;a href="https://crates.io/crates/rand_xoshiro"&gt;rand_xoshiro&lt;/a&gt;
+(which is part of the popular Rust crate &lt;a href="https://crates.io/crates/rand"&gt;rand&lt;/a&gt;)
+has implementations of 
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256Plus.html"&gt;Xoshiro256Plus&lt;/a&gt;
+and
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256PlusPlus.html"&gt;Xoshiro256PlusPlus&lt;/a&gt;
+.
+&lt;a href="https://docs.rs/rand_xoshiro/latest/rand_xoshiro/struct.Xoshiro256PlusPlus.html"&gt;Xoshiro256PlusPlus&lt;/a&gt;
+is a very good PRNG for statistical simulation purpose. 
+Specially,
+it supports jumping ahead
+which means that you can implement a fast and &lt;strong&gt;correct&lt;/strong&gt; parallel PRNG based on it.&lt;/p&gt;
+&lt;h2 id="mersenne-twister"&gt;Mersenne Twister&lt;/h2&gt;
+&lt;p&gt;Mersenne Twister was the state-of-the-art (SOTA) non-cryptographic pseudo random number generator (PRNG) 
+before the 
+&lt;a href="https://prng.di.unimi.it/"&gt;Xoshiro faimily of PRNGs&lt;/a&gt;
+.
+It was implemented in many programming languages 
+and was the default in many software and programming languages.
+Mersenne Twister has many different versions, 
+among which the MT19937 is the most widely used one. 
+The period of MT19937 is extreemly long (&lt;span class="math"&gt;\(2^{19937}-1\)&lt;/span&gt;)
+and is equidistributed for generating vectors up to dimension 623. 
+The MT19937 generate 32 bits random numbers. 
+Combining two random blocks, 
+one can generate 64 bits random numbers.
+This is often implemented together with the 32 bit version, 
+and usually call MT19937_64.
+The MT19937_64 is equidistributed for generating vectors up to dimension 311.&lt;/p&gt;
+&lt;h2 id="well"&gt;WELL&lt;/h2&gt;
+&lt;p&gt;A more modern family of random number generators than Mersenne Twister 
+is the WELL random number generators, 
+which have better equidistribution property and are better to escape the zeroland 
+(initialization array contains many zero bits). 
+However, 
+the speed of the WELL generators is about 0.6 to 0.7 compared to the Mersenne Twister generators. 
+Also the WELL random number generators has a large inner state 
+(e.g., the WELL44497b uses about 33kb for its inner state while the MT19937 uses only about 2.5kb). 
+This is usually not a problem on modern computers, 
+but if you use lots of random number generators at the same time 
+or if the code is run on a embedded device, 
+it might worth considering the consume of memories of these generators. 
+Among different versions of WELL generators, 
+WELL19937c and WELL44497b are commonly used. &lt;/p&gt;
+&lt;h2 id="sfmt"&gt;SFMT&lt;/h2&gt;
+&lt;p&gt;SIMD-oriented Fast Mersenne Twister (SFMT) is an improved version of Mersenne Twister. 
+It uses parallelism of modern CPUs and is about twice faster than mersenne Twister. 
+SFMT also has better equidistribution property than Mersenne Twister, 
+but not as good as WELL.
+SFMT recovers from 0-excess initial state faster than Mersenne Twister, 
+but not faster than WELL.
+C++ implementations are available but I don't see a popular Java implementation so far.&lt;/p&gt;
+&lt;h2 id="pcg"&gt;&lt;a href="http://www.pcg-random.org/"&gt;PCG&lt;/a&gt;&lt;/h2&gt;
+&lt;p&gt;PCG is a family of simple fast space-efficient statistically good algorithms 
+for random number generation. 
+Unlike many general-purpose RNGs, 
+they are also hard to predict.
+C++ implementations are available,
+and the Rust crate 
+&lt;a href="https://crates.io/crates/rand_pcg"&gt;rand_pcg&lt;/a&gt;
+(which is part of the popular Rust crate &lt;a href="https://crates.io/crates/rand"&gt;rand&lt;/a&gt;)
+has implementation of 
+&lt;a href="https://rust-random.github.io/rand/rand_pcg/type.Pcg32.html"&gt;PCG32&lt;/a&gt;
+and 
+&lt;a href="https://rust-random.github.io/rand/rand_pcg/type.Pcg64.html"&gt;PCG64&lt;/a&gt;
+.
+I don't see a popular Java implementation for PCG at this time.&lt;/p&gt;
+&lt;h2 id="libraries-for-random-number-generators"&gt;Libraries for Random Number Generators&lt;/h2&gt;
+&lt;h3 id="java"&gt;Java&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href="http://commons.apache.org/proper/commons-math/javadocs/api-3.6/org/apache/commons/math3/random/RandomDataGenerator.html"&gt;org.apache.commons.math3.random.RandomDataGenerator&lt;/a&gt;
+    is a popular one. 
+    By default it uses a Well19937c generator.
+    A customized RandomGenerator can be provided in the constructor.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="python"&gt;Python&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Use the &lt;a href="https://docs.python.org/3/library/random.html"&gt;random&lt;/a&gt; model.
+    It is based on a Mersenne Twister random number generator.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id="rust"&gt;Rust&lt;/h3&gt;
+&lt;p&gt;&lt;a href="https://crates.io/crates/rand"&gt;rand&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://crates.io/crates/rand_xoshiro"&gt;rand_xoshiro&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id="references"&gt;References&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://prng.di.unimi.it/"&gt;Xoshiro / Xoroshiro Generators and the PRNG Shootout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://www.legendu.net/en/blog/thread-safe-random-number-generator"&gt;Thread Safe Random Number Generator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;script type="text/javascript"&gt;if (!document.getElementById('mathjaxscript_pelican_#%@#$@#')) {
+    var align = "center",
+        indent = "0em",
+        linebreak = "false";
+
+    if (false) {
+        align = (screen.width &lt; 768) ? "left" : align;
+        indent = (screen.width &lt; 768) ? "0em" : indent;
+        linebreak = (screen.width &lt; 768) ? 'true' : linebreak;
+    }
+
+    var mathjaxscript = document.createElement('script');
+    mathjaxscript.id = 'mathjaxscript_pelican_#%@#$@#';
+    mathjaxscript.type = 'text/javascript';
+    mathjaxscript.src = 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/latest.js?config=TeX-AMS-MML_HTMLorMML';
+
+    var configscript = document.createElement('script');
+    configscript.type = 'text/x-mathjax-config';
+    configscript[(window.opera ? "innerHTML" : "text")] =
+        "MathJax.Hub.Config({" +
+        "    config: ['MMLorHTML.js']," +
+        "    TeX: { extensions: ['AMSmath.js','AMSsymbols.js','noErrors.js','noUndefined.js','color.js','mhchem.js'], equationNumbers: { autoNumber: 'none' } }," +
+        "    jax: ['input/TeX','input/MathML','output/HTML-CSS']," +
+        "    extensions: ['tex2jax.js','mml2jax.js','MathMenu.js','MathZoom.js']," +
+        "    displayAlign: '"+ align +"'," +
+        "    displayIndent: '"+ indent +"'," +
+        "    showMathMenu: true," +
+        "    messageStyle: 'normal'," +
+        "    tex2jax: { " +
+        "        inlineMath: [ ['\\\\(','\\\\)'] ], " +
+        "        displayMath: [ ['$$','$$'] ]," +
+        "        processEscapes: true," +
+        "        preview: 'TeX'," +
+        "    }, " +
+        "    'HTML-CSS': { " +
+        "        availableFonts: ['STIX', 'TeX']," +
+        "        preferredFont: 'STIX'," +
+        "        styles: { '.MathJax_Display, .MathJax .mo, .MathJax .mi, .MathJax .mn': {color: 'inherit ! important'} }," +
+        "        linebreaks: { automatic: "+ linebreak +", width: '90% container' }," +
+        "    }, " +
+        "}); " +
+        "if ('default' !== 'default') {" +
+            "MathJax.Hub.Register.StartupHook('HTML-CSS Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax['HTML-CSS'].FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+            "MathJax.Hub.Register.StartupHook('SVG Jax Ready',function () {" +
+                "var VARIANT = MathJax.OutputJax.SVG.FONTDATA.VARIANT;" +
+                "VARIANT['normal'].fonts.unshift('MathJax_default');" +
+                "VARIANT['bold'].fonts.unshift('MathJax_default-bold');" +
+                "VARIANT['italic'].fonts.unshift('MathJax_default-italic');" +
+                "VARIANT['-tex-mathit'].fonts.unshift('MathJax_default-italic');" +
+            "});" +
+        "}";
+
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(configscript);
+    (document.body || document.getElementsByTagName('head')[0]).appendChild(mathjaxscript);
+}
+&lt;/script&gt;</content><category term="AI"></category><category term="WELL"></category><category term="RNG"></category><category term="statistics"></category><category term="SFMT"></category><category term="dimension"></category><category term="MT"></category><category term="PCG"></category><category term="Java"></category><category term="Python"></category></entry><entry><title>Don't Do Statistics If You Don't Really Undestand It</title><link href="https://www.legendu.net/en/blog/statistics-traps/" rel="alternate"></link><published>2015-04-10T07:50:16-07:00</published><updated>2015-04-10T07:50:16-07:00</updated><author><name>Ben Chuanlong Du</name></author><id>tag:www.legendu.net,2015-04-10:/en/blog/statistics-traps/</id><summary type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/statistics/lie.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lies, damned lies, and statistics.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As a statistician I'm very glad to see 
+that statistics is being widely used in many areas.
+However, 
+time after time I found that it is really dangerous 
+for people who don't really understand statistics to use it.
+As we all know that there are …&lt;/p&gt;</summary><content type="html">&lt;p&gt;&lt;img src="http://dclong.github.io/media/statistics/lie.jpg" height="200" width="240" align="right"/&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Lies, damned lies, and statistics.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;As a statistician I'm very glad to see 
+that statistics is being widely used in many areas.
+However, 
+time after time I found that it is really dangerous 
+for people who don't really understand statistics to use it.
+As we all know that there are 3 basic assumptions in linear regression:
+independency, normality and homoscedasticity.
+However, not many people really understand what these assumptions mean.
+For example, 
+most people don't know that an "independency" test is actually with respect to some "order".
+For human beings, there are 2 nature orders: time 
+(for which people developped time series analysis) 
+and space (for which people developped spatial analysis).
+While we test for "independency", 
+mostly of the time we test for "independency" with respect to time. 
+Here comes the problem. 
+Many people do simple linear regression, 
+and they are "smart" enough to remember to check assumptions of linear regression. 
+Many people use some kind of test statistics 
+(e.g., the Ljung-Box test statistics) to help them 
+especially when there are many model candidates. 
+Not many of them realized that this test is probably meaningless 
+as they are actually testing "independency" with respect to the order of observations. 
+But what if I reorder the observations 
+(in linear regression there's usually no chronological order among observations)? 
+This can obviously change the decision of the "independency" test. 
+For example, 
+if I reorder the observations according the magnitude of the residuals 
+the Ljung-Box test will obviously be significant 
+and reject the null hypothesis of "independency";
+and if I randomize the order of observations, 
+the Ljung-Box test will probably be non-significant 
+and fail to reject the null hypothesis of "independency".
+Keep in mind that an "independency" test is with respect to some "order",
+e.g., time, space or some nature grouping.
+Be sure that you are not testing "independency" with respect to some meaningless order.&lt;/p&gt;</content><category term="AI"></category><category term="statistics"></category><category term="independence"></category><category term="linear model"></category><category term="linear regression"></category><category term="hypothesis test"></category><category term="Ljung-Box test"></category></entry></feed>
